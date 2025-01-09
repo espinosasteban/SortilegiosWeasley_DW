@@ -1,35 +1,29 @@
-import { useState } from 'react'
+import {useState} from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import Product from '../components/Product.tsx'
 
 function App() {
-  const [count, setCount] = useState(0)
+    const [count, setCount] = useState(0)
 
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    return (
+        <>
+            <div className="container">
+                <Product img={'../src/assets/imgProducts/polvo_peruano_oscuridad_instantanea.png'}
+                         title={'Polvo Peruano de Oscuridad Instantánea'}
+                         price={500}
+                         description={'Polvo que al ser lanzado en el aire, oscurece la zona en la que se encuentra. Ideal para escapar de situaciones incómodas.'}
+                />
+
+                <Product img={'../src/assets/imgProducts/pociones_de_amor.png'}
+                         title={'Pociones de Amor'}
+                         price={300}
+                         description={'Pociones que al ser ingeridas, hacen que la persona que la consuma se enamore de la primera persona que vea.'}
+                />
+            </div>
+        </>
+    )
 }
 
 export default App
