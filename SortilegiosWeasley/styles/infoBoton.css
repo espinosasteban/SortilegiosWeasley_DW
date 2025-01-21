@@ -1,0 +1,15 @@
+.infoBoton img{
+    width: 3rem;
+    height: 3rem;
+    background-color: #f1f1f1;
+}
+
+.infoBoton{
+    padding: 0;
+    transition: scale 0.3s;
+}
+
+.infoBoton:hover img{
+    background-color: #f1f1f1;
+    scale: 1.1;
+}
