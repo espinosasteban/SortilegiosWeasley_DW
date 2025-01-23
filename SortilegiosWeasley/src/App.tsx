@@ -1,12 +1,12 @@
 import {useState} from 'react'
 
 import './App.css'
+import NavBar from "./components/NavBar.tsx";
+import {articulosBromas, articulosMagiaMuggle} from "./mocks/articulos.tsx";
 
-import ProductoSeccion from '../components/ProductoSeccion.tsx'
-import NavBar from "../components/NavBar.tsx";
-import {articulosBromas, articulosMagiaMuggle} from "../mocks/articulos.tsx";
+import LadingPage from './paginas/Principal/landingPage.tsx'
 
-import LadingPage from '../paginas/Principal/landingPage.tsx'
+
 function App() {
     const [seccionSeleccionada, setSeccionSeleccionada] = useState('bromas')
     const todosLosArticulos = [...articulosBromas, ...articulosMagiaMuggle];

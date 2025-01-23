@@ -1,7 +1,4 @@
 
-
-
-
 import '../styles/ProductoSeccion.css';
 
 import {Articulo} from "../tipos.tsx";
@@ -15,7 +12,7 @@ function ProductoSeccion({ articulo }: ProductoSeccionProps) {
     const { nombre, precio, descripcion, seccion, imagen } = articulo;
 
     return (
-        <div className="product">
+        <div className="product floating" >
             <img src={imagen} alt={nombre} className="product-image" />
             <h1 className="product-title">{nombre}</h1>
             <p className="product-price">${precio}</p>

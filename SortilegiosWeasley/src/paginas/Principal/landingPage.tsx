@@ -1,6 +1,6 @@
 import React from 'react';
 import '../../styles/landingPage.css';
-import ProductoSeccion from '../../components/productoSeccion';
+import ProductoSeccion from '../../components/ProductoSeccion';
 import { articulosBromas, articulosMagiaMuggle } from '../../mocks/articulos';
 import InfoBoton from '../../components/infoBoton';
 
