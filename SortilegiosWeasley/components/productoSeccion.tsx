@@ -1,5 +1,9 @@
+<<<<<<< Updated upstream
 import React from 'react';
 import '../styles/productoSeccion.css';
+=======
+import '../styles/ProductoSeccion.css';
+>>>>>>> Stashed changes
 import {Articulo} from "../tipos.tsx";
 
 interface ProductoSeccionProps {
