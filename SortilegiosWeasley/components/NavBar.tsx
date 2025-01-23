@@ -7,7 +7,7 @@ interface NavBarProps {
 
 function NavBar ({cambiarSeccion}: NavBarProps) {
 
-    const secciones = ["magiaMuggle", "bromas"];
+    const secciones = ["Magia Muggle", "bromas"];
 
     return (
         <nav className="navbar">

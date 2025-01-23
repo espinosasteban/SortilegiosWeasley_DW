@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../styles/productoSeccion.css';
+import '../../styles/landingPage.css';
 import ProductoSeccion from '../../components/productoSeccion';
 import { articulosBromas, articulosMagiaMuggle } from '../../mocks/articulos';
 import InfoBoton from '../../components/infoBoton';
@@ -7,17 +7,20 @@ import InfoBoton from '../../components/infoBoton';
 
 
 export default function LandingPage() {
-    return (<> 
+    return (<>
+    <main>
         <Entrada/>
         <Producto/>
         <InfoBoton/>
+    </main>
+
     </>);
 }
 
 function Entrada() {
     return (
     <>
-        <section>
+        <section className="entrada-section">
             <h1>Sortilegios Weasley!</h1>
             <img src="../src/assets/Entrada.jpg"></img>
         </section>
@@ -27,10 +30,10 @@ function Entrada() {
 function Producto(){
     return (
     <>
-        <div className="container">
+        <section className="producto-section">
             <ProductoSeccion articulo={articulosBromas[0]}/>
             <ProductoSeccion articulo={articulosMagiaMuggle[0]}/>
-        </div>
+        </section>
     </>
     );
 }

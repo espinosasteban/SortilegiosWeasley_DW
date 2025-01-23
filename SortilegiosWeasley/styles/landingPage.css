@@ -1,0 +1,31 @@
+.entrada-section {
+    background-color: #D97941;
+    padding: 0;
+
+}
+
+.entrada-section h1 {
+    margin: 0;
+    padding: 4rem;
+}
+
+.entrada-section img {
+
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+.producto-section {
+    background-color: #646cff;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+
+
