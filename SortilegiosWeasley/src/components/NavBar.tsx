@@ -1,25 +1,17 @@
 import '../styles/NavBar.css';
+import { Link } from "react-router"; // Importa Link
 
-interface NavBarProps {
-    cambiarSeccion: (seccion: string) => void;
-}
-
-
-function NavBar ({cambiarSeccion}: NavBarProps) {
-
-    const secciones = ["Magia Muggle", "bromas"];
-
+function NavBar() {
     return (
         <nav className="navbar">
             <ul className="navbar-list">
-                {secciones.map((seccion) => (
-                    <li
-                        key={seccion}
-                        className="navbar-item"
-                        onClick={() => cambiarSeccion(seccion)}>
-                        {seccion.toLowerCase()}
-                    </li>
-                ))}
+                {/* Usa <Link> para navegar entre las rutas */}
+                <li className="navbar-item">
+                    <Link to="/">Inicio</Link> {/* Enlace a la Landing Page */}
+                </li>
+                <li className="navbar-item">
+                    <Link to="/vistaSeccion">Vista Sección</Link> {/* Enlace a Vista Sección */}
+                </li>
             </ul>
         </nav>
     );

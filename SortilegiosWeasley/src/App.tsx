@@ -1,31 +1,22 @@
-import {useState} from 'react'
-
-import './App.css'
+import './App.css';
 import NavBar from "./components/NavBar.tsx";
-import {articulosBromas, articulosMagiaMuggle} from "./mocks/articulos.tsx";
-
-import LadingPage from './paginas/Principal/landingPage.tsx'
-
+import { BrowserRouter, Routes, Route } from "react-router"; // Importar Routes y Route
+import LandingPage from "./paginas/Principal/landingPage.tsx";
+import VistaSeccion from "./paginas/Principal/vistaSeccion.tsx"; // Importa tu vista
 
 function App() {
-    const [seccionSeleccionada, setSeccionSeleccionada] = useState('bromas')
-    const todosLosArticulos = [...articulosBromas, ...articulosMagiaMuggle];
-
-
-    const productosFiltrados = seccionSeleccionada
-        ? todosLosArticulos.filter(
-            (articulo) =>
-                articulo.seccion.toLowerCase() === seccionSeleccionada.toLowerCase()
-        )
-        : todosLosArticulos;
-
     return (
-        <>
-            <NavBar cambiarSeccion={setSeccionSeleccionada}/>
-            <LadingPage/>
-
-        </>
-    )
+        <BrowserRouter>
+            <NavBar /> {/* La barra de navegación siempre visible */}
+            <main>
+                <Routes>
+                    {/* Define las rutas */}
+                    <Route path="/" element={<LandingPage />} /> {/* Ruta para Landing Page */}
+                    <Route path="/vistaSeccion" element={<VistaSeccion />} /> {/* Ruta para Vista Sección */}
+                </Routes>
+            </main>
+        </BrowserRouter>
+    );
 }
 
-export default App
+export default App;
