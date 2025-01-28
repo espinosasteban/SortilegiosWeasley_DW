@@ -1,0 +1,18 @@
+.vista-seccion {
+    display: flex;
+}
+
+.ordenar-precio {
+    display: flex;
+    flex-direction: column;
+    background-color: blueviolet;
+}
+
+.elemento-ordenar {
+    margin: 1rem;
+}
+
+.vitrina-producto{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}

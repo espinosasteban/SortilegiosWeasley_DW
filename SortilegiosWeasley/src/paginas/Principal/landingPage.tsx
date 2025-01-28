@@ -1,10 +1,8 @@
 import React from 'react';
 import '../../styles/landingPage.css';
 import ProductoSeccion from '../../components/ProductoSeccion';
-import { articulosBromas, articulosMagiaMuggle } from '../../mocks/articulos';
+import { articulos } from '../../mocks/articulos';
 import InfoBoton from '../../components/infoBoton';
-
-
 
 export default function LandingPage() {
     return (<>
@@ -27,14 +25,15 @@ function Entrada() {
     </>);
 }
 
-function Producto(){
+function Producto() {
     return (
-    <>
-        <section className="producto-section">
-            <ProductoSeccion articulo={articulosBromas[0]}/>
-            <ProductoSeccion articulo={articulosMagiaMuggle[0]}/>
-        </section>
-    </>
+        <>
+            <section className="producto-section">
+                {articulos.map((articulo) => (
+                    <ProductoSeccion articulo={articulo} floating={true} />
+                ))}
+            </section>
+        </>
     );
 }
 

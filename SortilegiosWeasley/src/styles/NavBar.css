@@ -25,3 +25,11 @@
 .navbar-item:hover {
     color: #007bff;
 }
+
+.navbar-item a {
+    margin: 1rem;
+}
+
+.active{
+    color: #0a1b2e;
+}

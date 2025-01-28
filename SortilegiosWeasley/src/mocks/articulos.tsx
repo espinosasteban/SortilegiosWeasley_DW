@@ -1,16 +1,14 @@
 import {Articulo} from '../tipos';
 
-export const articulosBromas: Array<Articulo> = [
+export const articulos: Array<Articulo> = [
     {
         nombre: "Orejas Extensibles",
         precio: 500,
         descripcion: "Las Orejas Extensibles son el accesorio perfecto para escuchar conversaciones a distancia con total discreción. Con un diseño encantado y divertido, estas orejas se deslizan fácilmente hasta el lugar deseado, llevándote cada palabra como si estuvieras ahí.",
         imagen: "../src/assets/imagenesProductos/bromas/orejasExtensibles.png",
         seccion: "Bromas"
-    }
-];
-
-export const articulosMagiaMuggle: Array<Articulo> = [
+    },
+    
     {
         nombre: "Huevo Irrompible",
         precio: 800,

@@ -5,6 +5,7 @@ export interface Articulo {
     descripcion: string;
     imagen: string;
     seccion: string;
+    
 
 
 }

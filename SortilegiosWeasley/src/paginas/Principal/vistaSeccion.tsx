@@ -1,39 +1,47 @@
 import React from 'react';
-import '../../styles/landingPage.css';
 import ProductoSeccion from '../../components/ProductoSeccion';
-import { articulosBromas, articulosMagiaMuggle } from '../../mocks/articulos';
+import '../../styles/vistaSeccion.css';
+import { articulos } from '../../mocks/articulos';
 import InfoBoton from '../../components/infoBoton';
+import {Articulo} from "../../tipos.tsx";
 
+interface VistaSeccionProps {
+    seccion: string | null;
+}
 
-export default function VistaSeccion(){
+export default function VistaSeccion({ seccion }: VistaSeccionProps) {
+    const articulosFiltrados = seccion ? articulos.filter(articulo => articulo.seccion === seccion) : articulos;
+
     return (<>
-        <main>
-            <FiltroPrecio/>
-            <VitrinaProducto/>
-            <InfoBoton/>
+        <main className="vista-seccion">
+            <OrdenarPorPrecio />
+            <VitrinaProducto articulos={articulosFiltrados} />
+            <InfoBoton />
         </main>
-
     </>);
 }
 
-function FiltroPrecio(){
+function OrdenarPorPrecio() {
     return (
-    <>
-        <section className="filtro-precio">
-            <h1>Filtrar por precio</h1>
-            <input type="number" placeholder="Precio minimo"/>
-            <input type="number" placeholder="Precio maximo"/>
-        </section>
-    </>);
+        <>
+            <section className="ordenar-precio">
+                <h2 className="elemento-ordenar">Ordenar por precio</h2>
+                <button className="elemento-ordenar">Precio más alto</button>
+                <button className="elemento-ordenar">Precio más bajo</button>
+
+            </section>
+        </>
+    );
 }
 
-function VitrinaProducto(){
+function VitrinaProducto({ articulos }: { articulos: Articulo[] }) {
     return (
-    <>
-        <section className="vitrina-producto">
-            <ProductoSeccion articulo={articulosBromas[0]}/>
-            <ProductoSeccion articulo={articulosMagiaMuggle[0]}/>
-        </section>
-    </>
+        <>
+            <section className="vitrina-producto">
+                {articulos.map((articulo) => (
+                    <ProductoSeccion articulo={articulo} floating = {false}  />
+                ))}
+            </section>
+        </>
     );
 }
