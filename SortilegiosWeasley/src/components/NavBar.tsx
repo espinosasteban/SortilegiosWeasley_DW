@@ -11,7 +11,7 @@ function NavBar({ setSeccion }: NavBarProps) {
             <ul className="navbar-list">
                 {/* Usa <Link> para navegar entre las rutas */}
                 <li className="navbar-item">
-                    <Link to="/">Logo</Link> {/* Enlace a la Landing Page */}
+                    <Link to="/"><img className="logo" src="../../public/iconoPagina.png" alt="Tu mundo Muggle"/></Link> {/* Enlace a la Landing Page */}
                 </li>
                 <li className="navbar-item">
                     <Link to="/vistaSeccion" onClick={() => setSeccion('Bromas')}>Bromas</Link> {/* Enlace a Vista Sección */}

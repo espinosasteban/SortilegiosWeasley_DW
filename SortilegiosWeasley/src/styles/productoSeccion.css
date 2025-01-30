@@ -5,7 +5,8 @@
     margin: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    width: 200px;
+    width: 250px;
+    height: 330px;
     background-color: #424791;
     transition: scale 0.3s;
 }

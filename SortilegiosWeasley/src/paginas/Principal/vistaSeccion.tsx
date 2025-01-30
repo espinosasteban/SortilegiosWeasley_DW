@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import ProductoSeccion from '../../components/ProductoSeccion';
 import '../../styles/vistaSeccion.css';
 import { articulos } from '../../mocks/articulos';
@@ -12,29 +12,42 @@ interface VistaSeccionProps {
 export default function VistaSeccion({ seccion }: VistaSeccionProps) {
     const articulosFiltrados = seccion ? articulos.filter(articulo => articulo.seccion === seccion) : articulos;
 
+    const [orden, setOrden] = useState<string | null>(null);
+
+    if (orden === 'ascendente') {
+        articulosFiltrados.sort((a, b) => a.precio - b.precio);
+    } else if (orden === 'descendente') {
+        articulosFiltrados.sort((a, b) => b.precio - a.precio);
+    }
+
     return (<>
         <main className="vista-seccion">
-            <OrdenarPorPrecio />
+            <OrdenarPorPrecio setOrden={setOrden}/>
             <VitrinaProducto articulos={articulosFiltrados} />
             <InfoBoton />
         </main>
     </>);
 }
 
-function OrdenarPorPrecio() {
+interface OrdenarPorPrecioProps {
+    setOrden: (orden: string | null) => void;
+}
+
+function OrdenarPorPrecio({setOrden}: OrdenarPorPrecioProps) {
+
     return (
         <>
             <section className="ordenar-precio">
-                <h2 className="elemento-ordenar">Ordenar por precio</h2>
-                <button className="elemento-ordenar">Precio más alto</button>
-                <button className="elemento-ordenar">Precio más bajo</button>
+                <h2>Ordenar por precio</h2>
+                <button className="boton-ordenar" onClick={() => setOrden("descendente")}>Precio más alto</button>
+                <button className="boton-ordenar" onClick={() => setOrden("ascendente")}>Precio más bajo</button>
 
             </section>
         </>
     );
 }
 
-function VitrinaProducto({ articulos }: { articulos: Articulo[] }) {
+function VitrinaProducto({articulos}: { articulos: Articulo[] }) {
     return (
         <>
             <section className="vitrina-producto">

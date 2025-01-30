@@ -11,7 +11,7 @@ function App() {
     return (
         <BrowserRouter>
             <NavBar setSeccion={setSeccion} /> {/* Pasar la función para actualizar la sección */}
-            <main>
+            <main className="mainApp">
                 <Routes>
                     {/* Define las rutas */}
                     <Route path="/" element={<LandingPage />} /> {/* Ruta para Landing Page */}

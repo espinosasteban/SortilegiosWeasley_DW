@@ -1,21 +1,52 @@
-
+.mainApp {
+    height: 100vh;
+}
 
 
 .vista-seccion {
     display: flex;
+    margin-top: 5.8rem;
+    height: 100%;
+    background-color: #8271fb;
 }
 
 .ordenar-precio {
     display: flex;
     flex-direction: column;
-    background-color: blueviolet;
+    background-color: #a799f5;
+    width: 20rem;
+    align-items: center;
+
 }
 
-.elemento-ordenar {
+.boton-ordenar {
     margin: 1rem;
+    padding: 1rem;
+    transition: scale 0.3s;
+    width: 15rem;
+}
+
+.boton-ordenar:focus {
+    background-color: #4c2aa7;
+    color: #fefefe;
+    outline: none;
+
+}
+
+.boton-ordenar:hover {
+    scale: 1.1;
+}
+
+.ordenar-precio h2 {
+    margin: 1rem;
+    padding: 1rem;
+    color: #4c2aa7;
 }
 
 .vitrina-producto{
     display: flex;
     flex-wrap: wrap;
+    margin-left: 2rem;
+    margin-top: 2rem;
 }
+
