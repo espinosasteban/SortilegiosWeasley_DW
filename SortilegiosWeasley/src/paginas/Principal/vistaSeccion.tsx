@@ -4,6 +4,7 @@ import '../../styles/vistaSeccion.css';
 import { articulos } from '../../mocks/articulos';
 import InfoBoton from '../../components/infoBoton';
 import {Articulo} from "../../tipos.tsx";
+import PuntuacionVarita from '../ProcesoCompra/puntuacionVarita.tsx';
 
 interface VistaSeccionProps {
     seccion: string | null;
@@ -18,6 +19,15 @@ export default function VistaSeccion({ seccion }: VistaSeccionProps) {
         articulosFiltrados.sort((a, b) => a.precio - b.precio);
     } else if (orden === 'descendente') {
         articulosFiltrados.sort((a, b) => b.precio - a.precio);
+    }
+
+    // BORRAR: Solo para probar lo de la puntuación varita
+    if (seccion === null) {
+        return (
+            <main className="vista-seccion">
+                <PuntuacionVarita defaultRaing={0} iconSize={null} />
+            </main>
+        );
     }
 
     return (<>
