@@ -1,0 +1,18 @@
+.puntuacion-varita {
+    display: flex;
+    gap: 1rem;
+  }
+
+.puntuacion-varita-fija {
+  display: flex;
+  gap: 0.3rem;
+}
+  
+.varita {
+cursor: pointer;
+transition: all 0.1s linear;
+}
+
+.varita:hover {
+transform: scale(1.2);
+}
