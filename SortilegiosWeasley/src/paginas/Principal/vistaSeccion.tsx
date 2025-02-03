@@ -21,15 +21,6 @@ export default function VistaSeccion({ seccion }: VistaSeccionProps) {
         articulosFiltrados.sort((a, b) => b.precio - a.precio);
     }
 
-    // BORRAR: Solo para probar lo de la puntuación varita
-    if (seccion === null) {
-        return (
-            <main className="vista-seccion">
-                <PuntuacionVarita defaultRaing={0} iconSize={null} />
-            </main>
-        );
-    }
-
     return (<>
         <main className="vista-seccion">
             <OrdenarPorPrecio setOrden={setOrden}/>

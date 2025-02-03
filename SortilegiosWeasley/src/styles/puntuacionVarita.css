@@ -2,6 +2,11 @@
     display: flex;
     gap: 1rem;
   }
+
+.puntuacion-varita-fija {
+  display: flex;
+  gap: 0.3rem;
+}
   
 .varita {
 cursor: pointer;

@@ -10,18 +10,44 @@ const DEFAULT_SELECTED_COLOR = 'gold';
 interface PuntuacionVaritaProps {
     defaultRaing: number | 0;
     iconSize: string | null;
+    modifiable: boolean;
 }
 
-export default function PuntuacionVarita({defaultRaing, iconSize} : PuntuacionVaritaProps) {
+export default function PuntuacionVarita({defaultRaing, iconSize, modifiable} : PuntuacionVaritaProps) {
     const [rating, setRating] = useState(defaultRaing);
     const [hoverRating, setHoverRating] = useState(0);
 
     let varitas = Array(DEFAULT_COUNT).fill(0);
 
     const handleClick = (rating: number) => {
-        if (!defaultRaing) {
-            setRating(rating);
-        }
+        setRating(rating);
+    }
+
+    if (modifiable === false) {
+        return (
+            <section className = 'puntuacion-varita-fija'>
+                
+                {varitas.map((_, index) =>{
+                    const isActiveColor = 
+                     rating && index < rating;
+    
+                    let elementColor = "";
+
+                    isActiveColor ? elementColor = 
+                    DEFAULT_SELECTED_COLOR : elementColor = DEFAULT_UNSELECTED_COLOR;
+    
+                    return (
+                        <div className="varita-fija" key = {index} 
+                        style ={{
+                            fontSize: iconSize ? iconSize: '1rem', 
+                            color: elementColor}}
+                        >
+                            <FontAwesomeIcon icon={fas.faWandSparkles} />
+                        </div>
+                    )
+                })}
+            </section>
+        )
     }
 
     return (
@@ -36,7 +62,6 @@ export default function PuntuacionVarita({defaultRaing, iconSize} : PuntuacionVa
 
                 isActiveColor ? elementColor = 
                 DEFAULT_SELECTED_COLOR : elementColor = DEFAULT_UNSELECTED_COLOR;
-
 
                 return (
                     <div className="varita" key = {index} 
