@@ -9,6 +9,7 @@ import { articulos } from "./mocks/articulos.tsx";
 import {Articulo} from "./tipos.tsx";
 import DetalleResena from "./paginas/ProcesoCompra/detalleProductoEntrada.tsx";
 import Detalle from "./paginas/ProcesoCompra/detalleProductoEntrada.tsx";
+import DetalleProducto from "./paginas/ProcesoCompra/detalleProductoEntrada.tsx";
 
 
 function App() {
@@ -25,7 +26,7 @@ function App() {
                     {/* Define las rutas */}
                     <Route path="/" element={<LandingPage />} /> {/* Ruta para Landing Page */}
                     <Route path="/vistaSeccion" element={<VistaSeccion seccion={seccion}  setProducto={setProducto}/>} /> {/* Ruta para Vista Sección */}
-                    <Route path="/producto/:nombreProducto" element={<Detalle producto={producto}/>} />
+                    <Route path="/producto/:nombreProducto" element={<VistaProducto producto={producto}/>} />
                 </Routes>
             </main>
         </BrowserRouter>

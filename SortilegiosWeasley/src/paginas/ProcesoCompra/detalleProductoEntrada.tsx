@@ -4,32 +4,50 @@ import '../../styles/detalleProductoEntrada.css';
 
 
 
-/*
-
-
-export default function VistaProducto(){
-    <main>
-        <DetalleProducto/>
-        <DetalleResena/>
-    </main>
-
+interface VistaProductoProps{
+    producto: Articulo | null;
 }
-*/
 
 
-function DetalleProducto(){
-    <section>
-        <MostradorProducto/>
-        <Detalle/>
-    </section>
+export default function VistaProducto({producto}: VistaProductoProps){
+    return <>
+        <main className="main-vista-producto">
+            <DetalleProducto producto={producto}/>
+            <DetalleResena producto={producto}/>
+        </main>
 
+    </>
 
 
 }
 
-function MostradorProducto(){
+
+interface DetalleProductoProps {
+    producto: Articulo | null;
+}
+
+function DetalleProducto({producto}: DetalleProductoProps){
+        return <>
+            <section className="detalle-producto-seccion">
+                <MostradorProducto producto={producto}/>
+                <Detalle producto={producto}/>
+            </section>
+        </>
+
+
+}
+
+interface MostradorProductoProps {
+    producto: Articulo | null;
+}
+
+function MostradorProducto({producto}: MostradorProductoProps){
     return (
         <>
+            <section className="mostrador-producto-seccion">
+                <img src={producto?.imagen ?? 'Imagen no disponible'} alt={producto?.nombre ?? 'Nombre no disponible'}/>
+                <Valoracion producto={producto}/>
+            </section>
         </>
     );
 
@@ -44,7 +62,7 @@ interface DetalleProps {
     producto: Articulo | null;
 }
 
-export default function Detalle({ producto }: DetalleProps) {
+function Detalle({ producto }: DetalleProps) {
     return (
         <>
             <section className="detalle-seccion">
@@ -53,7 +71,6 @@ export default function Detalle({ producto }: DetalleProps) {
                 <p>{producto?.precio ?? 'Precio no disponible'}</p>
                 <button>Añadir al carrito</button>
             </section>
-            <DetalleResena producto={producto}/>
         </>
     );
 }
