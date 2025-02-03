@@ -66,7 +66,7 @@ function VitrinaProducto({ articulos, setProducto}: VitrinaProductoProps) {
             {articulos.map((articulo) => {
                 const ruta = `/producto/${formatearNombreParaRuta(articulo.nombre)}`;
                 return (
-                    <Link to={ruta} key={articulo.nombre} onClick={() => setProducto(articulo)}>
+                    <Link className='link-producto' to={ruta} key={articulo.nombre} onClick={() => setProducto(articulo)}>
                         <ProductoSeccion articulo={articulo} floating={false} />
                     </Link>
                 );

@@ -1,6 +1,7 @@
 .main-vista-producto {
     background-color: #e0e7f1;
     padding: 4rem 1rem 1rem 1rem;
+    height: 100%;
 }
 
 
@@ -70,13 +71,13 @@
 
 .detalle-resena-seccion {
     display: flex;
+    flex-wrap: wrap;
     flex-direction: column;
-    background-color: #8271fb;
+    justify-content: space-evenly;
     align-items: center;
-    width: 70%;
-    margin: 3rem 2rem 2rem 2rem;
-    padding: 2rem;
-    border-radius: 10px;
+    margin: 5rem 2rem 2rem 2rem;
+    background-color: #8271fb;
+    border-radius: 1rem;
 }
 
 
@@ -92,11 +93,12 @@
 
 .valoracion-seccion {
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-around;
+    align-items: center;
     background-color: #1a1a1a;
-    width: 50%;
-    margin: 2rem;
-    padding: 2rem;
+    width: 70%;
+    margin: 1rem;
+    padding: 1rem;
     border-radius: 10px;
 }
 
@@ -111,9 +113,6 @@
     width: 100%;
     height: fit-content;
 }
-
-
-
 
 .resena {
     background-color: #212426;

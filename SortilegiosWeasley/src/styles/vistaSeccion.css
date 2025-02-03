@@ -1,5 +1,10 @@
 .mainApp {
-    height: 100vh;
+    height: 100%;
+}
+
+.link-producto{
+    height: fit-content;
+    width: fit-content;
 }
 
 
