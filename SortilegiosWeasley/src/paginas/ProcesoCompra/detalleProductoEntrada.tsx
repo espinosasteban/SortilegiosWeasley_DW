@@ -1,8 +1,7 @@
 import {Articulo, ResenaArticulo} from "../../tipos.tsx";
 import '../../styles/detalleProductoEntrada.css';
-
-
-
+import PuntuacionVarita from "./puntuacionVarita.tsx";
+import { useParams } from "react-router-dom";
 
 interface VistaProductoProps{
     producto: Articulo | null;
@@ -17,10 +16,7 @@ export default function VistaProducto({producto}: VistaProductoProps){
         </main>
 
     </>
-
-
 }
-
 
 interface DetalleProductoProps {
     producto: Articulo | null;
@@ -81,14 +77,12 @@ function DetalleResena({producto}: ValoracionProps) {
         <>
             <section className="detalle-resena-seccion">
                 <h2 className="titulo-detalle-resena">Reseñas del producto</h2>
-                <Valoracion producto={producto}/>
-
+                <PuntuacionVarita defaultRaing={0} iconSize="3rem" modifiable={true}/>
                 <VitrinaResena resenas={producto?.resenas ?? null}/>
             </section>
 
         </>
     );
-
 }
 
 interface ValoracionProps {
@@ -96,13 +90,21 @@ interface ValoracionProps {
 }
 
 function Valoracion({ producto }: ValoracionProps) {
+
+    let puntuacion = '0';
+    
+    if (producto) {
+        puntuacion = (producto.resenas.reduce((sum, resena) => sum + resena.calificacion, 0) / producto.resenas.length).toFixed(1)
+    }
+
     return (
         <section className="valoracion-seccion">
             <h2>
                 {!(producto) || producto.resenas.length === 0
                     ? "Sin calificaciones"
-                    : (producto.resenas.reduce((sum, resena) => sum + resena.calificacion, 0) / producto.resenas.length).toFixed(1)}
+                    : puntuacion}
             </h2>
+            <PuntuacionVarita defaultRaing={Math.floor(Number(puntuacion))} iconSize="2rem" modifiable={false}/>
         </section>
     );
 }
