@@ -26,7 +26,7 @@ function App() {
                     {/* Define las rutas */}
                     <Route path="/" element={<LandingPage />} /> {/* Ruta para Landing Page */}
                     <Route path="/vistaSeccion" element={<VistaSeccion seccion={seccion}  setProducto={setProducto}/>} /> {/* Ruta para Vista Sección */}
-                    <Route path="/producto/:nombreProducto" element={<VistaProducto producto={producto}/>} />
+                    <Route path="/producto/:nombreProducto" element={<VistaProducto/>} />
                 </Routes>
             </main>
         </BrowserRouter>

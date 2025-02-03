@@ -1,14 +1,22 @@
 import {Articulo, ResenaArticulo} from "../../tipos.tsx";
 import '../../styles/detalleProductoEntrada.css';
+
 import PuntuacionVarita from "./puntuacionVarita.tsx";
-import { useParams } from "react-router-dom";
-
-interface VistaProductoProps{
-    producto: Articulo | null;
-}
+import { useParams } from "react-router";
+import { articulos } from "../../mocks/articulos.tsx";
 
 
-export default function VistaProducto({producto}: VistaProductoProps){
+
+
+
+
+
+
+export default function VistaProducto(){
+
+    const { nombreProducto } = useParams<{ nombreProducto: string }>();
+    const producto = articulos.find(art => formatearNombreParaRuta(art.nombre) === nombreProducto) || null;
+
     return <>
         <main className="main-vista-producto">
             <DetalleProducto producto={producto}/>
@@ -17,6 +25,11 @@ export default function VistaProducto({producto}: VistaProductoProps){
 
     </>
 }
+
+function formatearNombreParaRuta(nombre: string): string {
+    return nombre.toLowerCase().replace(/\s+/g, '');
+}
+
 
 interface DetalleProductoProps {
     producto: Articulo | null;
