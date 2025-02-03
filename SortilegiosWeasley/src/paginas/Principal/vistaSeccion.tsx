@@ -4,7 +4,6 @@ import '../../styles/vistaSeccion.css';
 import { articulos } from '../../mocks/articulos';
 import InfoBoton from '../../components/infoBoton';
 import {Articulo} from "../../tipos.tsx";
-import PuntuacionVarita from '../ProcesoCompra/puntuacionVarita.tsx';
 
 interface VistaSeccionProps {
     seccion: string | null;
