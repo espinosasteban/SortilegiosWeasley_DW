@@ -105,7 +105,7 @@ interface ValoracionProps {
 function Valoracion({ producto }: ValoracionProps) {
 
     let puntuacion = '0';
-    
+
     if (producto) {
         puntuacion = (producto.resenas.reduce((sum, resena) => sum + resena.calificacion, 0) / producto.resenas.length).toFixed(1)
     }

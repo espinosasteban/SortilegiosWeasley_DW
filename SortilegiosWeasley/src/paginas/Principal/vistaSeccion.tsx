@@ -74,3 +74,6 @@ function VitrinaProducto({ articulos, setProducto}: VitrinaProductoProps) {
         </section>
     );
 }
+
+
+

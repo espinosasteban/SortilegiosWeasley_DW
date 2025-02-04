@@ -1,6 +1,7 @@
 .puntuacion-varita {
     display: flex;
     gap: 1rem;
+    margin: 1rem;
   }
 
 .puntuacion-varita-fija {
@@ -9,8 +10,8 @@
 }
   
 .varita {
-cursor: pointer;
-transition: all 0.1s linear;
+    cursor: pointer;
+    transition: all 0.1s linear;
 }
 
 .varita:hover {
