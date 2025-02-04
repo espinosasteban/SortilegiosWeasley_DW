@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import "../../styles/crearCuenta.css";
-import InfoBoton from '../../components/infoBoton';
+import "./styles.css";
+import InfoBoton from '../../../components/infoBoton';
 
 export default function CrearCuenta() {
     const [usuario, setUsuario] = useState("");
@@ -29,32 +29,31 @@ export default function CrearCuenta() {
     };
 
     return (
-        <div className="crearCuenta">
-            <div className="crearCuenta__contenedor">
-                <h1 className="crearCuenta__titulo">Crear una cuenta</h1>
-                <form className="crearCuenta__formulario" onSubmit={handleSubmit}>
+        <div className="contenido-login">
+                <h1>Crear una cuenta</h1>
+                <form onSubmit={handleSubmit}>
+                    <label htmlFor="usuario">Usuario</label>
                     <input
                         type="text"
-                        placeholder="Usuario"
                         className="crearCuenta__input"
                         onChange={(e) => setUsuario(e.target.value)}
                     />
+                    <label htmlFor="email">Correo electrónico</label>
                     <input
                         type="email"
-                        placeholder="Correo electrónico"
                         className="crearCuenta__input"
                         onChange={(e) => setCorreo(e.target.value)}
                     />
+                    <label htmlFor="contraseña">Contraseña</label>
                     <input
                         type="password"
-                        placeholder="Contraseña"
                         className="crearCuenta__input"
                         onChange={(e) => setContraseña(e.target.value)}
                     />
                     <p className="info">La contraseña debe tener al menos 8 caracteres. Entre ellos: Una mayúscula y un carácter especial (., *, ?, %, _)</p>
+                    <label htmlFor='confirmarContraseña'>Confirmar Contraseña</label>
                     <input
                         type="password"
-                        placeholder="Confirmar Contraseña"
                         className="crearCuenta__input"
                         onChange={(e) => setConfirmarContraseña(e.target.value)}
                     />
@@ -63,6 +62,5 @@ export default function CrearCuenta() {
                 </form>
                 <InfoBoton />
             </div>
-        </div>
     );
 }
