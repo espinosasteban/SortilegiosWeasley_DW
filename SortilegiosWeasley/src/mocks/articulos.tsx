@@ -28,14 +28,23 @@ export const articulos: Array<Articulo> = [
         imagen: "../src/assets/imagenesProductos/magiaMuggle/miraphorus.png",
         seccion: "Magia Muggle",
         resenas: []
-    }
-    ,
+    },
+
     {
         nombre: "Bomba Arcana Oscura",
         precio: 150,
         descripcion: "Una esfera encantada de diseño minimalista, con líneas de energía arcana que pulsan suavemente. Su fusible brillante emite chispas mágicas, indicando su inestabilidad. Perfecta para crear efectos espectaculares en duelos y travesuras mágicas.",
         imagen: "../src/assets/imagenesProductos/explosivos/bomba.png",
         seccion: "Explosivos",
+        resenas: []
+
+    },
+    {
+        nombre: "Varita Mágica Fake",
+        precio: 299.99, // Precio ficticio en tu moneda local
+        descripcion: "✨ ¡Despierta el mago o bruja que llevas dentro con esta impresionante Varita Mágica Minimalista! ✨ Inspirada en el mágico mundo de Harry Potter, esta varita combina un diseño elegante y moderno con un toque de encanto sobrenatural. Su punta emite un brillo etéreo que te transportará directamente a las aulas de Hogwarts -o eso dicen-. ¿Estás list@ para lanzar hechizos épicos? ¡No querrás dejarla en casa!",
+        imagen: "../src/assets/imagenesProductos/bromas/varita.png",
+        seccion: "Bromas",
         resenas: []
 
     }
