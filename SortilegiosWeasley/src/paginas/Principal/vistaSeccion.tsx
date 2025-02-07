@@ -52,7 +52,7 @@ function OrdenarPorPrecio({setOrden}: OrdenarPorPrecioProps) {
 }
 
 function formatearNombreParaRuta(nombre: string): string {
-    return nombre.toLowerCase().replace(/\s+/g, ''); // Elimina espacios y convierte a minúsculas
+    return nombre.toLowerCase().replace(/\s+/g, '').normalize('NFD').replace(/[\u0300-\u036f]/g, ''); // Elimina espacios y convierte a minúsculas
 }
 
 interface VitrinaProductoProps {
