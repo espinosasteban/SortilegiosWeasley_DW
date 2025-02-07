@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import ProductoSeccion from '../../components/ProductoSeccion';
+import ProductoSeccion from '../../components/productoSeccion';
 import '../../styles/vistaSeccion.css';
 import { articulos } from '../../mocks/articulos';
 import InfoBoton from '../../components/infoBoton';

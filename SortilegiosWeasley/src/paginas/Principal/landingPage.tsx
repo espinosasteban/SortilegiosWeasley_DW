@@ -1,6 +1,6 @@
 import React from 'react';
 import '../../styles/landingPage.css';
-import ProductoSeccion from '../../components/ProductoSeccion';
+import ProductoSeccion from '../../components/productoSeccion';
 import { articulos } from '../../mocks/articulos';
 import InfoBoton from '../../components/infoBoton';
 import {Link} from "react-router";
