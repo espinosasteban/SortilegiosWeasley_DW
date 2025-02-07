@@ -4,10 +4,7 @@ import '../../styles/detalleProductoEntrada.css';
 import PuntuacionVarita from "./puntuacionVarita.tsx";
 import { useParams } from "react-router";
 import { articulos } from "../../mocks/articulos.tsx";
-
-
-
-
+import {useEffect} from "react";
 
 
 
@@ -27,7 +24,7 @@ export default function VistaProducto(){
 }
 
 function formatearNombreParaRuta(nombre: string): string {
-    return nombre.toLowerCase().replace(/\s+/g, '');
+    return nombre.toLowerCase().replace(/\s+/g, '').normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 }
 
 
@@ -36,7 +33,12 @@ interface DetalleProductoProps {
 }
 
 function DetalleProducto({producto}: DetalleProductoProps){
+
+    useEffect(() => {
+        window.scrollTo(0, 0); // Desplaza la página al inicio
+    }, []);
         return <>
+
             <section className="detalle-producto-seccion">
                 <MostradorProducto producto={producto}/>
                 <Detalle producto={producto}/>
@@ -54,7 +56,12 @@ function MostradorProducto({producto}: MostradorProductoProps){
     return (
         <>
             <section className="mostrador-producto-seccion">
-                <img src={producto?.imagen ?? 'Imagen no disponible'} alt={producto?.nombre ?? 'Nombre no disponible'}/>
+                console.log({producto?.nombre.toLowerCase().replace(/\s+/g, '').normalize('NFD').replace(/[\u0300-\u036f]/g, '')});
+
+
+                <img src={producto?.imagen ?? 'Imagen no disponible'}
+                     id={producto?.nombre.replace(/\s+/g, '').toLowerCase()}
+                     alt={producto?.nombre ?? 'Nombre no disponible'}/>
                 <Valoracion producto={producto}/>
             </section>
         </>
@@ -105,7 +112,7 @@ interface ValoracionProps {
 function Valoracion({ producto }: ValoracionProps) {
 
     let puntuacion = '0';
-    
+
     if (producto) {
         puntuacion = (producto.resenas.reduce((sum, resena) => sum + resena.calificacion, 0) / producto.resenas.length).toFixed(1)
     }
