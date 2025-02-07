@@ -60,7 +60,7 @@ function MostradorProducto({producto}: MostradorProductoProps){
 
 
                 <img src={producto?.imagen ?? 'Imagen no disponible'}
-                     id={producto?.nombre.replace(/\s+/g, '').toLowerCase()}
+                     id={producto?.nombre.toLowerCase().replace(/\s+/g, '').normalize('NFD').replace(/[\u0300-\u036f]/g, '')}
                      alt={producto?.nombre ?? 'Nombre no disponible'}/>
                 <Valoracion producto={producto}/>
             </section>
@@ -68,11 +68,6 @@ function MostradorProducto({producto}: MostradorProductoProps){
     );
 
 }
-
-/*
-aqui va el componente PuntuacionVarita
- */
-
 
 interface DetalleProps {
     producto: Articulo | null;
@@ -165,7 +160,7 @@ function Resena({ resenas }: ResenaProps) {
                             <p>{resena.cantidadNoEsUtil}</p>
                         </div>
                         <div className="calificacion">
-                            <p>Calificación: {resena.calificacion}/5</p>
+                            <PuntuacionVarita defaultRaing={resena.calificacion} iconSize="1.5rem" modifiable={false}/>
                         </div>
                     </footer>
                 </section>

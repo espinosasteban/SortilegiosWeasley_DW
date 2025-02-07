@@ -316,10 +316,11 @@
 
 }
 
+/* ----------------------------------------------------------------------------------*/
 /*Animación varita*/
 
 /* CSS */
-#varitamágicafake {
+#varitamagicafake {
     animation: float-animation 2s infinite ease-in-out;
     filter: drop-shadow(0 0 6rem rgb(94, 0, 255)) drop-shadow(0 0 5rem rgba(225, 132, 253, 0.7)) drop-shadow(0 0 4rem rgba(255, 255, 255, 0.8)) brightness(1.7);
 }
@@ -327,7 +328,7 @@
 
 
 /* Pseudo-elemento para el brillo mágico */
-#varitamágicafake:hover {
+#varitamagicafake:hover {
 
     animation: glow-animation 2s infinite ease-in-out, rotate-animation 1.3s infinite; /* Añadimos la animación de rotación */
     filter: drop-shadow(0 0 6rem rgb(236, 212, 64)) drop-shadow(0 0 5rem rgba(197, 191, 107, 0.7)) drop-shadow(0 0 4rem rgba(255, 255, 255, 0.8)) brightness(1.7);
@@ -368,3 +369,85 @@
         transform: rotate(360deg);
     }
 }
+
+
+/*-------------------------------------------------------------------------*/
+/*Animacion Poción de Amor*/
+
+#pociondeamor {
+    animation: palpitar 1.5s infinite ease-in-out;
+    filter: drop-shadow(0 0 3rem rgba(255, 105, 180, 0.8));
+}
+
+/* Efecto de palpitación */
+@keyframes palpitar {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    60% {
+        transform: scale(1);
+    }
+    70% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+/*-------------------------------------------------------------------------*/
+/*Animacion Elixir Removedor de Acné*/
+
+#elixirremovedordeacne {
+    animation: brillo 1s ease-in-out infinite;
+    filter: drop-shadow(0 0 20px rgb(96, 173, 175)) drop-shadow(0 0 5px rgba(114, 173, 228, 0.5));
+}
+
+#elixirremovedordeacne:hover {
+    animation: shake-diagonal 1s ease-in-out;
+  }
+
+
+
+
+@keyframes shake-diagonal {
+    0% {
+      transform: translate(0, 0) rotate(0deg);
+    }
+    10% {
+      transform: translate(-10px, 10px) rotate(-5deg);
+    }
+    20% {
+      transform: translate(10px, -10px) rotate(5deg);
+    }
+    30% {
+      transform: translate(-10px, 10px) rotate(-5deg);
+    }
+    40% {
+      transform: translate(10px, -10px) rotate(5deg);
+    }
+    50% {
+      transform: translate(-10px, 10px) rotate(-5deg);
+    }
+    60% {
+      transform: translate(10px, -10px) rotate(5deg);
+    }
+    70% {
+      transform: translate(-10px, 10px) rotate(-5deg);
+    }
+    80% {
+      transform: translate(10px, -10px) rotate(5deg);
+    }
+    90% {
+      transform: translate(-10px, 10px) rotate(-5deg);
+    }
+    100% {
+      transform: translate(0, 0) rotate(0deg);
+    }
+  }
+  
+ 
