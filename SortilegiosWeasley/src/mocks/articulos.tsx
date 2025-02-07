@@ -29,6 +29,16 @@ export const articulos: Array<Articulo> = [
         seccion: "Magia Muggle",
         resenas: []
     }
+    ,
+    {
+        nombre: "Bomba Arcana Oscura",
+        precio: 150,
+        descripcion: "Una esfera encantada de diseño minimalista, con líneas de energía arcana que pulsan suavemente. Su fusible brillante emite chispas mágicas, indicando su inestabilidad. Perfecta para crear efectos espectaculares en duelos y travesuras mágicas.",
+        imagen: "../src/assets/imagenesProductos/explosivos/bomba.png",
+        seccion: "Explosivos",
+        resenas: []
+
+    }
 
 ];
 

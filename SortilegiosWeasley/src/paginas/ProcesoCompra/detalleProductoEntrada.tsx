@@ -8,10 +8,6 @@ import { articulos } from "../../mocks/articulos.tsx";
 
 
 
-
-
-
-
 export default function VistaProducto(){
 
     const { nombreProducto } = useParams<{ nombreProducto: string }>();
@@ -37,6 +33,7 @@ interface DetalleProductoProps {
 
 function DetalleProducto({producto}: DetalleProductoProps){
         return <>
+
             <section className="detalle-producto-seccion">
                 <MostradorProducto producto={producto}/>
                 <Detalle producto={producto}/>
@@ -54,7 +51,11 @@ function MostradorProducto({producto}: MostradorProductoProps){
     return (
         <>
             <section className="mostrador-producto-seccion">
-                <img src={producto?.imagen ?? 'Imagen no disponible'} alt={producto?.nombre ?? 'Nombre no disponible'}/>
+                console.log({producto?.nombre.replace(/\s+/g, '').toLowerCase()});
+
+                <img src={producto?.imagen ?? 'Imagen no disponible'}
+                     id={producto?.nombre.replace(/\s+/g, '').toLowerCase()}
+                     alt={producto?.nombre ?? 'Nombre no disponible'}/>
                 <Valoracion producto={producto}/>
             </section>
         </>

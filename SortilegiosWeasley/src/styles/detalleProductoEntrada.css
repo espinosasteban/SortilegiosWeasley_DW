@@ -26,18 +26,6 @@
 }
 
 
-
-.mostrador-producto-seccion {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-    margin: 2rem;
-}
-
-
-
 .detalle-seccion {
     background-color: #fff;
     padding: 1.25rem;
@@ -199,4 +187,99 @@
 .resena .calificacion {
     font-size: 1.2em;
     color: #95BF3B;
+}
+
+
+
+
+/*ANIMACIONES*/
+
+/*ANIMACIÓN HUEVOIRROMPIBLE*/
+
+@keyframes caerYRebotar {
+    0% {
+        transform: translateY(-100px) rotate(0deg);
+    }
+    50% {
+        transform: translateY(0) rotate(360deg);
+    }
+    60% {
+        transform: translateY(-30px) rotate(360deg);
+    }
+    70% {
+        transform: translateY(0) rotate(360deg);
+    }
+    80% {
+        transform: translateY(-15px) rotate(360deg);
+    }
+    100% {
+        transform: translateY(0) rotate(360deg);
+    }
+}
+
+
+@keyframes brillar {
+    0% {
+
+        filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.5));
+    }
+    50% {
+
+        filter: drop-shadow(0 0 20px rgba(255, 215, 0, 1)) drop-shadow(0 0 40px rgba(255, 215, 0, 0.7));
+    }
+    100% {
+
+        filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.5));
+    }
+}
+
+.mostrador-producto-seccion {
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+#huevoirrompible {
+    position: relative;
+    border-radius: 50%;
+    animation: caerYRebotar 2s ease-in-out forwards; /* Solo se ejecuta una vez */
+    transition: filter 0.5s ease;
+}
+
+#huevoirrompible:hover {
+    filter: drop-shadow(0 0 20px rgba(255, 215, 0, 1)) drop-shadow(0 0 40px rgba(255, 215, 0, 0.7));
+}
+
+
+
+
+
+/* Animación principal: explosión */
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10% { transform: translateX(-5px); }
+    20% { transform: translateX(5px); }
+    30% { transform: translateX(-5px); }
+    40% { transform: translateX(5px); }
+    50% { transform: translateX(0); }
+}
+
+@keyframes grow {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.5); }
+}
+
+@keyframes explode {
+    0% { transform: scale(1.3); opacity: 1; }
+    100% { transform: scale(3); opacity: 0; }
+}
+
+#bombaarcanaoscura {
+    transition: all 0.3s ease-in-out;
+}
+
+#bombaarcanaoscura:hover {
+    animation: shake 0.5s ease-in-out, grow 0.5s 0.5s ease-in-out, explode 1s 1s;
 }
