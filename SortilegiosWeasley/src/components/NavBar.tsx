@@ -1,11 +1,18 @@
 import '../styles/NavBar.css';
 import { Link } from "react-router"; // Importa Link
 
+// Components
+import Cart  from './carritoCompras'
+// Hooks
+import { useState } from 'react'
+
 interface NavBarProps {
     setSeccion: (seccion: string | null) => void;
 }
 
 function NavBar({ setSeccion }: NavBarProps) {
+    const [cartOpen, setCartOpen] = useState(false)
+    {console.log(cartOpen)}
     return (
         <nav className="navbar">
             <ul className="navbar-list">
@@ -24,8 +31,8 @@ function NavBar({ setSeccion }: NavBarProps) {
                 <li className="navbar-item">
                     <Link to="/vistaSeccion" onClick={() => setSeccion('')}>Buscar</Link> {/* Enlace a Vista Sección */}
                 </li>
-                <li className="navbar-item">
-                    Carrito {/* Enlace a Vista Sección */}
+                <li onClick={() => setCartOpen(!cartOpen)} className="navbar-item">
+                    Carrito
                 </li>
                 <li className="navbar-item">
                     <Link to='detalleUsuario'>Usuario</Link>
