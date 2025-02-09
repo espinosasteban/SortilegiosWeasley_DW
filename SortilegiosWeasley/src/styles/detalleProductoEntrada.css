@@ -412,8 +412,6 @@
   }
 
 
-
-
 @keyframes shake-diagonal {
     0% {
       transform: translate(0, 0) rotate(0deg);
@@ -458,7 +456,7 @@
 }
 
 #wildfirewhizz-bangs:hover {
-    animation: explode 1s ease-in-out infinite;
+    animation: explode 1s ease-out forwards;
 }
 
 /* Movimiento vibrante para simular energía mágica */
@@ -471,6 +469,16 @@
 
 /* Pequeñas explosiones de chispas */
 @keyframes explode {
-    0% {transform: scale(1); opacity: 1; filter: brightness(3)}
-    100% {transform: scale(3); opacity: 0; filter: brightness(0)}
+    0% {
+        transform: scale(1);
+        opacity: 1;
+        filter: brightness(3) blur(0);
+    }
+
+    100% {
+        transform: scale(3);
+        opacity: 0;
+        filter: brightness(1.7) blur(2px);
+    }
 }
+
