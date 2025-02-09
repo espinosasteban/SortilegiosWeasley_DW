@@ -93,3 +93,30 @@ export const resenasRemovedorAcne: Array<ResenaArticulo> = [
         "cantidadNoEsUtil": 5
     }
 ]
+
+export const resenasWildFire: Array<ResenaArticulo> = [
+    {
+        "nombreUsuario": "MagoTravesuras99",
+        "fechaComentario": "2024-02-07",
+        "comentario": "¡Espectaculares! Los lanzamos en una fiesta y los efectos mágicos fueron increíbles. Totalmente recomendados.",
+        "calificacion": 5,
+        "cantidadEsUtil": 15,
+        "cantidadNoEsUtil": 0
+    },
+    {
+        "nombreUsuario": "HechiceroCurioso",
+        "fechaComentario": "2024-02-06",
+        "comentario": "Muy divertidos, aunque uno casi me persigue por toda la casa. Sin duda, magia Weasley en su máxima expresión.",
+        "calificacion": 4,
+        "cantidadEsUtil": 10,
+        "cantidadNoEsUtil": 2
+    },
+    {
+        "nombreUsuario": "BrujaDivertida",
+        "fechaComentario": "2024-02-05",
+        "comentario": "El mejor espectáculo de fuegos artificiales que he visto, pero hay que tener cuidado con los más traviesos.",
+        "calificacion": 5,
+        "cantidadEsUtil": 8,
+        "cantidadNoEsUtil": 1
+    }
+]
