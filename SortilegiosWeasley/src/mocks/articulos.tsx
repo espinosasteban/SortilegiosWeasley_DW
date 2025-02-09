@@ -1,5 +1,11 @@
 import {Articulo} from '../tipos';
-import {resenasHuevoIrrompible, resenasPocionAmor, resenasRemovedorAcne} from './resenas';
+import {
+    resenasHuevoIrrompible,
+    resenasPastillasVomitas,
+    resenasPocionAmor,
+    resenasRemovedorAcne,
+    resenasWildFire
+} from './resenas';
 
 export const articulos: Array<Articulo> = [
     {
@@ -59,12 +65,29 @@ export const articulos: Array<Articulo> = [
 
     {
         nombre: "Elixir removedor de acné",
-        precio: 12,
+        precio: 100,
         descripcion: "Un potente y mágico eliminador de granos en formato de spray. Inspirado en el mundo de la magia, este producto actúa en tan solo diez segundos para dejar la piel impecable. Su fórmula encantada, con un ligero resplandor dorado, se activa con un suave rocío que envuelve la piel en una brisa de partículas mágicas. Perfecto para magos y brujas que necesitan una solución rápida y efectiva antes de una gran reunión en el Callejón Diagon.",
         imagen: "../src/assets/imagenesProductos/amorBelleza/elixirRemovedorAcne.png",
         seccion: "Amor y Belleza",
         resenas: resenasRemovedorAcne
-    }
+    },
+    {
+        nombre: "Wildfire Whizz-Bangs",
+        precio: 100,
+        descripcion: "Estos fuegos artificiales mágicos son imparables. Incluyen ruedas de fuego rosa impactante, dragones que escupen fuego, bengalas que escriben insultos, cohetes con largas colas de estrellas plateadas y petardos. Si dos tipos colisionan, crean combinaciones nuevas como cerdos voladores plateados y rosados.",
+        imagen: "../src/assets/imagenesProductos/explosivos/wildFire.png",
+        seccion: "Explosivos",
+        resenas: resenasWildFire
+    },
+
+    {
+        nombre: "Pastillas Vomitivas",
+        precio: 7.99,
+        descripcion: "Un dulce mágico engañosamente delicioso que, segundos después de ser ingerido, provoca un intenso pero temporal ataque de vómito. Perfecto para evitar clases aburridas o gastar bromas inolvidables.",
+        imagen: "../src/assets/imagenesProductos/dulces/pastillasVomitivas.png",
+        seccion: "Dulces",
+        resenas: resenasPastillasVomitas}
+
 ];
 
 

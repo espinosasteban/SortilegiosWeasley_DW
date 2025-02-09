@@ -93,3 +93,59 @@ export const resenasRemovedorAcne: Array<ResenaArticulo> = [
         "cantidadNoEsUtil": 5
     }
 ]
+
+export const resenasWildFire: Array<ResenaArticulo> = [
+    {
+        "nombreUsuario": "MagoTravesuras99",
+        "fechaComentario": "2024-02-07",
+        "comentario": "¡Espectaculares! Los lanzamos en una fiesta y los efectos mágicos fueron increíbles. Totalmente recomendados.",
+        "calificacion": 5,
+        "cantidadEsUtil": 15,
+        "cantidadNoEsUtil": 0
+    },
+    {
+        "nombreUsuario": "HechiceroCurioso",
+        "fechaComentario": "2024-02-06",
+        "comentario": "Muy divertidos, aunque uno casi me persigue por toda la casa. Sin duda, magia Weasley en su máxima expresión.",
+        "calificacion": 4,
+        "cantidadEsUtil": 10,
+        "cantidadNoEsUtil": 2
+    },
+    {
+        "nombreUsuario": "BrujaDivertida",
+        "fechaComentario": "2024-02-05",
+        "comentario": "El mejor espectáculo de fuegos artificiales que he visto, pero hay que tener cuidado con los más traviesos.",
+        "calificacion": 5,
+        "cantidadEsUtil": 8,
+        "cantidadNoEsUtil": 1
+    }
+]
+
+export const resenasPastillasVomitas: Array<ResenaArticulo> = [
+
+        {
+            nombreUsuario: "FredThePrankster",
+            fechaComentario: "2025-02-09",
+            comentario: "Funcionan de maravilla. Vomité justo a tiempo para evitar el examen de pociones. ¡Gracias, Weasley!",
+            calificacion: 5,
+            cantidadEsUtil: 23,
+            cantidadNoEsUtil: 2
+        },
+        {
+            nombreUsuario: "MagaTraviesa",
+            fechaComentario: "2025-02-08",
+            comentario: "Buen efecto, aunque me duró un poco más de lo esperado. Recomiendo no comerlas justo antes del almuerzo.",
+            calificacion: 4,
+            cantidadEsUtil: 15,
+            cantidadNoEsUtil: 1
+        },
+        {
+            nombreUsuario: "BromistaSecreta",
+            fechaComentario: "2025-02-07",
+            comentario: "Le di una a mi hermano y salió corriendo al baño en segundos. ¡Definitivamente las volveré a comprar!",
+            calificacion: 5,
+            cantidadEsUtil: 30,
+            cantidadNoEsUtil: 0
+        }
+
+]

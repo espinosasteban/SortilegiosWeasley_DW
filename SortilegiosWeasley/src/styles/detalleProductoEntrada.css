@@ -412,8 +412,6 @@
   }
 
 
-
-
 @keyframes shake-diagonal {
     0% {
       transform: translate(0, 0) rotate(0deg);
@@ -449,5 +447,86 @@
       transform: translate(0, 0) rotate(0deg);
     }
   }
-  
- 
+
+/*-------------------------------*/
+/*Animacion WildFire*/
+
+#wildfirewhizz-bangs {
+    animation: shake 1.5s ease-in-out infinite;
+}
+
+#wildfirewhizz-bangs:hover {
+    animation: explode 1s ease-out forwards;
+}
+
+/* Movimiento vibrante para simular energía mágica */
+@keyframes shake {
+    0%, 100% {filter: brightness(1.1); transform: rotate(0deg) translate(0, 0); }
+    25% {filter: brightness(1.5); transform: rotate(2deg) translate(1px, -1px); }
+    50% {filter: brightness(1.1); transform: rotate(-2deg) translate(-1px, 1px); }
+    75% {filter: brightness(1.5); transform: rotate(2deg) translate(1px, -1px); }
+}
+
+/* Pequeñas explosiones de chispas */
+@keyframes explode {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+        filter: brightness(3) blur(0);
+    }
+
+    100% {
+        transform: scale(3);
+        opacity: 0;
+        filter: brightness(1.7) blur(2px);
+    }
+}
+
+
+/*-------------------------------*/
+/*Animacion Pastillas Vomitivas*/
+
+#pastillasvomitivas {
+    animation: vomitoEffect 2s infinite alternate ease-in-out,
+    colorEffect 2s infinite alternate ease-in-out;
+    transform-origin: bottom; /* Hace que la expansión sea hacia arriba */
+    filter: drop-shadow(0 0 3rem rgba(13, 208, 97, 0.5));
+}
+
+@keyframes vomitoEffect {
+    0% {
+        filter: hue-rotate(0deg) brightness(1);
+        transform: scaleY(1);
+    }
+    50% {
+        filter: hue-rotate(45deg) brightness(1.5);
+        transform: scale3d(1.2, 1.2, 1.2);
+    }
+
+    100% {
+        filter: hue-rotate(90deg) brightness(1.2);
+        transform: scaleY(0.7); /* Aumenta la altura en un 20% */
+    }
+}
+
+@keyframes glitchEffect {
+    0% { transform: translate(0, 0); }
+    20% { transform: translate(-2px, 3px) skewX(2deg); }
+    40% { transform: translate(2px, -3px) skewX(-2deg); }
+    60% { transform: translate(-3px, 1px) skewX(1deg); }
+    80% { transform: translate(3px, -1px) skewX(-1deg); }
+    100% { transform: translate(0, 0); }
+}
+
+@keyframes colorEffect {
+    0% {
+        filter: hue-rotate(0deg) brightness(1) drop-shadow(0 0 3rem rgba(13, 208, 97, 0.5));
+    }
+    50% {
+        filter: hue-rotate(45deg) brightness(1.5) drop-shadow(0 0 4rem rgba(13, 208, 97, 0.7));
+    }
+    100% {
+        filter: hue-rotate(90deg) brightness(1.2) drop-shadow(0 0 5rem rgba(13, 208, 97, 1));
+    }
+}
+
