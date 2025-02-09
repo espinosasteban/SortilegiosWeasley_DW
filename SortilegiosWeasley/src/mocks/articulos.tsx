@@ -1,5 +1,11 @@
 import {Articulo} from '../tipos';
-import {resenasHuevoIrrompible, resenasPocionAmor, resenasRemovedorAcne, resenasWildFire} from './resenas';
+import {
+    resenasHuevoIrrompible,
+    resenasPastillasVomitas,
+    resenasPocionAmor,
+    resenasRemovedorAcne,
+    resenasWildFire
+} from './resenas';
 
 export const articulos: Array<Articulo> = [
     {
@@ -72,7 +78,15 @@ export const articulos: Array<Articulo> = [
         imagen: "../src/assets/imagenesProductos/explosivos/wildFire.png",
         seccion: "Explosivos",
         resenas: resenasWildFire
-    }
+    },
+
+    {
+        nombre: "Pastillas Vomitivas",
+        precio: 7.99,
+        descripcion: "Un dulce mágico engañosamente delicioso que, segundos después de ser ingerido, provoca un intenso pero temporal ataque de vómito. Perfecto para evitar clases aburridas o gastar bromas inolvidables.",
+        imagen: "../src/assets/imagenesProductos/dulces/pastillasVomitivas.png",
+        seccion: "Dulces",
+        resenas: resenasPastillasVomitas}
 
 ];
 

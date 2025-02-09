@@ -120,3 +120,32 @@ export const resenasWildFire: Array<ResenaArticulo> = [
         "cantidadNoEsUtil": 1
     }
 ]
+
+export const resenasPastillasVomitas: Array<ResenaArticulo> = [
+
+        {
+            nombreUsuario: "FredThePrankster",
+            fechaComentario: "2025-02-09",
+            comentario: "Funcionan de maravilla. Vomité justo a tiempo para evitar el examen de pociones. ¡Gracias, Weasley!",
+            calificacion: 5,
+            cantidadEsUtil: 23,
+            cantidadNoEsUtil: 2
+        },
+        {
+            nombreUsuario: "MagaTraviesa",
+            fechaComentario: "2025-02-08",
+            comentario: "Buen efecto, aunque me duró un poco más de lo esperado. Recomiendo no comerlas justo antes del almuerzo.",
+            calificacion: 4,
+            cantidadEsUtil: 15,
+            cantidadNoEsUtil: 1
+        },
+        {
+            nombreUsuario: "BromistaSecreta",
+            fechaComentario: "2025-02-07",
+            comentario: "Le di una a mi hermano y salió corriendo al baño en segundos. ¡Definitivamente las volveré a comprar!",
+            calificacion: 5,
+            cantidadEsUtil: 30,
+            cantidadNoEsUtil: 0
+        }
+
+]

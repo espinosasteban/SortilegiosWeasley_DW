@@ -482,3 +482,51 @@
     }
 }
 
+
+/*-------------------------------*/
+/*Animacion Pastillas Vomitivas*/
+
+#pastillasvomitivas {
+    animation: vomitoEffect 2s infinite alternate ease-in-out,
+    colorEffect 2s infinite alternate ease-in-out;
+    transform-origin: bottom; /* Hace que la expansión sea hacia arriba */
+    filter: drop-shadow(0 0 3rem rgba(13, 208, 97, 0.5));
+}
+
+@keyframes vomitoEffect {
+    0% {
+        filter: hue-rotate(0deg) brightness(1);
+        transform: scaleY(1);
+    }
+    50% {
+        filter: hue-rotate(45deg) brightness(1.5);
+        transform: scale3d(1.2, 1.2, 1.2);
+    }
+
+    100% {
+        filter: hue-rotate(90deg) brightness(1.2);
+        transform: scaleY(0.7); /* Aumenta la altura en un 20% */
+    }
+}
+
+@keyframes glitchEffect {
+    0% { transform: translate(0, 0); }
+    20% { transform: translate(-2px, 3px) skewX(2deg); }
+    40% { transform: translate(2px, -3px) skewX(-2deg); }
+    60% { transform: translate(-3px, 1px) skewX(1deg); }
+    80% { transform: translate(3px, -1px) skewX(-1deg); }
+    100% { transform: translate(0, 0); }
+}
+
+@keyframes colorEffect {
+    0% {
+        filter: hue-rotate(0deg) brightness(1) drop-shadow(0 0 3rem rgba(13, 208, 97, 0.5));
+    }
+    50% {
+        filter: hue-rotate(45deg) brightness(1.5) drop-shadow(0 0 4rem rgba(13, 208, 97, 0.7));
+    }
+    100% {
+        filter: hue-rotate(90deg) brightness(1.2) drop-shadow(0 0 5rem rgba(13, 208, 97, 1));
+    }
+}
+
