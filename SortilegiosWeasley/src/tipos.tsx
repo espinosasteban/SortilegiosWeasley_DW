@@ -5,7 +5,17 @@ export interface Articulo {
     descripcion: string;
     imagen: string;
     seccion: string;
-    
+    resenas: Array<ResenaArticulo>;
 
+}
+
+
+export interface ResenaArticulo {
+    nombreUsuario: string;
+    fechaComentario: string;
+    comentario: string;
+    calificacion: number;
+    cantidadEsUtil: number;
+    cantidadNoEsUtil: number;
 
 }

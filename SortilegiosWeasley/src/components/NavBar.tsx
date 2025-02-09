@@ -35,7 +35,7 @@ function NavBar({ setSeccion }: NavBarProps) {
                     Carrito
                 </li>
                 <li className="navbar-item">
-                    <Link to='detalleUsuario'>Usuario</Link>
+                    <Link to='/login'>Iniciar Sesión</Link>
                 </li>
             </ul>
         </nav>
