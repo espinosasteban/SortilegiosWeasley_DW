@@ -4,7 +4,8 @@ import {
     resenasPastillasVomitas,
     resenasPocionAmor,
     resenasRemovedorAcne,
-    resenasWildFire
+    resenasWildFire,
+    resenasEscudoGuantes
 } from './resenas';
 
 export const articulos: Array<Articulo> = [
@@ -82,12 +83,20 @@ export const articulos: Array<Articulo> = [
 
     {
         nombre: "Pastillas Vomitivas",
-        precio: 7.99,
+        precio: 799,
         descripcion: "Un dulce mágico engañosamente delicioso que, segundos después de ser ingerido, provoca un intenso pero temporal ataque de vómito. Perfecto para evitar clases aburridas o gastar bromas inolvidables.",
         imagen: "../src/assets/imagenesProductos/dulces/pastillasVomitivas.png",
         seccion: "Dulces",
-        resenas: resenasPastillasVomitas}
-
+        resenas: resenasPastillasVomitas
+    },
+    {
+        nombre: "Guantes Escudo",
+        precio: 250,
+        descripcion: "Un guante encantado que otorga protección mágica al usuario. Forjado con runas antiguas, refuerza la resistencia ante ataques y proporciona un aura de defensa.",
+        imagen: "../src/assets/imagenesProductos/defensaPersonal/escudoGuantes.png",
+        seccion: "Defensa Personal",
+        resenas: resenasEscudoGuantes
+    }
 ];
 
 
