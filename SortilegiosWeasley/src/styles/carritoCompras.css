@@ -23,8 +23,27 @@
     margin-left: 40px;
   }
 
+  .item-header {
+    display: flex;
+    flex-direction: column; /* Organiza los elementos en columna */
+    gap: 10px; /* Espacio entre los elementos */
+  }
+  
+  .item-header-top {
+    display: flex;
+    justify-content: space-between; /* Separa el nombre y el botón */
+    align-items: center; /* Alinea verticalmente los elementos */
+  }
+  
+  .img-shopping-cart {
+    max-width: 100%; 
+    height: auto; 
+    border-radius: 8px; 
+  }
+
 .cart-wrapper {
   font-family: Arial, Helvetica, sans-serif;
   width: 500px;
   padding: 20px;
 }
+

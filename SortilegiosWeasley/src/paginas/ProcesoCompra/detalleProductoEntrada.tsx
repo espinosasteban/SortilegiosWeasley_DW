@@ -12,7 +12,7 @@ import { useParams } from "react-router";
 import { CartContext } from '../../contexts/CartContext.tsx';
 
 // Hooks
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect } from 'react';
 
 export default function VistaProducto(){
 
@@ -84,7 +84,7 @@ interface DetalleProps {
 }
 
 function Detalle({ producto}: DetalleProps) {
-    const { cartItems, addToCart} = useContext(CartContext)
+    const { addToCart} = useContext(CartContext)
     return (
         <>
             <section className="detalle-seccion">

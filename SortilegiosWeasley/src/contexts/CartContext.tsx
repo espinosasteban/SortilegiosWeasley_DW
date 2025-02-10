@@ -1,7 +1,7 @@
 import { createContext, useState, useEffect, ReactNode }  from 'react';
 
+// Types
 import { ArticuloCarrito } from '../tipos';
-import Cart from '../components/carritoCompras';
 
 export const CartContext = createContext<{
     cartItems: ArticuloCarrito[];
@@ -9,12 +9,16 @@ export const CartContext = createContext<{
     removeFromCart: (item: ArticuloCarrito) => void;
     getCartTotal: () => number;
     toggleCart: () => void;
+    getTotalCartItems: () => number;
+    deleteItem: (item: ArticuloCarrito) => void
 }>({
     cartItems: [],
     addToCart: () => {},
     removeFromCart: () => {},
     getCartTotal: () => 0,
     toggleCart: () => false,
+    getTotalCartItems: () => 0,
+    deleteItem: () => {},
 })
 
 interface CartProviderProps {
@@ -77,6 +81,22 @@ export const CartProvider = ({ children }: CartProviderProps) => {
     }
 
     const toggleCart = () => setIsCartOpen(!isCartOpen)
+
+    const getTotalCartItems = () => {
+        return cartItems.reduce((ack:number, item: ArticuloCarrito) => ack + item.total_items, 0)
+    }
+
+    const deleteItem = (item: ArticuloCarrito) => {
+      const isItemInCart = cartItems.find((cartItem:ArticuloCarrito) => cartItem.nombre === item.nombre);
+
+      if (isItemInCart === undefined) {
+        throw new TypeError("No se encontraron Artículos con ese nombre")
+      }
+
+      if (isItemInCart.total_items > 0){
+        setCartItems(cartItems.filter((carItem) => carItem.nombre !== item.nombre))
+      }
+    }
     
     return (
       <CartContext.Provider
@@ -85,7 +105,9 @@ export const CartProvider = ({ children }: CartProviderProps) => {
           addToCart,
           removeFromCart,
           getCartTotal,
-          toggleCart
+          toggleCart,
+          getTotalCartItems,
+          deleteItem,
          }}>
           {children}
          </CartContext.Provider>

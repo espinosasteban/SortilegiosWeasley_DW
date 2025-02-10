@@ -21,7 +21,8 @@ interface NavBarProps {
 
 function NavBar({ setSeccion }: NavBarProps) {
     const [ cartOpen, setCartOpen] = useState(false)
-    const { cartItems, toggleCart, addToCart, removeFromCart, getCartTotal} = useContext(CartContext)
+    const { cartItems, toggleCart, addToCart,
+            removeFromCart, getCartTotal, getTotalCartItems} = useContext(CartContext)
 
     return (
         <nav className="navbar">
@@ -49,7 +50,7 @@ function NavBar({ setSeccion }: NavBarProps) {
                             removeFromCart={removeFromCart}></Cart>
                     </Drawer>
                     <button onClick={() => setCartOpen(true)}>
-                        <Badge badgeContent = {getCartTotal(cartItems) } color = 'error'>
+                        <Badge badgeContent = {getTotalCartItems()} color = 'error'>
                             <AddShoppingCartIcon />
                         </Badge>
                     </button>
