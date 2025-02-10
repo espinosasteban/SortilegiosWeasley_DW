@@ -5,20 +5,14 @@ import {
     resenasPocionAmor,
     resenasRemovedorAcne,
     resenasWildFire,
-    resenasEscudoGuantes
+    resenasEscudoGuantes,
+    resenasSombreroAntiGravedad,
+    resenasPolvosPeruanos,
+    resenasRatonesMagicos,
+    resenasCarameloLonguilongo
 } from './resenas';
 
 export const articulos: Array<Articulo> = [
-    {
-        nombre: "Orejas Extensibles",
-        precio: 500,
-        descripcion: "Las Orejas Extensibles son el accesorio perfecto para escuchar conversaciones a distancia con total discreción. Con un diseño encantado y divertido, estas orejas se deslizan fácilmente hasta el lugar deseado, llevándote cada palabra como si estuvieras ahí.",
-        imagen: "../src/assets/imagenesProductos/bromas/orejasExtensibles.png",
-        seccion: "Bromas",
-        resenas: []
-
-    },
-    
     {
         nombre: "Huevo Irrompible",
         precio: 800,
@@ -27,16 +21,6 @@ export const articulos: Array<Articulo> = [
         seccion: "Magia Muggle",
         resenas: resenasHuevoIrrompible
     },
-
-    {
-        nombre: "Miraphorus",
-        precio: 1250,
-        descripcion: "¡Descubre el poder del Miraphorus, el accesorio mágico definitivo para los amantes de la escritura y el dibujo encantados! Este extraordinario objeto, creado por los ingeniosos gemelos Weasley, permite capturar con precisión cada trazo que realices en papel y duplicarlo mágicamente en otro lugar.",
-        imagen: "../src/assets/imagenesProductos/magiaMuggle/miraphorus.png",
-        seccion: "Magia Muggle",
-        resenas: []
-    },
-
     {
         nombre: "Bomba Arcana Oscura",
         precio: 150,
@@ -83,7 +67,7 @@ export const articulos: Array<Articulo> = [
 
     {
         nombre: "Pastillas Vomitivas",
-        precio: 799,
+        precio: 20,
         descripcion: "Un dulce mágico engañosamente delicioso que, segundos después de ser ingerido, provoca un intenso pero temporal ataque de vómito. Perfecto para evitar clases aburridas o gastar bromas inolvidables.",
         imagen: "../src/assets/imagenesProductos/dulces/pastillasVomitivas.png",
         seccion: "Dulces",
@@ -96,7 +80,40 @@ export const articulos: Array<Articulo> = [
         imagen: "../src/assets/imagenesProductos/defensaPersonal/escudoGuantes.png",
         seccion: "Defensa Personal",
         resenas: resenasEscudoGuantes
+    },
+    {
+        nombre: "Sombrero Antigravedad",
+        precio: 50,
+        descripcion: "Un sombrero encantado que levita mágicamente cuando se usa. Perfecto para gastar bromas y sorprender a los desprevenidos. Su empaque incluye la frase: 'Arruina el día de un caballero haciendo que su sombrero vuele'.",
+        imagen: "../src/assets/imagenesProductos/bromas/sombreroAntigravedad.png",
+        seccion: "Bromas",
+        resenas: resenasSombreroAntiGravedad
+    },
+    {
+        nombre: "Polvo Peruano de Oscuridad Instantánea",
+        precio: 300,
+        descripcion: "Un polvo encantado importado por los gemelos Weasley que crea una oscuridad impenetrable al usarse. Perfecto para escapar sin ser visto.",
+        imagen: "../src/assets/imagenesProductos/defensaPersonal/polvosPeruanos.png",
+        seccion: "Defensa Personal",
+        resenas: resenasPolvosPeruanos
+    },
+    {
+        nombre: "Los Ratones Mágicos de María",
+        precio: 600,
+        descripcion: "Unos traviesos ratones encantados que se escapan, flotan y desaparecen en el aire cuando intentas atraparlos. Perfectos para jugar bromas.",
+        imagen: "../src/assets/imagenesProductos/magiaMuggle/ratonesMagicos.png",
+        seccion: "Magia Muggle",
+        resenas: resenasRatonesMagicos
+    },
+    {
+        nombre: "Caramelo Longuilonguo",
+        precio: 10,
+        descripcion: "Un dulce encantado que hace que la lengua del consumidor crezca de forma exagerada durante varios minutos. Ideal para bromas y travesuras.",
+        imagen: "../src/assets/imagenesProductos/dulces/lenguaLongui.png",
+        seccion: "Dulces",
+        resenas: resenasCarameloLonguilongo
     }
+
 ];
 
 

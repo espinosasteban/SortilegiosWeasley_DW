@@ -263,7 +263,6 @@
 }
 
 
-
 #huevoirrompible {
     animation: caerYRebotar 2s ease-in-out forwards; /* Solo se ejecuta una vez */
     transition: filter 0.5s ease;
@@ -274,44 +273,37 @@
     filter: drop-shadow(0 0 7rem rgba(255, 215, 0, 1)) drop-shadow(0 0 3rem rgba(255, 237, 145, 0.7));
 }
 
-
-
-
-
-
-
-
 /* Animación principal: explosión */
 @keyframes shake {
     0%, 100% {
         transform: translateX(0);
     }
     10% {
-        transform: translateX(-7px); filter: brightness(0.7); /* Valor "aleatorio" dentro del rango */
+        transform: translateX(-7px); filter: brightness(0.7);
     }
     20% {
-        transform: translateX(12px); /* Valor "aleatorio" dentro del rango */
+        transform: translateX(12px);
     }
     30% {
-        transform: translateX(-15px); filter: brightness(1); /* Valor "aleatorio" dentro del rango */
+        transform: translateX(-15px); filter: brightness(1);
     }
     40% {
-        transform: translateX(9px); /* Valor "aleatorio" dentro del rango */
+        transform: translateX(9px);
     }
     50% {
-        transform: translateX(0); filter: brightness(1.5);  /* Valor "aleatorio" dentro del rango */;
+        transform: translateX(0); filter: brightness(1.5);
     }
     60% {
-        transform: translateX(-10px); filter: brightness(0.8); /* Valor "aleatorio" dentro del rango */
+        transform: translateX(-10px); filter: brightness(0.8); 
     }
     70% {
-        transform: translateX(8px); /* Valor "aleatorio" dentro del rango */
+        transform: translateX(8px); 
     }
     80% {
-        transform: translateX(-13px); /* Valor "aleatorio" dentro del rango */
+        transform: translateX(-13px); 
     }
     90% {
-        transform: translateX(6px); /* Valor "aleatorio" dentro del rango */
+        transform: translateX(6px); 
     }
 }
 
@@ -339,15 +331,12 @@
 /* ----------------------------------------------------------------------------------*/
 /*Animación varita*/
 
-/* CSS */
 #varitamagicafake {
     animation: float-animation 2s infinite ease-in-out;
     filter: drop-shadow(0 0 6rem rgb(94, 0, 255)) drop-shadow(0 0 5rem rgba(225, 132, 253, 0.7)) drop-shadow(0 0 4rem rgba(255, 255, 255, 0.8)) brightness(1.7);
 }
 
 
-
-/* Pseudo-elemento para el brillo mágico */
 #varitamagicafake:hover {
 
     animation: glow-animation 2s infinite ease-in-out, rotate-animation 1.3s infinite; /* Añadimos la animación de rotación */
@@ -423,8 +412,8 @@
 /*Animacion Elixir Removedor de Acné*/
 
 #elixirremovedordeacne {
-    animation: brillo 1s ease-in-out infinite;
-    filter: drop-shadow(0 0 20px rgb(96, 173, 175)) drop-shadow(0 0 5px rgba(114, 173, 228, 0.5));
+    animation: brillar 2s ease-in-out infinite;
+    filter: drop-shadow(0 0 20px rgb(192, 199, 98)) drop-shadow(0 0 5px rgba(200, 211, 49, 0.5));
 }
 
 #elixirremovedordeacne:hover {
@@ -479,7 +468,6 @@
     animation: explode 1s ease-out forwards;
 }
 
-/* Movimiento vibrante para simular energía mágica */
 @keyframes shake {
     0%, 100% {filter: brightness(1.1); transform: rotate(0deg) translate(0, 0); }
     25% {filter: brightness(1.5); transform: rotate(2deg) translate(1px, -1px); }
@@ -487,7 +475,7 @@
     75% {filter: brightness(1.5); transform: rotate(2deg) translate(1px, -1px); }
 }
 
-/* Pequeñas explosiones de chispas */
+
 @keyframes explode {
     0% {
         transform: scale(1);
@@ -509,7 +497,7 @@
 #pastillasvomitivas {
     animation: vomitoEffect 2s infinite alternate ease-in-out,
     colorEffect 2s infinite alternate ease-in-out;
-    transform-origin: bottom; /* Hace que la expansión sea hacia arriba */
+    transform-origin: bottom;
     filter: drop-shadow(0 0 3rem rgba(13, 208, 97, 0.5));
 }
 
@@ -609,11 +597,103 @@
     will-change: filter, transform;
 }
 
-
-
-/* 🔹 Efecto al hacer hover */
 #guantesescudo:hover{
-
-    animation: girar180 2.7s ease-in-out forwards; /* Detiene la animación y mantiene el efecto */
+    animation: girar180 2.7s ease-in-out forwards;
 }
 
+/*-------------------------------*/
+/*Animacion sombrero Antigravedad*/
+
+#sombreroantigravedad {
+    animation: volar 4s ease-in-out infinite;
+    filter: drop-shadow(0 0 2rem rgba(214, 203, 39, 0.5));
+}
+
+@keyframes volar {
+    0% {
+        transform: translateX(0) translateY(0) rotate(0deg) scale(1.2);
+    }
+    25% {
+        transform: translateX(30px) translateY(-50px) rotate(45deg) scale(0.8);
+    }
+    50% {
+        transform: translateX(-40px) translateY(-100px) rotate(0deg) scale(0.6);
+    }
+    75% {
+        transform: translateX(20px) translateY(-50px) rotate(45deg) scale(0.8);
+    }
+    100% {
+        transform: translateX(0) translateY(0) rotate(0deg) scale(1.2);
+    }
+}
+
+/*-------------------------------*/
+/*Animacion polvos peruanos*/
+
+@keyframes pulsoBrillo {
+    0% { filter: drop-shadow(0 0 5px rgba(60, 226, 231, 0.3)); }
+    50% { filter: drop-shadow(0 0 15px rgba(14, 239, 255, 0.7)); }
+    100% { filter: drop-shadow(0 0 5px rgba(60, 226, 231, 0.3)); }
+}
+
+@keyframes oscurecer {
+    0% { filter: brightness(1); }
+    100% { filter: brightness(0); }
+}
+
+#polvoperuanodeoscuridadinstantanea {
+    animation: pulsoBrillo 2s infinite ease-in-out; 
+}
+
+#polvoperuanodeoscuridadinstantanea:hover {
+    animation: none;
+    animation: oscurecer 1.5s forwards ease-in-out;
+}
+
+
+/*-------------------------------*/
+/*Animacion ratones mágicos*/
+
+@keyframes movimientoRatones {
+    0% { transform: translateX(0) translateY(0); }
+    25% { transform: translateX(10px) translateY(-40px); }
+    50% { transform: translateX(-5px) translateY(15px); }
+    75% { transform: translateX(20px) translateY(-20px); }
+    100% { transform: translateX(0) translateY(0); }
+}
+
+@keyframes brilloMagico {
+    0% { filter: brightness(1); }
+    50% { filter: brightness(1.2); }
+    100% { filter: brightness(1); }
+}
+
+
+#losratonesmagicosdemaria {
+    animation: movimientoRatones 3s infinite ease-in-out, brilloMagico 2s infinite ease-in-out;
+    transition: opacity 1s ease-in-out;
+    opacity: 1;
+}
+
+#losratonesmagicosdemaria:hover {
+    opacity: 0;
+}
+
+/*-------------------------------*/
+/*Animacion caramelo longuilonguo*/
+
+@keyframes estirarLengua {
+    0% { transform: scaleY(1); }
+    50% { transform: scaleY(1.6); } 
+    100% { transform: scaleY(1); } 
+}
+
+#caramelolonguilonguo {
+    filter: drop-shadow(0 0  2rem rgba(255, 0, 0, 0.5));
+    transform-origin: top; 
+    transition: scale 6s ease-in-out;
+}
+
+#caramelolonguilonguo:hover {
+    animation: estirarLengua 6s ease-in-out infinite;
+}
