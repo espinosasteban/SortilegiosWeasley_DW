@@ -17,7 +17,8 @@
 .detalle-producto-seccion {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-evenly;
+    justify-content: space-around;
+    padding: 2rem;
     align-items: center;
     margin: 5rem 2rem 2rem 2rem;
     background-color: #423773;
@@ -32,38 +33,57 @@
     align-items: center;
 }
 
-
 .detalle-seccion {
-    background-color: #fff;
-    padding: 1.25rem;
     border-radius: 0.75rem;
-    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
-    max-width: 25rem;
-    margin: 1rem 3rem 2rem 5rem;
+    max-width: 28rem;
+    margin: 0 3rem 2rem 2rem;
     text-align: center;
 }
 
 .detalle-seccion h2 {
-    font-size: 1.8rem;
-    color: #333;
+    font-size: 3.3rem;
+    color: #e5dcdc;
     margin-bottom: 0.625rem;
 }
 
-.detalle-seccion p {
-    font-size: 1rem;
-    color: #666;
-    margin-bottom: 0.5rem;
+
+.detalle-seccion-descripcion {
+    font-size: 1.5rem;
+    color: #bfbdf1;
+    background-color: #5e519f;
+    padding: 1rem;
+    border-radius: 0.75rem;
+    margin-bottom: 0.625rem;
+}
+
+
+
+.contenedor-detalle-seccion {
+    display:flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.detalle-seccion-precio {
+    font-size: 2.5rem;
+    color: #e6e5f8;
+    background-color: #c96655;
+    padding: 0.5rem 3rem;
+    border-radius: 0.75rem;
+    margin: 1rem;
 }
 
 .detalle-seccion button {
-    background-color: #007bff;
+    background-color: #1a1a1a;
     color: white;
     border: none;
-    padding: 0.625rem 1rem;
-    font-size: 1rem;
+    padding: 1rem 2rem;
+    font-size: 1.5rem;
     border-radius: 0.5rem;
     cursor: pointer;
     transition: background-color 0.3s ease-in-out;
+    margin: 1rem;
 }
 
 .detalle-seccion button:hover {

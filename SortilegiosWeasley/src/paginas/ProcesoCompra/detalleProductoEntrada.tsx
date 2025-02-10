@@ -78,9 +78,12 @@ function Detalle({ producto }: DetalleProps) {
         <>
             <section className="detalle-seccion">
                 <h2>{producto?.nombre ?? 'Nombre no disponible'}</h2>
-                <p>{producto?.descripcion ?? 'Descripción no disponible'}</p>
-                <p>{producto?.precio ?? 'Precio no disponible'}</p>
-                <button>Añadir al carrito</button>
+                <p className="detalle-seccion-descripcion">{producto?.descripcion ?? 'Descripción no disponible'}</p>
+
+                <div className="contenedor-detalle-seccion">
+                    <p className="detalle-seccion-precio">${producto?.precio ?? 'Precio no disponible'}</p>
+                    <button>Añadir al carrito</button>
+                </div>
             </section>
         </>
     );
