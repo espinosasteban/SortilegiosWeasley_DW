@@ -1,11 +1,14 @@
 import '../styles/NavBar.css';
 import { Link } from "react-router"; // Importa Link
+import { useAuth } from '../paginas/ProcesoLoginUsuario/AuthContext';
 
 interface NavBarProps {
     setSeccion: (seccion: string | null) => void;
 }
 
 function NavBar({ setSeccion }: NavBarProps) {
+    const { usuario, logout } = useAuth();
+
     return (
         <nav className="navbar">
             <ul className="navbar-list">
@@ -28,7 +31,14 @@ function NavBar({ setSeccion }: NavBarProps) {
                     Carrito {/* Enlace a Vista Sección */}
                 </li>
                 <li className="navbar-item">
-                    <Link to='/login'>Iniciar Sesión</Link>
+                    {usuario ? (
+                        <>
+                            <Link to="/perfil">Mi Perfil</Link>
+                            <button onClick={logout}>Cerrar Sesión</button>
+                        </>
+                    ) : (
+                        <Link to="/login">Iniciar Sesión</Link>
+                    )}
                 </li>
             </ul>
         </nav>

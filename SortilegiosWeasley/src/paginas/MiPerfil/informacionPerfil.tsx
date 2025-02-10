@@ -1,4 +1,5 @@
 import { useState } from "react";
+import InfoBoton from "../../components/infoBoton";
 
 // Definir interfaces para la información del usuario y direcciones
 interface ContactInfo {
@@ -251,7 +252,9 @@ const handleLogout = () => {
       </button>
 
     </div>
+
   );
+  <InfoBoton/>
 };
 
 export default UserProfile;
