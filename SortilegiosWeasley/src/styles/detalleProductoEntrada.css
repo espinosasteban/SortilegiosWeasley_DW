@@ -24,13 +24,15 @@
     background-color: #423773;
     border-radius: 1rem;
     width: 80%;
+    height: fit-content;
 }
 
 .mostrador-producto-seccion {
     display:flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
+    height: 100%;
 }
 
 .detalle-seccion {
@@ -123,7 +125,6 @@
     align-items: center;
     background-color: #1a1a1a;
     width: 70%;
-    margin: 1rem;
     padding: 1rem;
     border-radius: 10px;
 }
@@ -631,9 +632,11 @@
 /*Animacion polvos peruanos*/
 
 @keyframes pulsoBrillo {
-    0% { filter: drop-shadow(0 0 5px rgba(60, 226, 231, 0.3)); }
-    50% { filter: drop-shadow(0 0 15px rgba(14, 239, 255, 0.7)); }
-    100% { filter: drop-shadow(0 0 5px rgba(60, 226, 231, 0.3)); }
+    0% { filter: drop-shadow(0 0 2rem rgba(2, 85, 86, 0.3)); }
+
+    50% { filter: drop-shadow(0 0 8rem rgba(1, 22, 24, 1)) drop-shadow(0 0 15rem rgba(1, 22, 24, 1)) brightness(0.5); }
+
+    100% { filter: drop-shadow(0 0 2rem rgba(3, 84, 86, 0.3)); }
 }
 
 @keyframes oscurecer {
@@ -646,8 +649,7 @@
 }
 
 #polvoperuanodeoscuridadinstantanea:hover {
-    animation: none;
-    animation: oscurecer 1.5s forwards ease-in-out;
+    animation: oscurecer 1s forwards ease-in-out;
 }
 
 
@@ -663,9 +665,18 @@
 }
 
 @keyframes brilloMagico {
-    0% { filter: brightness(1); }
-    50% { filter: brightness(1.2); }
-    100% { filter: brightness(1); }
+    0% { filter: brightness(1); opacity: 1}
+    50% { filter: brightness(1.2); opacity: 0.5}
+    100% { filter: brightness(1); opacity: 1}
+}
+
+@keyframes titilar {
+    0% { opacity: 1; }
+    25% { opacity: 0.5; }
+    50% { opacity: 1; }
+    75% { opacity: 0.5; }
+    85% { opacity: 1}
+    100% { opacity: 0; }
 }
 
 
@@ -676,7 +687,7 @@
 }
 
 #losratonesmagicosdemaria:hover {
-    opacity: 0;
+    animation: titilar 2.3s ease-in-out forwards, movimientoRatones 0.7s infinite ease-in-out forwards;
 }
 
 /*-------------------------------*/
@@ -684,14 +695,14 @@
 
 @keyframes estirarLengua {
     0% { transform: scaleY(1); }
-    50% { transform: scaleY(1.6); } 
-    100% { transform: scaleY(1); } 
+    50% { transform: scaleY(1.6); }
+    100% { transform: scaleY(1); }
 }
 
 #caramelolonguilonguo {
     filter: drop-shadow(0 0  2rem rgba(255, 0, 0, 0.5));
-    transform-origin: top; 
-    transition: scale 6s ease-in-out;
+    transform-origin: top;
+    transition: transform 0.5s ease-in-out; /* Transición para el estado normal */
 }
 
 #caramelolonguilonguo:hover {
