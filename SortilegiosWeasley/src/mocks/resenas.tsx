@@ -147,5 +147,23 @@ export const resenasPastillasVomitas: Array<ResenaArticulo> = [
             cantidadEsUtil: 30,
             cantidadNoEsUtil: 0
         }
+]
 
+export const resenasEscudoGuantes: Array<ResenaArticulo> = [
+    {
+        nombreUsuario: "FredLover",
+        fechaComentario: "2024-02-09",
+        comentario: "Me salvó en un duelo contra Peeves, la mejor compra que he hecho.",
+        calificacion: 5,
+        cantidadEsUtil: 12,
+        cantidadNoEsUtil: 1
+    },
+    {
+        nombreUsuario: "MagusProtego",
+        fechaComentario: "2024-02-07",
+        comentario: "Muy bueno, aunque un poco pesado al principio.",
+        calificacion: 4,
+        cantidadEsUtil: 8,
+        cantidadNoEsUtil: 2
+    }
 ]
