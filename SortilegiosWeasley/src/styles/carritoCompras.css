@@ -1,0 +1,30 @@
+
+.item-wrapper {
+    display: flex;
+    justify-content: space-between;
+    font-family: Arial, Helvetica, sans-serif;
+    border-bottom: 1px solid lightblue;
+    padding-bottom: 20px;
+  }
+  
+  .item-wrapper div {
+    flex: 1;
+  }
+  
+  .item-wrapper .information,
+  .item-wrapper .buttons {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .item-wrapper img {
+    max-width: 80px;
+    object-fit: cover;
+    margin-left: 40px;
+  }
+
+.cart-wrapper {
+  font-family: Arial, Helvetica, sans-serif;
+  width: 500px;
+  padding: 20px;
+}

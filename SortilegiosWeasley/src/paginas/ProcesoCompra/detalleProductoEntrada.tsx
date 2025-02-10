@@ -1,13 +1,18 @@
-import {Articulo, ResenaArticulo} from "../../tipos.tsx";
 import '../../styles/detalleProductoEntrada.css';
+
+// Tipos
+import { articulos } from "../../mocks/articulos.tsx";
+import {Articulo, ResenaArticulo, ArticuloCarrito} from "../../tipos.tsx";
+
 
 import PuntuacionVarita from "./puntuacionVarita.tsx";
 import { useParams } from "react-router";
-import { articulos } from "../../mocks/articulos.tsx";
-import {useEffect} from "react";
 
+// Contexts
+import { CartContext } from '../../contexts/CartContext.tsx';
 
-
+// Hooks
+import { useContext, useEffect, useState } from 'react';
 
 export default function VistaProducto(){
 
@@ -16,8 +21,13 @@ export default function VistaProducto(){
 
     return <>
         <main className="main-vista-producto">
-            <DetalleProducto producto={producto}/>
-            <DetalleResena producto={producto}/>
+        {producto && (
+          <>
+          <DetalleProducto producto={producto} />
+          <DetalleResena producto={producto} />
+          </>
+        )}
+        {!producto && <p>No hay producto seleccionado.</p>}
         </main>
 
     </>
@@ -29,10 +39,10 @@ function formatearNombreParaRuta(nombre: string): string {
 
 
 interface DetalleProductoProps {
-    producto: Articulo | null;
+    producto: Articulo;
 }
 
-function DetalleProducto({producto}: DetalleProductoProps){
+function DetalleProducto({producto }: DetalleProductoProps){
 
     useEffect(() => {
         window.scrollTo(0, 0); // Desplaza la página al inicio
@@ -41,7 +51,7 @@ function DetalleProducto({producto}: DetalleProductoProps){
 
             <section className="detalle-producto-seccion">
                 <MostradorProducto producto={producto}/>
-                <Detalle producto={producto}/>
+                <Detalle producto={producto} />
             </section>
         </>
 
@@ -70,17 +80,18 @@ function MostradorProducto({producto}: MostradorProductoProps){
 }
 
 interface DetalleProps {
-    producto: Articulo | null;
+    producto: ArticuloCarrito;
 }
 
-function Detalle({ producto }: DetalleProps) {
+function Detalle({ producto}: DetalleProps) {
+    const { cartItems, addToCart} = useContext(CartContext)
     return (
         <>
             <section className="detalle-seccion">
                 <h2>{producto?.nombre ?? 'Nombre no disponible'}</h2>
                 <p>{producto?.descripcion ?? 'Descripción no disponible'}</p>
                 <p>{producto?.precio ?? 'Precio no disponible'}</p>
-                <button>Añadir al carrito</button>
+                <button onClick={() => addToCart(producto)}>Añadir al carrito</button>
             </section>
         </>
     );

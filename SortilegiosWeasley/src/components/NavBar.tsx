@@ -1,18 +1,28 @@
 import '../styles/NavBar.css';
 import { Link } from "react-router"; // Importa Link
 
+// Types
+import ArticuloCarrito  from './carritoCompras';
+// External Components
+import Badge from '@mui/material/Badge'
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import { Drawer } from '@mui/material';
 // Components
 import Cart  from './carritoCompras'
 // Hooks
-import { useState } from 'react'
+import { useState, useContext } from 'react'
+// Contexts
+import { CartContext } from '../contexts/CartContext.tsx';
+
 
 interface NavBarProps {
     setSeccion: (seccion: string | null) => void;
 }
 
 function NavBar({ setSeccion }: NavBarProps) {
-    const [cartOpen, setCartOpen] = useState(false)
-    {console.log(cartOpen)}
+    const [ cartOpen, setCartOpen] = useState(false)
+    const { cartItems, toggleCart, addToCart, removeFromCart, getCartTotal} = useContext(CartContext)
+
     return (
         <nav className="navbar">
             <ul className="navbar-list">
@@ -31,8 +41,18 @@ function NavBar({ setSeccion }: NavBarProps) {
                 <li className="navbar-item">
                     <Link to="/vistaSeccion" onClick={() => setSeccion('')}>Buscar</Link> {/* Enlace a Vista Sección */}
                 </li>
-                <li onClick={() => setCartOpen(!cartOpen)} className="navbar-item">
-                    Carrito
+                <li className="navbar-item">
+                    <Drawer anchor='right' open = {cartOpen} onClose={() => setCartOpen(false)}>
+                        <Cart
+                            cartItems={cartItems}
+                            addToCart={addToCart}
+                            removeFromCart={removeFromCart}></Cart>
+                    </Drawer>
+                    <button onClick={() => setCartOpen(true)}>
+                        <Badge badgeContent = {getCartTotal(cartItems) } color = 'error'>
+                            <AddShoppingCartIcon />
+                        </Badge>
+                    </button>
                 </li>
                 <li className="navbar-item">
                     <Link to='/login'>Iniciar Sesión</Link>

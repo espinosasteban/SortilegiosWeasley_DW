@@ -1,35 +1,88 @@
-import {Articulo} from '../tipos.tsx'
+import '../styles/carritoCompras.css';
 
-// interface CartItemProps extends Articulo {
-//     addToCart: (clickedArticle: CartItemProps) => void;
-//     removeFromCart: (id:number) => void;
-// }
+// External components
+import Button from '@mui/material/Button';
+// Types
+import { ArticuloCarrito } from '../tipos.tsx'
 
-const Cart = ( ) => {
-    return (
+// Contexts
+import { CartContext } from '../contexts/CartContext.tsx';
+// Hooks
+import { useContext } from 'react';
+
+
+
+type ItemProps =  {
+    item: ArticuloCarrito
+    cantidad?: number;
+    addToCart: (clickedItem: ArticuloCarrito) => void;
+    removeFromCart: (item: ArticuloCarrito) => void;
+}
+
+type CartProps = {
+    cartItems: ArticuloCarrito[];
+    addToCart: (clickedItem: ArticuloCarrito) => void;
+    removeFromCart: (item: ArticuloCarrito) => void;
+}
+
+
+const CartItem:  React.FC<ItemProps> = ( {item, addToCart, removeFromCart} ) => (
+    <div className='item-wrapper'>
         <div>
+            <div>
+                <h3>{item.nombre}</h3>
+                <p>🗑️</p>
+            </div>
+            <div className = 'information'>
+                <p>Precio: ${item.precio}</p>
+                <p>Total</p>
 
+            </div>
+            <div className = 'buttons'>
+                <p>Cantidad</p>
+                <Button
+                  size = 'small'
+                  disableElevation
+                  variant='contained'
+                  onClick = {() => addToCart}>
+                    -
+                </Button>
+                <p>{item.total_items}</p>
+                <Button
+                  size='small'
+                  disableElevation
+                  variant='contained'
+                  onClick={() => removeFromCart(item)}
+                >
+                    +
+                </Button>
 
-
+            </div>
         </div>
+
+    </div>
+
+)
+
+const Cart: React.FC<CartProps> = () => {
+    const { cartItems, addToCart, removeFromCart, getCartTotal } = useContext(CartContext)
+    return (
+        <aside className='cart-wrapper'>
+            <h2> Carrito de compras</h2>
+            {cartItems.length === 0 ? <p>Todavía no hay productos</p> : null}
+            {cartItems.map( item => (
+                <CartItem
+                  key = {item.nombre}
+                  item = {item}
+                  addToCart={ addToCart}
+                  removeFromCart={ removeFromCart}>
+                
+                </CartItem> 
+            ))}
+            <h2>Total: ${getCartTotal().toFixed(2)}</h2>
+        </aside>
 
         )
 }
-
-// const CarArticle = (articulo: Articulo) => 
-
 export default Cart
-
-
-/* 
-TODO
-Ahora mismo, tengo que ver cómo puedo renderizar todo el carrito
-para que según la propiedad de isOpen, este pueda renderizar el carrito.
-1) No sé como se ve esa renderización condicional
-2) ¿Debería entonces dibujar el carro? ¿Usar Material UI?
-3) Recordar crear el cartArticle para llenarlo en el carrito.
-
-
-
-*/
 

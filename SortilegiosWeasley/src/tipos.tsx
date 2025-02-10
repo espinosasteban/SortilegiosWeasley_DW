@@ -9,6 +9,9 @@ export interface Articulo {
 
 }
 
+export interface ArticuloCarrito extends Articulo {
+    total_items: number;
+}
 
 export interface ResenaArticulo {
     nombreUsuario: string;
