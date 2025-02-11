@@ -1,5 +1,19 @@
 import '../styles/NavBar.css';
 import { Link } from "react-router"; // Importa Link
+
+// Types
+import ArticuloCarrito  from './carritoCompras';
+// External Components
+import Badge from '@mui/material/Badge'
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import { Drawer } from '@mui/material';
+// Components
+import Cart  from './carritoCompras'
+// Hooks
+import { useState, useContext } from 'react'
+// Contexts
+import { CartContext } from '../contexts/CartContext.tsx';
+
 import { useAuth } from '../paginas/ProcesoLoginUsuario/AuthContext';
 
 interface NavBarProps {
@@ -7,6 +21,10 @@ interface NavBarProps {
 }
 
 function NavBar({ setSeccion }: NavBarProps) {
+    const [ cartOpen, setCartOpen] = useState(false)
+    const { cartItems, toggleCart, addToCart,
+            removeFromCart, getCartTotal, getTotalCartItems} = useContext(CartContext)
+
     const { usuario, logout } = useAuth();
 
     return (
@@ -28,7 +46,17 @@ function NavBar({ setSeccion }: NavBarProps) {
                     <Link to="/vistaSeccion" onClick={() => setSeccion('')}>Buscar</Link> {/* Enlace a Vista Sección */}
                 </li>
                 <li className="navbar-item">
-                    Carrito {/* Enlace a Vista Sección */}
+                    <Drawer anchor='right' open = {cartOpen} onClose={() => setCartOpen(false)}>
+                        <Cart
+                            cartItems={cartItems}
+                            addToCart={addToCart}
+                            removeFromCart={removeFromCart}></Cart>
+                    </Drawer>
+                    <button onClick={() => setCartOpen(true)}>
+                        <Badge badgeContent = {getTotalCartItems()} color = 'error'>
+                            <AddShoppingCartIcon />
+                        </Badge>
+                    </button>
                 </li>
                 <li className="navbar-item">
                     {usuario ? (
