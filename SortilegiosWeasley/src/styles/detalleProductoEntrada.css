@@ -1,6 +1,8 @@
+
 .mainApp {
     height: 100%;
 }
+
 
 
 
@@ -24,36 +26,48 @@
     background-color: #423773;
     border-radius: 1rem;
     width: 80%;
-    height: fit-content;
+    height: 100%;
 }
+
+
 
 .mostrador-producto-seccion {
     display:flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: space-around;
     align-items: center;
     height: 100%;
 }
 
+.mostrador-producto-seccion img {
+    width: 20rem;
+    height: 20rem;
+    border-radius: 1rem;
+    margin: 1rem;
+}
+
 .detalle-seccion {
     border-radius: 0.75rem;
-    max-width: 28rem;
-    margin: 0 3rem 2rem 2rem;
+    max-width: 33rem;
+    margin: 0 1rem 1rem 1rem;
     text-align: center;
+    
 }
 
 .detalle-seccion h2 {
-    font-size: 3.3rem;
+    font-size: 2.5rem;
     color: #e5dcdc;
     margin-bottom: 0.625rem;
 }
 
 
+
 .detalle-seccion-descripcion {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     color: #bfbdf1;
     background-color: #5e519f;
     padding: 1rem;
+    width: fit-content;
     border-radius: 0.75rem;
     margin-bottom: 0.625rem;
 }
@@ -68,7 +82,7 @@
 }
 
 .detalle-seccion-precio {
-    font-size: 2.5rem;
+    font-size: 1.5rem;
     color: #e6e5f8;
     background-color: #c96655;
     padding: 0.5rem 3rem;
@@ -81,7 +95,7 @@
     color: white;
     border: none;
     padding: 1rem 2rem;
-    font-size: 1.5rem;
+    font-size: 1rem;
     border-radius: 0.5rem;
     cursor: pointer;
     transition: background-color 0.3s ease-in-out;
@@ -90,6 +104,13 @@
 
 .detalle-seccion button:hover {
     background-color: #0056b3;
+}
+
+@media (max-width: 1000px) {
+    .detalle-seccion {
+        margin: 3rem 2rem 2rem 2rem;
+    }
+    
 }
 
 
@@ -102,9 +123,11 @@
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
-    margin: 5rem 2rem 2rem 2rem;
+    margin: 2rem 2rem 2rem 2rem;
     background-color: #8271fb;
     border-radius: 1rem;
+    width: 85%;
+    height: fit-content;
 
 }
 
@@ -112,7 +135,7 @@
 .titulo-detalle-resena {
     font-size: 2em;
     color: #F2F2F2;
-    margin: 7rem 1rem 2rem 2rem;
+    margin: 2rem 1rem 2rem 2rem;
 }
 
 
@@ -148,29 +171,37 @@
     padding: 2rem;
     margin: 2rem; /* Centrado y con margen */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-    font-family: 'Cinzel', serif;
     color: #F2F2F2;
     width: 30rem; /* Ancho máximo para que no ocupe toda la página */
+}
+
+.resena header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
 }
 
 .resena header h3 {
     font-size: 1.5em;
     color: #D9663D;
-    margin-bottom: 5px;
+    margin: 0;
+
 }
 
 .resena header p {
     font-size: 0.9em;
     color: #95BF3B;
-    margin-bottom: 10px;
+
 }
 
 .resena .contenido {
     background-color: #F2F2F2;
-    padding: 15px;
+    padding: 1.5rem;
     border-radius: 5px;
-    margin-bottom: 15px;
+    margin-bottom: 1.5rem;
     color: #212426; /* Texto oscuro sobre fondo claro */
+    
 }
 
 .resena .contenido p {
