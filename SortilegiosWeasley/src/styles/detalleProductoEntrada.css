@@ -17,53 +17,75 @@
 .detalle-producto-seccion {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-evenly;
+    justify-content: space-around;
+    padding: 2rem;
     align-items: center;
     margin: 5rem 2rem 2rem 2rem;
     background-color: #423773;
     border-radius: 1rem;
     width: 80%;
+    height: fit-content;
 }
 
 .mostrador-producto-seccion {
     display:flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
+    height: 100%;
 }
 
-
 .detalle-seccion {
-    background-color: #fff;
-    padding: 1.25rem;
     border-radius: 0.75rem;
-    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
-    max-width: 25rem;
-    margin: 1rem 3rem 2rem 5rem;
+    max-width: 28rem;
+    margin: 0 3rem 2rem 2rem;
     text-align: center;
 }
 
 .detalle-seccion h2 {
-    font-size: 1.8rem;
-    color: #333;
+    font-size: 3.3rem;
+    color: #e5dcdc;
     margin-bottom: 0.625rem;
 }
 
-.detalle-seccion p {
-    font-size: 1rem;
-    color: #666;
-    margin-bottom: 0.5rem;
+
+.detalle-seccion-descripcion {
+    font-size: 1.5rem;
+    color: #bfbdf1;
+    background-color: #5e519f;
+    padding: 1rem;
+    border-radius: 0.75rem;
+    margin-bottom: 0.625rem;
+}
+
+
+
+.contenedor-detalle-seccion {
+    display:flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.detalle-seccion-precio {
+    font-size: 2.5rem;
+    color: #e6e5f8;
+    background-color: #c96655;
+    padding: 0.5rem 3rem;
+    border-radius: 0.75rem;
+    margin: 1rem;
 }
 
 .detalle-seccion button {
-    background-color: #007bff;
+    background-color: #1a1a1a;
     color: white;
     border: none;
-    padding: 0.625rem 1rem;
-    font-size: 1rem;
+    padding: 1rem 2rem;
+    font-size: 1.5rem;
     border-radius: 0.5rem;
     cursor: pointer;
     transition: background-color 0.3s ease-in-out;
+    margin: 1rem;
 }
 
 .detalle-seccion button:hover {
@@ -103,7 +125,6 @@
     align-items: center;
     background-color: #1a1a1a;
     width: 70%;
-    margin: 1rem;
     padding: 1rem;
     border-radius: 10px;
 }
@@ -243,7 +264,6 @@
 }
 
 
-
 #huevoirrompible {
     animation: caerYRebotar 2s ease-in-out forwards; /* Solo se ejecuta una vez */
     transition: filter 0.5s ease;
@@ -254,44 +274,37 @@
     filter: drop-shadow(0 0 7rem rgba(255, 215, 0, 1)) drop-shadow(0 0 3rem rgba(255, 237, 145, 0.7));
 }
 
-
-
-
-
-
-
-
 /* Animación principal: explosión */
 @keyframes shake {
     0%, 100% {
         transform: translateX(0);
     }
     10% {
-        transform: translateX(-7px); filter: brightness(0.7); /* Valor "aleatorio" dentro del rango */
+        transform: translateX(-7px); filter: brightness(0.7);
     }
     20% {
-        transform: translateX(12px); /* Valor "aleatorio" dentro del rango */
+        transform: translateX(12px);
     }
     30% {
-        transform: translateX(-15px); filter: brightness(1); /* Valor "aleatorio" dentro del rango */
+        transform: translateX(-15px); filter: brightness(1);
     }
     40% {
-        transform: translateX(9px); /* Valor "aleatorio" dentro del rango */
+        transform: translateX(9px);
     }
     50% {
-        transform: translateX(0); filter: brightness(1.5);  /* Valor "aleatorio" dentro del rango */;
+        transform: translateX(0); filter: brightness(1.5);
     }
     60% {
-        transform: translateX(-10px); filter: brightness(0.8); /* Valor "aleatorio" dentro del rango */
+        transform: translateX(-10px); filter: brightness(0.8); 
     }
     70% {
-        transform: translateX(8px); /* Valor "aleatorio" dentro del rango */
+        transform: translateX(8px); 
     }
     80% {
-        transform: translateX(-13px); /* Valor "aleatorio" dentro del rango */
+        transform: translateX(-13px); 
     }
     90% {
-        transform: translateX(6px); /* Valor "aleatorio" dentro del rango */
+        transform: translateX(6px); 
     }
 }
 
@@ -319,15 +332,12 @@
 /* ----------------------------------------------------------------------------------*/
 /*Animación varita*/
 
-/* CSS */
 #varitamagicafake {
     animation: float-animation 2s infinite ease-in-out;
     filter: drop-shadow(0 0 6rem rgb(94, 0, 255)) drop-shadow(0 0 5rem rgba(225, 132, 253, 0.7)) drop-shadow(0 0 4rem rgba(255, 255, 255, 0.8)) brightness(1.7);
 }
 
 
-
-/* Pseudo-elemento para el brillo mágico */
 #varitamagicafake:hover {
 
     animation: glow-animation 2s infinite ease-in-out, rotate-animation 1.3s infinite; /* Añadimos la animación de rotación */
@@ -403,15 +413,13 @@
 /*Animacion Elixir Removedor de Acné*/
 
 #elixirremovedordeacne {
-    animation: brillo 1s ease-in-out infinite;
-    filter: drop-shadow(0 0 20px rgb(96, 173, 175)) drop-shadow(0 0 5px rgba(114, 173, 228, 0.5));
+    animation: brillar 2s ease-in-out infinite;
+    filter: drop-shadow(0 0 20px rgb(192, 199, 98)) drop-shadow(0 0 5px rgba(200, 211, 49, 0.5));
 }
 
 #elixirremovedordeacne:hover {
     animation: shake-diagonal 1s ease-in-out;
   }
-
-
 
 
 @keyframes shake-diagonal {
@@ -449,5 +457,254 @@
       transform: translate(0, 0) rotate(0deg);
     }
   }
-  
- 
+
+/*-------------------------------*/
+/*Animacion WildFire*/
+
+#wildfirewhizz-bangs {
+    animation: shake 1.5s ease-in-out infinite;
+}
+
+#wildfirewhizz-bangs:hover {
+    animation: explode 1s ease-out forwards;
+}
+
+@keyframes shake {
+    0%, 100% {filter: brightness(1.1); transform: rotate(0deg) translate(0, 0); }
+    25% {filter: brightness(1.5); transform: rotate(2deg) translate(1px, -1px); }
+    50% {filter: brightness(1.1); transform: rotate(-2deg) translate(-1px, 1px); }
+    75% {filter: brightness(1.5); transform: rotate(2deg) translate(1px, -1px); }
+}
+
+
+@keyframes explode {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+        filter: brightness(3) blur(0);
+    }
+
+    100% {
+        transform: scale(3);
+        opacity: 0;
+        filter: brightness(1.7) blur(2px);
+    }
+}
+
+
+/*-------------------------------*/
+/*Animacion Pastillas Vomitivas*/
+
+#pastillasvomitivas {
+    animation: vomitoEffect 2s infinite alternate ease-in-out,
+    colorEffect 2s infinite alternate ease-in-out;
+    transform-origin: bottom;
+    filter: drop-shadow(0 0 3rem rgba(13, 208, 97, 0.5));
+}
+
+@keyframes vomitoEffect {
+    0% {
+        filter: hue-rotate(0deg) brightness(1);
+        transform: scaleY(1);
+    }
+    50% {
+        filter: hue-rotate(45deg) brightness(1.5);
+        transform: scale3d(1.2, 1.2, 1.2);
+    }
+
+    100% {
+        filter: hue-rotate(90deg) brightness(1.2);
+        transform: scaleY(0.7); /* Aumenta la altura en un 20% */
+    }
+}
+
+
+
+@keyframes colorEffect {
+    0% {
+        filter: hue-rotate(0deg) brightness(1) drop-shadow(0 0 3rem rgba(13, 208, 97, 0.5));
+    }
+    50% {
+        filter: hue-rotate(45deg) brightness(1.5) drop-shadow(0 0 4rem rgba(13, 208, 97, 0.7));
+    }
+    100% {
+        filter: hue-rotate(90deg) brightness(1.2) drop-shadow(0 0 5rem rgba(13, 208, 97, 1));
+    }
+}
+
+/*-------------------------------*/
+/*Animacion Guantes*/
+
+
+@keyframes activarPoder {
+    0% {
+        filter: drop-shadow(0 0 5px rgba(0, 162, 255, 0.6));
+        transform: scale(1);
+    }
+    50% {
+        filter: drop-shadow(0 0 15px rgba(0, 162, 255, 0.8));
+        transform: scale(1.1);
+    }
+    100% {
+        filter: drop-shadow(0 0 25px rgba(0, 162, 255, 1));
+        transform: scale(1.05) rotate(5deg);
+    }
+}
+
+@keyframes girar180 {
+    0% {
+        transform: rotate(0deg);
+    }
+    10% {
+        transform: rotate(20deg);
+        filter: drop-shadow(0 0 2rem rgb(86, 191, 250)) brightness(1.01)
+    }
+    20% {
+        transform: rotate(-30deg);
+        filter: drop-shadow(0 0 1rem rgb(163, 220, 255)) brightness(1.05)
+
+    }
+
+    40% {
+        transform: rotate(40deg);
+        filter: drop-shadow(0 0 3rem rgb(94, 193, 255)) brightness(1.1)
+
+    }
+
+    60% {
+        transform: rotate(-40deg);
+        filter: drop-shadow(0 0 1rem rgb(214, 241, 255)) brightness(1.15)
+    }
+
+    70% {
+        transform: rotate(40deg);
+        filter: drop-shadow(0 0 1rem rgb(86, 194, 253)) brightness(1.15)
+    }
+
+    80% {
+        filter: drop-shadow(0 0 2rem rgb(163, 220, 255)) brightness(1.2)
+    }
+
+    100% {
+        transform: rotate(-180deg) scale(1.2);
+        filter: drop-shadow(0 0 4rem rgba(0, 162, 255, 0.7)) brightness(1.3);
+    }
+
+}
+#guantesescudo {
+    animation: activarPoder 2s infinite alternate ease-in-out;
+    transform-origin: center;
+    transition: transform 0.5s ease-out, filter 0.5s ease-out;
+    will-change: filter, transform;
+}
+
+#guantesescudo:hover{
+    animation: girar180 2.7s ease-in-out forwards;
+}
+
+/*-------------------------------*/
+/*Animacion sombrero Antigravedad*/
+
+#sombreroantigravedad {
+    animation: volar 4s ease-in-out infinite;
+    filter: drop-shadow(0 0 2rem rgba(214, 203, 39, 0.5));
+}
+
+@keyframes volar {
+    0% {
+        transform: translateX(0) translateY(0) rotate(0deg) scale(1.2);
+    }
+    25% {
+        transform: translateX(30px) translateY(-50px) rotate(45deg) scale(0.8);
+    }
+    50% {
+        transform: translateX(-40px) translateY(-100px) rotate(0deg) scale(0.6);
+    }
+    75% {
+        transform: translateX(20px) translateY(-50px) rotate(45deg) scale(0.8);
+    }
+    100% {
+        transform: translateX(0) translateY(0) rotate(0deg) scale(1.2);
+    }
+}
+
+/*-------------------------------*/
+/*Animacion polvos peruanos*/
+
+@keyframes pulsoBrillo {
+    0% { filter: drop-shadow(0 0 2rem rgba(2, 85, 86, 0.3)); }
+
+    50% { filter: drop-shadow(0 0 8rem rgba(1, 22, 24, 1)) drop-shadow(0 0 15rem rgba(1, 22, 24, 1)) brightness(0.5); }
+
+    100% { filter: drop-shadow(0 0 2rem rgba(3, 84, 86, 0.3)); }
+}
+
+@keyframes oscurecer {
+    0% { filter: brightness(1); }
+    100% { filter: brightness(0); }
+}
+
+#polvoperuanodeoscuridadinstantanea {
+    animation: pulsoBrillo 2s infinite ease-in-out; 
+}
+
+#polvoperuanodeoscuridadinstantanea:hover {
+    animation: oscurecer 1s forwards ease-in-out;
+}
+
+
+/*-------------------------------*/
+/*Animacion ratones mágicos*/
+
+@keyframes movimientoRatones {
+    0% { transform: translateX(0) translateY(0); }
+    25% { transform: translateX(10px) translateY(-40px); }
+    50% { transform: translateX(-5px) translateY(15px); }
+    75% { transform: translateX(20px) translateY(-20px); }
+    100% { transform: translateX(0) translateY(0); }
+}
+
+@keyframes brilloMagico {
+    0% { filter: brightness(1); opacity: 1}
+    50% { filter: brightness(1.2); opacity: 0.5}
+    100% { filter: brightness(1); opacity: 1}
+}
+
+@keyframes titilar {
+    0% { opacity: 1; }
+    25% { opacity: 0.5; }
+    50% { opacity: 1; }
+    75% { opacity: 0.5; }
+    85% { opacity: 1}
+    100% { opacity: 0; }
+}
+
+
+#losratonesmagicosdemaria {
+    animation: movimientoRatones 3s infinite ease-in-out, brilloMagico 2s infinite ease-in-out;
+    transition: opacity 1s ease-in-out;
+    opacity: 1;
+}
+
+#losratonesmagicosdemaria:hover {
+    animation: titilar 2.3s ease-in-out forwards, movimientoRatones 0.7s infinite ease-in-out forwards;
+}
+
+/*-------------------------------*/
+/*Animacion caramelo longuilonguo*/
+
+@keyframes estirarLengua {
+    0% { transform: scaleY(1); }
+    50% { transform: scaleY(1.6); }
+    100% { transform: scaleY(1); }
+}
+
+#caramelolonguilonguo {
+    filter: drop-shadow(0 0  2rem rgba(255, 0, 0, 0.5));
+    transform-origin: top;
+    transition: transform 0.5s ease-in-out; /* Transición para el estado normal */
+}
+
+#caramelolonguilonguo:hover {
+    animation: estirarLengua 6s ease-in-out infinite;
+}

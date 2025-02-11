@@ -14,6 +14,7 @@ import { useState, useContext } from 'react'
 // Contexts
 import { CartContext } from '../contexts/CartContext.tsx';
 
+import { useAuth } from '../paginas/ProcesoLoginUsuario/AuthContext';
 
 interface NavBarProps {
     setSeccion: (seccion: string | null) => void;
@@ -23,6 +24,8 @@ function NavBar({ setSeccion }: NavBarProps) {
     const [ cartOpen, setCartOpen] = useState(false)
     const { cartItems, toggleCart, addToCart,
             removeFromCart, getCartTotal, getTotalCartItems} = useContext(CartContext)
+
+    const { usuario, logout } = useAuth();
 
     return (
         <nav className="navbar">
@@ -56,7 +59,14 @@ function NavBar({ setSeccion }: NavBarProps) {
                     </button>
                 </li>
                 <li className="navbar-item">
-                    <Link to='/login'>Iniciar Sesión</Link>
+                    {usuario ? (
+                        <>
+                            <Link to="/perfil">Mi Perfil</Link>
+                            <button onClick={logout}>Cerrar Sesión</button>
+                        </>
+                    ) : (
+                        <Link to="/login">Iniciar Sesión</Link>
+                    )}
                 </li>
             </ul>
         </nav>

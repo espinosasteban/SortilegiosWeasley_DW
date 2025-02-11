@@ -96,6 +96,12 @@ const CartItem:  React.FC<ItemProps> = ( {item, addToCart, removeFromCart, delet
     </div>
 
 )
+/*
+TODO
+
+El botón de ir a pagar sólo debe aparecer si hay items en el carrito.
+
+*/
 
 const Cart: React.FC<CartProps> = () => {
     const { cartItems, addToCart, removeFromCart, getCartTotal, deleteItem } = useContext(CartContext)

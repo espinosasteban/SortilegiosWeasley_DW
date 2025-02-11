@@ -66,8 +66,6 @@ function MostradorProducto({producto}: MostradorProductoProps){
     return (
         <>
             <section className="mostrador-producto-seccion">
-                console.log({producto?.nombre.toLowerCase().replace(/\s+/g, '').normalize('NFD').replace(/[\u0300-\u036f]/g, '')});
-
 
                 <img src={producto?.imagen ?? 'Imagen no disponible'}
                      id={producto?.nombre.toLowerCase().replace(/\s+/g, '').normalize('NFD').replace(/[\u0300-\u036f]/g, '')}
@@ -89,9 +87,12 @@ function Detalle({ producto}: DetalleProps) {
         <>
             <section className="detalle-seccion">
                 <h2>{producto?.nombre ?? 'Nombre no disponible'}</h2>
-                <p>{producto?.descripcion ?? 'Descripción no disponible'}</p>
-                <p>{producto?.precio ?? 'Precio no disponible'}</p>
-                <button onClick={() => addToCart(producto)}>Añadir al carrito</button>
+                <p className="detalle-seccion-descripcion">{producto?.descripcion ?? 'Descripción no disponible'}</p>
+
+                <div className="contenedor-detalle-seccion">
+                    <p className="detalle-seccion-precio">${producto?.precio ?? 'Precio no disponible'}</p>
+                    <button onClick={() => addToCart(producto)}>Añadir al carrito</button>
+                </div>
             </section>
         </>
     );

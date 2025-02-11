@@ -1,17 +1,18 @@
 import {Articulo} from '../tipos';
-import {resenasHuevoIrrompible, resenasPocionAmor, resenasRemovedorAcne} from './resenas';
+import {
+    resenasHuevoIrrompible,
+    resenasPastillasVomitas,
+    resenasPocionAmor,
+    resenasRemovedorAcne,
+    resenasWildFire,
+    resenasEscudoGuantes,
+    resenasSombreroAntiGravedad,
+    resenasPolvosPeruanos,
+    resenasRatonesMagicos,
+    resenasCarameloLonguilongo
+} from './resenas';
 
 export const articulos: Array<Articulo> = [
-    {
-        nombre: "Orejas Extensibles",
-        precio: 500,
-        descripcion: "Las Orejas Extensibles son el accesorio perfecto para escuchar conversaciones a distancia con total discreción. Con un diseño encantado y divertido, estas orejas se deslizan fácilmente hasta el lugar deseado, llevándote cada palabra como si estuvieras ahí.",
-        imagen: "../src/assets/imagenesProductos/bromas/orejasExtensibles.png",
-        seccion: "Bromas",
-        resenas: []
-
-    },
-    
     {
         nombre: "Huevo Irrompible",
         precio: 800,
@@ -20,16 +21,6 @@ export const articulos: Array<Articulo> = [
         seccion: "Magia Muggle",
         resenas: resenasHuevoIrrompible
     },
-
-    {
-        nombre: "Miraphorus",
-        precio: 1250,
-        descripcion: "¡Descubre el poder del Miraphorus, el accesorio mágico definitivo para los amantes de la escritura y el dibujo encantados! Este extraordinario objeto, creado por los ingeniosos gemelos Weasley, permite capturar con precisión cada trazo que realices en papel y duplicarlo mágicamente en otro lugar.",
-        imagen: "../src/assets/imagenesProductos/magiaMuggle/miraphorus.png",
-        seccion: "Magia Muggle",
-        resenas: []
-    },
-
     {
         nombre: "Bomba Arcana Oscura",
         precio: 150,
@@ -59,12 +50,70 @@ export const articulos: Array<Articulo> = [
 
     {
         nombre: "Elixir removedor de acné",
-        precio: 12,
+        precio: 100,
         descripcion: "Un potente y mágico eliminador de granos en formato de spray. Inspirado en el mundo de la magia, este producto actúa en tan solo diez segundos para dejar la piel impecable. Su fórmula encantada, con un ligero resplandor dorado, se activa con un suave rocío que envuelve la piel en una brisa de partículas mágicas. Perfecto para magos y brujas que necesitan una solución rápida y efectiva antes de una gran reunión en el Callejón Diagon.",
         imagen: "../src/assets/imagenesProductos/amorBelleza/elixirRemovedorAcne.png",
         seccion: "Amor y Belleza",
         resenas: resenasRemovedorAcne
+    },
+    {
+        nombre: "Wildfire Whizz-Bangs",
+        precio: 100,
+        descripcion: "Estos fuegos artificiales mágicos son imparables. Incluyen ruedas de fuego rosa impactante, dragones que escupen fuego, bengalas que escriben insultos, cohetes con largas colas de estrellas plateadas y petardos. Si dos tipos colisionan, crean combinaciones nuevas como cerdos voladores plateados y rosados.",
+        imagen: "../src/assets/imagenesProductos/explosivos/wildFire.png",
+        seccion: "Explosivos",
+        resenas: resenasWildFire
+    },
+
+    {
+        nombre: "Pastillas Vomitivas",
+        precio: 20,
+        descripcion: "Un dulce mágico engañosamente delicioso que, segundos después de ser ingerido, provoca un intenso pero temporal ataque de vómito. Perfecto para evitar clases aburridas o gastar bromas inolvidables.",
+        imagen: "../src/assets/imagenesProductos/dulces/pastillasVomitivas.png",
+        seccion: "Dulces",
+        resenas: resenasPastillasVomitas
+    },
+    {
+        nombre: "Guantes Escudo",
+        precio: 250,
+        descripcion: "Un guante encantado que otorga protección mágica al usuario. Forjado con runas antiguas, refuerza la resistencia ante ataques y proporciona un aura de defensa.",
+        imagen: "../src/assets/imagenesProductos/defensaPersonal/escudoGuantes.png",
+        seccion: "Defensa Personal",
+        resenas: resenasEscudoGuantes
+    },
+    {
+        nombre: "Sombrero Antigravedad",
+        precio: 50,
+        descripcion: "Un sombrero encantado que levita mágicamente cuando se usa. Perfecto para gastar bromas y sorprender a los desprevenidos. Su empaque incluye la frase: 'Arruina el día de un caballero haciendo que su sombrero vuele'.",
+        imagen: "../src/assets/imagenesProductos/bromas/sombreroAntigravedad.png",
+        seccion: "Bromas",
+        resenas: resenasSombreroAntiGravedad
+    },
+    {
+        nombre: "Polvo Peruano de Oscuridad Instantánea",
+        precio: 300,
+        descripcion: "Un polvo encantado importado por los gemelos Weasley que crea una oscuridad impenetrable al usarse. Perfecto para escapar sin ser visto.",
+        imagen: "../src/assets/imagenesProductos/defensaPersonal/polvosPeruanos.png",
+        seccion: "Defensa Personal",
+        resenas: resenasPolvosPeruanos
+    },
+    {
+        nombre: "Los Ratones Mágicos de María",
+        precio: 600,
+        descripcion: "Unos traviesos ratones encantados que se escapan, flotan y desaparecen en el aire cuando intentas atraparlos. Perfectos para jugar bromas.",
+        imagen: "../src/assets/imagenesProductos/magiaMuggle/ratonesMagicos.png",
+        seccion: "Magia Muggle",
+        resenas: resenasRatonesMagicos
+    },
+    {
+        nombre: "Caramelo Longuilonguo",
+        precio: 10,
+        descripcion: "Un dulce encantado que hace que la lengua del consumidor crezca de forma exagerada durante varios minutos. Ideal para bromas y travesuras.",
+        imagen: "../src/assets/imagenesProductos/dulces/lenguaLongui.png",
+        seccion: "Dulces",
+        resenas: resenasCarameloLonguilongo
     }
+
 ];
 
 
