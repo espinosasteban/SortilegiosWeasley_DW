@@ -4,6 +4,7 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     position: fixed;
     width: 100%;
+    max-height: 4rem;
     z-index: 1000;
 }
 
@@ -14,8 +15,6 @@
     padding: 0;
 }
 
-
-
 .navbar-list {
     display: flex;
     justify-content: space-around;
@@ -23,6 +22,7 @@
     margin: 0;
     padding: 0;
     align-items: center;
+    height: 4rem;
 }
 
 .navbar-item {
@@ -42,7 +42,65 @@
     margin: 1rem;
 }
 
-.active{
+.active {
     color: #0a1b2e;
 }
 
+.menu-icon, .right-menu-icon {
+    display: none;
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+.navbar-sections, .right-menu {
+    display: flex;
+    align-items: center;
+}
+
+@media (max-width: 1000px) {
+    .right-menu-icon {
+        display: block; /* Mostrar el ícono del menú de la derecha */
+    }
+
+    .right-menu {
+        display: none; /* Ocultar el menú de la derecha por defecto */
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background-color: #f4f4f4;
+        width: 200px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .right-menu.open {
+        display: flex; /* Mostrar el menú de la derecha cuando esté abierto */
+    }
+}
+
+@media (max-width: 1000px) {
+    .menu-icon {
+        display: block; /* Mostrar el ícono del menú de secciones */
+    }
+
+    .navbar-sections {
+        display: none; /* Ocultar las secciones por defecto */
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        background-color: #f4f4f4;
+        width: 100%;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        align-items: center;
+    }
+
+    .navbar-sections.open {
+        display: flex; /* Mostrar las secciones cuando el menú esté abierto */
+    }
+
+    .navbar-item {
+        width: 100%;
+        text-align: center;
+        padding: 1rem 0;
+    }
+}
