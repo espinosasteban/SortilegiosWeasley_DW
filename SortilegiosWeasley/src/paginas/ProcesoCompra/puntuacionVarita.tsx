@@ -25,6 +25,7 @@ export default function PuntuacionVarita({defaultRaing, iconSize, modifiable} : 
 
     if (!defaultRaing && !modifiable) {
         return <></>
+    }
 
     if (modifiable === false) {
         return (
