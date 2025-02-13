@@ -20,7 +20,7 @@ function Entrada() {
     return (
     <>
         <section className="entrada-section">
-            <h1>Sortilegios Weasley!</h1>
+            <h1>¡Bienvenidos a Sortilegios Weasley!</h1>
             <img src="../src/assets/Entrada.jpg"></img>
         </section>
     </>);

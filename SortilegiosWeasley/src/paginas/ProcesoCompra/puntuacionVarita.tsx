@@ -23,9 +23,8 @@ export default function PuntuacionVarita({defaultRaing, iconSize, modifiable} : 
         setRating(rating);
     }
 
-    if (!defaultRaing) {
-        return <>  </>
-    }
+    if (!defaultRaing && !modifiable) {
+        return <></>
 
     if (modifiable === false) {
         return (

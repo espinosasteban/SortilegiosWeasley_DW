@@ -105,10 +105,6 @@
     
 }
 
-
-
-
-
 .detalle-resena-seccion {
     display: flex;
     flex-wrap: wrap;
@@ -130,10 +126,6 @@
     margin: 2rem 1rem 2rem 2rem;
 }
 
-
-
-
-
 .valoracion-seccion {
     display: flex;
     justify-content: space-around;
@@ -143,10 +135,6 @@
     padding: 1rem;
     border-radius: 10px;
 }
-
-
-
-
 
 .vitrina-resena {
     display: flex;
@@ -165,6 +153,78 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
     color: #F2F2F2;
     width: 30rem; /* Ancho máximo para que no ocupe toda la página */
+}
+
+.crear-resena {
+    background-color: #212426;
+    border: 2px solid #463859;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    color: #F2F2F2;
+    width: 32rem;
+    padding: 1rem;
+    margin: 1rem auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 3rem;
+}
+
+.contenido-resena {
+    width: 90%;
+    height: 5rem;
+    background-color: #F2F2F2;
+    border: none;
+    border-radius: 5px;
+    color: #212426;
+    resize: none;
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    font-weight: 400;
+    font-size: 1em;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: box-shadow 0.3s ease;
+    padding: 0.5rem; 
+}
+
+
+.puntuacion-varita-resena {
+    display: flex;
+    justify-content: center;
+    margin-top: -1.5rem;
+    margin-bottom: 0.2rem;
+}
+
+.contenido-resena:focus {
+    outline: none;
+    box-shadow: inset 0 4px 8px #423773;
+}
+
+.boton-publicar {
+    background-color: #D9663D;
+    color: #fff;
+    border: none;
+    margin: 1rem;
+    padding: 0.5rem 1.5rem;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.boton-publicar:hover {
+    background-color: #423773;
+    transform: translateY(-2px);
+}
+
+.boton-publicar:active {
+    transform: translateY(1px);
+}
+
+.crear-resena h2{
+    font-size: 1.5em;
+    margin-top: 2rem;
 }
 
 .resena header {
@@ -221,7 +281,6 @@
     margin: 0 5px;
     border-radius: 5px;
     cursor: pointer;
-    font-family: 'Cinzel', serif;
     transition: background-color 0.3s ease;
 }
 
