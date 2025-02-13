@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import "./styles.css";
 import InfoBoton from '../../../components/infoBoton';
+import HermioneImg from '../../../assets/Login/Hermione.png';
 
 export default function CrearCuenta() {
     const [usuario, setUsuario] = useState("");
@@ -30,7 +31,10 @@ export default function CrearCuenta() {
 
     return (
         <div className="contenido-login">
-                <h1>Crear una cuenta</h1>
+            <div className="create-header">
+                <h1 className='CreateH1'>Crear una cuenta</h1>
+                <img src={HermioneImg} alt="Hermione" className="hermione-img" />
+            </div>
                 <form onSubmit={handleSubmit}>
                     <label htmlFor="usuario">Usuario</label>
                     <input
