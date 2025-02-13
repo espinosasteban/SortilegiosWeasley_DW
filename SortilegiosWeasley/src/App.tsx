@@ -8,8 +8,8 @@ import VistaSeccion from "./paginas/Principal/vistaSeccion.tsx";
 import VistaProducto from "./paginas/ProcesoCompra/detalleProductoEntrada.tsx";
 import Login from "./paginas/ProcesoLoginUsuario/login/"; 
 import CrearCuenta from './paginas/ProcesoLoginUsuario/crearCuenta/';
-import CambiarContraseña from './paginas/ProcesoLoginUsuario/cambiarContraseña/';
-import UserProfile from "./paginas/MiPerfil/informacionPerfil"; // Agregado
+import CambiarContraseña from "./paginas/ProcesoLoginUsuario/cambiarContraseña/";
+import AppProfile from "./paginas/MiPerfil/App_perfil"; // Agregado
 // Contexts 
 import { CartProvider } from './contexts/CartContext.tsx';
 import { AuthProvider } from "./paginas/ProcesoLoginUsuario/AuthContext"; // Agregado
@@ -37,7 +37,7 @@ function App() {
                                 <Route path="/login" element={<Login />} /> 
                                 <Route path="/crearCuenta" element={<CrearCuenta />} />
                                 <Route path="/cambiarContraseña" element={<CambiarContraseña />} />
-                                <Route path="/perfil" element={<UserProfile />} /> {/* Agregado */}
+                                <Route path="/perfil" element={<AppProfile/>} /> {/* Agregado */}
                         </Routes>
                         </main>
                     </BrowserRouter>

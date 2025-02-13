@@ -42,7 +42,7 @@ interface DetalleProductoProps {
     producto: Articulo;
 }
 
-function DetalleProducto({producto }: DetalleProductoProps){
+function DetalleProducto({ producto }: DetalleProductoProps){
 
     useEffect(() => {
         window.scrollTo(0, 0); // Desplaza la página al inicio
