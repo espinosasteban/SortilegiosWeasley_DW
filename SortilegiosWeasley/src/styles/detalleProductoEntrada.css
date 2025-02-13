@@ -169,6 +169,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    margin-bottom: 3rem;
 }
 
 .contenido-resena {
@@ -179,9 +180,10 @@
     border-radius: 5px;
     color: #212426;
     resize: none;
-    font-size: 1.1em; 
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
     line-height: 1.5;
-    font-family: 'Arial', sans-serif; 
+    font-weight: 400;
+    font-size: 1em;
     box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
     transition: box-shadow 0.3s ease;
     padding: 0.5rem; 
@@ -197,7 +199,7 @@
 
 .contenido-resena:focus {
     outline: none;
-    box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.3);
+    box-shadow: inset 0 4px 8px #423773;
 }
 
 .boton-publicar {
@@ -213,7 +215,7 @@
 }
 
 .boton-publicar:hover {
-    background-color: #333;
+    background-color: #423773;
     transform: translateY(-2px);
 }
 
