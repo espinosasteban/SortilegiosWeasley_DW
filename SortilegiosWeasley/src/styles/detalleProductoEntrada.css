@@ -1,13 +1,7 @@
-.mainApp {
-    height: 100%;
-}
-
-
 
 .main-vista-producto {
     background-color: #e0e7f1;
     padding: 4rem 1rem 1rem 1rem;
-    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -24,36 +18,48 @@
     background-color: #423773;
     border-radius: 1rem;
     width: 80%;
-    height: fit-content;
+    height: 100%;
 }
+
+
 
 .mostrador-producto-seccion {
     display:flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: space-around;
     align-items: center;
     height: 100%;
 }
 
+.mostrador-producto-seccion img {
+    width: 20rem;
+    height: 20rem;
+    border-radius: 1rem;
+    margin: 1rem;
+}
+
 .detalle-seccion {
     border-radius: 0.75rem;
-    max-width: 28rem;
-    margin: 0 3rem 2rem 2rem;
+    max-width: 33rem;
+    margin: 0 1rem 1rem 1rem;
     text-align: center;
+    
 }
 
 .detalle-seccion h2 {
-    font-size: 3.3rem;
+    font-size: 2.5rem;
     color: #e5dcdc;
     margin-bottom: 0.625rem;
 }
 
 
+
 .detalle-seccion-descripcion {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     color: #bfbdf1;
     background-color: #5e519f;
     padding: 1rem;
+    width: fit-content;
     border-radius: 0.75rem;
     margin-bottom: 0.625rem;
 }
@@ -68,7 +74,7 @@
 }
 
 .detalle-seccion-precio {
-    font-size: 2.5rem;
+    font-size: 1.5rem;
     color: #e6e5f8;
     background-color: #c96655;
     padding: 0.5rem 3rem;
@@ -81,7 +87,7 @@
     color: white;
     border: none;
     padding: 1rem 2rem;
-    font-size: 1.5rem;
+    font-size: 1rem;
     border-radius: 0.5rem;
     cursor: pointer;
     transition: background-color 0.3s ease-in-out;
@@ -92,8 +98,12 @@
     background-color: #0056b3;
 }
 
-
-
+@media (max-width: 1000px) {
+    .detalle-seccion {
+        margin: 3rem 2rem 2rem 2rem;
+    }
+    
+}
 
 
 .detalle-resena-seccion {
@@ -102,9 +112,11 @@
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
-    margin: 5rem 2rem 2rem 2rem;
+    margin: 2rem 2rem 2rem 2rem;
     background-color: #8271fb;
     border-radius: 1rem;
+    width: 85%;
+    height: fit-content;
 
 }
 
@@ -112,12 +124,8 @@
 .titulo-detalle-resena {
     font-size: 2em;
     color: #F2F2F2;
-    margin: 7rem 1rem 2rem 2rem;
+    margin: 2rem 1rem 2rem 2rem;
 }
-
-
-
-
 
 .valoracion-seccion {
     display: flex;
@@ -128,10 +136,6 @@
     padding: 1rem;
     border-radius: 10px;
 }
-
-
-
-
 
 .vitrina-resena {
     display: flex;
@@ -148,29 +152,107 @@
     padding: 2rem;
     margin: 2rem; /* Centrado y con margen */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-    font-family: 'Cinzel', serif;
     color: #F2F2F2;
     width: 30rem; /* Ancho máximo para que no ocupe toda la página */
+}
+
+.crear-resena {
+    background-color: #212426;
+    border: 2px solid #463859;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    color: #F2F2F2;
+    width: 32rem;
+    padding: 1rem;
+    margin: 1rem auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.contenido-resena {
+    width: 90%;
+    height: 5rem;
+    background-color: #F2F2F2;
+    border: none;
+    border-radius: 5px;
+    color: #212426;
+    resize: none;
+    font-size: 1.1em; 
+    line-height: 1.5;
+    font-family: 'Arial', sans-serif; 
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: box-shadow 0.3s ease;
+    padding: 0.5rem; 
+}
+
+
+.puntuacion-varita-resena {
+    display: flex;
+    justify-content: center;
+    margin-top: -1.5rem;
+    margin-bottom: 0.2rem;
+}
+
+.contenido-resena:focus {
+    outline: none;
+    box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.boton-publicar {
+    background-color: #D9663D;
+    color: #fff;
+    border: none;
+    margin: 1rem;
+    padding: 0.5rem 1.5rem;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.boton-publicar:hover {
+    background-color: #333;
+    transform: translateY(-2px);
+}
+
+.boton-publicar:active {
+    transform: translateY(1px);
+}
+
+.crear-resena h2{
+    font-size: 1.5em;
+    margin-top: 2rem;
+}
+
+.resena header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
 }
 
 .resena header h3 {
     font-size: 1.5em;
     color: #D9663D;
-    margin-bottom: 5px;
+    margin: 0;
+
 }
 
 .resena header p {
     font-size: 0.9em;
     color: #95BF3B;
-    margin-bottom: 10px;
+
 }
 
 .resena .contenido {
     background-color: #F2F2F2;
-    padding: 15px;
+    padding: 1.5rem;
     border-radius: 5px;
-    margin-bottom: 15px;
+    margin-bottom: 1.5rem;
     color: #212426; /* Texto oscuro sobre fondo claro */
+    
 }
 
 .resena .contenido p {
@@ -198,7 +280,6 @@
     margin: 0 5px;
     border-radius: 5px;
     cursor: pointer;
-    font-family: 'Cinzel', serif;
     transition: background-color 0.3s ease;
 }
 

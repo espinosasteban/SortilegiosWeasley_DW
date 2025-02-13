@@ -7,6 +7,7 @@
     border-radius: 5px;
     width: 250px;
     height: 350px;
+    color: fff;
     background-color: #424791;
     transition: scale 0.3s;
 }
@@ -44,6 +45,7 @@
 .product-title {
     font-size: 1.2rem;
     margin-bottom: 10px;
+    color: #ffffff;
 }
 
 .product-description {
@@ -55,6 +57,7 @@
     font-size: 1.2rem;
     font-weight: bold;
     margin-bottom: 10px;
+    color:  #D9663D
 }
 
 .product:hover {
