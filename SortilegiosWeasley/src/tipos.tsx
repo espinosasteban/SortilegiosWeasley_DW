@@ -22,3 +22,14 @@ export interface ResenaArticulo {
     cantidadNoEsUtil: number;
 
 }
+
+export interface Direccion {
+    id: number; 
+    nombre: string;
+    departamento: string;
+    municipio: string;
+    direccion: string;
+    barrio: string;
+    info_extra: string;
+    recibidor: string;
+  }

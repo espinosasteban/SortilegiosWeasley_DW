@@ -42,7 +42,7 @@ interface DetalleProductoProps {
     producto: Articulo;
 }
 
-function DetalleProducto({producto }: DetalleProductoProps){
+function DetalleProducto({ producto }: DetalleProductoProps){
 
     useEffect(() => {
         window.scrollTo(0, 0); // Desplaza la página al inicio
@@ -104,8 +104,8 @@ function DetalleResena({producto}: ValoracionProps) {
         <>
             <section className="detalle-resena-seccion">
                 <h2 className="titulo-detalle-resena">Reseñas del producto</h2>
-                <PuntuacionVarita defaultRaing={0} iconSize="3rem" modifiable={true}/>
                 <VitrinaResena resenas={producto?.resenas ?? null}/>
+                <CrearResena/>
             </section>
 
         </>
@@ -178,5 +178,18 @@ function Resena({ resenas }: ResenaProps) {
                 </section>
             ))}
         </>
+    );
+}
+
+function CrearResena() {
+    return (
+        <section className="crear-resena">
+            <h2>¿Qué te pareció el producto?</h2>
+            <div className='puntuacion-varita-resena'>
+                <PuntuacionVarita defaultRaing={0} iconSize="2.5rem" modifiable={true} />
+            </div>
+            <textarea className='contenido-resena' placeholder="Escribe tu reseña aquí..." />
+            <button className="boton-publicar">Publicar</button>
+        </section>
     );
 }
