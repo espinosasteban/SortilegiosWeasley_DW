@@ -1,10 +1,14 @@
+/* Para que no salga la barra gris*/
+:root { 
+  
+  background-color: #e0e7f1;
+}
   /* Contenedor principal de la vista */
   .profile-container {
     display: flex;
     place-items: center; /* Centra en ambas direcciones */
     height: 100vh;
     margin: 0% 2% 0% 2%;
-    background-color: #e0e7f1;
     width: 100%;
   }
   

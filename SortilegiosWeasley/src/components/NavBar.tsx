@@ -6,6 +6,7 @@ import ArticuloCarrito  from './carritoCompras';
 // External Components
 import Badge from '@mui/material/Badge'
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import IconButton from '@mui/material/IconButton';
 import { Drawer } from '@mui/material';
 // Components
 import Cart  from './carritoCompras'
@@ -59,17 +60,22 @@ function NavBar({ setSeccion }: NavBarProps) {
                         <Link to="/vistaSeccion" onClick={() => setSeccion('')}>Buscar</Link>
                     </li>
                     <li className="navbar-item">
-                        <Drawer anchor='right' open={cartOpen} onClose={() => setCartOpen(false)}>
+                        <Drawer anchor='right' open={cartOpen} onClose={() => setCartOpen(false)}
+                            PaperProps= {{
+                                sx: {
+                                  backgroundColor: " #f5f5f5;",
+                                }
+                                }}>
                             <Cart
                                 cartItems={cartItems}
                                 addToCart={addToCart}
                                 removeFromCart={removeFromCart}></Cart>
                         </Drawer>
-                        <button onClick={() => setCartOpen(true)}>
-                            <Badge badgeContent={getTotalCartItems()} color='error'>
+                        <IconButton onClick={() => setCartOpen(true)} aria-label="Carrito de Compras">
+                            <Badge badgeContent={getTotalCartItems()} color="error">
                                 <AddShoppingCartIcon />
                             </Badge>
-                        </button>
+                        </IconButton>
                     </li>
                     <li className="navbar-item">
                         {usuario ? (
