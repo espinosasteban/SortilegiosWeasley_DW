@@ -60,7 +60,7 @@ export default function CambiarContrasena() {
                         onChange={(e) => setConfirmarContrasena(e.target.value)}
                     />
                     {error && <p className="error">{error}</p>}
-                    <button type="submit">Cambiar contraseña</button>
+                    <button type="submit" className="cambiarContraseña">Cambiar contraseña</button>
                 </form>
                 <InfoBoton />
             </div>
