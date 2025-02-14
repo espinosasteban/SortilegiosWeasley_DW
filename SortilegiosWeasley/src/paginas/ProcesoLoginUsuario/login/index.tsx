@@ -15,9 +15,12 @@ export default function Login() {
     const handleLogin = () => {
         if (usuario === "admin" && password === "admin") {
             login(usuario);
+            navigate('/admin');
+        } else if (usuario === "muggle" && password === "muggle") {
+            login(usuario);
             navigate('/perfil');
         } else {
-            setError('Usuario o contraseña incorrectos');
+            setError("Usuario o contraseña incorrectos");
         }
     };
 
