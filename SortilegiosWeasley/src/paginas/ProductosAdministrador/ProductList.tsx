@@ -1,19 +1,15 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom"; // Se agrega Link para navegación
-import ProductForm from "./ProductForm";
 import { FaEdit, FaTrash } from "react-icons/fa";
+import ProductForm from "./ProductForm";
 import { Producto } from "../../tipos";
-
-// Función para formatear la URL del producto
-const formatearNombreParaRuta = (nombre: string): string => {
-  return nombre.toLowerCase().replace(/\s+/g, '').normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-};
+import "./MisProductos.css";
 
 const MisProducto: React.FC = () => {
   const [productos, setProductos] = useState<Producto[]>([]);
   const [mostrandoFormulario, setMostrandoFormulario] = useState(false);
   const [productoActual, setProductoActual] = useState<Producto | null>(null);
-
+  const [modalAbierto, setModalAbierto] = useState(false); 
+  
   const agregarProducto = (producto: Producto) => {
     if (productoActual) {
       setProductos((prev) =>
@@ -56,21 +52,42 @@ const MisProducto: React.FC = () => {
           ) : (
             <div className="tarjetas-Producto">
               {productos.map((prt) => (
-                <div key={prt.id} className="tarjeta">
-                  {/* Enlace al detalle del producto */}
-                  <Link to={`/producto/${formatearNombreParaRuta(prt.name)}`} className="tarjeta-enlace">
-                    <h3>{prt.name}</h3>
-                    <p>{prt.price}, {prt.units}</p>
-                  </Link>
-                  <div className="acciones">
-                    <FaEdit className="icono editar" onClick={() => editarProducto(prt)} />
-                    <FaTrash className="icono eliminar" onClick={() => eliminarProducto(prt.id)} />
+                <div key={prt.id} className="tarjeta" onClick={() => {
+                  setProductoActual(prt);
+                  setModalAbierto(true);}}>
+                  <h3>{prt.name}</h3>
+                    <p>{prt.price}</p>
+                    <div className="acciones">
+                      <FaEdit className="icono editar" onClick={(e) => {
+                        e.stopPropagation();
+                        editarProducto(prt);
+                      }} />
+                      <FaTrash className="icono eliminar" onClick={(e) => {
+                        e.stopPropagation();
+                        eliminarProducto(prt.id);
+                      }} />
+                    </div>
                   </div>
-                </div>
               ))}
             </div>
           )}
         </>
+      )}
+      
+      {/* Modal */}
+      {modalAbierto && productoActual && (
+        <div className="custom-model-main model-open" onClick={() => setModalAbierto(false)}>
+          <div className="custom-model-inner" onClick={(e) => e.stopPropagation()}>
+            <div className="close-btn" onClick={() => setModalAbierto(false)}>×</div>
+            <div className="pop-up-content-wrap">
+              <h3>{productoActual.name}</h3>
+              <p>Precio: {productoActual.price}</p>
+              <p>Unidades: {productoActual.units}</p>
+              <p>Sección: {productoActual.section}</p>
+              <p>Descripción: {productoActual.description}</p>
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );

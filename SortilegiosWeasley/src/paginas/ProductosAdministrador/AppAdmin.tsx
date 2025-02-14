@@ -1,4 +1,4 @@
-import NavbarAdmin from './NavBarAdmin';
+import NavbarAdmin from './NavbarAdmin';
 /*  import './styles.css'; */
 import InfoBoton from "../../components/infoBoton";
 // import ProductForm from './ProductForm';
@@ -12,7 +12,7 @@ const AppAdmin = () => {
             <NavbarAdmin />
             <div className="profile-content">
               <Routes>
-                <Route path="/" element={<Navigate to="/gestion-producto" replace />} />
+                <Route path="/admin" element={<Navigate to="/gestion-producto" replace />} />
                 <Route path="/gestion-producto" element={<ProductList />} />
               </Routes>
             </div>
