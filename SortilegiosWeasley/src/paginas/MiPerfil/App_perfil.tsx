@@ -14,7 +14,7 @@ const AppProfile = () => {
             <Navbar_perfil />
             <div className="profile-content">
               <Routes>
-                <Route path="/" element={<Navigate to="/mi-informacion" replace />} />
+                <Route path="/perfil" element={<Navigate to="/mi-informacion" replace />} />
                 <Route path="/mi-informacion" element={<UserInfo />} />
                 <Route path="/historial-compras" element={<HistorialCompras />} />
                 <Route path="/mis-direcciones" element={<MisDirecciones />} />
