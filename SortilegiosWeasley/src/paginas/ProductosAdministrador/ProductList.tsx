@@ -1,15 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import ProductForm from "./ProductForm";
 import { Producto } from "../../tipos";
-import "./MisProductos.css";
+import "./Styles.css";
 
 const MisProducto: React.FC = () => {
-  const [productos, setProductos] = useState<Producto[]>([]);
+  const [productos, setProductos] = useState<Producto[]>(() => {
+    const datosGuardados = localStorage.getItem("productos");
+    return datosGuardados ? JSON.parse(datosGuardados) : [];
+  });
+
   const [mostrandoFormulario, setMostrandoFormulario] = useState(false);
   const [productoActual, setProductoActual] = useState<Producto | null>(null);
-  const [modalAbierto, setModalAbierto] = useState(false); 
-  
+  const [modalAbierto, setModalAbierto] = useState(false);
+
+  useEffect(() => {
+    localStorage.setItem("productos", JSON.stringify(productos));
+  }, [productos]);
+
   const agregarProducto = (producto: Producto) => {
     if (productoActual) {
       setProductos((prev) =>
@@ -54,27 +62,27 @@ const MisProducto: React.FC = () => {
               {productos.map((prt) => (
                 <div key={prt.id} className="tarjeta" onClick={() => {
                   setProductoActual(prt);
-                  setModalAbierto(true);}}>
+                  setModalAbierto(true);
+                }}>
                   <h3>{prt.name}</h3>
-                    <p>{prt.price}</p>
-                    <div className="acciones">
-                      <FaEdit className="icono editar" onClick={(e) => {
-                        e.stopPropagation();
-                        editarProducto(prt);
-                      }} />
-                      <FaTrash className="icono eliminar" onClick={(e) => {
-                        e.stopPropagation();
-                        eliminarProducto(prt.id);
-                      }} />
-                    </div>
+                  <p>{prt.price}</p>
+                  <div className="acciones">
+                    <FaEdit className="icono editar" onClick={(e) => {
+                      e.stopPropagation();
+                      editarProducto(prt);
+                    }} />
+                    <FaTrash className="icono eliminar" onClick={(e) => {
+                      e.stopPropagation();
+                      eliminarProducto(prt.id);
+                    }} />
                   </div>
+                </div>
               ))}
             </div>
           )}
         </>
       )}
-      
-      {/* Modal */}
+
       {modalAbierto && productoActual && (
         <div className="custom-model-main model-open" onClick={() => setModalAbierto(false)}>
           <div className="custom-model-inner" onClick={(e) => e.stopPropagation()}>

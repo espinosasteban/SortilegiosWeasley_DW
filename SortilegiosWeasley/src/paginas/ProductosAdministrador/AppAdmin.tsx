@@ -1,7 +1,6 @@
 import NavbarAdmin from './NavbarAdmin';
-/*  import './styles.css'; */
+import './styles.css'; 
 import InfoBoton from "../../components/infoBoton";
-// import ProductForm from './ProductForm';
 import { BrowserRouter as Router, Routes, Route, Navigate  } from "react-router-dom";
 import ProductList from './ProductList';
 

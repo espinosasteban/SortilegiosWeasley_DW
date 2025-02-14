@@ -24,22 +24,22 @@ const FormularioProducto: React.FC<Props> = ({ onGuardar, onCancelar, producto})
 
   return (
     <div className="formulario-Producto" >
-      <h2>{producto ? "Editar Dirección" : "Añadir Dirección"}</h2>
+      <h2>{producto ? "Añadir un nuevo producto" : "Añadir un nuevo producto"}</h2>
       <div className="datos">
         <div>
-            <label>name</label>
+            <label>Nombre</label>
             <input type="text" name="name" value={datos.name} onChange={manejarCambio} placeholder="Nombre del Producto" required />
         </div>
         <div>
-        <label>section</label>
+        <label>Sección</label>
             <input type="text" name="section" value={datos.section} onChange={manejarCambio} placeholder="Sección del Producto" required />
         </div>
         <div>
-        <label>price</label>
+        <label>Precio</label>
             <input type="text" name="price" value={datos.price} onChange={manejarCambio} placeholder="Precio del Producto" required />
         </div>
         <div>
-        <label>units</label>
+        <label>Unidades</label>
             <input type="text" name="units" value={datos.units} onChange={manejarCambio} placeholder="Unidades del Producto" required />
         </div>
         <div>
