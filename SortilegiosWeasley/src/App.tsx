@@ -10,6 +10,7 @@ import Login from "./paginas/ProcesoLoginUsuario/login/";
 import CrearCuenta from './paginas/ProcesoLoginUsuario/crearCuenta/';
 import CambiarContraseña from "./paginas/ProcesoLoginUsuario/cambiarContraseña/";
 import AppProfile from "./paginas/MiPerfil/App_perfil"; // Agregado
+import AppAdmin from "./paginas/ProductosAdministrador/AppAdmin"; // Agregado
 // Contexts 
 import { CartProvider } from './contexts/CartContext.tsx';
 import { AuthProvider } from "./paginas/ProcesoLoginUsuario/AuthContext"; // Agregado
@@ -38,6 +39,7 @@ function App() {
                                 <Route path="/crearCuenta" element={<CrearCuenta />} />
                                 <Route path="/cambiarContraseña" element={<CambiarContraseña />} />
                                 <Route path="/perfil" element={<AppProfile/>} /> {/* Agregado */}
+                                <Route path="/admin" element={<AppAdmin/>} /> {/* Agregado */}
                         </Routes>
                         </main>
                     </BrowserRouter>

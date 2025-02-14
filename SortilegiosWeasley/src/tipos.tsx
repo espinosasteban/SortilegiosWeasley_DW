@@ -33,3 +33,12 @@ export interface Direccion {
     info_extra: string;
     recibidor: string;
   }
+
+export interface Producto {
+    id: number;
+    name: string;
+    section: string;
+    price: number;
+    units: number;
+    description: string;
+}
