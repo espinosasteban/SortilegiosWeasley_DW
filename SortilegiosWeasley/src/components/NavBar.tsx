@@ -1,5 +1,5 @@
 import '../styles/NavBar.css';
-import { Link } from "react-router"; // Importa Link
+import {Link, useNavigate} from "react-router"; // Importa Link
 
 // Types
 import ArticuloCarrito  from './carritoCompras';
@@ -8,10 +8,11 @@ import Badge from '@mui/material/Badge'
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import IconButton from '@mui/material/IconButton';
 import { Drawer } from '@mui/material';
+import {PersonIcon} from '@mui/icons-material/Person';
 // Components
 import Cart  from './carritoCompras'
 // Hooks
-import { useState, useContext } from 'react'
+import { useState, useContext} from 'react'
 // Contexts
 import { CartContext } from '../contexts/CartContext.tsx';
 
@@ -27,13 +28,19 @@ function NavBar({ setSeccion }: NavBarProps) {
     const [isRightMenuOpen, setIsRightMenuOpen] = useState(false); // Nuevo estado para el menú de la derecha
     const { cartItems, toggleCart, addToCart, removeFromCart, getCartTotal, getTotalCartItems } = useContext(CartContext);
     const { usuario, logout } = useAuth();
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        logout();
+        navigate('/');
+    };
 
     return (
         <nav className="navbar">
             <ul className="navbar-list">
                 {/* Logo */}
                 <li className="navbar-item">
-                    <Link to="/"><img className="logo" src="../../public/iconoPagina.png" alt="Tu mundo Muggle"/></Link>
+                    <Link to="/"><img className="logo" src="../../public/iconoPagina2.png" alt="Tu mundo Muggle"/></Link>
                 </li>
 
                 {/* Menú de secciones (centro) */}
@@ -53,7 +60,7 @@ function NavBar({ setSeccion }: NavBarProps) {
 
                 {/* Menú de la derecha (carrito, buscar, inicio de sesión) */}
                 <li className="navbar-item right-menu-icon" onClick={() => setIsRightMenuOpen(!isRightMenuOpen)}>
-                    🛒
+                    🧙‍♂️
                 </li>
                 <div className={`right-menu ${isRightMenuOpen ? 'open' : ''}`}>
                     <li className="navbar-item">
@@ -81,7 +88,7 @@ function NavBar({ setSeccion }: NavBarProps) {
                         {usuario ? (
                             <>
                                 <Link to="/perfil">Mi Perfil</Link>
-                                <button onClick={logout}>Cerrar Sesión</button>
+                                <button onClick={handleLogout}>Cerrar Sesión</button>
                             </>
                         ) : (
                             <Link to="/login">Iniciar Sesión</Link>

@@ -26,25 +26,25 @@ const FormularioProducto: React.FC<Props> = ({ onGuardar, onCancelar, producto})
     <div className="formulario-Producto" >
       <h2>{producto ? "Añadir un nuevo producto" : "Añadir un nuevo producto"}</h2>
       <div className="datos">
-        <div>
+        <div className="formulario-producto-info">
             <label>Nombre</label>
             <input type="text" name="name" value={datos.name} onChange={manejarCambio} placeholder="Nombre del Producto" required />
         </div>
-        <div>
+        <div className="formulario-producto-info">
         <label>Sección</label>
             <input type="text" name="section" value={datos.section} onChange={manejarCambio} placeholder="Sección del Producto" required />
         </div>
-        <div>
+        <div className="formulario-producto-info">
         <label>Precio</label>
             <input type="text" name="price" value={datos.price} onChange={manejarCambio} placeholder="Precio del Producto" required />
         </div>
-        <div>
+        <div className="formulario-producto-info">
         <label>Unidades</label>
             <input type="text" name="units" value={datos.units} onChange={manejarCambio} placeholder="Unidades del Producto" required />
         </div>
-        <div>
+        <div className="formulario-producto-info">
         <label>Descripcion</label>
-            <input type="text" name="Producto" value={datos.description} onChange={manejarCambio} placeholder="Descripción del Producto" required />
+            <input type="text" name="description" value={datos.description} onChange={manejarCambio} placeholder="Descripción del Producto" required />
         </div>
       </div>
       <div className="botones">

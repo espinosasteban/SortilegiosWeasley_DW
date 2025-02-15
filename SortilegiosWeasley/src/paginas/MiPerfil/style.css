@@ -1,68 +1,73 @@
 /* Para que no salga la barra gris*/
-:root { 
-  
+:root {
+
   background-color: #e0e7f1;
 }
-  /* Contenedor principal de la vista */
-  .profile-container {
-    display: flex;
-    place-items: center; /* Centra en ambas direcciones */
-    height: 100vh;
-    margin: 0% 2% 0% 2%;
-    width: 100%;
-  }
-  
-  /* Barra de navegación lateral */
-  .navbar_perfil {
-    width: 300px;
-    margin-left: 2%;
-    text-align: left;
-  }
-  
-  .navbar_perfil ul {
-    list-style-type: none;
-  }
-  
-  .navbar_perfil li {
-    margin: 30px 0;
-    padding-right: 30px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    border-bottom: 2px solid transparent;
+/* Contenedor principal de la vista */
+.profile-container {
+  margin-top: 5rem;
+  display: flex;
+  flex-direction: column;
+  place-items: center; /* Centra en ambas direcciones */
+  height: 100vh;
+  width: 100%;
+  background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.3));
+  background-repeat: no-repeat;
+  background-size: cover;
+  justify-content: center;
+  align-items: center;
+}
 
-  }
-  
-  .navbar_perfil a {
-    text-decoration: none;
-    color: hsl(28, 86%, 47%);
-    font-size: 20px;
-  }
+/* Barra de navegación lateral */
+.navbar_perfil {
+  width: 300px;
+  margin-left: 2%;
+  text-align: left;
+}
 
-  .navbar_perfil h2 {
-    color: brown;
-    padding-left: 10%;
-  }
-  
-  .navbar_perfil a:hover {
-    color: rgb(219, 180, 36);
-  }
-  
-  .navbar_perfil li.active {
-    font-weight: bold;
-    border-bottom: 2px solid #c014eb;
-  }
+.navbar_perfil ul {
+  list-style-type: none;
+}
 
-  /* Contenido de la información del usuario */
-  .profile-content {
-    padding-left: 20px;
-    width: 50%;
-  }
-  
-  .edit-form input {
-    margin: 10px 0;
-    padding: 10px;
-    width: 100%;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-  }
+.navbar_perfil li {
+  margin: 30px 0;
+  padding-right: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-bottom: 2px solid transparent;
+
+}
+
+.navbar_perfil a {
+  text-decoration: none;
+  color: hsl(28, 86%, 47%);
+  font-size: 20px;
+}
+
+.navbar_perfil h2 {
+  color: brown;
+  padding-left: 10%;
+}
+
+.navbar_perfil a:hover {
+  color: rgb(219, 180, 36);
+}
+
+.navbar_perfil li.active {
+  font-weight: bold;
+  border-bottom: 2px solid #c014eb;
+}
+
+/* Contenido de la información del usuario */
+.profile-content {
+  width: 50%;
+}
+
+.edit-form input {
+  margin: 10px 0;
+  padding: 10px;
+  width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
   

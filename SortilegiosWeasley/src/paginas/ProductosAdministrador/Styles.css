@@ -55,7 +55,7 @@
     cursor: pointer;
     border-radius: 5px;
     font-weight: bold;
-    max-width: 720px;
+    max-width: 100%
   }
   
   .btn-anadir:hover {
@@ -91,6 +91,12 @@
     margin: 10px;
     background-color: #0d0d0f;
     color: aliceblue;
+  }
+
+  .formulario-producto-info {
+    display:flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   .Click-here {
@@ -177,10 +183,7 @@
   100% { transform: scale(1) rotate(0deg); }
 }
 
-.profile-container {
-  background-color: rgb	(199,200,255);
-  gap: 40px;
-}
+
 
 p {
   color: #000000;

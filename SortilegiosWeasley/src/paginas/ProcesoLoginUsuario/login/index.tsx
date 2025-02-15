@@ -47,7 +47,10 @@ export default function Login() {
                 <div className="crear-cuenta">
                     ¿No tienes cuenta? <a href="/crearCuenta">Crear cuenta</a>
                 </div>
-                {error && <p className="error">{error}</p>}
+                <div className="login-error">
+                    {error && <p className="error">{error}</p>}
+                </div>
+
             </form>
             <InfoBoton />
         </div>

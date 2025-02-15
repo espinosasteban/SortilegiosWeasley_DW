@@ -8,7 +8,6 @@ const AppAdmin = () => {
     return (
         <Router>
           <div className="profile-container">
-            <NavbarAdmin />
             <div className="profile-content">
               <Routes>
                 <Route path="/admin" element={<Navigate to="/gestion-producto" replace />} />
