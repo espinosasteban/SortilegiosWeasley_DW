@@ -18,6 +18,7 @@ import { AuthProvider } from "./paginas/ProcesoLoginUsuario/AuthContext"; // Agr
 import { Articulo } from "./tipos.tsx";
 // Hooks
 import { useState } from 'react';
+import ProcesoCompra from './paginas/ProcesoCompra/procesoCompra.tsx';
 
 
 
@@ -40,6 +41,7 @@ function App() {
                                 <Route path="/cambiarContraseña" element={<CambiarContraseña />} />
                                 <Route path="/perfil" element={<AppProfile/>} /> {/* Agregado */}
                                 <Route path="/admin" element={<AppAdmin/>} /> {/* Agregado */}
+                                <Route path ="/procesoCompra" element={<ProcesoCompra infoContacto={true} />} />
                         </Routes>
                         </main>
                     </BrowserRouter>
