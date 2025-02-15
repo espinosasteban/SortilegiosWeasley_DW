@@ -1,7 +1,7 @@
 import NavbarAdmin from './NavbarAdmin';
 import './styles.css'; 
 import InfoBoton from "../../components/infoBoton";
-import { BrowserRouter as Router, Routes, Route, Navigate  } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate  } from "react-router";
 import ProductList from './ProductList';
 
 const AppAdmin = () => {

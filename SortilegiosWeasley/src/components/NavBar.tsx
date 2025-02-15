@@ -8,7 +8,7 @@ import Badge from '@mui/material/Badge'
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import IconButton from '@mui/material/IconButton';
 import { Drawer } from '@mui/material';
-import {PersonIcon} from '@mui/icons-material/Person';
+
 // Components
 import Cart  from './carritoCompras'
 // Hooks
@@ -23,16 +23,23 @@ interface NavBarProps {
 }
 
 function NavBar({ setSeccion }: NavBarProps) {
+    const [searchTerm, setSearchTerm] = useState('');
+    const navigate = useNavigate();
     const [cartOpen, setCartOpen] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isRightMenuOpen, setIsRightMenuOpen] = useState(false); // Nuevo estado para el menú de la derecha
     const { cartItems, toggleCart, addToCart, removeFromCart, getCartTotal, getTotalCartItems } = useContext(CartContext);
     const { usuario, logout } = useAuth();
-    const navigate = useNavigate();
+
 
     const handleLogout = () => {
         logout();
         navigate('/');
+    };
+
+    const handleSearch = () => {
+        navigate('/vistaSeccion', { state: { searchTerm } });
+
     };
 
     return (
@@ -64,14 +71,20 @@ function NavBar({ setSeccion }: NavBarProps) {
                 </li>
                 <div className={`right-menu ${isRightMenuOpen ? 'open' : ''}`}>
                     <li className="navbar-item">
-                        <Link to="/vistaSeccion" onClick={() => setSeccion('')}>Buscar</Link>
+                        <input
+                            type="text"
+                            placeholder="Buscar artículo..."
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
+                        />
+                        <button onClick={handleSearch}>Buscar</button>
                     </li>
                     <li className="navbar-item">
                         <Drawer anchor='right' open={cartOpen} onClose={() => setCartOpen(false)}
-                            PaperProps= {{
-                                sx: {
-                                  backgroundColor: " #f5f5f5;",
-                                }
+                                PaperProps= {{
+                                    sx: {
+                                        backgroundColor: " #f5f5f5;",
+                                    }
                                 }}>
                             <Cart
                                 cartItems={cartItems}
