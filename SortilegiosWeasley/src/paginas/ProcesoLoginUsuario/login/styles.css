@@ -30,6 +30,7 @@
     width: 125px; /* Ajusta el tamaño según sea necesario */
     height: auto;
     animation: flotar 3s infinite ease-in-out;
+    margin-top: 40px;
 }
 
 /* Keyframes para hacer que la imagen flote suavemente */
