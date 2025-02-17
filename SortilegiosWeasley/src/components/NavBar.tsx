@@ -26,7 +26,7 @@ function NavBar({ setSeccion }: NavBarProps) {
     const [cartOpen, setCartOpen] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isRightMenuOpen, setIsRightMenuOpen] = useState(false); // Nuevo estado para el menú de la derecha
-    const { cartItems, toggleCart, addToCart, removeFromCart, getCartTotal, getTotalCartItems } = useContext(CartContext);
+    const { cartItems, addToCart, removeFromCart, getTotalCartItems } = useContext(CartContext);
     const { usuario, logout } = useAuth();
     const navigate = useNavigate();
 
