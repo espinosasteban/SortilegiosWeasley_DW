@@ -2,16 +2,34 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 5rem;
+    justify-content: center;
+    height: 100%;
 }
 
-h2{
+.h2-gracias-muggle{
+
     display: block;
     color: black;
-    align-self: flex-start;
+    
 }
 
 .informacion{
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.Formularios{
+    margin-right: 2rem;
+    width: 60%;
+}
+
+.Resumen{
+    margin-top: 3.5rem;
+}
+.resumen-compra {
+    background-color: aqua;
+    width: 50%;
+    height: 50%;
 }

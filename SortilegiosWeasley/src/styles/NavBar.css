@@ -9,8 +9,8 @@
 }
 
 .logo {
-    width: 4rem;
-    height: 4rem;
+    width: 5.5rem;
+    height: 5.5rem;
     margin: 0;
     padding: 0;
 }
@@ -57,7 +57,7 @@
     align-items: center;
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 1200px) {
     .right-menu-icon {
         display: block; /* Mostrar el ícono del menú de la derecha */
     }
@@ -78,7 +78,7 @@
     }
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 1200px) {
     .menu-icon {
         display: block; /* Mostrar el ícono del menú de secciones */
     }

@@ -1,26 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 import "../MiPerfil/user_info.css";
 import './procesoCompra.css';
 import { useNavigate } from 'react-router';
+import { LegendToggleRounded } from '@mui/icons-material';
 
-interface Props {
-    infoContacto: boolean;
-}
-export default function ProcesoCompra({infoContacto}: Props) {
+
+export default function ProcesoCompra() {
+    const [formulario, setFormulario] = useState('información')
 
 
     return (<>
         <main className="proceso-compra"> 
-            <h2>Termina tu compra, Muggle!</h2>
             <section className="informacion">
+        
                 <section className="Formularios">
+                    <h2 className='h2-gracias-muggle'>Termina tu compra, Muggle!</h2>
 
-                    <InformacionContacto />
+                    <ElegirInformacion setFormulario={setFormulario} formulario={formulario}/>
                 
 
                 </section>
                 <section className="Resumen">
                     <p>Resumen de tu compra</p>
+                    <div className="resumen-compra">
+                    </div>
                 </section>
 
             </section>
@@ -28,7 +31,13 @@ export default function ProcesoCompra({infoContacto}: Props) {
     </>)
 }
 
-function InformacionContacto(){
+
+interface PropsInformacionContacto {
+    setFormulario: (formulario: string) => void;
+
+}
+
+function InformacionContacto({setFormulario}: PropsInformacionContacto){
     const navigate = useNavigate();
     return (<>
         <section className="info-contacto">
@@ -78,10 +87,91 @@ function InformacionContacto(){
                 </div>
             <div style = {{display: "flex", justifyContent: "space-around"}}>
                 <button className="cancelar-button" onClick={() => navigate(-1)}>Cancelar compra</button>
-                <button className="direccion-button">Continuar a dirección</button>
+                <button className="direccion-button" onClick={() => setFormulario('dirección')}>Continuar a dirección</button>
             </div>
         </div>
         </section>
     </>)
 }
+
+interface PropsInformacionContacto {
+    setFormulario: (formulario: string) => void;
+}
+
+function Direccion({setFormulario}: PropsInformacionContacto){
+    const navigate = useNavigate();
+    return (<>
+        <section className="info-contacto">
+            <div className="user-info">
+                <h3>Dirección</h3>
+                <div className="perfil">
+                    <div><label>Departamento</label>
+                    <input
+                        type="text"
+                        name="departamento"
+                    /></div>
+                    <div>
+                    <label>Municipio</label>
+                    <input
+                        type="text"
+                        name="municipio"
+                    />
+                    </div>
+                    <div>
+                    <label>Dirección</label>
+                    <input
+                        type="text"
+                        name="direccion"
+                    />
+                    </div>
+                    <div>
+                    <label>Información adicional</label>
+                    <input
+                        type="text"
+                        name="informacion-adicional"
+                    />
+                    </div>
+                    <div>
+                        <label>Barrio</label>
+                    <input
+                        type="text"
+                        name="barrio"
+                    />
+                    </div>
+                    <div>
+                        <label>Nombre de quien recibe</label>
+                    <input
+                        type= "text"
+                        name="nombre-recibe"
+                    />
+                    </div>
+                </div>
+            <div style = {{display: "flex", justifyContent: "space-around"}}>
+                <button className="regresar-button" onClick={() => setFormulario('información')}>Regresar</button>
+                <button className="finalizar-button" onClick={() => {}}>Finalizar compra</button>
+            </div>
+        </div>
+        </section>
+    </>)
+}
+
+interface PropsElegirFormulario{
+    formulario: string;
+    setFormulario: (formulario: string) => void;
+}
+
+function ElegirInformacion({formulario, setFormulario}: PropsElegirFormulario){
+
+    if (formulario === "información"){
+        return (
+            <InformacionContacto setFormulario={setFormulario} />
+        )
+    }else{
+        return(
+            <Direccion setFormulario={setFormulario}/>
+        )
+    }
+
+}
+
 
