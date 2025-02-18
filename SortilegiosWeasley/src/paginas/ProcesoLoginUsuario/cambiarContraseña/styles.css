@@ -5,8 +5,8 @@
     justify-content: center;
     min-height: 100vh; 
     padding: 20px;
-    background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.3)), 
-                url(../../../assets/Login/Fondo.webp);
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                url(../../../assets/Login/WizardWheezes.png);
     background-repeat: no-repeat;
     background-size: cover;
     color: #ffffff; 
@@ -16,7 +16,7 @@
 .RecuperarH1 {
     margin-bottom: 20px;
     margin-block-start: 0;
-    color: #e4e4cc;
+    color: #ffffff;
 }
 .get-header {
     display: flex;
@@ -50,6 +50,7 @@ form {
     box-shadow: 0 4px 8px rgb(115,109,95); 
     width: 100%;
     max-width: 400px; 
+    border: 2px solid #423773;
 }
 
 form label {
@@ -67,12 +68,12 @@ form input {
 }
 
 form input:focus {
-    border-color: #aaa48c; 
+    border-color: #8271fb; 
     box-shadow: 0 0 5px rgb(115,109,95);
 }
 
 form button {
-    background-color: #aaa48c;
+    background-color: #8271fb;
     color: #ffffff;
     padding: 10px;
     border: none;
@@ -82,7 +83,7 @@ form button {
 }
 
 form button:hover {
-    background-color: #aaa48c; 
+    background-color: #8271fb; 
 }
 
 .info {
@@ -101,11 +102,11 @@ form button:hover {
 }
 
 .cambiarContraseña {
-    background-color: #7c7c74; 
+    background-color: #8271fb; 
 }
 
 .cambiarContraseña:hover {
-    background-color: #7c7c74; 
+    background-color: #5e519f; 
 }
 
 .error {
