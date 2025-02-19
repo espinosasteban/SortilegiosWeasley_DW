@@ -48,7 +48,7 @@
 .btn-anadir {
   margin-top: 20px;
   padding: 10px 15px;
-  background: #FACC15;
+  background: #D97941;
   color: #000000;
   border: none;
   cursor: pointer;
@@ -58,18 +58,18 @@
 }
 
 .btn-anadir:hover {
-  background: #e0b815;
+  background: #D9663D;
 }
 
 .formulario-Producto {
-  background-color: #4B2884;
+  background-color: #423773;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1);
   max-width: 180%;
   color: aliceblue;
   margin-left: 10px;
-  border: 2px solid #9F7AEA;
+  border: 2px solid #000000;
 }
 
 .formulario-Producto .datos {
@@ -83,7 +83,7 @@
   padding: 8px;
   margin-bottom: 10px;
   margin-right: 20px;
-  border: 2px solid #9F7AEA;
+  border: 2px solid #000000;
   border-radius: 5px;
   background-color: #1E1E1E;
   color: #FFFFFF;
@@ -98,6 +98,7 @@
   margin: 10px;
   padding: 10px 20px;
   border-radius: 5px;
+  background: #8271fb;
 }
 
 .guardar-btn {
@@ -217,7 +218,7 @@ p {
   justify-content: center;
   min-height: 100vh; 
   padding: 20px;
-  background: linear-gradient(rgba(58, 58, 82, 0.8), rgba(58, 58, 82, 0.6));
+  background: linear-gradient(rgba(66, 55, 115, 0.8), rgba(58, 58, 82, 0.6));
   background-repeat: no-repeat;
   background-size: cover;
   color: #ffffff; 
