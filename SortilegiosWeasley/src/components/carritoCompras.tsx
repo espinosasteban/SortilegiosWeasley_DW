@@ -111,14 +111,3 @@ const Cart: React.FC<CartProps> = () => {
         )
 }
 export default Cart
-
-
-/* 
-TODOS:
-
-Corregir:
-- Agregarle mejores estilos
-- Cuando tenga menos de un tamaño, haya un botón para poder cerrar el carrito
-- Agregarle un gorrito al título 
-
-*/
