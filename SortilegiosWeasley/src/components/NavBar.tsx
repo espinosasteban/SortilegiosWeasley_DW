@@ -80,7 +80,7 @@ function NavBar({ setSeccion }: NavBarProps) {
                         </Drawer>
                         <IconButton onClick={() => setCartOpen(true)} aria-label="Carrito de Compras">
                             <Badge badgeContent={getTotalCartItems()} color="error">
-                                <AddShoppingCartIcon />
+                                <AddShoppingCartIcon sx = {{'color': '#646cff'}} />
                             </Badge>
                         </IconButton>
                     </li>

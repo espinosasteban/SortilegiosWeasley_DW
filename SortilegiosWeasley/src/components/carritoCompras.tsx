@@ -57,24 +57,24 @@ type CartProps = {
 
 
 const CartItem: React.FC<ItemProps> = ({ item, addToCart, removeFromCart, deleteItem }) => (
-  <div className="cart-item">
-      <img className="cart-item-image" src={item.imagen} alt={item.nombre} />
+  <div className="block-cart-item">
+      <img className="block-cart-item-image" src={item.imagen} alt={item.nombre} />
       
-      <div className="cart-item-info">
-          <div className="cart-item-header">
-              <h3 className="cart-item-name">{item.nombre}</h3>
+      <div className="block-cart-item-info">
+          <div className="block-cart-item-header">
+              <h3 className="block-cart-item-name">{item.nombre}</h3>
               <DeleteIconButton onClick={() => deleteItem(item)} />
           </div>
-          <p className="cart-item-effect">{item.seccion}</p>
+          <p className="block-cart-item-effect">{item.seccion}</p>
 
-          <div className="cart-item-bottom">
-              <div className="cart-item-quantity">
+          <div className="block-cart-item-bottom">
+              <div className="block-cart-item-quantity">
                   <p>Cantidad</p>
-                  <button className="quantity-btn" onClick={() => removeFromCart(item)}>-</button>
+                  <button className="block-quantity-btn" onClick={() => removeFromCart(item)}>-</button>
                   <p>{item.total_items}</p>
-                  <button className="quantity-btn" onClick={() => addToCart(item)}>+</button>
+                  <button className="block-quantity-btn" onClick={() => addToCart(item)}>+</button>
               </div>
-              <p className="cart-item-price">$ {Number(item.precio * item.total_items).toFixed(2)}</p>
+              <p className="block-cart-item-price">$ {Number(item.precio * item.total_items).toFixed(2)}</p>
           </div>
       </div>
   </div>
@@ -86,8 +86,8 @@ const Cart: React.FC<CartProps> = () => {
     const { cartItems, addToCart, removeFromCart, getCartTotal, deleteItem } = useContext(CartContext)
 
     return (
-        <aside className='cart-wrapper'>
-            <h2 className='cart-wrapper-title'> Carrito de compras</h2>
+        <aside className='block-cart-wrapper'>
+            <h2 className='block-cart-wrapper-title'> Carrito de compras</h2>
             {cartItems.length === 0 ? <p>Todavía no hay productos</p> : null}
             {cartItems.map( item => (
                 <CartItem
@@ -104,7 +104,7 @@ const Cart: React.FC<CartProps> = () => {
             
             
             {cartItems.length > 0 ?
-            <button className='cart-wrapper-pay-btn' onClick={() => navigate("/procesoCompra")}>Ir a pagar</button> : null}
+            <button className='block-cart-wrapper-pay-btn' onClick={() => navigate("/procesoCompra")}>Ir a pagar</button> : null}
             
         </aside>
 

@@ -1,4 +1,4 @@
-.cart-item {
+.block-cart-item {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -10,14 +10,14 @@
 }
 
 
-.cart-item::after {
+.block-cart-item::after {
   content: "";
   position: absolute;
   left: 5%;
   bottom: -5px;
   width: 90%;
   height: 4px;
-  background-image: radial-gradient(circle, rgba(155, 216, 240, 0.9) 10%, rgba(148, 225, 255, 0) 70%),
+  background-image: radial-gradient(circle, #463859be 10%, rgba(148, 225, 255, 0) 70%),
                     radial-gradient(circle, rgba(216, 244, 255, 0.8) 15%, rgba(216, 244, 255, 0) 80%),
                     radial-gradient(circle, rgba(121, 162, 182, 0.7) 20%, rgba(255, 200, 50, 0) 90%);
   border-radius: 50%;
@@ -38,43 +38,43 @@
   }
 }
 
-.cart-item-image {
+.block-cart-item-image {
   width: 80px;
   height: 80px;
   object-fit: cover;
   border-radius: 8px;
 }
 
-.cart-item-info {
+.block-cart-item-info {
   flex: 1;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
 }
 
-.cart-item-header {
+.block-cart-item-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.cart-item-name {
+.block-cart-item-name {
   font-size: 1rem;
   font-weight: bold;
 }
 
-.cart-item-effect {
+.block-cart-item-effect {
   color: gray;
   font-size: 0.9rem;
 }
 
-.cart-item-bottom {
+.block-cart-item-bottom {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.cart-item-quantity {
+.block-cart-item-quantity {
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -82,8 +82,8 @@
 
 
 
-.quantity-btn {
-  background: rgba(128, 215, 250, 0.842);
+.block-quantity-btn {
+  background: #D97941;
   color: white;
   border: none;
   padding: 0.3rem 0.6rem;
@@ -91,21 +91,22 @@
   border-radius: 4px;
 }
 
-.cart-item-price {
+.block-cart-item-price {
   font-weight: bold;
 }
 
-.cart-wrapper {
+.block-cart-wrapper {
   font-family: Arial, Helvetica, sans-serif;
+  background-color: #f5f5f5;
   width: 500px;
   padding: 20px;
 }
 
-.cart-wrapper-title {
+.block-cart-wrapper-title {
   text-align: center;
 }
 
-.cart-wrapper-title::after {
+.block-cart-wrapper-title::after {
   content: "";
   display: block;
   width: 50%; /* La línea no abarca todo el div */
@@ -116,10 +117,15 @@
 }
 
 
-.cart-wrapper-pay-btn {
-  background:rgb(112, 189, 219);
+.block-cart-wrapper-pay-btn {
+  background:#D97941;
   display: block;
   margin: auto;
   padding: 0.8rem 1.2rem;
 }
 
+
+
+ button:hover {
+  background:#db6d2d;
+}

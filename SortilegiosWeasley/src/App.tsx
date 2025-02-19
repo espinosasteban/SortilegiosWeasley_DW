@@ -24,7 +24,7 @@ import ProcesoCompra from './paginas/ProcesoCompra/procesoCompra.tsx';
 
 function App() {
     const [seccion, setSeccion] = useState<string | null>(null);
-    const [producto, setProducto] = useState<Articulo | null>(null);
+    const [_, setProducto] = useState<Articulo | null>(null);
 
     return (
             <AuthProvider> {/* Envuelve todo con AuthProvider */}
