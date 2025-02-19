@@ -34,11 +34,12 @@
     transition: color 0.3s;
 }
 
-.navbar-item:hover {
-    color: #007bff;
+.navbar-item a:hover {
+    color: #8271fb;
 }
 
 .navbar-item a {
+    color: #463859;
     margin: 1rem;
 }
 
@@ -57,7 +58,7 @@
     align-items: center;
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1350px) {
     .right-menu-icon {
         display: block; /* Mostrar el ícono del menú de la derecha */
     }
