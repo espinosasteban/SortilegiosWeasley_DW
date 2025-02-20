@@ -33,7 +33,7 @@ function App() {
                         <NavBar setSeccion={setSeccion} />
                         <main className="mainApp">
                             <Routes>
-                                <Route path="/" element={<LandingPage />} />
+                                <Route path="/" element={<LandingPage setSeccion={setSeccion}/>} />
                                 <Route path="/vistaSeccion" element={<VistaSeccion seccion={seccion} setProducto={setProducto} />} />
                                 <Route path="/producto/:nombreProducto" element={<VistaProducto />} />
                                 <Route path="/login" element={<Login />} /> 
