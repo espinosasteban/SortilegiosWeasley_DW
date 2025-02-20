@@ -5,7 +5,11 @@ import { articulos } from '../../mocks/articulos';
 import InfoBoton from '../../components/infoBoton';
 import {Link} from "react-router";
 
-export default function LandingPage() {
+
+interface LandingPageProps {
+    setSeccion: (seccion: string | null) => void;
+}
+export default function LandingPage({setSeccion}: LandingPageProps) {
     return (<>
     <main>
         <section className="entrada-section">
@@ -13,7 +17,7 @@ export default function LandingPage() {
             <img src="../src/assets/Entrada.jpg"></img>
         </section>
         <Producto/>
-        <CarruselProductos/>
+        <CarruselProductos setSeccion={setSeccion}/>
         <InfoBoton/>
     </main>
 
@@ -64,40 +68,50 @@ function Producto() {
     );
 }
 
-function CarruselProductos(){
+
+interface CarruselProductosProps {
+    setSeccion: (seccion: string | null) => void;
+}
+
+function CarruselProductos({setSeccion}: CarruselProductosProps) {
     return (
         <>
         <section className="carrusel-contenedor">
             <h2 className ="titulo-descubre-mas">Descubre más...</h2>
 
             <div className="carrusel-productos">
-            <div className="producto-carrusel">
-                <img src={articulos.filter(articulo => articulo.seccion === "Bromas")[0].imagen} alt="Sombrero Antigravedad" />
-                <h2>
-                    Bromas
-                </h2>
-                
 
-            </div>
-            <div className="producto-carrusel">
-            <img src={articulos.filter(articulo => articulo.seccion === "Magia Muggle")[1].imagen} alt="Los Ratones Magicos De Maria" />
-                <h2>
-                    Magia Muggle
-                </h2>
-                
+                <Link to="/vistaSeccion" onClick={() => setSeccion('Bromas')}>
+                    <div className="producto-carrusel">
+                        <img src={articulos.filter(articulo => articulo.seccion === "Bromas")[0].imagen} alt="Sombrero Antigravedad" />
+                        <h2>
+                            Bromas
+                        </h2>
+                    </div>
+                </Link>
 
-
-            </div>
-            <div className="producto-carrusel">
-            <img src={articulos.filter(articulo => articulo.seccion === "Explosivos")[0].imagen} alt="Wildfire Whizz-Bangs" />
-                <h2>
-                    Explosivos
-                </h2>
-                
-
-            </div>
+                <Link to="/vistaSeccion" onClick={() => setSeccion('Magia Muggle')}>
+                    <div className="producto-carrusel">
+                        <img src={articulos.filter(articulo => articulo.seccion === "Magia Muggle")[1].imagen} alt="Los Ratones Magicos De Maria" />
+                        <h2>
+                            Magia Muggle
+                        </h2>
+                    </div>
+                </Link>
 
 
+
+
+                <Link to="/vistaSeccion" onClick={() => setSeccion('Explosivos')}>
+
+
+                <div className="producto-carrusel">
+                    <img src={articulos.filter(articulo => articulo.seccion === "Explosivos")[0].imagen} alt="Wildfire Whizz-Bangs" />
+                    <h2>
+                        Explosivos
+                    </h2>
+                </div>
+                </Link>
 
             </div>
             
