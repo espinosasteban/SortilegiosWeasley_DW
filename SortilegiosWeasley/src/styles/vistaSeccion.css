@@ -51,3 +51,15 @@
     margin-top: 2rem;
 }
 
+.no-productos-encontrados{
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: 2rem;
+    margin-top: 2rem;
+    width: 70%;
+    justify-content: center;
+}
+
+.no-productos-encontrados h2 {
+    color: #4c2aa7;
+}

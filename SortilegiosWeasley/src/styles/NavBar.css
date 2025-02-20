@@ -43,6 +43,39 @@
     margin: 1rem;
 }
 
+.buscar {
+    display: flex;
+    justify-content: center;
+    margin: 1rem;
+    background-color: #d77840;
+    align-items: center;
+    border-radius: 0.5rem;
+    padding: 0;
+}
+
+.buscar input {
+    width: 100%;
+    padding: 0.8rem;
+    border: none;
+    background-color: transparent;
+    margin-right: 0.7rem;
+    -moz-border-radius-topleft: 0.5rem;
+    -moz-border-radius-bottomleft: 0.5rem;
+}
+
+.buscar input::placeholder {
+    color: #fff;
+    font-size: 1rem;
+}
+
+.buscar input:active, .buscar input:focus {
+    outline: none;
+}
+
+.icono-buscar {
+    margin-right: 0.5rem;
+}
+
 
 
 
@@ -81,6 +114,11 @@
     .right-menu.open {
         display: flex; /* Mostrar el menú de la derecha cuando esté abierto */
     }
+
+    .buscar::placeholder {
+        text: "Buscar";
+    }
+
 }
 
 @media (max-width: 1200px) {
@@ -109,3 +147,4 @@
         padding: 1rem 0;
     }
 }
+

@@ -73,31 +73,29 @@ function NavBar({ setSeccion }: NavBarProps) {
                     🧙‍♂️
                 </li>
                 <div className={`right-menu ${isRightMenuOpen ? 'open' : ''}`}>
-                    <li className="navbar-item">
                         <form className="navbar-item buscar">
 
 
                             <input
 
                                 type="text"
-                                placeholder="Buscar artículo..."
+                                placeholder="Buscar..."
                                 value={searchTerm}
                                 onChange={(e) => setSearchTerm(e.target.value)}
                             />
 
-                                <SearchIcon
+                                <SearchIcon className="icono-buscar"
                                     size="medium"
                                     aria-label="Buscar"
                                     onClick = {handleSearch}
                                     sx={{
-                                        color: 'black',
+                                        color: 'white',
                                     }}
                                     >
                                 </SearchIcon>
                         </form>
 
 
-                    </li>
                     <li className="navbar-item">
                         <Drawer anchor='right' open={cartOpen} onClose={() => setCartOpen(false)}
                                 PaperProps= {{

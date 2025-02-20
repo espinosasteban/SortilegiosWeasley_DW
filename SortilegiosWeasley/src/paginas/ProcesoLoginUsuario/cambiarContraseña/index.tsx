@@ -34,7 +34,7 @@ export default function CambiarContrasena() {
                 <h1 className="RecuperarH1">Recuperar contraseña</h1>
                 <img src={RonIMG} alt="Ron" className="ron-img"/>
             </div>
-                <form onSubmit={handleSubmit}>
+                <form className="form-cambiar-contrasena "onSubmit={handleSubmit}>
                     <label htmlFor="usuario">Usuario</label>
                     <input
                         id="usuario"

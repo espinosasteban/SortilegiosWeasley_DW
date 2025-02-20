@@ -25,6 +25,9 @@ export default function VistaSeccion({ seccion, setProducto }: VistaSeccionProps
             articulo.descripcion.toLowerCase().includes(searchTerm.toLowerCase())
         );
     }
+    else {
+
+    }
 
     if (orden === 'ascendente') {
         articulosFiltrados.sort((a, b) => a.precio - b.precio);
@@ -35,7 +38,11 @@ export default function VistaSeccion({ seccion, setProducto }: VistaSeccionProps
     return (
         <main className="vista-seccion">
             <OrdenarPorPrecio setOrden={setOrden} />
-            <VitrinaProducto articulos={articulosFiltrados} setProducto={setProducto} />
+            {articulosFiltrados.length > 0 ? (
+                <VitrinaProducto articulos={articulosFiltrados} setProducto={setProducto} />
+            ) : (
+                <NoProductosEncontrados />
+            )}
             <InfoBoton />
         </main>
     );
@@ -75,6 +82,14 @@ function VitrinaProducto({ articulos, setProducto }: VitrinaProductoProps) {
                     </Link>
                 );
             })}
+        </section>
+    );
+}
+
+function NoProductosEncontrados() {
+    return (
+        <section className="no-productos-encontrados">
+            <h2>No se encontraron productos :( </h2>
         </section>
     );
 }
