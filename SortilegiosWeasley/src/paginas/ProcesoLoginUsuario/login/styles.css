@@ -5,18 +5,21 @@
     justify-content: center;
     min-height: 100vh; 
     padding: 20px;
-    background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.3)), 
-                url(../../../assets/Login/Fondo.webp);
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                url(../../../assets/Login/WizardWheezes.png);
     background-repeat: no-repeat;
     background-size: cover;
+    background-position: center;
     color: #ffffff; 
 }
+
 
 .LoginH1 {
     margin-bottom: 20px;
     margin-block-start: 0;
-    color: #e4e4cc;
+    color: #ffffff;
 }
+
 .login-header {
     display: flex;
     flex-direction: column-reverse;
@@ -30,6 +33,7 @@
     width: 125px; /* Ajusta el tamaño según sea necesario */
     height: auto;
     animation: flotar 3s infinite ease-in-out;
+    margin-top: 40px;
 }
 
 /* Keyframes para hacer que la imagen flote suavemente */
@@ -49,12 +53,14 @@ form {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
     width: 100%;
     max-width: 400px; 
+    border: 2px solid #423773;
 }
 
 form label {
     font-size: 1rem;
     color: #333333; 
     text-align: left;
+    font-weight: bold;
 }
 
 form input {
@@ -66,12 +72,12 @@ form input {
 }
 
 form input:focus {
-    border-color: #aaa48c; 
+    border-color: #8271fb; 
     box-shadow: 0 0 5px rgb(115,109,95);
 }
 
 form button {
-    background-color: #aaa48c;
+    background-color: #8271fb;
     color: #ffffff;
     padding: 10px;
     border: none;
@@ -81,7 +87,7 @@ form button {
 }
 
 form button:hover {
-    background-color: #aaa48c; 
+    background-color: #8271fb; 
 }
 
 .cambiar-contraseña, .crear-cuenta {
@@ -92,21 +98,21 @@ form button:hover {
 }
 
 .cambiar-contraseña a, .crear-cuenta a {
-    color: #aaa48c;
+    color: #8271fb;
     font-weight: bold;
     text-decoration: none;
 }
 
 .cambiar-contraseña a:hover, .crear-cuenta a:hover {
-    color: #7c7c74;
+    color: #5e519f;
 }
 
 .login-button {
-    background-color: #7c7c74; 
+    background-color: #8271fb; 
 }
 
 .login-button:hover {
-    background-color: #7c7c74; 
+    background-color: #5e519f; 
 }
 
 .login-error {

@@ -11,6 +11,9 @@ import { CartContext } from '../contexts/CartContext.tsx';
 // Hooks
 import { useContext } from 'react';
 
+import { useNavigate } from 'react-router';
+
+
 /*
 TODO
 
@@ -79,7 +82,9 @@ const CartItem: React.FC<ItemProps> = ({ item, addToCart, removeFromCart, delete
 
 
 const Cart: React.FC<CartProps> = () => {
+    const navigate = useNavigate();
     const { cartItems, addToCart, removeFromCart, getCartTotal, deleteItem } = useContext(CartContext)
+
     return (
         <aside className='cart-wrapper'>
             <h2 className='cart-wrapper-title'> Carrito de compras</h2>
@@ -99,7 +104,7 @@ const Cart: React.FC<CartProps> = () => {
             
             
             {cartItems.length > 0 ?
-            <button className='cart-wrapper-pay-btn'>Ir a pagar</button> : null}
+            <button className='cart-wrapper-pay-btn' onClick={() => navigate("/procesoCompra")}>Ir a pagar</button> : null}
             
         </aside>
 

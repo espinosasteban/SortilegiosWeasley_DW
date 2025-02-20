@@ -25,12 +25,46 @@
 
 
 .producto-section {
-    background-color: #646cff;
+    background-color:#e0e7f1;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     padding: 3rem;
+}
+
+.carrusel-contenedor {
+    display:flex;
+    flex-direction: column;
+    background-color: #D97941;
+}
+
+.titulo-descubre-mas {
+    font-size: 4rem;
+}
+
+.carrusel-productos {
+    display:flex;
+    justify-content: center;
+
+    padding: 2rem;;
+    width: 100%;
+
+}
+
+.producto-carrusel {
+    background-color: black;
+    width: 20rem;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0rem 1rem 0rem 1rem;
+}
+
+.carrusel-productos :nth-child(3) img{
+    width: 20rem;
+    height: 20rem;
+    object-fit: cover;
 }
 
 

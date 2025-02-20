@@ -1,0 +1,35 @@
+.proceso-compra{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.h2-gracias-muggle{
+
+    display: block;
+    color: black;
+    
+}
+
+.informacion{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.Formularios{
+    margin-right: 2rem;
+    width: 60%;
+}
+
+.Resumen{
+    margin-top: 3.5rem;
+}
+.resumen-compra {
+    background-color: aqua;
+    width: 50%;
+    height: 50%;
+}
