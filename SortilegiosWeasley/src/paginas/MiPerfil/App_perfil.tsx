@@ -5,7 +5,7 @@ import './style.css';
 import InfoBoton from "../../components/infoBoton";
 import MisDirecciones from "../Direcciones/MisDirecciones";
 import HistorialCompras from "../DetalleUsuario/historial";
-import { BrowserRouter as Router, Routes, Route, Navigate  } from "react-router";
+import { BrowserRouter as Router, Routes, Route, Navigate  } from "react-router-dom";
 
 const AppProfile = () => {
     return (
