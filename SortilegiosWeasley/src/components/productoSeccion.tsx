@@ -15,7 +15,10 @@ function ProductoSeccion({ articulo, floating }: ProductoSeccionProps) {
 
     return (
         <div className= {floatingClase} >
-            <img src={imagen} alt={nombre} className="product-image" />
+            <div className="contenedor-imagen">
+                <img src={imagen} alt={nombre} className="product-image"/>
+            </div>
+
             <h1 className="product-title">{nombre}</h1>
             <p className="product-price">${precio}</p>
         </div>

@@ -43,7 +43,7 @@
     100% { transform: translateY(0); }
 }
 
-form {
+.form-login {
     display: flex;
     flex-direction: column;
     gap: 10px; 
@@ -56,14 +56,14 @@ form {
     border: 2px solid #423773;
 }
 
-form label {
+.form-login label {
     font-size: 1rem;
     color: #333333; 
     text-align: left;
     font-weight: bold;
 }
 
-form input {
+.form-login input {
     padding: 10px;
     font-size: 1rem;
     border: 1px solid #cccccc;
@@ -71,12 +71,12 @@ form input {
     outline: none;
 }
 
-form input:focus {
+.form-login input:focus {
     border-color: #8271fb; 
     box-shadow: 0 0 5px rgb(115,109,95);
 }
 
-form button {
+.form-login button {
     background-color: #8271fb;
     color: #ffffff;
     padding: 10px;
@@ -86,7 +86,7 @@ form button {
     font-size: 1rem;
 }
 
-form button:hover {
+.form-login button:hover {
     background-color: #8271fb; 
 }
 

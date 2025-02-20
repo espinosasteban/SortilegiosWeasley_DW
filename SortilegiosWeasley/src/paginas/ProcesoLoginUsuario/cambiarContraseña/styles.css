@@ -40,7 +40,7 @@
     100% { transform: translateY(0); }
 }
 
-form {
+.form-cambiar-contrasena {
     display: flex;
     flex-direction: column;
     gap: 10px; 
@@ -53,13 +53,13 @@ form {
     border: 2px solid #423773;
 }
 
-form label {
+.form-cambiar-contrasena label {
     font-size: 1rem;
     color: #333333; 
     text-align: left;
 }
 
-form input {
+.form-cambiar-contrasena input {
     padding: 10px;
     font-size: 1rem;
     border: 1px solid #cccccc;
@@ -67,12 +67,12 @@ form input {
     outline: none;
 }
 
-form input:focus {
+.form-cambiar-contrasena input:focus {
     border-color: #8271fb; 
     box-shadow: 0 0 5px rgb(115,109,95);
 }
 
-form button {
+.form-cambiar-contrasena button {
     background-color: #8271fb;
     color: #ffffff;
     padding: 10px;
@@ -82,7 +82,7 @@ form button {
     font-size: 1rem;
 }
 
-form button:hover {
+.form-cambiar-contrasena button:hover {
     background-color: #8271fb; 
 }
 

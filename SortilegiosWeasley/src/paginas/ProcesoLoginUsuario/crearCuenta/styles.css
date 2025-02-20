@@ -41,7 +41,7 @@
     100% { transform: translateY(0); }
 }
 
-form {
+.form-crear-cuenta {
     display: flex;
     flex-direction: column;
     gap: 10px; 
@@ -54,13 +54,13 @@ form {
     border: 2px solid #423773;
 }
 
-form label {
+.form-crear-cuenta label {
     font-size: 1rem;
     color: #333333; 
     text-align: left;
 }
 
-form input {
+.form-crear-cuenta input {
     padding: 10px;
     font-size: 1rem;
     border: 1px solid #cccccc;
@@ -68,12 +68,12 @@ form input {
     outline: none;
 }
 
-form input:focus {
+.form-crear-cuenta input:focus {
     border-color: #8271fb; 
     box-shadow: 0 0 5px rgb(115,109,95);
 }
 
-form button {
+.form-crear-cuenta button {
     background-color: #8271fb;
     color: #ffffff;
     padding: 10px;
@@ -83,7 +83,7 @@ form button {
     font-size: 1rem;
 }
 
-form button:hover {
+.form-crear-cuenta button:hover {
     background-color: #8271fb; 
 }
 
