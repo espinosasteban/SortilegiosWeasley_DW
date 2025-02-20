@@ -18,6 +18,9 @@ import { CartContext } from '../contexts/CartContext.tsx';
 
 import { useAuth } from '../paginas/ProcesoLoginUsuario/AuthContext';
 
+import SearchIcon from '@mui/icons-material/Search';
+import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
+
 interface NavBarProps {
     setSeccion: (seccion: string | null) => void;
 }
@@ -71,13 +74,29 @@ function NavBar({ setSeccion }: NavBarProps) {
                 </li>
                 <div className={`right-menu ${isRightMenuOpen ? 'open' : ''}`}>
                     <li className="navbar-item">
-                        <input
-                            type="text"
-                            placeholder="Buscar artículo..."
-                            value={searchTerm}
-                            onChange={(e) => setSearchTerm(e.target.value)}
-                        />
-                        <button onClick={handleSearch}>Buscar</button>
+                        <form className="navbar-item buscar">
+
+
+                            <input
+
+                                type="text"
+                                placeholder="Buscar artículo..."
+                                value={searchTerm}
+                                onChange={(e) => setSearchTerm(e.target.value)}
+                            />
+
+                                <SearchIcon
+                                    size="medium"
+                                    aria-label="Buscar"
+                                    onClick = {handleSearch}
+                                    sx={{
+                                        color: 'black',
+                                    }}
+                                    >
+                                </SearchIcon>
+                        </form>
+
+
                     </li>
                     <li className="navbar-item">
                         <Drawer anchor='right' open={cartOpen} onClose={() => setCartOpen(false)}
