@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useLocation } from "react-router";
+import { Link, useLocation } from "react-router-dom";
 
 const Navbar_perfil: React.FC = () => {
     const location = useLocation(); // Obtiene la ruta actual
