@@ -1,8 +1,8 @@
 import express from "express";
-import productoController from '../controllers/productoController.js';
+import seccionController from '../controllers/seccionController.js';
 const route = express.Router();
 
-route.post('/', productoController.create);
+route.post('/', seccionController.create);
 
 /*
 route.put('/:id', productoController.update);
@@ -10,7 +10,6 @@ route.delete('/:id', productoController.delete);
 route.get('/', productoController.getAll);
 route.get('/:id', productoController.getOne);
 */
-
 
 
 export default route;
