@@ -1,43 +1,24 @@
-import Producto from '../modelos/producto.js';
+import productoModelo from '../modelos/productos.js';
 
-class productoController {
+class productoController{
+    constructor(){}
 
-    async create(req, res) {
-        try {
-            const producto = new Producto(req.body);
-            const nuevoProducto = await producto.save();
-            console.log("Producto creado con éxito");
-            res.status(201).json(nuevoProducto);
-        } catch (error) {
-            console.log("Error creando el producto");
-            res.status(500).json({error: 'Error creando el producto'});
+    async create(req, res){
+        try{
+            const data = await productoModelo.create(req.body);
+            res.status(201).json(data);
+        }catch(error){
+            res.status(500).send(error);
         }
     }
-}
-
-export default new productoController();
-
-    /*
-
 
     async update(req, res){
-
-        if (!req.body) {
-            return res.status(400).send({ message: "Los datos a actualizar no pueden estar vacíos" });
-        }
-
         try{
             const { id } = req.params;
-            const data = await Producto.findByIdAndUpdate(id, req.body, { useFindAndModify: false });
-
-            if (!data) {
-                res.status(404).send({ message: `No se puede actualizar el producto con id=${id}. No se encontró el producto` });
-            } else {
-                res.status(200).send({ message: "Producto actualizado con éxito" });
-            }
-
+            const data = await productoModelo.update(id, req.body);
+            res.status(201).json(data);
         }catch(error){
-            res.status(500).send({ message: "Error actualizando el producto con id=" + id });
+            res.status(500).send(error);
         }
     }
 
@@ -58,7 +39,7 @@ export default new productoController();
         }catch(error){
             res.status(500).send(error);
         }
-    };
+    }
 
     async getOne(req, res){
         try{
@@ -68,8 +49,7 @@ export default new productoController();
         }catch(error){
             res.status(500).send(error);
         }
-    };
+    }
 }
-*/
 
-
+export default new productoController();

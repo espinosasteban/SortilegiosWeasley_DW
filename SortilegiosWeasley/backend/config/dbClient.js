@@ -1,19 +1,22 @@
 import 'dotenv/config';
+import {MongoClient} from 'mongodb';
 
-
-import mongoose from 'mongoose';
-
-const conectarDB = async () => {
-    try {
-        await mongoose.connect(`mongodb+srv://${process.env.USER_DB}:${process.env.PASSWORD_DB}@${process.env.SERVER_DB}/?retryWrites=true&w=majority&appName=Sortilegios`, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true
-        });
-        console.log('✅ Conectado a MongoDB');
-    } catch (error) {
-        console.error('❌ Error conectando a MongoDB:', error);
-        process.exit(1);
+class dbClient{
+    constructor(){
+        const queryString = `mongodb+srv://${process.env.USER_DB}:${process.env.PASSWORD_DB}@${process.env.SERVER_DB}/?retryWrites=true&w=majority&appName=Sortilegios`;
+        this.client = new MongoClient(queryString);
+        this.conectarBD();
     }
-};
 
-export default conectarDB;
+    async conectarBD() {
+        try{
+            await this.client.connect();
+            this.db = this.client.db('SortilegiosWeasley');
+            console.log('Conexión a la base de datos exitosa');
+        }catch (e){
+            console.log(e);
+        }
+    }
+}
+
+export default new dbClient();
