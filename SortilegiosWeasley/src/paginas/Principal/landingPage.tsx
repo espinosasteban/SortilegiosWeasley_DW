@@ -4,20 +4,27 @@ import ProductoSeccion from '../../components/productoSeccion';
 import { articulos } from '../../mocks/articulos';
 import InfoBoton from '../../components/infoBoton';
 import {Link} from "react-router";
+import { Articulo } from '../../tipos';
 
 
 interface LandingPageProps {
     setSeccion: (seccion: string | null) => void;
+    productos: Array<Articulo>;
 }
-export default function LandingPage({setSeccion}: LandingPageProps) {
+
+export default function LandingPage({setSeccion, productos}: LandingPageProps) {
+    if (productos.length === 0) {
+        return <p>🔄 Cargando productos...</p>;
+    }
+
     return (<>
     <main>
         <section className="entrada-section">
             <h1>¡Bienvenidos a Sortilegios Weasley!</h1>
             <img src="../src/assets/Entrada.jpg"></img>
         </section>
-        <Producto/>
-        <CarruselProductos setSeccion={setSeccion}/>
+        <Producto productos={productos}/>
+        <CarruselProductos setSeccion={setSeccion} productos={productos}/>
         <InfoBoton/>
     </main>
 
@@ -29,8 +36,8 @@ function formatearNombreParaRuta(nombre: string): string {
     return nombre.toLowerCase().replace(/\s+/g, '').normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 }
 
-function Producto() {
-
+function Producto({productos}: {productos: Array<Articulo>}) {
+     /*
     articulos.sort((a, b) => {
         
         const diferenciaResenas = b.resenas.length - a.resenas.length;
@@ -49,15 +56,15 @@ function Producto() {
     
         return promedioB - promedioA;
     });
-
+    */
     return (
         <>
             <section className="producto-section">
-                {articulos.slice(0,5).map((articulo) => {
-                    const ruta = `/producto/${formatearNombreParaRuta(articulo.nombre)}`;
+                {productos.slice(0,5).map((producto) => {
+                    const ruta = `/producto/${formatearNombreParaRuta(producto.nombre)}`;
                     return (
-                        <Link className='link-producto' to={ruta} key={articulo.nombre}>
-                            <ProductoSeccion articulo={articulo} floating={true} />
+                        <Link className='link-producto' to={ruta} key={producto.nombre}>
+                            <ProductoSeccion articulo={producto} floating={true} />
                         </Link>
                     );
                 })}
@@ -71,9 +78,10 @@ function Producto() {
 
 interface CarruselProductosProps {
     setSeccion: (seccion: string | null) => void;
+    productos: Array<Articulo>;
 }
 
-function CarruselProductos({setSeccion}: CarruselProductosProps) {
+function CarruselProductos({setSeccion, productos}: CarruselProductosProps) {
     return (
         <>
         <section className="carrusel-contenedor">
@@ -83,7 +91,7 @@ function CarruselProductos({setSeccion}: CarruselProductosProps) {
 
                 <Link to="/vistaSeccion" onClick={() => setSeccion('Bromas')}>
                     <div className="producto-carrusel">
-                        <img src={articulos.filter(articulo => articulo.seccion === "Bromas")[0].imagen} alt="Sombrero Antigravedad" />
+                        <img src={productos.filter(producto => producto.seccion === "67bb546c4b598574467ef6b1")[0].img} alt="Sombrero Antigravedad" />
                         <h2>
                             Bromas
                         </h2>
@@ -92,26 +100,21 @@ function CarruselProductos({setSeccion}: CarruselProductosProps) {
 
                 <Link to="/vistaSeccion" onClick={() => setSeccion('Magia Muggle')}>
                     <div className="producto-carrusel">
-                        <img src={articulos.filter(articulo => articulo.seccion === "Magia Muggle")[1].imagen} alt="Los Ratones Magicos De Maria" />
+                        <img src={productos.filter(producto => producto.seccion === "67bb587da5bd9da775c01231")[0].img} alt="Los Ratones Magicos De Maria" />
                         <h2>
                             Magia Muggle
                         </h2>
                     </div>
                 </Link>
 
-
-
-
-                <Link to="/vistaSeccion" onClick={() => setSeccion('Explosivos')}>
-
-
+                {/* <Link to="/vistaSeccion" onClick={() => setSeccion('Explosivos')}>
                 <div className="producto-carrusel">
-                    <img src={articulos.filter(articulo => articulo.seccion === "Explosivos")[0].imagen} alt="Wildfire Whizz-Bangs" />
+                    <img src={productos.filter(producto => producto.seccion === "Explosivos")[0].img} alt="Wildfire Whizz-Bangs" />
                     <h2>
                         Explosivos
                     </h2>
                 </div>
-                </Link>
+                </Link> */}
 
             </div>
             

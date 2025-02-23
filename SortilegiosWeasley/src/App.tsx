@@ -17,13 +17,29 @@ import { AuthProvider } from "./paginas/ProcesoLoginUsuario/AuthContext"; // Agr
 // Types
 import { Articulo } from "./tipos.tsx";
 // Hooks
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ProcesoCompra from './paginas/ProcesoCompra/procesoCompra.tsx';
-
-
 
 function App() {
     const [seccion, setSeccion] = useState<string | null>(null);
+    const [productos, setProductos] = useState<Array<Articulo>>([]);
+
+    useEffect(() => {
+        console.log('Entré al useEffect');
+        async function obtenerProductos(){
+            const response = await fetch('http://localhost:5000/producto/');
+            console.log(response);
+            if (!response.ok){
+                console.log('Error al obtener productos', response.statusText);
+                return
+            }
+            const productos = await response.json();
+            setProductos(productos);
+        }
+        obtenerProductos();
+        return;
+    }, [productos.length]);
+
     const [producto, setProducto] = useState<Articulo | null>(null);
 
     return (
@@ -33,7 +49,7 @@ function App() {
                         <NavBar setSeccion={setSeccion} />
                         <main className="mainApp">
                             <Routes>
-                                <Route path="/" element={<LandingPage setSeccion={setSeccion}/>} />
+                                <Route path="/" element={<LandingPage productos={productos} setSeccion={setSeccion}/>} />
                                 <Route path="/vistaSeccion" element={<VistaSeccion seccion={seccion} setProducto={setProducto} />} />
                                 <Route path="/producto/:nombreProducto" element={<VistaProducto />} />
                                 <Route path="/login" element={<Login />} /> 

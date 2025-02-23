@@ -13,6 +13,19 @@ class productoController {
             res.status(500).json({error: 'Error creando el producto'});
         }
     }
+
+    async getAll(req, res) {
+        try {
+            const productos = await Producto.find();
+            res.status(200).json(productos);
+            console.log("Productos obtenidos con éxito");
+        } catch (error) {
+            console.log("Error obteniendo los productos");
+            res.status(500).json({error: 'Error obteniendo los productos'});
+        }
+    }
+
+   
 }
 
 export default new productoController();

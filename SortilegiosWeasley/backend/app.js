@@ -4,11 +4,13 @@ import routesProductos from './routes/producto.js';
 import routesSecciones from './routes/seccion.js';
 import bodyParser from 'body-parser';
 import mongoose from "mongoose";
+import { corsMiddleware } from './middlewares/cors.js';
 
 const app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(corsMiddleware());
 
 
 //RUTAS NECESARIAS PARA LOS MÉTODOS RELACIONADOS A LAS COLECCIONES

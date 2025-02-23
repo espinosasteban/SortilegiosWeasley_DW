@@ -1,12 +1,11 @@
 export interface Articulo {
 
-    nombre: string;
-    precio: number;
-    descripcion: string;
-    imagen: string;
-    seccion: string;
-    resenas: Array<ResenaArticulo>;
-
+    nombre: string, 
+    descripcion: string,
+    img: string,
+    precio: Number,
+    unidadesStock: Number,
+    seccion: string
 }
 
 export interface ArticuloCarrito extends Articulo {
