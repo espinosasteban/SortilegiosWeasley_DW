@@ -10,6 +10,6 @@ const resenaSchema = new mongoose.Schema({
     usuario: { type: mongoose.Schema.Types.ObjectId, ref: 'Muggle' }
 }, { timestamps: true });
 
-const Resena = mongoose.model('Resena', resenaSchema);
+const Resena = mongoose.model('Resena', resenaSchema, 'resenas');
 
 export default Resena;

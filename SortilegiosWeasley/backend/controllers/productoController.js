@@ -25,64 +25,61 @@ class productoController {
         }
     }
 
-   
-}
-
-export default new productoController();
-
-    /*
-
-
-    async update(req, res){
-
-        if (!req.body) {
-            return res.status(400).send({ message: "Los datos a actualizar no pueden estar vacíos" });
-        }
-
-        try{
+    async getOne(req, res) {
+        try {
             const { id } = req.params;
-            const data = await Producto.findByIdAndUpdate(id, req.body, { useFindAndModify: false });
-
-            if (!data) {
-                res.status(404).send({ message: `No se puede actualizar el producto con id=${id}. No se encontró el producto` });
+            const producto = await Producto.findById(id);
+            if (producto) {
+                res.status(200).json(producto);
+                console.log("Producto obtenido con éxito");
             } else {
-                res.status(200).send({ message: "Producto actualizado con éxito" });
+                console.log("Producto no encontrado");
+                res.status(404).json({error: 'Producto no encontrado'});
             }
-
-        }catch(error){
-            res.status(500).send({ message: "Error actualizando el producto con id=" + id });
+        }
+        catch (error) {
+            console.log("Error obteniendo el producto");
+            res.status(500).json({error: 'Error obteniendo el producto'});
         }
     }
 
-    async delete(req, res){
-        try{
+    async update(req, res) {
+        try {
             const { id } = req.params;
-            const data = await productoModelo.delete(id);
-            res.status(206).json(data);
-        }catch(error){
-            res.status(500).send(error);
+            const producto = await Producto.findByIdAndUpdate(id, req.body, { new: true });
+
+            if (producto) {
+                res.status(200).json(producto);
+                console.log("Producto actualizado con éxito");
+            } else {
+                console.log("Producto no encontrado");
+                res.status(404).json({error: 'Producto no encontrado'});
+            }
+        }
+        catch (error) {
+            console.log("Error actualizando el producto");
+            res.status(500).json({error: 'Error actualizando el producto'});
         }
     }
 
-    async getAll(req, res){
-        try{
-            const data = await productoModelo.getAll();
-            res.status(201).json(data);
-        }catch(error){
-            res.status(500).send(error);
-        }
-    };
-
-    async getOne(req, res){
-        try{
+    async delete(req, res) {
+        try { 
             const { id } = req.params;
-            const data = await productoModelo.getOne(id);
-            res.status(201).json(data);
-        }catch(error){
-            res.status(500).send(error);
+            const producto = await Producto.findByIdAndDelete(id);
+
+            if (producto) {
+                res.status(200).json(producto);
+                console.log("Producto eliminado con éxito");
+            } else {
+                console.log("Producto no encontrado");
+                res.status(404).json({error: 'Producto no encontrado'});
+            }
         }
-    };
+        catch (error) {
+            console.log("Error eliminando el producto");
+            res.status(500).json({error: 'Error eliminando el producto'});
+        }
+    }
 }
-*/
-
+export default new productoController();
 

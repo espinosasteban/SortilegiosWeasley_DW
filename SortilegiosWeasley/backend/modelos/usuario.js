@@ -4,6 +4,7 @@ const muggleSchema = new mongoose.Schema({
     nombreUsuario: { type: String, required: true },
     contrasena: { type: String, required: true },
     correo: { type: String, required: true },
+    rol: { type: String, required: true },
     nombre: { type: String, required: true },
     apellido: { type: String, required: true },
     documento: { type: String, required: true },
@@ -11,7 +12,7 @@ const muggleSchema = new mongoose.Schema({
     fechaNacimiento: { type: Date, required: true },
 });
 
-const Muggle = mongoose.model('Muggle', muggleSchema);
+const Muggle = mongoose.model('Muggle', muggleSchema, 'muggles');
 
 export default Muggle;
 
