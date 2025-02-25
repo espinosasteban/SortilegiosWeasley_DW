@@ -1,13 +1,21 @@
 import Resena from '../modelos/resena.js';
+import {ValidarResena, ValidarResenaParcial} from '../esquemas/esquemas.js';
 
 class resenaController {
 
     async create(req, res) {
         try {
+            const result = ValidarResena(req.body);
+
+            if (!result.sucess){
+                return res.status(400).json({ error: JSON.parse(result.error.message) })
+            }
+
             const resena = new Resena(req.body);
             const nuevoResena = await resena.save();
             console.log("resena creada con éxito");
             res.status(201).json(nuevoResena);
+
         } catch (error) {
             console.log("Error creando la resena");
             res.status(500).json({error: 'Error creando la resena'});
@@ -45,6 +53,12 @@ class resenaController {
 
     async update(req, res) {
         try {
+            const result = ValidarResenaParcial(req.body);
+
+            if (!result.sucess){
+                return res.status(400).json({ error: JSON.parse(result.error.message) })
+            }
+            
             const { id } = req.params;
             const resena = await Resena.findByIdAndUpdate(id, req.body, { new: true });
 

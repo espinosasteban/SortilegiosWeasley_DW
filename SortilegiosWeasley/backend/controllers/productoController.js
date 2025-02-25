@@ -1,13 +1,21 @@
 import Producto from '../modelos/producto.js';
+import {ValidarProducto, ValidarProductoParcial} from '../esquemas/esquemas.js';
 
 class productoController {
 
     async create(req, res) {
         try {
+            const result = ValidarProducto(req.body);
+
+            if (!result.sucess){
+                return res.status(400).json({ error: JSON.parse(result.error.message) })
+            }
+
             const producto = new Producto(req.body);
             const nuevoProducto = await producto.save();
             console.log("Producto creado con éxito");
             res.status(201).json(nuevoProducto);
+
         } catch (error) {
             console.log("Error creando el producto");
             res.status(500).json({error: 'Error creando el producto'});
@@ -45,6 +53,12 @@ class productoController {
 
     async update(req, res) {
         try {
+            const result = ValidarProductoParcial(req.body);
+
+            if (!result.sucess){
+                return res.status(400).json({ error: JSON.parse(result.error.message) })
+            }
+            
             const { id } = req.params;
             const producto = await Producto.findByIdAndUpdate(id, req.body, { new: true });
 

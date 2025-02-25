@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const muggleSchema = new mongoose.Schema({
+const usuarioSchema = new mongoose.Schema({
     nombreUsuario: { type: String, required: true },
     contrasena: { type: String, required: true },
     correo: { type: String, required: true },
@@ -12,7 +12,7 @@ const muggleSchema = new mongoose.Schema({
     fechaNacimiento: { type: Date, required: true },
 });
 
-const Muggle = mongoose.model('Muggle', muggleSchema, 'muggles');
+const usuario = mongoose.model('Muggle', muggleSchema, 'muggles');
 
-export default Muggle;
+export default Usuario;
 

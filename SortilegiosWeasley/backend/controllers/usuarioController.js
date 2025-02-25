@@ -1,9 +1,16 @@
 import Usuario from '../modelos/usuario.js';
+import {ValidarUsuario, ValidarUsuarioParcial} from '../esquemas/esquemas.js';
 
 class usuarioController {
 
     async create(req, res) {
         try {
+            const result = ValidarUsuario(req.body);
+
+            if (!result.sucess){
+                return res.status(400).json({ error: JSON.parse(result.error.message) })
+            }
+
             const usuario = new Usuario(req.body);
             const nuevoUsuario = await usuario.save();
             console.log("Usuario creado con éxito");
@@ -45,6 +52,12 @@ class usuarioController {
 
     async update(req, res) {
         try {
+            const result = ValidarUsuarioParcial(req.body);
+
+            if (!result.sucess){
+                return res.status(400).json({ error: JSON.parse(result.error.message) })
+            }
+            
             const { id } = req.params;
             const usuario = await Usuario.findByIdAndUpdate(id, req.body, { new: true });
 
