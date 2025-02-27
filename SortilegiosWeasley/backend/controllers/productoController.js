@@ -1,13 +1,13 @@
 import Producto from '../modelos/producto.js';
-import {ValidarProducto, ValidarProductoParcial} from '../esquemas/esquemas.js';
+import {validarProducto, validarProductoParcial} from '../esquemas/esquemas.js';
 
 class productoController {
 
     async create(req, res) {
         try {
-            const result = ValidarProducto(req.body);
+            const result = validarProducto(req.body);
 
-            if (!result.sucess){
+            if (!result.success){
                 return res.status(400).json({ error: JSON.parse(result.error.message) })
             }
 
@@ -53,9 +53,9 @@ class productoController {
 
     async update(req, res) {
         try {
-            const result = ValidarProductoParcial(req.body);
+            const result = validarProductoParcial(req.body);
 
-            if (!result.sucess){
+            if (!result.success){
                 return res.status(400).json({ error: JSON.parse(result.error.message) })
             }
             

@@ -12,7 +12,6 @@ const usuarioSchema = new mongoose.Schema({
     fechaNacimiento: { type: Date, required: true },
 });
 
-const usuario = mongoose.model('Muggle', muggleSchema, 'muggles');
-
+const Usuario = mongoose.model('Usuario', usuarioSchema, 'usuarios');
 export default Usuario;
 

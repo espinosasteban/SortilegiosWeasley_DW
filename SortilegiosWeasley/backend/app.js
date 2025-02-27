@@ -2,7 +2,7 @@ import 'dotenv/config';
 import express from 'express';
 import routesProductos from './routes/producto.js';
 import routesSecciones from './routes/seccion.js';
-import routesMuggles from './routes/usuario.js';
+import routesUsuarios from './routes/usuario.js';
 import routesResenas from './routes/resena.js';
 import bodyParser from 'body-parser';
 import mongoose from "mongoose";
@@ -18,7 +18,7 @@ app.use(corsMiddleware());
 //RUTAS NECESARIAS PARA LOS MÉTODOS RELACIONADOS A LAS COLECCIONES
 app.use('/producto', routesProductos);
 app.use('/seccion', routesSecciones);
-app.use('/muggle', routesMuggles);
+app.use('/usuario', routesUsuarios);
 app.use('/resenas', routesResenas);
 
 //CONEXIÓN A LA BD

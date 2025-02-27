@@ -1,13 +1,14 @@
 import Usuario from '../modelos/usuario.js';
-import {ValidarUsuario, ValidarUsuarioParcial} from '../esquemas/esquemas.js';
+import {validarUsuario, validarUsuarioParcial} from '../esquemas/esquemas.js';
 
 class usuarioController {
 
     async create(req, res) {
         try {
-            const result = ValidarUsuario(req.body);
+            const result = validarUsuario(req.body);
+            console.log(result);
 
-            if (!result.sucess){
+            if (!result.success){
                 return res.status(400).json({ error: JSON.parse(result.error.message) })
             }
 
@@ -17,6 +18,7 @@ class usuarioController {
             res.status(201).json(nuevoUsuario);
         } catch (error) {
             console.log("Error creando el usuario");
+            console.log(error);
             res.status(500).json({error: 'Error creando el usuario'});
         }
     }
@@ -52,7 +54,7 @@ class usuarioController {
 
     async update(req, res) {
         try {
-            const result = ValidarUsuarioParcial(req.body);
+            const result = validarUsuarioParcial(req.body);
 
             if (!result.sucess){
                 return res.status(400).json({ error: JSON.parse(result.error.message) })

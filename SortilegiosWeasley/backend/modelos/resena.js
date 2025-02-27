@@ -7,7 +7,7 @@ const resenaSchema = new mongoose.Schema({
     recuentoUtil: { type: Number, required: true, default: 0 },
     recuentoNoUtil: { type: Number, required: true, default: 0 },
     producto: { type: mongoose.Schema.Types.ObjectId, ref: 'Producto' },
-    usuario: { type: mongoose.Schema.Types.ObjectId, ref: 'Muggle' }
+    usuario: { type: mongoose.Schema.Types.ObjectId, ref: 'Usuario' }
 }, { timestamps: true });
 
 const Resena = mongoose.model('Resena', resenaSchema, 'resenas');

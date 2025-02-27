@@ -2,8 +2,8 @@ import {z} from 'zod';
 
 // Esquema de validación de datos Usuario
 const UsuarioSchema = z.object({
-    usuario: z.string().min(3, "El usuario debe tener al menos 3 caracteres"),
-    contraseña: z.string().min(6, "La contraseña debe tener al menos 6 caracteres"),
+    nombreUsuario: z.string().min(3, "El usuario debe tener al menos 3 caracteres"),
+    contrasena: z.string().min(6, "La contraseña debe tener al menos 6 caracteres"),
     correo: z.string().email("Correo no válido"),
     rol: z.enum(["muggle", "administrador"]),
     nombre: z.string().min(1, "El nombre es obligatorio"),

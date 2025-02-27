@@ -1,13 +1,13 @@
 import Resena from '../modelos/resena.js';
-import {ValidarResena, ValidarResenaParcial} from '../esquemas/esquemas.js';
+import {validarResena, validarResenaParcial} from '../esquemas/esquemas.js';
 
 class resenaController {
 
     async create(req, res) {
         try {
-            const result = ValidarResena(req.body);
+            const result = validarResena(req.body);
 
-            if (!result.sucess){
+            if (!result.success){
                 return res.status(400).json({ error: JSON.parse(result.error.message) })
             }
 
@@ -53,9 +53,9 @@ class resenaController {
 
     async update(req, res) {
         try {
-            const result = ValidarResenaParcial(req.body);
+            const result = validarResenaParcial(req.body);
 
-            if (!result.sucess){
+            if (!result.success){
                 return res.status(400).json({ error: JSON.parse(result.error.message) })
             }
             
