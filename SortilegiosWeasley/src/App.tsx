@@ -40,6 +40,10 @@ function App() {
         return;
     }, [productos.length]);
 
+
+
+
+
     const [producto, setProducto] = useState<Articulo | null>(null);
 
     return (
@@ -50,7 +54,7 @@ function App() {
                         <main className="mainApp">
                             <Routes>
                                 <Route path="/" element={<LandingPage productos={productos} setSeccion={setSeccion}/>} />
-                                <Route path="/vistaSeccion" element={<VistaSeccion seccion={seccion} setProducto={setProducto} />} />
+                                <Route path="/vistaSeccion" element={<VistaSeccion nombreSeccion={seccion} setProducto={setProducto}  productos={productos}/>} />
                                 <Route path="/producto/:nombreProducto" element={<VistaProducto />} />
                                 <Route path="/login" element={<Login />} /> 
                                 <Route path="/crearCuenta" element={<CrearCuenta />} />
