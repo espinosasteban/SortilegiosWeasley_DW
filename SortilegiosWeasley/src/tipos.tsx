@@ -1,12 +1,11 @@
 export interface Articulo {
-
-    nombre: string;
-    precio: number;
-    descripcion: string;
-    imagen: string;
-    seccion: string;
-    resenas: Array<ResenaArticulo>;
-
+    _id: string;
+    nombre: string, 
+    descripcion: string,
+    img: string,
+    precio: Number,
+    unidadesStock: Number,
+    seccion: string
 }
 
 export interface ArticuloCarrito extends Articulo {
@@ -14,12 +13,13 @@ export interface ArticuloCarrito extends Articulo {
 }
 
 export interface ResenaArticulo {
-    nombreUsuario: string;
-    fechaComentario: string;
+    puntuacion: number;
+    fecha: Date;
     comentario: string;
-    calificacion: number;
-    cantidadEsUtil: number;
-    cantidadNoEsUtil: number;
+    recuentoUtil: number;
+    recuentoNoUtil: number;
+    producto: string; /*esto sería el id */
+    usuario: string; /*esto sería el id */
 
 }
 
@@ -41,4 +41,23 @@ export interface Producto {
     price: number;
     units: number;
     description: string;
+}
+
+export interface Seccion {
+    _id: string;
+    nombre: string;
+    descripcion: string;
+}
+
+export interface Usuario {
+    _id: string;
+    nombreUsuario: string;
+    contrasena: string;
+    correo: string;
+    rol: string;
+    nombre: string;
+    apellido: string;
+    documento: number;
+    telefono: number;
+    fechaNacimiento: Date;
 }

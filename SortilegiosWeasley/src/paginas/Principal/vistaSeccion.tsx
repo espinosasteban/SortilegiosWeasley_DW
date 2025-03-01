@@ -1,45 +1,77 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router';
 import ProductoSeccion from '../../components/productoSeccion';
 import '../../styles/vistaSeccion.css';
-import { articulos } from '../../mocks/articulos';
 import InfoBoton from '../../components/infoBoton';
-import { Articulo } from "../../tipos.tsx";
+import { Articulo, Seccion } from "../../tipos.tsx";
 import { Link } from "react-router";
 
 interface VistaSeccionProps {
-    seccion: string | null;
+    nombreSeccion: string | null;
     setProducto: (producto: Articulo | null) => void;
+    productos: Array<Articulo>;
 }
 
-export default function VistaSeccion({ seccion, setProducto }: VistaSeccionProps) {
+export default function VistaSeccion({ nombreSeccion, setProducto, productos }: VistaSeccionProps) {
     const location = useLocation();
     const searchTerm = location.state?.searchTerm || '';
     const [orden, setOrden] = useState<string | null>(null);
+    const [seccion, setSeccion] = useState<Seccion | null>(null);
 
-    let articulosFiltrados = seccion ? articulos.filter(articulo => articulo.seccion === seccion) : articulos;
+    const fetchSeccionByName = async (nombreSeccion: string | null) => {
+        try {
+            if (nombreSeccion === null) {
+                console.log("La sección que se ha pasado es null");
+                return null;
+            }
+
+            const response = await fetch(`http://localhost:5000/seccion/nombre/${nombreSeccion}`);
+            if (!response.ok) {
+                console.log("Error al obtener la sección", response.statusText);
+                return "";
+            }
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            console.error('Error:', error);
+            return null;
+        }
+    };
+
+    useEffect(() => {
+        const obtenerSeccion = async () => {
+            const seccionData = await fetchSeccionByName(nombreSeccion);
+            setSeccion(seccionData);
+        };
+        obtenerSeccion();
+    }, [nombreSeccion]);
+
+    if (seccion == null) {
+        return <><p>La sección es nula</p></>;
+    }
+    console.log(seccion)
+
+    let productosFiltrados = productos.filter(producto => producto.seccion === seccion._id);
+
 
     if (searchTerm) {
-        articulosFiltrados = articulosFiltrados.filter(articulo =>
-            articulo.nombre.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            articulo.descripcion.toLowerCase().includes(searchTerm.toLowerCase())
+        productosFiltrados = productosFiltrados.filter(producto =>
+            producto.nombre.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            producto.descripcion.toLowerCase().includes(searchTerm.toLowerCase())
         );
-    }
-    else {
-
     }
 
     if (orden === 'ascendente') {
-        articulosFiltrados.sort((a, b) => a.precio - b.precio);
+        productosFiltrados.sort((a, b) => a.precio - b.precio);
     } else if (orden === 'descendente') {
-        articulosFiltrados.sort((a, b) => b.precio - a.precio);
+        productosFiltrados.sort((a, b) => b.precio - a.precio);
     }
 
     return (
         <main className="vista-seccion">
             <OrdenarPorPrecio setOrden={setOrden} />
-            {articulosFiltrados.length > 0 ? (
-                <VitrinaProducto articulos={articulosFiltrados} setProducto={setProducto} />
+            {productosFiltrados.length > 0 ? (
+                <VitrinaProducto articulos={productosFiltrados} setProducto={setProducto} />
             ) : (
                 <NoProductosEncontrados />
             )}

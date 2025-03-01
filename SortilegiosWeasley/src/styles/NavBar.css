@@ -95,7 +95,7 @@
     align-items: center;
 }
 
-@media (max-width: 1350px) {
+@media (max-width: 1410px) {
     .right-menu-icon {
         display: block; /* Mostrar el ícono del menú de la derecha */
     }

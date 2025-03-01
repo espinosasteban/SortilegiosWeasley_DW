@@ -17,14 +17,30 @@ import { AuthProvider } from "./paginas/ProcesoLoginUsuario/AuthContext"; // Agr
 // Types
 import { Articulo } from "./tipos.tsx";
 // Hooks
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ProcesoCompra from './paginas/ProcesoCompra/procesoCompra.tsx';
-
-
 
 function App() {
     const [seccion, setSeccion] = useState<string | null>(null);
+    const [productos, setProductos] = useState<Array<Articulo>>([]);
     const [producto, setProducto] = useState<Articulo | null>(null);
+
+    useEffect(() => {
+        console.log('Entré al useEffect');
+        async function obtenerProductos(){
+            const response = await fetch('http://localhost:5000/producto/');
+            console.log(response);
+            if (!response.ok){
+                console.log('Error al obtener productos', response.statusText);
+                return
+            }
+            const productos = await response.json();
+            setProductos(productos);
+        }
+        obtenerProductos();
+        return;
+    }, [productos.length]);
+
 
     return (
             <AuthProvider> {/* Envuelve todo con AuthProvider */}
@@ -33,9 +49,9 @@ function App() {
                         <NavBar setSeccion={setSeccion} />
                         <main className="mainApp">
                             <Routes>
-                                <Route path="/" element={<LandingPage setSeccion={setSeccion}/>} />
-                                <Route path="/vistaSeccion" element={<VistaSeccion seccion={seccion} setProducto={setProducto} />} />
-                                <Route path="/producto/:nombreProducto" element={<VistaProducto />} />
+                                <Route path="/" element={<LandingPage productos={productos} setSeccion={setSeccion} setProducto={setProducto}/>} />
+                                <Route path="/vistaSeccion" element={<VistaSeccion nombreSeccion={seccion} setProducto={setProducto}  productos={productos}/>} />
+                                <Route path="/producto/:nombreProducto" element={<VistaProducto productos={productos} setProducto={setProducto} />} />
                                 <Route path="/login" element={<Login />} /> 
                                 <Route path="/crearCuenta" element={<CrearCuenta />} />
                                 <Route path="/cambiarContraseña" element={<CambiarContraseña />} />

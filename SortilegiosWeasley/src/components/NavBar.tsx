@@ -23,6 +23,7 @@ import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined
 
 interface NavBarProps {
     setSeccion: (seccion: string | null) => void;
+
 }
 
 function NavBar({ setSeccion }: NavBarProps) {

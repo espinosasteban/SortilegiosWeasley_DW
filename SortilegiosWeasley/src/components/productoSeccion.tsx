@@ -10,17 +10,17 @@ interface ProductoSeccionProps {
 
 function ProductoSeccion({ articulo, floating }: ProductoSeccionProps) {
 
-    const { nombre, precio, descripcion, seccion, imagen } = articulo;
+    const { nombre, precio, img } = articulo;
     const floatingClase = floating ? 'product floating' : 'product';
 
     return (
         <div className= {floatingClase} >
             <div className="contenedor-imagen">
-                <img src={imagen} alt={nombre} className="product-image"/>
+                <img src={img} alt={nombre} className="product-image"/>
             </div>
 
             <h1 className="product-title">{nombre}</h1>
-            <p className="product-price">${precio}</p>
+            <p className="product-price">{precio}</p>
         </div>
     );
 }
