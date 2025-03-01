@@ -201,10 +201,10 @@ function Resena({ resenas }: ResenaProps) {
                 <section className="resena" key={index}>
                     <header>
                         <h3>{usuariosResenas[resena.usuario]}</h3>
-                        <p>{resena.fecha}</p>
+                        <p>{new Date(resena.fecha).toLocaleDateString('es-ES')}</p>
                     </header>
                     <div className="contenido">
-                        <p>{resena.comentario}</p>
+                        <p className="resena-comentario">{resena.comentario}</p>
                     </div>
                     <footer>
                         <div className="utilidad">
