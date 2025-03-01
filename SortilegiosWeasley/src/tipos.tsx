@@ -1,4 +1,5 @@
 export interface Articulo {
+    _id: string;
 
     nombre: string, 
     descripcion: string,
@@ -47,4 +48,17 @@ export interface Seccion {
     _id: string;
     nombre: string;
     descripcion: string;
+}
+
+export interface Usuario {
+    _id: string;
+    nombreUsuario: string;
+    contrasena: string;
+    correo: string;
+    rol: string;
+    nombre: string;
+    apellido: string;
+    documento: number;
+    telefono: number;
+    fechaNacimiento: Date;
 }

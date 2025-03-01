@@ -55,7 +55,7 @@ function App() {
                             <Routes>
                                 <Route path="/" element={<LandingPage productos={productos} setSeccion={setSeccion}/>} />
                                 <Route path="/vistaSeccion" element={<VistaSeccion nombreSeccion={seccion} setProducto={setProducto}  productos={productos}/>} />
-                                <Route path="/producto/:nombreProducto" element={<VistaProducto />} />
+                                <Route path="/producto/:nombreProducto" element={<VistaProducto  producto={producto}/>} />
                                 <Route path="/login" element={<Login />} /> 
                                 <Route path="/crearCuenta" element={<CrearCuenta />} />
                                 <Route path="/cambiarContraseña" element={<CambiarContraseña />} />

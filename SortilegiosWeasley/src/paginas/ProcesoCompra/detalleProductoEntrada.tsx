@@ -12,19 +12,48 @@ import { useParams } from "react-router";
 import { CartContext } from '../../contexts/CartContext.tsx';
 
 // Hooks
-import { useContext, useEffect } from 'react';
+import {useContext, useEffect, useState} from 'react';
 
-export default function VistaProducto(){
+export default function VistaProducto({producto}: {producto: Articulo | null}) {
 
-    const { nombreProducto } = useParams<{ nombreProducto: string }>();
-    const producto = articulos.find(art => formatearNombreParaRuta(art.nombre) === nombreProducto) || null;
+    const [resenas, setResenas] = useState<Array<ResenaArticulo>>([]);
+
+
+
+
+
+
+    useEffect(() => {
+        console.log('Entré al useEffect de resenas');
+        console.log(producto);
+        async function obtenerResenas(){
+            const response = await fetch('http://localhost:5000/resenas/');
+            console.log(response);
+            if (!response.ok){
+                console.log('Error al obtener resenas', response.statusText);
+                return
+            }
+            const resenas = await response.json();
+
+
+            const resenasFiltradas = resenas.filter((resena: ResenaArticulo) => resena.producto === producto._id);
+
+            console.log(resenasFiltradas);
+
+
+
+            setResenas(resenasFiltradas);
+        }
+        obtenerResenas();
+        return;
+    }, [resenas.length]);
 
     return <>
         <main className="main-vista-producto">
         {producto && (
           <>
-          <DetalleProducto producto={producto} />
-          <DetalleResena producto={producto} />
+          <DetalleProducto producto={producto}  resenas={resenas}/>
+          <DetalleResena producto={producto} resenas={resenas}/>
           </>
         )}
         {!producto && <p>No hay producto seleccionado.</p>}
@@ -40,9 +69,10 @@ function formatearNombreParaRuta(nombre: string): string {
 
 interface DetalleProductoProps {
     producto: Articulo;
+    resenas: Array<ResenaArticulo> | null;
 }
 
-function DetalleProducto({ producto }: DetalleProductoProps){
+function DetalleProducto({ producto, resenas }: DetalleProductoProps){
 
     useEffect(() => {
         window.scrollTo(0, 0); // Desplaza la página al inicio
@@ -50,7 +80,7 @@ function DetalleProducto({ producto }: DetalleProductoProps){
         return <>
 
             <section className="detalle-producto-seccion">
-                <MostradorProducto producto={producto}/>
+                <MostradorProducto producto={producto} resenas={resenas}/>
                 <Detalle producto={producto} />
             </section>
         </>
@@ -60,17 +90,18 @@ function DetalleProducto({ producto }: DetalleProductoProps){
 
 interface MostradorProductoProps {
     producto: Articulo | null;
+    resenas: Array<ResenaArticulo> | null;
 }
 
-function MostradorProducto({producto}: MostradorProductoProps){
+function MostradorProducto({producto, resenas}: MostradorProductoProps){
     return (
         <>
             <section className="mostrador-producto-seccion">
 
-                <img src={producto?.imagen ?? 'Imagen no disponible'}
+                <img src={producto?.img ?? 'Imagen no disponible'}
                      id={producto?.nombre.toLowerCase().replace(/\s+/g, '').normalize('NFD').replace(/[\u0300-\u036f]/g, '')}
                      alt={producto?.nombre ?? 'Nombre no disponible'}/>
-                <Valoracion producto={producto}/>
+                <Valoracion producto={producto} resenas={resenas}/>
             </section>
         </>
     );
@@ -99,12 +130,17 @@ function Detalle({ producto}: DetalleProps) {
 }
 
 
-function DetalleResena({producto}: ValoracionProps) {
+function DetalleResena({resenas}: ValoracionProps) {
+
+
+
+
+
     return (
         <>
             <section className="detalle-resena-seccion">
                 <h2 className="titulo-detalle-resena">Reseñas del producto</h2>
-                <VitrinaResena resenas={producto?.resenas ?? null}/>
+                <VitrinaResena resenas={resenas}/>
                 <CrearResena/>
             </section>
 
@@ -113,21 +149,23 @@ function DetalleResena({producto}: ValoracionProps) {
 }
 
 interface ValoracionProps {
-    producto: Articulo | null;
+    resenas: Array<ResenaArticulo> | null;
 }
 
-function Valoracion({ producto }: ValoracionProps) {
+function Valoracion({resenas }: ValoracionProps) {
 
     let puntuacion = '0';
 
-    if (producto) {
-        puntuacion = (producto.resenas.reduce((sum, resena) => sum + resena.calificacion, 0) / producto.resenas.length).toFixed(1)
+
+
+    if (resenas) {
+        puntuacion = (resenas.reduce((sum, resena) => sum + resena.puntuacion, 0) / resenas.length).toFixed(1)
     }
 
     return (
         <section className="valoracion-seccion">
             <h2>
-                {!(producto) || producto.resenas.length === 0
+                {!(resenas) || resenas.length === 0
                     ? "Sin calificaciones"
                     : puntuacion}
             </h2>
@@ -153,13 +191,15 @@ interface ResenaProps {
 }
 
 function Resena({ resenas }: ResenaProps) {
+
+
     return (
         <>
             {resenas?.map((resena, index) => (
                 <section className="resena" key={index}>
                     <header>
-                        <h3>{resena.nombreUsuario}</h3>
-                        <p>{resena.fechaComentario}</p>
+                        <h3>{resena.usuario}</h3>
+                        <p>{resena.fecha}</p>
                     </header>
                     <div className="contenido">
                         <p>{resena.comentario}</p>
@@ -167,12 +207,12 @@ function Resena({ resenas }: ResenaProps) {
                     <footer>
                         <div className="utilidad">
                             <button>Útil</button>
-                            <p>{resena.cantidadEsUtil}</p>
+                            <p>{resena.recuentoUtil}</p>
                             <button>No útil</button>
-                            <p>{resena.cantidadNoEsUtil}</p>
+                            <p>{resena.recuentoNoUtil}</p>
                         </div>
                         <div className="calificacion">
-                            <PuntuacionVarita defaultRaing={resena.calificacion} iconSize="1.5rem" modifiable={false}/>
+                            <PuntuacionVarita defaultRaing={resena.puntuacion} iconSize="1.5rem" modifiable={false}/>
                         </div>
                     </footer>
                 </section>
