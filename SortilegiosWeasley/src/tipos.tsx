@@ -1,6 +1,5 @@
 export interface Articulo {
     _id: string;
-
     nombre: string, 
     descripcion: string,
     img: string,

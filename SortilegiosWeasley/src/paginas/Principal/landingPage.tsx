@@ -9,10 +9,11 @@ import { Articulo } from '../../tipos';
 
 interface LandingPageProps {
     setSeccion: (seccion: string | null) => void;
+    setProducto: (producto: Articulo | null) => void;
     productos: Array<Articulo>;
 }
 
-export default function LandingPage({setSeccion, productos}: LandingPageProps) {
+export default function LandingPage({setSeccion, setProducto, productos}: LandingPageProps) {
     if (productos.length === 0) {
         return <p>🔄 Cargando productos...</p>;
     }
@@ -23,7 +24,7 @@ export default function LandingPage({setSeccion, productos}: LandingPageProps) {
             <h1>¡Bienvenidos a Sortilegios Weasley!</h1>
             <img src="../src/assets/Entrada.jpg"></img>
         </section>
-        <Producto productos={productos}/>
+        <Producto setProducto={setProducto} productos={productos}/>
         <CarruselProductos setSeccion={setSeccion} productos={productos}/>
         <InfoBoton/>
     </main>
@@ -36,7 +37,7 @@ function formatearNombreParaRuta(nombre: string): string {
     return nombre.toLowerCase().replace(/\s+/g, '').normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 }
 
-function Producto({productos}: {productos: Array<Articulo>}) {
+function Producto({productos, setProducto}: {productos: Array<Articulo>, setProducto: (producto: Articulo | null) => void}) {
      /*
     articulos.sort((a, b) => {
         
@@ -63,14 +64,12 @@ function Producto({productos}: {productos: Array<Articulo>}) {
                 {productos.slice(0,5).map((producto) => {
                     const ruta = `/producto/${formatearNombreParaRuta(producto.nombre)}`;
                     return (
-                        <Link className='link-producto' to={ruta} key={producto.nombre}>
+                        <Link className='link-producto' onClick={()=>setProducto(producto)} to={ruta} key={producto.nombre}>
                             <ProductoSeccion articulo={producto} floating={true} />
                         </Link>
                     );
                 })}
             </section>
-
-
         </>
     );
 }

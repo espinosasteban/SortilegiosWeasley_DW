@@ -23,6 +23,7 @@ import ProcesoCompra from './paginas/ProcesoCompra/procesoCompra.tsx';
 function App() {
     const [seccion, setSeccion] = useState<string | null>(null);
     const [productos, setProductos] = useState<Array<Articulo>>([]);
+    const [producto, setProducto] = useState<Articulo | null>(null);
 
     useEffect(() => {
         console.log('Entré al useEffect');
@@ -41,11 +42,6 @@ function App() {
     }, [productos.length]);
 
 
-
-
-
-    const [producto, setProducto] = useState<Articulo | null>(null);
-
     return (
             <AuthProvider> {/* Envuelve todo con AuthProvider */}
                 <CartProvider>
@@ -53,9 +49,9 @@ function App() {
                         <NavBar setSeccion={setSeccion} />
                         <main className="mainApp">
                             <Routes>
-                                <Route path="/" element={<LandingPage productos={productos} setSeccion={setSeccion}/>} />
+                                <Route path="/" element={<LandingPage productos={productos} setSeccion={setSeccion} setProducto={setProducto}/>} />
                                 <Route path="/vistaSeccion" element={<VistaSeccion nombreSeccion={seccion} setProducto={setProducto}  productos={productos}/>} />
-                                <Route path="/producto/:nombreProducto" element={<VistaProducto  producto={producto}/>} />
+                                <Route path="/producto/:nombreProducto" element={<VistaProducto productos={productos} setProducto={setProducto} />} />
                                 <Route path="/login" element={<Login />} /> 
                                 <Route path="/crearCuenta" element={<CrearCuenta />} />
                                 <Route path="/cambiarContraseña" element={<CambiarContraseña />} />
