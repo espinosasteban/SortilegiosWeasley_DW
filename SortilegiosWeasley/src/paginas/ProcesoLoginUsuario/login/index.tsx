@@ -8,19 +8,33 @@ import HarryPotterImg from '../../../assets/Login/HarryPotter.png';
 export default function Login() {
     const navigate = useNavigate();
     const { login } = useAuth();
-    const [usuario, setUsuario] = useState<string>('');
-    const [password, setPassword] = useState<string>('');
+    const [usuario, setUsuario] = useState('');
+    const [password, setPassword] = useState('');
     const [error, setError] = useState<string | null>(null);
 
-    const handleLogin = () => {
-        if (usuario === "admin" && password === "admin") {
-            login(usuario);
-            navigate('/admin');
-        } else if (usuario === "muggle" && password === "muggle") {
-            login(usuario);
-            navigate('/perfil');
-        } else {
-            setError("Usuario o contraseña incorrectos");
+    const handleLogin = async () => {
+
+        console.log("Enviado datos:", { nombreUsuario: usuario, contrasena: password });
+
+        try {
+            const response = await fetch('http://localhost:5000/auth/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ nombreUsuario: usuario, contrasena: password })
+            });
+
+            const data = await response.json();
+            if (!response.ok) {
+                throw new Error(data.message || "Error desconocido");
+            }
+
+            localStorage.setItem('token', data.token);
+            login(data.rol); // Guarda el rol
+            navigate(data.rol === "admin" ? '/admin' : '/perfil');
+
+        } catch (error) {
+            console.error("Error", error);
+            setError("Error en el servidor");
         }
     };
 

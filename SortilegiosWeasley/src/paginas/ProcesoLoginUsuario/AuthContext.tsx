@@ -2,7 +2,8 @@ import { createContext, useContext, useState, ReactNode } from "react";
 
 interface AuthContextType {
     usuario: string | null;
-    login: (usuario: string) => void;
+    rol: string | null;
+    login: (rol: string) => void;
     logout: () => void;
 }
 
@@ -10,17 +11,21 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const [usuario, setUsuario] = useState<string | null>(null);
+    const [rol, setRol] = useState<string | null>(null);
 
-    const login = (usuario: string) => {
-        setUsuario(usuario);
+    const login = (rol: string) => {
+        setUsuario("Usuario"); // Esto podría venir del backend
+        setRol(rol);
     };
 
     const logout = () => {
         setUsuario(null);
+        setRol(null);
+        localStorage.removeItem('token');
     };
 
     return (
-        <AuthContext.Provider value={{ usuario, login, logout }}>
+        <AuthContext.Provider value={{ usuario, rol, login, logout }}>
             {children}
         </AuthContext.Provider>
     );

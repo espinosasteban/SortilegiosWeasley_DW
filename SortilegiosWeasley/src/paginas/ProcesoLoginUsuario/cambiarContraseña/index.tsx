@@ -14,20 +14,59 @@ export default function CambiarContrasena() {
         return regex.test(contrasena);
     };
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+    
         if (!validarContrasena(nuevaContrasena)) {
             setError("La nueva contraseña no cumple con los requisitos.");
             return;
         }
+    
         if (nuevaContrasena !== confirmarContrasena) {
             setError("Las contraseñas no coinciden.");
             return;
         }
+    
         setError(null);
-        alert("Contraseña cambiada correctamente");
-    };
+    
+        try {
+            // Usamos `getOne` para obtener el usuario por nombreUsuario
+            const response = await fetch(`http://localhost:5000/usuario/${usuario}`);
+            if (!response.ok) throw new Error("Usuario no encontrado");
+    
+            const data = await response.json();
+            const usuarioId = data._id; // Extraer el ID del usuario
+    
+            if (!usuarioId) {
+                setError("No se pudo encontrar el usuario.");
+                return;
+            }
+    
+            // Ahora hacemos la petición para cambiar la contraseña
+            const cambiarContrasenaResponse = await fetch(`http://localhost:5000/usuario/cambiarContrasena/${usuarioId}`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ nuevaContrasena }),
+            });
+    
+            const cambiarContrasenaData = await cambiarContrasenaResponse.json();
+    
+            if (!cambiarContrasenaResponse.ok) {
+                throw new Error(cambiarContrasenaData.error || "Error al cambiar la contraseña");
+            }
+    
+            alert("✅ Contraseña cambiada correctamente");
+            setUsuario("");
+            setNuevaContrasena("");
+            setConfirmarContrasena("");
+        } catch (error: any) {
+            setError(error.message);
+        }
 
+    };
+    
     return (
         <div className="contenido-login">
             <div className="get-header">
