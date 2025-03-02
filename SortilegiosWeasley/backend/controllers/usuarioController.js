@@ -145,8 +145,6 @@ class usuarioController {
             if (!regex.test(nuevaContrasena)) {
                 return res.status(400).json({ error: "La nueva contraseña no cumple con los requisitos." });
             }
-    
-            // Hashear la contraseña antes de guardarla
             usuario.contrasena = nuevaContrasena;
             await usuario.save();
             res.status(200).json({ mensaje: "Contraseña cambiada exitosamente" });
