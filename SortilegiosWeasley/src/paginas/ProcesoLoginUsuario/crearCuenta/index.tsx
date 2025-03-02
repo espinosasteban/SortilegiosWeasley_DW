@@ -2,8 +2,12 @@ import React, { useState } from 'react';
 import "./styles.css";
 import InfoBoton from '../../../components/infoBoton';
 import HermioneImg from '../../../assets/Login/Hermione.png';
+import { useAuth } from '../AuthContext';
+import { useNavigate } from 'react-router';
 
 export default function CrearCuenta() {
+    const navigate = useNavigate();
+    const { login } = useAuth();
     const [usuario, setUsuario] = useState("");
     const [contraseña, setContraseña] = useState("");
     const [confirmarContraseña, setConfirmarContraseña] = useState("");
@@ -14,6 +18,29 @@ export default function CrearCuenta() {
     const validarContraseña = (contraseña: string) => {
         const regex = /^(?=.*[A-Z])(?=.*[\.,*?%_])(?=.*\d)(?=.{8,})/;
         return regex.test(contraseña);
+    };
+
+    const iniciarSesionAutomatica = async (usuario: string, contraseña: string) => {
+        try {
+            const response = await fetch('http://localhost:5000/auth/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ nombreUsuario: usuario, contrasena: contraseña })
+            });
+
+            const data = await response.json();
+            if (!response.ok) {
+                throw new Error(data.message || "Error al iniciar sesión automáticamente");
+            }
+
+            localStorage.setItem('token', data.token);
+            login(data.rol); // Guarda el rol
+            navigate('/perfil'); // Redirige al perfil
+
+        } catch (error) {
+            console.error("Error al iniciar sesión automáticamente:", error);
+            // No mostramos el error al usuario ya que la cuenta se creó correctamente
+        }
     };
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -47,9 +74,10 @@ export default function CrearCuenta() {
                 const data = await response.json();
                 throw new Error(data.error || "Error creando el usuario");
             }
-
-            setMensaje("Cuenta creada exitosamente");
-            setError(null);
+            setError(null);           
+            // Iniciar sesión automáticamente después de crear la cuenta
+            await iniciarSesionAutomatica(usuario, contraseña);
+            
         } catch (error: any) {
             setError(error.message);
             setMensaje(null);
