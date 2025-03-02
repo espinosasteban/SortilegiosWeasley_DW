@@ -1,35 +1,160 @@
-.proceso-compra{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
+.proceso-compra {
+  display: flex;
+  flex-direction: row; 
+  align-items: flex-start; 
+  justify-content: space-between; 
+  height: 100%;
+  width: 100%;
+  padding: 20px;
 }
 
 .h2-gracias-muggle{
+  display: block;
+  color: black;
+  width: fit-content;
+  
+}
+.informacion {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 5rem;
+  flex-wrap: wrap;
+  min-width:fit-content;
+  width: 75%
 
-    display: block;
-    color: black;
-    
 }
 
-.informacion{
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    width: 100%;
-}
+/* .informacion{
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  width: 100%;
+} */
 
 .Formularios{
-    margin-right: 2rem;
-    width: 60%;
+  margin-right: 2rem;
+  width: 60%;
 }
 
-.Resumen{
-    margin-top: 3.5rem;
+.resumen-compras {
+  width: 40%; 
+  max-width: 350px; 
+  border: 1px solid #ccc;
+  padding: 16px;
+  background-color: #fff;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); 
+  margin-top: 10rem;
+  margin-right: 5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
 }
-.resumen-compra {
-    background-color: aqua;
-    width: 50%;
-    height: 50%;
+
+.resumen-compras h2 {
+  color: #000;
 }
+.resumen-compras .resumen-compras-title {
+  margin-top: auto;
+  margin-top: 1rem;
+  text-decoration: underline;
+}
+
+
+.resumen-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-height: 400px;
+  overflow-y: auto;
+  padding-right: 8px;
+}
+
+.resumen-lista::-webkit-scrollbar {
+  width: 6px;
+}
+
+.resumen-lista::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 4px;
+}
+
+.resumen-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: 8px; /* Bordes redondeados */
+  position: relative;
+  transition: box-shadow 0.3s ease-in-out;
+  width: 100%; /* Ocupa todo el ancho disponible */
+  box-sizing: border-box; /* Incluye el padding en el ancho */
+}
+
+.resumen-imagen img{
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+.resumen-item-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  overflow: hidden;
+}
+
+.resumen-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.resumen-item-name {
+  font-size: 1rem;
+  font-weight: bold;
+  white-space: nowrap; 
+  overflow: hidden; 
+  text-overflow: ellipsis;
+  color: #000; 
+}
+
+.resumen-item-seccion {
+  color: gray;
+  font-size: 0.9rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  align-self: flex-start;
+
+}
+
+.resumen-item-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.resumen-item-quantity {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.resumen-item-quantity-btn {
+  background: #D97941;
+  color: white;
+  border: none;
+  padding: 0.3rem 0.6rem;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.resumen-item-price {
+  font-weight: bold;
+}
+

@@ -1,14 +1,11 @@
 import '../styles/NavBar.css';
 import {Link, useNavigate} from "react-router"; // Importa Link
 
-// Types
-import ArticuloCarrito  from './carritoCompras';
 // External Components
 import Badge from '@mui/material/Badge'
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import IconButton from '@mui/material/IconButton';
 import { Drawer } from '@mui/material';
-import {PersonIcon} from '@mui/icons-material/Person';
 // Components
 import Cart  from './carritoCompras'
 // Hooks

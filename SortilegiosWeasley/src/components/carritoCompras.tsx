@@ -14,19 +14,11 @@ import { useContext } from 'react';
 import { useNavigate } from 'react-router';
 
 
-/*
-TODO
-
-Añadir un mismo tipo de fuente a todo el carrito que concuerde con la pág
-Cuando se tenga la ventana del carrito a menos de un tamaño de pantalla que
-aparezca un botón para cerrar el carrito
-*/ 
-
 interface DeleteIconButtonProps {
     onClick: () => void; 
   }
 
-const DeleteIconButton: React.FC<DeleteIconButtonProps> = ( { onClick }) => {
+export const DeleteIconButton: React.FC<DeleteIconButtonProps> = ( { onClick }) => {
     return (
       <IconButton
         size="medium"
@@ -41,45 +33,40 @@ const DeleteIconButton: React.FC<DeleteIconButtonProps> = ( { onClick }) => {
     );
   };
 
-type ItemProps =  {
-    item: ArticuloCarrito
-    cantidad?: number;
+  export type ItemProps = {
+    item: ArticuloCarrito;
     addToCart: (clickedItem: ArticuloCarrito) => void;
     removeFromCart: (item: ArticuloCarrito) => void;
     deleteItem: (item: ArticuloCarrito) => void;
-}
-
-type CartProps = {
-    cartItems: ArticuloCarrito[];
-    addToCart: (clickedItem: ArticuloCarrito) => void;
-    removeFromCart: (item: ArticuloCarrito) => void;
-}
-
-
-const CartItem: React.FC<ItemProps> = ({ item, addToCart, removeFromCart, deleteItem }) => (
-  <div className="block-cart-item">
-      <img className="block-cart-item-image" src={item.imagen} alt={item.nombre} />
-      
+    compact?: boolean; 
+  };
+  
+  export const CartItem: React.FC<ItemProps> = ({ item, addToCart, removeFromCart, deleteItem }) => (
+    <div className={`block-cart-item`}>
+      <img className={`block-cart-item-image`} src={item.imagen} alt={item.nombre} />
       <div className="block-cart-item-info">
-          <div className="block-cart-item-header">
-              <h3 className="block-cart-item-name">{item.nombre}</h3>
-              <DeleteIconButton onClick={() => deleteItem(item)} />
+        <div className="block-cart-item-header">
+          <h3 className={`block-cart-item-name`}>{item.nombre}</h3>
+          <DeleteIconButton onClick={() => deleteItem(item)} />
+        </div>
+        <p className="block-cart-item-effect">{item.seccion}</p>
+        <div className="block-cart-item-bottom">
+          <div className="block-cart-item-quantity">
+            <button className="block-quantity-btn" onClick={() => removeFromCart(item)}>-</button>
+            <p>{item.total_items}</p>
+            <button className="block-quantity-btn" onClick={() => addToCart(item)}>+</button>
           </div>
-          <p className="block-cart-item-effect">{item.seccion}</p>
-
-          <div className="block-cart-item-bottom">
-              <div className="block-cart-item-quantity">
-                  <p>Cantidad</p>
-                  <button className="block-quantity-btn" onClick={() => removeFromCart(item)}>-</button>
-                  <p>{item.total_items}</p>
-                  <button className="block-quantity-btn" onClick={() => addToCart(item)}>+</button>
-              </div>
-              <p className="block-cart-item-price">$ {Number(item.precio * item.total_items).toFixed(2)}</p>
-          </div>
+          <p className="block-cart-item-price">$ {Number(item.precio * item.total_items).toFixed(2)}</p>
+        </div>
       </div>
-  </div>
-);
+    </div>
+  );
 
+export type CartProps = {
+  cartItems: ArticuloCarrito[];
+  addToCart: (clickedItem: ArticuloCarrito) => void;
+  removeFromCart: (item: ArticuloCarrito) => void;
+}
 
 const Cart: React.FC<CartProps> = () => {
     const navigate = useNavigate();
