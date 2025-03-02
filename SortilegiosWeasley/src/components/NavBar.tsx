@@ -33,7 +33,7 @@ function NavBar({ setSeccion }: NavBarProps) {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isRightMenuOpen, setIsRightMenuOpen] = useState(false); // Nuevo estado para el menú de la derecha
     const { cartItems, toggleCart, addToCart, removeFromCart, getCartTotal, getTotalCartItems } = useContext(CartContext);
-    const { usuario, logout } = useAuth();
+    const { usuario, logout, rol } = useAuth();
 
 
     const handleLogout = () => {
@@ -118,11 +118,15 @@ function NavBar({ setSeccion }: NavBarProps) {
                     <li className="navbar-item">
                         {usuario ? (
                             <>
-                                <Link to="/perfil">Mi Perfil</Link>
-                                <button onClick={handleLogout}>Cerrar Sesión</button>
+                                {rol === 'admin' ? (
+                                    <Link to="/gestion-producto">Administrar Productos 🔮</Link>
+                                ) : (
+                                    <Link to="/perfil">Mi Perfil 🧚</Link>
+                                )}
+                                <button onClick={handleLogout}>Cerrar Sesión 🔓</button>
                             </>
                         ) : (
-                            <Link to="/login">Iniciar Sesión</Link>
+                            <Link to="/login">Iniciar Sesión 🔒</Link>
                         )}
                     </li>
                 </div>
