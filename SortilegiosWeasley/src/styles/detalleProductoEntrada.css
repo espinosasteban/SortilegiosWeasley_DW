@@ -284,6 +284,10 @@
     transition: background-color 0.3s ease;
 }
 
+.resena-comentario {
+    color: #0d0d0f;
+}
+
 .resena .utilidad button:hover {
     background-color: #D97941;
 }

@@ -35,7 +35,7 @@ export default function CrearCuenta() {
                 <h1 className='CreateH1'>Crear una cuenta</h1>
                 <img src={HermioneImg} alt="Hermione" className="hermione-img" />
             </div>
-                <form onSubmit={handleSubmit}>
+                <form className="form-crear-cuenta" onSubmit={handleSubmit}>
                     <label htmlFor="usuario">Usuario</label>
                     <input
                         type="text"

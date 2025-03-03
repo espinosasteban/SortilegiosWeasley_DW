@@ -27,13 +27,67 @@
 
 
 .producto-section {
-    background-color: #646cff;
+    background-color:#e0e7f1;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     padding: 3rem;
 }
+
+.carrusel-contenedor {
+    display:flex;
+    flex-direction: column;
+    background-color: #D97941;
+    height: 100%
+}
+
+.titulo-descubre-mas {
+    font-size: 4rem;
+}
+
+.carrusel-productos {
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 2rem;;
+    width: 100%;
+
+}
+
+.producto-carrusel {
+    background-color: #262626;
+    height: 40rem;
+    width: 24rem;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 2rem 8rem 0rem 1rem;
+
+}
+
+.producto-carrusel h2 {
+    font-size: 2rem;
+}
+
+.carrusel-productos a {
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.carrusel-productos a:nth-child(2) img {
+
+    z-index: 900;
+
+
+}
+
+.carrusel-productos a img {
+    filter: drop-shadow(0px 0px 3rem #ffffb3);
+}
+
+
 
 
 

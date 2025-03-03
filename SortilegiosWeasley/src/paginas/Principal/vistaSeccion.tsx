@@ -1,58 +1,101 @@
-import React, {useState} from 'react';
+import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router';
 import ProductoSeccion from '../../components/productoSeccion';
 import '../../styles/vistaSeccion.css';
-import { articulos } from '../../mocks/articulos';
 import InfoBoton from '../../components/infoBoton';
-import {Articulo} from "../../tipos.tsx";
-import {Link} from "react-router";
-
+import { Articulo, Seccion } from "../../tipos.tsx";
+import { Link } from "react-router";
 
 interface VistaSeccionProps {
-    seccion: string | null;
+    nombreSeccion: string | null;
     setProducto: (producto: Articulo | null) => void;
+    productos: Array<Articulo>;
 }
 
-export default function VistaSeccion({ seccion, setProducto }: VistaSeccionProps) {
-    const articulosFiltrados = seccion ? articulos.filter(articulo => articulo.seccion === seccion) : articulos;
+export default function VistaSeccion({ nombreSeccion, setProducto, productos }: VistaSeccionProps) {
+    const location = useLocation();
+    const searchTerm = location.state?.searchTerm || '';
     const [orden, setOrden] = useState<string | null>(null);
+    const [seccion, setSeccion] = useState<Seccion | null>(null);
 
-    if (orden === 'ascendente') {
-        articulosFiltrados.sort((a, b) => a.precio - b.precio);
-    } else if (orden === 'descendente') {
-        articulosFiltrados.sort((a, b) => b.precio - a.precio);
+    const fetchSeccionByName = async (nombreSeccion: string | null) => {
+        try {
+            if (nombreSeccion === null) {
+                console.log("La sección que se ha pasado es null");
+                return null;
+            }
+
+            const response = await fetch(`http://localhost:5000/seccion/nombre/${nombreSeccion}`);
+            if (!response.ok) {
+                console.log("Error al obtener la sección", response.statusText);
+                return "";
+            }
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            console.error('Error:', error);
+            return null;
+        }
+    };
+
+    useEffect(() => {
+        const obtenerSeccion = async () => {
+            const seccionData = await fetchSeccionByName(nombreSeccion);
+            setSeccion(seccionData);
+        };
+        obtenerSeccion();
+    }, [nombreSeccion]);
+
+    if (seccion == null) {
+        return <><p>La sección es nula</p></>;
+    }
+    console.log(seccion)
+
+    let productosFiltrados = productos.filter(producto => producto.seccion === seccion._id);
+
+
+    if (searchTerm) {
+        productosFiltrados = productosFiltrados.filter(producto =>
+            producto.nombre.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            producto.descripcion.toLowerCase().includes(searchTerm.toLowerCase())
+        );
     }
 
+    if (orden === 'ascendente') {
+        productosFiltrados.sort((a, b) => a.precio - b.precio);
+    } else if (orden === 'descendente') {
+        productosFiltrados.sort((a, b) => b.precio - a.precio);
+    }
 
-
-    return (<>
+    return (
         <main className="vista-seccion">
-            <OrdenarPorPrecio setOrden={setOrden}/>
-            <VitrinaProducto articulos={articulosFiltrados} setProducto={setProducto}/>
+            <OrdenarPorPrecio setOrden={setOrden} />
+            {productosFiltrados.length > 0 ? (
+                <VitrinaProducto articulos={productosFiltrados} setProducto={setProducto} />
+            ) : (
+                <NoProductosEncontrados />
+            )}
             <InfoBoton />
         </main>
-    </>);
+    );
 }
 
 interface OrdenarPorPrecioProps {
     setOrden: (orden: string | null) => void;
 }
 
-function OrdenarPorPrecio({setOrden}: OrdenarPorPrecioProps) {
-
+function OrdenarPorPrecio({ setOrden }: OrdenarPorPrecioProps) {
     return (
-        <>
-            <section className="ordenar-precio">
-                <h2>Ordenar por precio</h2>
-                <button className="boton-ordenar" onClick={() => setOrden("descendente")}>Precio más alto</button>
-                <button className="boton-ordenar" onClick={() => setOrden("ascendente")}>Precio más bajo</button>
-
-            </section>
-        </>
+        <section className="ordenar-precio">
+            <h2>Ordenar por precio</h2>
+            <button className="boton-ordenar" onClick={() => setOrden("descendente")}>Precio más alto</button>
+            <button className="boton-ordenar" onClick={() => setOrden("ascendente")}>Precio más bajo</button>
+        </section>
     );
 }
 
 function formatearNombreParaRuta(nombre: string): string {
-    return nombre.toLowerCase().replace(/\s+/g, '').normalize('NFD').replace(/[\u0300-\u036f]/g, ''); // Elimina espacios y convierte a minúsculas
+    return nombre.toLowerCase().replace(/\s+/g, '').normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 }
 
 interface VitrinaProductoProps {
@@ -60,7 +103,7 @@ interface VitrinaProductoProps {
     setProducto: (producto: Articulo | null) => void;
 }
 
-function VitrinaProducto({ articulos, setProducto}: VitrinaProductoProps) {
+function VitrinaProducto({ articulos, setProducto }: VitrinaProductoProps) {
     return (
         <section className="vitrina-producto">
             {articulos.map((articulo) => {
@@ -75,5 +118,10 @@ function VitrinaProducto({ articulos, setProducto}: VitrinaProductoProps) {
     );
 }
 
-
-
+function NoProductosEncontrados() {
+    return (
+        <section className="no-productos-encontrados">
+            <h2>No se encontraron productos :( </h2>
+        </section>
+    );
+}

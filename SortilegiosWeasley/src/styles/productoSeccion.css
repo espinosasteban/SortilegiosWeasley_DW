@@ -33,11 +33,15 @@
 	animation: float 6s ease-in-out infinite;
 }
 
-.product img {
+.contenedor-imagen {
     width: 100%;
+    background-color: #fdfdfd;
+}
+
+.product-image {
+    width: 200px;
     height: 200px;
-    object-fit: cover;
-    margin-bottom: 10px;
+    object-fit: fill;
     padding: 0;
     background-color: white;
 }

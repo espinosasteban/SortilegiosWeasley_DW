@@ -12,12 +12,12 @@
 }
 
 .tarjeta {
-  background: #7C3AED;
+  background: #423773;
   padding: 15px;
   border-radius: 8px;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
   text-align: left;
-  color: aliceblue;
+  color: #e5dcdc;
   max-width: 300px;
 }
 
@@ -38,18 +38,18 @@
 }
 
 .editar {
-  color: #84CC16;
+  color: #95BF3B;
 }
 
 .eliminar {
-  color: #F43F5E;
+  color: #c96655;
 }
 
 .btn-anadir {
   margin-top: 20px;
   padding: 10px 15px;
-  background: #FACC15;
-  color: #000000;
+  background: #D9663D;
+  color: #e5dcdc;
   border: none;
   cursor: pointer;
   border-radius: 5px;
@@ -58,18 +58,17 @@
 }
 
 .btn-anadir:hover {
-  background: #e0b815;
+  background: #D9663D;
 }
 
 .formulario-Producto {
-  background-color: #4B2884;
+  background-color: #5e519f;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1);
   max-width: 180%;
   color: aliceblue;
   margin-left: 10px;
-  border: 2px solid #9F7AEA;
 }
 
 .formulario-Producto .datos {
@@ -83,9 +82,9 @@
   padding: 8px;
   margin-bottom: 10px;
   margin-right: 20px;
-  border: 2px solid #9F7AEA;
+  border: 2px solid #000000;
   border-radius: 5px;
-  background-color: #1E1E1E;
+  background-color: #212426;
   color: #FFFFFF;
 }
 
@@ -98,6 +97,7 @@
   margin: 10px;
   padding: 10px 20px;
   border-radius: 5px;
+  background: #D9663D;
 }
 
 .guardar-btn {
@@ -176,10 +176,9 @@
 .AdminH1 {
   margin-bottom: 20px;
   margin-block-start: 0;
-  color: #FFFFFF;
+  color: #000000;
   font-size: 1.5rem;
   font-weight: bold;
-  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
 }
 
 .admin-header {
@@ -208,7 +207,7 @@
 }
 
 p {
-  color: #000000;
+  color: #ffffff;
 }
 .admin-container {
   display: flex;
@@ -217,8 +216,16 @@ p {
   justify-content: center;
   min-height: 100vh; 
   padding: 20px;
-  background: linear-gradient(rgba(58, 58, 82, 0.8), rgba(58, 58, 82, 0.6));
+  background-color: #e0e7f1;
   background-repeat: no-repeat;
   background-size: cover;
   color: #ffffff; 
+}
+
+.custom-model-inner p {
+  color: #000000;
+}
+
+.custom-model-inner {
+  border: 2px solid #000000;
 }

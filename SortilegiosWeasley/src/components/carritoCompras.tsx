@@ -43,7 +43,7 @@ export const DeleteIconButton: React.FC<DeleteIconButtonProps> = ( { onClick }) 
   
   export const CartItem: React.FC<ItemProps> = ({ item, addToCart, removeFromCart, deleteItem }) => (
     <div className={`block-cart-item`}>
-      <img className={`block-cart-item-image`} src={item.imagen} alt={item.nombre} />
+      <img className={`block-cart-item-image`} src={item.img} alt={item.nombre} />
       <div className="block-cart-item-info">
         <div className="block-cart-item-header">
           <h3 className={`block-cart-item-name`}>{item.nombre}</h3>
@@ -56,7 +56,7 @@ export const DeleteIconButton: React.FC<DeleteIconButtonProps> = ( { onClick }) 
             <p>{item.total_items}</p>
             <button className="block-quantity-btn" onClick={() => addToCart(item)}>+</button>
           </div>
-          <p className="block-cart-item-price">$ {Number(item.precio * item.total_items).toFixed(2)}</p>
+          <p className="block-cart-item-price">$ {Number(item.precio.valueOf() * item.total_items).toFixed(2)}</p>
         </div>
       </div>
     </div>

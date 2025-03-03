@@ -35,7 +35,7 @@ export default function Login() {
                 <h1 className="LoginH1">Inicio de sesión</h1>
                 <img src={HarryPotterImg} alt="Harry Potter" className="harry-potter-img" />
             </div>
-            <form onSubmit={submitHandler}>
+            <form className="form-login" onSubmit={submitHandler}>
                 <label htmlFor="usuario">Usuario</label>
                 <input type="text" value={usuario} onChange={(e) => setUsuario(e.target.value)} />
                 <label htmlFor="password">Contraseña</label>
