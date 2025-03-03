@@ -152,6 +152,6 @@ class usuarioController {
             console.error("❌ Error cambiando la contraseña:", error);
             res.status(500).json({ error: "Error cambiando la contraseña" });
         }
-    }      
+    }
 }
 export default new usuarioController();

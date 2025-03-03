@@ -1,5 +1,7 @@
 import express from "express";
 import usuarioController from '../controllers/usuarioController.js';
+import { authMiddleware } from "../middlewares/cors.js";
+
 const route = express.Router();
 
 route.post('/', usuarioController.create);

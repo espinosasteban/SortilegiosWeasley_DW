@@ -59,7 +59,7 @@ export interface Usuario {
     rol: string;
     nombre: string;
     apellido: string;
-    documento: number;
-    telefono: number;
+    documento: string;
+    telefono: string;
     fechaNacimiento: Date;
 }

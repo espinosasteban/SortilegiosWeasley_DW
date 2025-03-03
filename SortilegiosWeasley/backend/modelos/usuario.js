@@ -9,7 +9,7 @@ const usuarioSchema = new mongoose.Schema({
     nombre: { type: String, required: true },
     apellido: { type: String, required: true },
     documento: { type: String, required: true },
-    telefonoPersonal: { type: Number, required: true },
+    telefonoPersonal: { type: String, required: true },
     fechaNacimiento: { type: Date, required: true },
 });
 
