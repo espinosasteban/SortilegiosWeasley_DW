@@ -3,8 +3,8 @@ export interface Articulo {
     nombre: string, 
     descripcion: string,
     img: string,
-    precio: Number,
-    unidadesStock: Number,
+    precio: number,
+    unidadesStock: number,
     seccion: string
 }
 
