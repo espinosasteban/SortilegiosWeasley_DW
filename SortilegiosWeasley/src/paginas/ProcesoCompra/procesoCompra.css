@@ -9,9 +9,7 @@
 }
 
 .h2-gracias-muggle{
-  display: block;
   color: black;
-  width: fit-content;
   
 }
 .informacion {
@@ -24,13 +22,6 @@
 
 }
 
-/* .informacion{
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  width: 100%;
-} */
-
 .Formularios{
   margin-right: 2rem;
   width: 60%;
@@ -39,11 +30,12 @@
 .resumen-compras {
   width: 40%; 
   max-width: 350px; 
+  max-height: 500px;
   border: 1px solid #ccc;
   padding: 16px;
   background-color: #fff;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); 
-  margin-top: 10rem;
+  margin-top: 6rem;
   margin-right: 5rem;
   display: flex;
   flex-direction: column;
@@ -88,8 +80,12 @@
   border-radius: 8px; /* Bordes redondeados */
   position: relative;
   transition: box-shadow 0.3s ease-in-out;
-  width: 100%; /* Ocupa todo el ancho disponible */
+  width: 100%; 
   box-sizing: border-box; /* Incluye el padding en el ancho */
+}
+
+.resumen-total-items {
+  color: #000;
 }
 
 .resumen-imagen img{
@@ -156,5 +152,6 @@
 
 .resumen-item-price {
   font-weight: bold;
+  color: #000;
 }
 

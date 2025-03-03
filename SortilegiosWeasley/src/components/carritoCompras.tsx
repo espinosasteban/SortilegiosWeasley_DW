@@ -9,7 +9,7 @@ import { ArticuloCarrito } from '../tipos.tsx'
 // Contexts
 import { CartContext } from '../contexts/CartContext.tsx';
 // Hooks
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 import { useNavigate } from 'react-router';
 
@@ -41,26 +41,56 @@ export const DeleteIconButton: React.FC<DeleteIconButtonProps> = ( { onClick }) 
     compact?: boolean; 
   };
   
-  export const CartItem: React.FC<ItemProps> = ({ item, addToCart, removeFromCart, deleteItem }) => (
-    <div className={`block-cart-item`}>
-      <img className={`block-cart-item-image`} src={item.img} alt={item.nombre} />
-      <div className="block-cart-item-info">
-        <div className="block-cart-item-header">
-          <h3 className={`block-cart-item-name`}>{item.nombre}</h3>
-          <DeleteIconButton onClick={() => deleteItem(item)} />
-        </div>
-        <p className="block-cart-item-effect">{item.seccion}</p>
-        <div className="block-cart-item-bottom">
-          <div className="block-cart-item-quantity">
-            <button className="block-quantity-btn" onClick={() => removeFromCart(item)}>-</button>
-            <p>{item.total_items}</p>
-            <button className="block-quantity-btn" onClick={() => addToCart(item)}>+</button>
+
+  export const CartItem: React.FC<ItemProps> = ({ item, addToCart, removeFromCart, deleteItem }) => {
+      const [seccionNombre, setSeccionNombre] = useState<string | null>(null);
+      
+      useEffect(() => {
+          async function obtenerSeccion() {
+              if (!item.seccion) return;
+  
+              try {
+                  const response = await fetch(`http://localhost:5000/seccion/${item.seccion}`);
+                  
+                  if (!response.ok) {
+                      console.error('Error al obtener la sección:', response.statusText);
+                      return;
+                  }
+  
+                  const seccionData = await response.json();
+                  setSeccionNombre(seccionData.nombre);
+              } catch (error) {
+                  console.error('Error en la petición de la sección:', error);
+              }
+          }
+  
+          obtenerSeccion();
+      }, [item.seccion]);
+  
+      return (
+          <div className="block-cart-item">
+              <img className="block-cart-item-image" src={item.img} alt={item.nombre} />
+              <div className="block-cart-item-info">
+                  <div className="block-cart-item-header">
+                      <h3 className="block-cart-item-name">{item.nombre}</h3>
+                      <DeleteIconButton onClick={() => deleteItem(item)} />
+                  </div>
+                  <p className="block-cart-item-effect">
+                      {seccionNombre ? seccionNombre : "Cargando sección..."}
+                  </p>
+                  <div className="block-cart-item-bottom">
+                      <div className="block-cart-item-quantity">
+                          <button className="block-quantity-btn" onClick={() => removeFromCart(item)}>-</button>
+                          <p className='block-total-items'>{item.total_items}</p>
+                          <button className="block-quantity-btn" onClick={() => addToCart(item)}>+</button>
+                      </div>
+                      <p className="block-cart-item-price">$ {Number(item.precio * item.total_items).toFixed(2)}</p>
+                  </div>
+              </div>
           </div>
-          <p className="block-cart-item-price">$ {Number(item.precio.valueOf() * item.total_items).toFixed(2)}</p>
-        </div>
-      </div>
-    </div>
-  );
+      );
+  };
+  
 
 export type CartProps = {
   cartItems: ArticuloCarrito[];

@@ -97,9 +97,13 @@
   cursor: pointer;
   border-radius: 4px;
 }
+.block-total-items {
+  color: #000;
+}
 
 .block-cart-item-price {
   font-weight: bold;
+  color: #000;
 }
 
 .block-cart-wrapper {
