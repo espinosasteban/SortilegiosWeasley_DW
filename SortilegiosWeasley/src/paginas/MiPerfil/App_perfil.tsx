@@ -4,7 +4,6 @@ import UserInfo from './user_info';
 import './style.css';
 import InfoBoton from "../../components/infoBoton";
 import MisDirecciones from "../Direcciones/MisDirecciones";
-import FormularioDireccion from "../Direcciones/FormDireccion";
 import HistorialCompras from "../DetalleUsuario/historial";
 import { BrowserRouter as Router, Routes, Route, Navigate  } from "react-router-dom";
 
@@ -19,8 +18,6 @@ const AppProfile = () => {
                 <Route path="/mi-informacion" element={<UserInfo />} />
                 <Route path="/historial-compras" element={<HistorialCompras />} />
                 <Route path="/mis-direcciones" element={<MisDirecciones />} />
-                <Route path="/mis-direcciones/nueva" element={<FormularioDireccion />} />
-                <Route path="/mis-direcciones/:id" element={<FormularioDireccion />} />
               </Routes>
             </div>
             <InfoBoton/>

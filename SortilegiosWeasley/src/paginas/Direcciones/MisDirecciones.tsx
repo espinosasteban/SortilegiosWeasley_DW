@@ -45,13 +45,17 @@ const MisDirecciones: React.FC = () => {
       return;
     }
 
-    const nuevaDireccion = await respuesta.json();
-
-    setDirecciones((prevDirecciones) =>
-      metodo === "POST"
-        ? [...prevDirecciones, nuevaDireccion] // Agregar nueva
-        : prevDirecciones.map((dir) => (dir._id === nuevaDireccion._id ? nuevaDireccion : dir)) // Editar existente
-    );
+   // Después de guardar, recargar toda la lista desde la API
+    fetch(API_URL, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => setDirecciones(data))
+      .catch((error) => console.error("Error obteniendo direcciones:", error));
 
     setMostrandoFormulario(false);
     setDireccionActual(null);
