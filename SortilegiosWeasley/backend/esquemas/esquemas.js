@@ -1,4 +1,6 @@
 import {z} from 'zod';
+import mongoose from "mongoose";
+
 
 // Esquema de validación de datos Usuario
 const UsuarioSchema = z.object({
@@ -31,7 +33,9 @@ const DireccionSchema = z.object({
     info_extra: z.string().optional(),
     barrio: z.string().optional(),
     recibidor: z.string().min(1, "El nombre de quien recibe es obligatorio"),
-    usuario: z.string(),
+    usuario: z.string().refine((val) => mongoose.Types.ObjectId.isValid(val), {
+        message: "ID de usuario inválido"
+    })
 });
 
 export function validarDireccion (input){

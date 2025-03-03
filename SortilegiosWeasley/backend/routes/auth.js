@@ -4,7 +4,7 @@ import bcrypt from 'bcrypt';
 import Usuario from '../modelos/usuario.js'; 
 
 const router = express.Router();
-const SECRET_KEY = process.env.SECRET_KEY; 
+const SECRET_KEY = process.env.JWT_SECRET; 
 
 // Ruta para iniciar sesión
 router.post('/login', async (req, res) => {

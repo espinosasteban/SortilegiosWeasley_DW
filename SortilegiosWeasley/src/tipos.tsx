@@ -25,6 +25,7 @@ export interface ResenaArticulo {
 
 export interface Direccion {
     id: string;
+    _id: string;
     nombre: string;
     departamento: string;
     municipio: string;
@@ -32,7 +33,7 @@ export interface Direccion {
     barrio: string;
     info_extra?: string;
     recibidor?: string;
-    usuario: string;
+    usuario?: string;
   }
 
 export interface Producto {

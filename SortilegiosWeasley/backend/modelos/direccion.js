@@ -7,8 +7,8 @@ const direccionSchema = new mongoose.Schema({
     direccion: { type: String, required: true },
     barrio: { type: String, required: true },
     info_extra: { type: String, required: false },
-    recibidor: { type: String, required: false },
-    usuario: { type: mongoose.Schema.Types.ObjectId, ref: 'Usuario' }
+    recibidor: { type: String, required: true },
+    usuario: { type: mongoose.Schema.Types.ObjectId, ref: 'Usuario', required: true }
 });
 
 const Direccion = mongoose.model('Direccion', direccionSchema, 'direcciones');
