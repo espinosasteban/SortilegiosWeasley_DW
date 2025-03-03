@@ -9,9 +9,19 @@ interface Props {
 }
 
 const FormularioDireccion: React.FC<Props> = ({ onGuardar, onCancelar, direccion }) => {
-    const [datos, setDatos] = useState<Direccion>( 
-      direccion || { id: 0, nombre: "", departamento: "", municipio: "", direccion: "", barrio: "", info_extra: "", recibidor: ""} // Asegúrate de que 'id' esté incluido
-    );
+  const [datos, setDatos] = useState<Direccion>(
+    direccion || {
+      id: "",
+      nombre: "",
+      departamento: "",
+      municipio: "",
+      direccion: "",
+      barrio: "",
+      info_extra: "",
+      recibidor: "",
+      usuario:""
+    }
+  );
 
   const manejarCambio = (e: React.ChangeEvent<HTMLInputElement>) => {
     setDatos({ ...datos, [e.target.name]: e.target.value });

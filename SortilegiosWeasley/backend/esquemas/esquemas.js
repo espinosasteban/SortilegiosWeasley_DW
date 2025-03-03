@@ -24,12 +24,14 @@ export function validarUsuarioParcial (input){
 
 // Esquema de validación de datos Direccion
 const DireccionSchema = z.object({
+    nombre: z.string().min(1, "El nombre es obligatorio"),
     departamento: z.string().min(1, "El departamento es obligatorio"),
     municipio: z.string().min(1, "El municipio es obligatorio"),
-    direccionEntrega: z.string().min(5, "Dirección inválida"),
-    informacionAdicional: z.string().optional(),
+    direccion: z.string().min(5, "Dirección inválida"),
+    info_extra: z.string().optional(),
     barrio: z.string().optional(),
-    nombreRecibe: z.string().min(1, "El nombre de quien recibe es obligatorio"),
+    recibidor: z.string().min(1, "El nombre de quien recibe es obligatorio"),
+    usuario: z.string(),
 });
 
 export function validarDireccion (input){

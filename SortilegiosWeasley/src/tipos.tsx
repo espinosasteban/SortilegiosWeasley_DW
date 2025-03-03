@@ -24,14 +24,15 @@ export interface ResenaArticulo {
 }
 
 export interface Direccion {
-    id: number; 
+    id: string;
     nombre: string;
     departamento: string;
     municipio: string;
     direccion: string;
     barrio: string;
-    info_extra: string;
-    recibidor: string;
+    info_extra?: string;
+    recibidor?: string;
+    usuario: string;
   }
 
 export interface Producto {

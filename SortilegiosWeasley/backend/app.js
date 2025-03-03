@@ -9,6 +9,10 @@ import routesSecciones from './routes/seccion.js';
 import routesUsuarios from './routes/usuario.js';
 import routesResenas from './routes/resena.js';
 import authRoutes from './routes/auth.js';
+import routesDireccion from './routes/direccion.js';
+import bodyParser from 'body-parser';
+import mongoose from "mongoose";
+import { corsMiddleware } from './middlewares/cors.js';
 
 const app = express();
 
@@ -24,6 +28,8 @@ app.use('/seccion', routesSecciones);
 app.use('/usuario', routesUsuarios);
 app.use('/resenas', routesResenas);
 app.use('/auth', authRoutes);
+app.use('/mis-direcciones', routesDireccion);
+
 
 // CONEXIÓN A LA BD
 mongoose.connect(`mongodb+srv://${process.env.USER_DB}:${process.env.PASSWORD_DB}@${process.env.SERVER_DB}/SortilegiosWeasley?retryWrites=true&w=majority&appName=Sortilegios`)
