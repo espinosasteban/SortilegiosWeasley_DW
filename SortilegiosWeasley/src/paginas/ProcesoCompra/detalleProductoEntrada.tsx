@@ -113,13 +113,63 @@ interface DetalleProps {
 
 function Detalle({ producto }: DetalleProps) {
     const { addToCart } = useContext(CartContext);
+    const [cantidad, setCantidad] = useState(1);
+    const [stockDisponible, setStockDisponible] = useState(0);
+
+    // No muestra los errores, tengo que buscar la función para hacerlo
+    const [mensajeError, setMensajeError] = useState("");
+
+    useEffect(() => {
+        async function fetchStock() {
+            try {
+                const response = await fetch(`http://localhost:5000/producto/${producto._id}`);
+                const data = await response.json();
+                setStockDisponible(data.unidadesStock);
+            } catch (error) {
+                console.error("Error obteniendo el stock:", error);
+            }
+        }
+        fetchStock();
+    }, [cantidad]);
+
+    const incrementar = () => {
+        if (cantidad < stockDisponible) {
+            setCantidad(prev => prev + 1);
+            setMensajeError("");
+        } else {
+            setMensajeError(`Solo hay ${stockDisponible} unidades disponibles.`);
+        }
+    };
+
+    const decrementar = () => {
+        if (cantidad > 1) {
+            setCantidad(prev => prev - 1);
+            setMensajeError("");
+        }
+    };
+    
     return (
         <section className="detalle-seccion">
             <h2>{producto?.nombre ?? 'Nombre no disponible'}</h2>
             <p className="detalle-seccion-descripcion">{producto?.descripcion ?? 'Descripción no disponible'}</p>
             <div className="contenedor-detalle-seccion">
                 <p className="detalle-seccion-precio">${producto?.precio ?? 'Precio no disponible'}</p>
-                <button onClick={() => addToCart(producto)}>Añadir al carrito</button>
+
+                <div className="cantidad-controles">
+                    <button onClick={decrementar} disabled={cantidad === 1}>-</button>
+                    <span>{cantidad}</span>
+                    <button onClick={incrementar} disabled={cantidad >= stockDisponible}>+</button>
+                </div>
+
+                {mensajeError && <p className="mensaje-error">{mensajeError}</p>}
+
+                {/*Aquí supongo que deberíamos pasar también la cantidad*/}
+                <button 
+                    onClick={() => addToCart(producto)} 
+                    disabled={stockDisponible === 0}
+                >
+                    {stockDisponible === 0 ? "Sin stock" : "Añadir al carrito"}
+                </button>
             </div>
         </section>
     );

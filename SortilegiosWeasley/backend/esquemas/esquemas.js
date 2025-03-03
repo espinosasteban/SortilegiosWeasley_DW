@@ -1,11 +1,13 @@
 import {z} from 'zod';
+import mongoose from "mongoose";
+
 
 // Esquema de validación de datos Usuario
 const UsuarioSchema = z.object({
     nombreUsuario: z.string().min(3, "El usuario debe tener al menos 3 caracteres"),
-    contrasena: z.string().min(6, "La contraseña debe tener al menos 6 caracteres"),
+    contrasena: z.string().min(8, "La contraseña debe tener al menos 8 caracteres"),
     correo: z.string().email("Correo no válido"),
-    rol: z.enum(["muggle", "administrador"]),
+    rol: z.enum(["muggle", "admin"]),
     nombre: z.string().min(1, "El nombre es obligatorio"),
     apellido: z.string().min(1, "El apellido es obligatorio"),
     documento: z.string().min(5, "Documento inválido"),
@@ -24,12 +26,16 @@ export function validarUsuarioParcial (input){
 
 // Esquema de validación de datos Direccion
 const DireccionSchema = z.object({
+    nombre: z.string().min(1, "El nombre es obligatorio"),
     departamento: z.string().min(1, "El departamento es obligatorio"),
     municipio: z.string().min(1, "El municipio es obligatorio"),
-    direccionEntrega: z.string().min(5, "Dirección inválida"),
-    informacionAdicional: z.string().optional(),
+    direccion: z.string().min(5, "Dirección inválida"),
+    info_extra: z.string().optional(),
     barrio: z.string().optional(),
-    nombreRecibe: z.string().min(1, "El nombre de quien recibe es obligatorio"),
+    recibidor: z.string().min(1, "El nombre de quien recibe es obligatorio"),
+    usuario: z.string().refine((val) => mongoose.Types.ObjectId.isValid(val), {
+        message: "ID de usuario inválido"
+    })
 });
 
 export function validarDireccion (input){

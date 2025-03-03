@@ -3,8 +3,8 @@ export interface Articulo {
     nombre: string, 
     descripcion: string,
     img: string,
-    precio: Number,
-    unidadesStock: Number,
+    precio: number,
+    unidadesStock: number,
     seccion: string
 }
 
@@ -24,14 +24,16 @@ export interface ResenaArticulo {
 }
 
 export interface Direccion {
-    id: number; 
+    id: string;
+    _id: string;
     nombre: string;
     departamento: string;
     municipio: string;
     direccion: string;
     barrio: string;
-    info_extra: string;
-    recibidor: string;
+    info_extra?: string;
+    recibidor?: string;
+    usuario?: string;
   }
 
 export interface Producto {
@@ -57,7 +59,7 @@ export interface Usuario {
     rol: string;
     nombre: string;
     apellido: string;
-    documento: number;
-    telefono: number;
+    documento: string;
+    telefono: string;
     fechaNacimiento: Date;
 }
