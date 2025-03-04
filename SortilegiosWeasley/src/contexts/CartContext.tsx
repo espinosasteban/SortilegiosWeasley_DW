@@ -11,7 +11,7 @@ export const CartContext = createContext<{
   toggleCart: () => void;
   getTotalCartItems: () => number;
   deleteItem: (item: ArticuloCarrito) => void;
-  migrateCart: () => void;
+  migrateCart: (items) => [];
 }>({
   cartItems: [],
   addToCart: () => {},
@@ -20,7 +20,7 @@ export const CartContext = createContext<{
   toggleCart: () => false,
   getTotalCartItems: () => 0,
   deleteItem: () => {},
-  migrateCart: () => {},
+  migrateCart: () => [],
 });
 
 interface CartProviderProps {
@@ -38,8 +38,8 @@ export const CartProvider = ({ children }: CartProviderProps) => {
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
   }, [cartItems]);
 
-  const token = localStorage.getItem("token"); // Recuperar el token del usuario
-  const user = localStorage.getItem("user"); // Verificar si hay un usuario autenticado
+  const token = localStorage.getItem("token"); 
+  const user = localStorage.getItem("user"); 
 
   const addToCart = async (item: ArticuloCarrito) => {
     const isItemInCart = cartItems.find(cartItem => cartItem._id === item._id);
@@ -122,31 +122,33 @@ export const CartProvider = ({ children }: CartProviderProps) => {
     }
   };
 
-  const migrateCart = async () => {
-    if (!user || cartItems.length === 0) return;
-
+  const migrateCart = async (items) => {
     try {
-      await fetch("/api/carrito/migrar", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          productos: cartItems.map(item => ({
-            producto: item._id,
-            cantidad: item.total_items,
-            precio: item.precio,
-          })),
-        }),
-      });
+        const response = await fetch('/api/carrito/migrar', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${localStorage.getItem("token")}`
+            },
+            body: JSON.stringify({ items: items.map(item => ({
+                productoId: item.id, 
+                total_items: item.cantidad
+            })) })
+        });
 
-      localStorage.removeItem("cartItems");
-      setCartItems([]);
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(data.error || "Error al migrar el carrito");
+        }
+
+        console.log("Carrito migrado exitosamente", data);
+        return data.carrito;
     } catch (error) {
-      console.error("Error migrando el carrito al backend:", error);
+        console.error("Error en migrateCart:", error);
+        throw error;
     }
-  };
+};
 
   const getCartTotal = () => {
     return cartItems.reduce((total, item) => total + item.precio * item.total_items, 0);

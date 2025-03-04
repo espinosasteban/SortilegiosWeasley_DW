@@ -1,35 +1,34 @@
 import Carrito from '../modelos/carrito.js';
 import { validarCarrito, validarCarritoParcial } from '../esquemas/esquemas.js';
 
-class carritoController {
+class CarritoController {
     
     async create(req, res) {
         try {
+            if (!req.user) {
+                return res.status(401).json({ error: "Usuario no autenticado" });
+            }
+    
             const result = validarCarrito(req.body);
-
             if (!result.success) {
                 return res.status(400).json({ error: JSON.parse(result.error.message) });
             }
-
-            const carrito = new Carrito(req.body);
+    
+            let carritoExistente = await Carrito.findOne({ userId: req.user.id });
+    
+            if (carritoExistente) {
+                return res.status(400).json({ error: "El usuario ya tiene un carrito" });
+            }
+    
+            const carrito = new Carrito({ ...req.body, userId: req.user.id });
             const nuevoCarrito = await carrito.save();
+    
             console.log("Carrito creado con éxito");
             res.status(201).json(nuevoCarrito);
-
+    
         } catch (error) {
             console.log("Error creando el carrito", error);
             res.status(500).json({ error: 'Error creando el carrito' });
-        }
-    }
-
-    async getAll(req, res) {
-        try {
-            const carritos = await Carrito.find();
-            res.status(200).json(carritos);
-            console.log("Carritos obtenidos con éxito");
-        } catch (error) {
-            console.log("Error obteniendo los carritos", error);
-            res.status(500).json({ error: 'Error obteniendo los carritos' });
         }
     }
 
@@ -98,27 +97,38 @@ class carritoController {
                 return res.status(401).json({ error: "Usuario no autenticado" });
             }
     
-            const { productos } = req.body;
-    
-            if (!productos || productos.length === 0) {
+            const { items } = req.body;
+            if (!Array.isArray(items) || items.length === 0) {
                 return res.status(400).json({ error: "No hay productos para migrar" });
             }
     
-            // Crear carrito para el usuario logueado
-            const nuevoCarrito = new Carrito({
-                usuario: req.user.id,
-                productos,
-                total: productos.reduce((sum, p) => sum + (p.precio * p.cantidad), 0) 
-            });
+            let carrito = await Carrito.findOne({ userId: req.user.id });
     
-            await nuevoCarrito.save();
+            if (!carrito) {
+                carrito = new Carrito({ userId: req.user.id, items });
+            } else {
+                const productosMap = new Map(carrito.items.map(item => [item.productoId.toString(), item]));
     
-            res.json({ mensaje: "Carrito migrado exitosamente", carrito: nuevoCarrito });
+                items.forEach(({ productoId, total_items }) => {
+                    if (productosMap.has(productoId)) {
+                        productosMap.get(productoId).total_items += total_items;
+                    } else {
+                        productosMap.set(productoId, { productoId, total_items });
+                    }
+                });
+    
+                carrito.items = Array.from(productosMap.values());
+            }
+    
+            await carrito.save();
+            res.json({ mensaje: "Carrito migrado exitosamente", carrito });
+    
         } catch (error) {
             console.error("Error migrando carrito:", error);
             res.status(500).json({ error: "Error interno del servidor" });
         }
-    };
+    }
+    
 }
 
-export default new carritoController();
+export default new CarritoController();

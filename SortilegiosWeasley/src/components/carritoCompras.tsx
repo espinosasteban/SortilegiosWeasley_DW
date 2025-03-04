@@ -81,7 +81,7 @@ export const DeleteIconButton: React.FC<DeleteIconButtonProps> = ( { onClick }) 
                   <div className="block-cart-item-bottom">
                       <div className="block-cart-item-quantity">
                           <button className="block-quantity-btn" onClick={() => removeFromCart(item)}>-</button>
-                          <p className='block-total-items'>{item.total_items}</p>
+                          <p className='block-total-'>{item.total_items}</p>
                           <button className="block-quantity-btn" onClick={() => addToCart(item)}>+</button>
                       </div>
                       <p className="block-cart-item-price">$ {Number(item.precio * item.total_items).toFixed(2)}</p>

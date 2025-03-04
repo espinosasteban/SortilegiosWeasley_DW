@@ -49,24 +49,23 @@ export function validarDireccionParcial (input){
 
 // Esquema de validación de datos Carrito
 const CarritoSchema = z.object({
-    usuario: z.string().min(1, "El ID del usuario es obligatorio"), 
-    productos: z.array(
+    userId: z.string().min(1, "El ID del usuario es obligatorio"), 
+    items: z.array(
       z.object({
-        producto: z.string().min(1, "El ID del producto es obligatorio"),
-        cantidad: z.number().min(1, "La cantidad debe ser al menos 1"),
+        productoId: z.string().min(1, "El ID del producto es obligatorio"),
+        total_items: z.number().min(1, "La cantidad debe ser al menos 1"),
       })
     ),
     total: z.number().optional(), // Se calculará en Mongoose
 });
- 
+
 export function validarCarrito(input) {
     return CarritoSchema.safeParse(input);
-  }
-  
+}
   
 export function validarCarritoParcial(input) {
     return CarritoSchema.partial().safeParse(input);
-  }
+}
 
 
 
