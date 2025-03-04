@@ -25,6 +25,8 @@ export default function Login() {
                 body: JSON.stringify({ nombreUsuario: usuario, contrasena: password })
             });
 
+            
+
             const data = await response.json();
             if (!response.ok) {
                 throw new Error(data.message || "Error desconocido");
@@ -39,7 +41,6 @@ export default function Login() {
                 const migracionExitosa = await migrateCart(carritoLocal);
                 if (migracionExitosa) {
                     localStorage.removeItem("carrito"); // 
-                    
                 }
             }
             navigate(data.rol === "admin" ? '/admin' : '/perfil');
