@@ -148,7 +148,7 @@ function Direccion({setFormulario}: PropsInformacionContacto){
                 </div>
             <div style = {{display: "flex", justifyContent: "space-around"}}>
                 <button className="regresar-button" onClick={() => setFormulario('información')}>Regresar</button>
-                <button className="finalizar-button" onClick={() => {}}>Finalizar compra</button>
+                <button className="finalizar-button" onClick={() => {navigate("/gracias")}}>Finalizar compra</button>
             </div>
         </div>
         </section>

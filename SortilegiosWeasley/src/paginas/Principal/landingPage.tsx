@@ -106,14 +106,14 @@ function CarruselProductos({setSeccion, productos}: CarruselProductosProps) {
                     </div>
                 </Link>
 
-                {/* <Link to="/vistaSeccion" onClick={() => setSeccion('Explosivos')}>
+                <Link to="/vistaSeccion" onClick={() => setSeccion('Explosivos')}>
                 <div className="producto-carrusel">
-                    <img src={productos.filter(producto => producto.seccion === "Explosivos")[0].img} alt="Wildfire Whizz-Bangs" />
+                    <img src={productos.filter(producto => producto.seccion === "67c7001bbba0ae4cf9013b48")[0].img} alt="Wildfire Whizz-Bangs" />
                     <h2>
                         Explosivos
                     </h2>
                 </div>
-                </Link> */}
+                </Link>
 
             </div>
             

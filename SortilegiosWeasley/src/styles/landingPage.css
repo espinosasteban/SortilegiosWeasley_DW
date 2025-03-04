@@ -2,6 +2,11 @@
     background-color: #D97941;
     padding: 0;
     margin-top: 5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
 }
 
 .entrada-section h1 {
