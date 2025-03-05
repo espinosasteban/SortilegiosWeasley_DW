@@ -9,16 +9,24 @@ import { ArticuloCarrito } from '../tipos.tsx'
 // Contexts
 import { CartContext } from '../contexts/CartContext.tsx';
 // Hooks
-import { useContext, useEffect, useState } from 'react';
+import { useContext } from 'react';
 
 import { useNavigate } from 'react-router';
 
+
+/*
+TODO
+
+Añadir un mismo tipo de fuente a todo el carrito que concuerde con la pág
+Cuando se tenga la ventana del carrito a menos de un tamaño de pantalla que
+aparezca un botón para cerrar el carrito
+*/ 
 
 interface DeleteIconButtonProps {
     onClick: () => void; 
   }
 
-export const DeleteIconButton: React.FC<DeleteIconButtonProps> = ( { onClick }) => {
+const DeleteIconButton: React.FC<DeleteIconButtonProps> = ( { onClick }) => {
     return (
       <IconButton
         size="medium"
@@ -33,78 +41,53 @@ export const DeleteIconButton: React.FC<DeleteIconButtonProps> = ( { onClick }) 
     );
   };
 
-  export type ItemProps = {
-    item: ArticuloCarrito;
+type ItemProps =  {
+    item: ArticuloCarrito
+    cantidad?: number;
     addToCart: (clickedItem: ArticuloCarrito) => void;
     removeFromCart: (item: ArticuloCarrito) => void;
     deleteItem: (item: ArticuloCarrito) => void;
-    compact?: boolean; 
-  };
-  
-
-  export const CartItem: React.FC<ItemProps> = ({ item, addToCart, removeFromCart, deleteItem }) => {
-      // const [seccionNombre, setSeccionNombre] = useState<string | null>(null);
-      
-      // useEffect(() => {
-      //     async function obtenerSeccion() {
-      //         if (!item.seccion) return;
-  
-      //         try {
-      //             const response = await fetch(`http://localhost:5000/seccion/${item.seccion}`);
-                  
-      //             if (!response.ok) {
-      //                 console.error('Error al obtener la sección:', response.statusText);
-      //                 return;
-      //             }
-  
-      //             const seccionData = await response.json();
-      //             setSeccionNombre(seccionData.nombre);
-      //         } catch (error) {
-      //             console.error('Error en la petición de la sección:', error);
-      //         }
-      //     }
-  
-      //     obtenerSeccion();
-      // }, [item.seccion]);
-  
-      return (
-          <div className="block-cart-item">
-              <img className="block-cart-item-image" src={item.img} alt={item.nombre} />
-              <div className="block-cart-item-info">
-                  <div className="block-cart-item-header">
-                      <h3 className="block-cart-item-name">{item.nombre}</h3>
-                      <DeleteIconButton onClick={() => deleteItem(item)} />
-                  </div>
-                  <p className="block-cart-item-effect">
-                      {item.seccion ? item.seccion : "Cargando sección..."}
-                  </p>
-                  <div className="block-cart-item-bottom">
-                      <div className="block-cart-item-quantity">
-                          <button className="block-quantity-btn" onClick={() => removeFromCart(item)}>-</button>
-                          <p className='block-total-items'>{item.total_items}</p>
-                          <button className="block-quantity-btn" onClick={() => addToCart(item)}>+</button>
-                      </div>
-                      <p className="block-cart-item-price">$ {Number(item.precio * item.total_items).toFixed(2)}</p>
-                  </div>
-              </div>
-          </div>
-      );
-  };
-  
-
-export type CartProps = {
-  cartItems: ArticuloCarrito[];
-  addToCart: (clickedItem: ArticuloCarrito) => void;
-  removeFromCart: (item: ArticuloCarrito) => void;
 }
+
+type CartProps = {
+    cartItems: ArticuloCarrito[];
+    addToCart: (clickedItem: ArticuloCarrito) => void;
+    removeFromCart: (item: ArticuloCarrito) => void;
+}
+
+
+const CartItem: React.FC<ItemProps> = ({ item, addToCart, removeFromCart, deleteItem }) => (
+  <div className="cart-item">
+      <img className="cart-item-image" src={item.imagen} alt={item.nombre} />
+      
+      <div className="cart-item-info">
+          <div className="cart-item-header">
+              <h3 className="cart-item-name">{item.nombre}</h3>
+              <DeleteIconButton onClick={() => deleteItem(item)} />
+          </div>
+          <p className="cart-item-effect">{item.seccion}</p>
+
+          <div className="cart-item-bottom">
+              <div className="cart-item-quantity">
+                  <p>Cantidad</p>
+                  <button className="quantity-btn" onClick={() => removeFromCart(item)}>-</button>
+                  <p>{item.total_items}</p>
+                  <button className="quantity-btn" onClick={() => addToCart(item)}>+</button>
+              </div>
+              <p className="cart-item-price">$ {Number(item.precio * item.total_items).toFixed(2)}</p>
+          </div>
+      </div>
+  </div>
+);
+
 
 const Cart: React.FC<CartProps> = () => {
     const navigate = useNavigate();
     const { cartItems, addToCart, removeFromCart, getCartTotal, deleteItem } = useContext(CartContext)
 
     return (
-        <aside className='block-cart-wrapper'>
-            <h2 className='block-cart-wrapper-title'> Carrito de compras</h2>
+        <aside className='cart-wrapper'>
+            <h2 className='cart-wrapper-title'> Carrito de compras</h2>
             {cartItems.length === 0 ? <p>Todavía no hay productos</p> : null}
             {cartItems.map( item => (
                 <CartItem
@@ -121,10 +104,21 @@ const Cart: React.FC<CartProps> = () => {
             
             
             {cartItems.length > 0 ?
-            <button className='block-cart-wrapper-pay-btn' onClick={() => navigate("/procesoCompra")}>Ir a pagar</button> : null}
+            <button className='cart-wrapper-pay-btn' onClick={() => navigate("/procesoCompra")}>Ir a pagar</button> : null}
             
         </aside>
 
         )
 }
 export default Cart
+
+
+/* 
+TODOS:
+
+Corregir:
+- Agregarle mejores estilos
+- Cuando tenga menos de un tamaño, haya un botón para poder cerrar el carrito
+- Agregarle un gorrito al título 
+
+*/
