@@ -88,6 +88,18 @@
   color: #FFFFFF;
 }
 
+.formulario-Producto select {
+  width: 85%; 
+  padding: 8px;
+  margin-bottom: 10px;
+  margin-right: 20px;
+  border: 2px solid #000000;
+  border-radius: 5px;
+  background-color: #212426;
+  color: #FFFFFF;
+}
+
+
 .formulario-Producto input:hover {
   border-color: #D8B4FE;
   box-shadow: 0px 0px 5px #D8B4FE;
@@ -229,3 +241,8 @@ p {
 .custom-model-inner {
   border: 2px solid #000000;
 }
+
+.nombre-producto {
+  color: #000000;
+}
+
