@@ -5,16 +5,44 @@ import ProductForm from "./ProductForm";
 import "./Styles.css";
 import VoldemortImg from "../../assets/Login/Voldemort.png";
 
+interface Seccion {
+  _id: string;
+  nombre: string;
+}
+
 const MisArticulo: React.FC = () => {
+  const token = localStorage.getItem("token");
   const [articulos, setArticulos] = useState<Articulo[]>([]);
   const [modalAbierto, setModalAbierto] = useState(false);
   const [articuloActual, setArticuloActual] = useState<Articulo | null>(null);
   const [mostrandoFormulario, setMostrandoFormulario] = useState(false);
+  const [secciones, setSecciones] = useState<Seccion[]>([]);
+
+  // Cargar secciones
+  useEffect(() => {
+    const cargarSecciones = async () => {
+      try {
+        const respuesta = await fetch("http://localhost:5000/seccion", {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        if (!respuesta.ok) throw new Error("Error al obtener las secciones");
+
+        const data: Seccion[] = await respuesta.json();
+        setSecciones(data);
+      } catch (error) {
+        console.error("Error al cargar secciones:", error);
+      }
+    };
+
+    cargarSecciones();
+  }, []);
 
   // Cargar artículos desde la API
   const cargarArticulos = async () => {
     try {
-      const respuesta = await fetch("http://localhost:5000/producto");
+      const respuesta = await fetch("http://localhost:5000/producto", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
       if (!respuesta.ok) throw new Error("Error al obtener los artículos");
 
       const data: Articulo[] = await respuesta.json();
@@ -28,73 +56,10 @@ const MisArticulo: React.FC = () => {
     cargarArticulos();
   }, []);
 
-  const editarArticulo = (articulo: Articulo) => {
-    setArticuloActual(articulo);
-    setMostrandoFormulario(true);
-  };
-
-  const eliminarArticulo = async (id: string) => {
-    if (window.confirm("¿Estás seguro de que deseas eliminar este artículo?")) {
-      try {
-        const respuesta = await fetch(`http://localhost:5000/producto/${id}`, {
-          method: "DELETE",
-        });
-
-        if (!respuesta.ok) throw new Error("Error al eliminar el artículo");
-
-        // Actualizar la lista de artículos
-        cargarArticulos();
-      } catch (error) {
-        console.error("Error al eliminar artículo:", error);
-      }
-    }
-  };
-
-  const agregarOActualizarArticulo = async (articulo: Articulo) => {
-    try {
-      let respuesta;
-
-      if (articuloActual?._id) {
-        // Actualizar artículo existente
-        respuesta = await fetch(`http://localhost:5000/producto/${articuloActual._id}`, {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            nombre: articulo.nombre,
-            descripcion: articulo.descripcion,
-            precio: articulo.precio,
-            seccion: articulo.seccion,
-            unidadesStock: articulo.unidadesStock
-          }),
-        });
-      } else {
-        // Crear nuevo artículo
-        respuesta = await fetch("http://localhost:5000/producto", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            nombre: articulo.nombre,
-            descripcion: articulo.descripcion,
-            precio: articulo.precio,
-            seccion: articulo.seccion,
-            unidadesStock: articulo.unidadesStock
-          }),
-        });
-      }
-
-      if (!respuesta.ok) throw new Error("Error al guardar el artículo");
-
-      // Actualizar la lista de artículos y cerrar el formulario
-      cargarArticulos();
-      setMostrandoFormulario(false);
-      setArticuloActual(null);
-    } catch (error) {
-      console.error("Error al guardar artículo:", error);
-    }
+  // Obtener el nombre de la sección en base a su _id
+  const obtenerNombreSeccion = (idSeccion: string) => {
+    const seccionEncontrada = secciones.find((sec) => sec._id === idSeccion);
+    return seccionEncontrada ? seccionEncontrada.nombre : "Sección desconocida";
   };
 
   return (
@@ -106,7 +71,11 @@ const MisArticulo: React.FC = () => {
 
       {mostrandoFormulario ? (
         <ProductForm
-          onGuardar={agregarOActualizarArticulo}
+          onGuardar={() => {
+            cargarArticulos();
+            setMostrandoFormulario(false);
+            setArticuloActual(null);
+          }}
           onCancelar={() => {
             setMostrandoFormulario(false);
             setArticuloActual(null);
@@ -131,21 +100,27 @@ const MisArticulo: React.FC = () => {
                     setModalAbierto(true);
                   }}
                 >
+                  <img src={art.img} alt={art.nombre} className="producto-imagen" style={{width: "140px", height:"120px", objectFit: "cover", borderRadius:"8px"}} />
                   <h3>{art.nombre}</h3>
                   <p>Precio: ${art.precio ?? "No disponible"}</p>
+                  <p>Sección: {obtenerNombreSeccion(art.seccion)}</p>
                   <div className="acciones">
                     <FaEdit
                       className="icono editar"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        editarArticulo(art);
+                      onClick={() => {
+                        setArticuloActual(art);
+                        setMostrandoFormulario(true);
                       }}
                     />
                     <FaTrash
                       className="icono eliminar"
                       onClick={(e) => {
                         e.stopPropagation();
-                        eliminarArticulo(art._id || "");
+                        if (window.confirm("¿Estás seguro de que deseas eliminar este artículo?")) {
+                          fetch(`http://localhost:5000/producto/${art._id}`, {
+                            method: "DELETE",
+                          }).then(() => cargarArticulos());
+                        }
                       }}
                     />
                   </div>
@@ -161,10 +136,11 @@ const MisArticulo: React.FC = () => {
           <div className="custom-model-inner" onClick={(e) => e.stopPropagation()}>
             <div className="close-btn" onClick={() => setModalAbierto(false)}>×</div>
             <div className="pop-up-content-wrap">
+              <img src={articuloActual.img} alt={articuloActual.nombre} className="modal-imagen" style={{width: "140px", height:"120px", objectFit: "cover", borderRadius:"8px"}} />
               <h3>{articuloActual.nombre}</h3>
               <p>Precio: ${articuloActual.precio ?? "No disponible"}</p>
               <p>Unidades: {articuloActual.unidadesStock}</p>
-              <p>Sección: {articuloActual.seccion}</p>
+              <p>Sección: {obtenerNombreSeccion(articuloActual.seccion)}</p>
               <p>Descripción: {articuloActual.descripcion}</p>
             </div>
           </div>

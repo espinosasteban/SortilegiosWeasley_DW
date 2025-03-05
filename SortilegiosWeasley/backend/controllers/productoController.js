@@ -18,7 +18,7 @@ class productoController {
 
         } catch (error) {
             console.log("Error creando el producto");
-            res.status(500).json({error: 'Error creando el producto'});
+            res.status(500).json({error: 'Error creando el producto',detalles: error.message});
         }
     }
 

@@ -99,7 +99,9 @@ const ProductoSchema = z.object({
     img: z.string(),
     precio: z.number().positive("El precio debe ser mayor a 0"),
     unidadesStock: z.number().int().nonnegative("Las unidades en stock deben ser 0 o más"),
-    seccion: z.string().min(1, "La sección es obligatoria"),
+    seccion: z.string().refine((val) => mongoose.Types.ObjectId.isValid(val), {
+        message: "ID de seccion inválido"
+    })
 });
 
 export function validarProducto (input){
