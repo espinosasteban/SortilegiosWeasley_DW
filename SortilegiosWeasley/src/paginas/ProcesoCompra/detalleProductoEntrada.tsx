@@ -347,55 +347,72 @@ interface CrearResenaProps {
 function CrearResena({ productoId, setResenas }: CrearResenaProps) {
     const [comentario, setComentario] = useState('');
     const [puntuacion, setPuntuacion] = useState(0);
-
     const token = localStorage.getItem("token");
+    console.log(token);
 
     const guardarResena = async () => {
-        const resena: ResenaArticulo = {
-            _id: '',
-            puntuacion: puntuacion,
-            fecha: new Date(),
-            comentario: comentario,
-            recuentoUtil: 0,
-            recuentoNoUtil: 0,
-            producto: productoId,
-            usuario: ''
-        };
-        console.log('Token:', token);
-        console.log(resena);
-        console.log(JSON.stringify(resena));
-
-        const respuesta = await fetch('http://localhost:5000/resenas/', {
-            method: "POST",
-            body: JSON.stringify(resena),
-            headers: {
-                Authorization: `Bearer ${token}`,
-                "Content-Type": "application/json",
-            },
-        });
-           
-        if (!respuesta.ok) {
-            console.error("Error guardando la reseña");
+        if (!token) {
+            console.error("No hay token disponible");
             return;
         }
 
-        // Después de guardar, recargar toda la lista desde la API
-        fetch('http://localhost:5000/resenas/', {
-            method: "GET",
-        })
-            .then((res) => res.json())
-            .then((data) => setResenas(data.filter((resena: ResenaArticulo) => resena.producto === productoId)))
-            .catch((error) => console.error("Error obteniendo reseñas:", error));
+        console.log(token);
+
+        const nuevaResena: ResenaArticulo = {
+            _id: '',
+            puntuacion,
+            fecha: new Date(),
+            comentario,
+            recuentoUtil: 0,
+            recuentoNoUtil: 0,
+            producto: productoId,
+            usuario: '' // Esto será asignado en el backend
+        };
+
+        console.log('Enviando reseña:', JSON.stringify(nuevaResena));
+
+        try {
+            const respuesta = await fetch('http://localhost:5000/resenas/', {
+                method: "POST",
+                body: JSON.stringify(nuevaResena),
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "application/json",
+                },
+            });
+
+            if (!respuesta.ok) {
+                throw new Error("Error guardando la reseña");
+            }
+
+            const resenaGuardada = await respuesta.json(); // Obtenemos la reseña creada con ID
+            console.log("✅ Reseña guardada correctamente:", resenaGuardada);
+
+            // 🔥 En lugar de volver a hacer un fetch, actualizamos directamente el estado:
+            setResenas((prevResenas) => [...prevResenas, resenaGuardada]);
+
+            // 🔄 Reseteamos el formulario después de publicar
+            setComentario('');
+            setPuntuacion(0);
+
+            window.location.reload();
+
+        } catch (error) {
+            console.error("Error guardando la reseña:", error);
+        }
     };
 
     return (
-
         <section className="crear-resena">
             <h2>¿Qué te pareció el producto?</h2>
             <div className='puntuacion-varita-resena'>
-                <PuntuacionVarita defaultRaing={0} iconSize="2.5rem" modifiable={true} setPuntuacion={setPuntuacion} />
+                <PuntuacionVarita
+                    defaultRaing={puntuacion}
+                    iconSize="2.5rem"
+                    modifiable={true}
+                    setPuntuacion={setPuntuacion}
+                />
             </div>
-
 
             <textarea
                 className='contenido-resena'
