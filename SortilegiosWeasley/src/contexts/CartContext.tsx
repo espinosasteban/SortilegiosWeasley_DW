@@ -168,7 +168,7 @@ const addToCart = async (item: ArticuloCarrito) => {
       }
     }
   } catch (error) {
-    console.error("❌ Error al manejar el carrito:", error);
+    console.error(" Error al manejar el carrito:", error);
   }
 };
 
