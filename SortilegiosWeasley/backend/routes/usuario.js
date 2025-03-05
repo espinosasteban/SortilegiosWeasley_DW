@@ -11,4 +11,6 @@ route.delete('/:id', usuarioController.delete);
 route.get('/:id', usuarioController.getOne);
 route.put('/cambiarContrasena/:id', usuarioController.cambiarContrasena);
 
+route.get('/autenticado', authMiddleware, usuarioController.getAutenticado);
+
 export default route;

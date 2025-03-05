@@ -16,12 +16,9 @@ class votosController{
     async registrarVoto(req, res) {
         try {
             const { resenaId, tipo } = req.body;
-            console.log(req.body);
-            console.log(req);
 
             // Verificar si el usuario ya votó en esta reseña
             const votoExistente = await Voto.findOne({ usuarioId: req.user.id, resenaId });
-            console.log(votoExistente);
 
             if(votoExistente){
                 if (votoExistente.tipo === tipo) {
@@ -36,7 +33,6 @@ class votosController{
 
             // Guardar el nuevo voto
             const nuevoVoto = new Voto({ usuarioId: req.user.id, resenaId, tipo });
-            console.log(nuevoVoto);
             await nuevoVoto.save();
 
             // Incrementar el recuento en la reseña

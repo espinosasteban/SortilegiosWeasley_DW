@@ -135,8 +135,8 @@ export function validarSeccionParcial (input){
 
 // Esquema de validación de datos Resena
 const ResenaSchema = z.object({
-    puntuacion: z.number().int().min(1).max(5, "La puntuación debe estar entre 1 y 5"),
-    fecha: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Formato: YYYY-MM-DD"),
+    puntuacion: z.number().int().min(0).max(5, "La puntuación debe estar entre 0 y 5"),
+    fecha: z.union([z.string(), z.date()]),
     comentario: z.string().min(1, "El comentario es obligatorio"),
     recuentoUtil: z.number().int().nonnegative("El recuento útil debe ser 0 o más"),
     recuentoNoUtil: z.number().int().nonnegative("El recuento no útil debe ser 0 o más"),

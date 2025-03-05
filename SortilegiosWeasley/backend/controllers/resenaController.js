@@ -5,34 +5,33 @@ class resenaController {
 
     async create(req, res) {
         try {
+            
+            if (!req.user || !req.user.id) {
+                console.error("❌ Error: No hay usuario autenticado en la solicitud.");
+                return res.status(401).json({ error: "Acceso denegado." });
+            }
 
-            const { comentario, puntuacion, producto } = req.body;
-            const usuario = req.user;
-            console.log("usuario", usuario);
+            console.log("📥 Datos recibidos en backend:", req.body);
+    
+            // Eliminar `_id` y el usuario si viene en el body
+            const { _id, ...datos } = req.body;
+            const datosConUsuario = { ...datos, usuario: req.user.id };
 
-            const nuevaResena = new Resena({
-                comentario,
-                puntuacion,
-                producto,
-                usuario,
-                fecha: new Date()
-            })
-
-            console.log("nuevaResena", nuevaResena);
+            console.log("📥 Datos con usuario:", datosConUsuario);
 
 
-            const result = validarResena(nuevaResena);
+            const result = validarResena(datosConUsuario);
+
             console.log("result", result);
             if(!result.success){
                 return res.status(400).json({ error: JSON.parse(result.error.message) });
             }
+            
+            const nuevaResena = new Resena(datosConUsuario);
+            await nuevaResena.save();
 
-            const resenaGuardada = await nuevaResena.save();
-            console.log("resena creada con éxito");
-            res.status(201).json(nuevoResena);
-
-
-
+            console.log("resena creada con éxito", nuevaResena);
+            res.status(201).json(nuevaResena);
 
         } catch (error) {
             console.log("Error creando la resena");
@@ -71,26 +70,24 @@ class resenaController {
 
     async update(req, res) {
         try {
-            const result = validarResenaParcial(req.body);
-
-            if (!result.success){
-                return res.status(400).json({ error: JSON.parse(result.error.message) })
-            }
-            
             const { id } = req.params;
-            const resena = await Resena.findByIdAndUpdate(id, req.body, { new: true });
-
-            if (resena) {
-                res.status(200).json(resena);
-                console.log("resena actualizada con éxito");
-            } else {
-                console.log("resena no encontrada");
-                res.status(404).json({error: 'resena no encontrada'});
+            const { comentario, puntuacion } = req.body;
+    
+            const resena = await Resena.findById(id);
+            if (!resena) return res.status(404).json({ error: "Reseña no encontrada" });
+    
+            if (resena.usuario.toString() !== req.user.id) {
+                return res.status(403).json({ error: "No tienes permiso para editar esta reseña" });
             }
-        }
-        catch (error) {
-            console.log("Error actualizando la resena");
-            res.status(500).json({error: 'Error actualizando la resena'});
+    
+            resena.comentario = comentario;
+            resena.puntuacion = puntuacion;
+            await resena.save();
+    
+            res.json(resena);
+        } catch (error) {
+            console.error("Error actualizando la reseña", error);
+            res.status(500).json({ error: "Error actualizando la reseña" });
         }
     }
 

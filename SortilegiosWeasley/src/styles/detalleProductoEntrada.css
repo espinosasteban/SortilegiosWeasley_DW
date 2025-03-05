@@ -319,6 +319,11 @@
     margin-bottom: 3rem;
 }
 
+.seleccionado {
+    background-color: #4CAF50;
+    color: white;
+}
+
 
 
 

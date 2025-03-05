@@ -153,5 +153,21 @@ class usuarioController {
             res.status(500).json({ error: "Error cambiando la contraseña" });
         }
     }
+
+    async getAutenticado (req, res) {
+        try {
+            console.log("👤 Usuario autenticado:", req.user);
+            
+            const usuario = await Usuario.findById(req.user.id).select('-password'); // Excluir la contraseña
+            if (!usuario) {
+                return res.status(404).json({ error: 'Usuario no encontrado' });
+            }
+            res.json(usuario);
+        } catch (error) {
+            console.error("Error obteniendo usuario autenticado:", error);
+            res.status(500).json({ error: 'Error en el servidor' });
+        }
+    }
 }
+
 export default new usuarioController();
