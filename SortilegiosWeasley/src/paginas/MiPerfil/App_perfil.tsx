@@ -16,7 +16,6 @@ const AppProfile = () => {
               <Routes>
                 <Route path="/perfil" element={<Navigate to="/mi-informacion" replace />} />
                 <Route path="/mi-informacion" element={<UserInfo />} />
-                <Route path="/historial-compras" element={<HistorialCompras />} />
                 <Route path="/mis-direcciones" element={<MisDirecciones />} />
               </Routes>
             </div>
@@ -27,3 +26,6 @@ const AppProfile = () => {
 };
 
 export default AppProfile;
+
+//Ruta de historial se quita ya que al momento de subir esto, no funciona proceso de compra
+//<Route path="/historial-compras" element={<HistorialCompras />} />

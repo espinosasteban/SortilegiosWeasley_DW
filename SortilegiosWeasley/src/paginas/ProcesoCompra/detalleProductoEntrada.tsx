@@ -182,7 +182,7 @@ function DetalleResena({setResenas, producto }: ValoracionProps) {
     return (
         <section className="detalle-resena-seccion">
             <h2 className="titulo-detalle-resena">Reseñas del producto</h2>
-            <VitrinaResena producto={producto} setResenas={setResenas}/>
+            <VitrinaResena producto={producto} setResenas={setResenas} setResenas={setResenas}/>
             {usuario ? (<CrearResena productoId={producto._id} setResenas={setResenas} />) : (<p>Para dejar una reseña o valorar alguna, inicia sesión.</p>)}
         </section>
     );
@@ -223,7 +223,7 @@ function Valoracion({ resenas }: ValoracionProps) {
 function VitrinaResena({ producto, setResenas }: { producto: Articulo | null; setResenas: (resenas: Array<ResenaArticulo>) => void }) {
     return (
         <section className="vitrina-resena">
-            <Resena producto={producto} setResenas={setResenas} />
+            <Resena producto={producto} setResenas={setResenas} setResenas={setResenas} />
         </section>
     );
 }
@@ -432,6 +432,7 @@ function CrearResena({ productoId, setResenas }: CrearResenaProps) {
             });
     
             setResenaUsuario(resenaGuardada);
+            window.location.reload();
         } catch (error) {
             console.error("Error guardando la reseña:", error);
         }
@@ -455,7 +456,8 @@ function CrearResena({ productoId, setResenas }: CrearResenaProps) {
             setComentario("");
             setPuntuacion(0);
     
-            setResenas((prev) => prev.filter((r) => r._id !== resenaUsuario._id)); // Eliminar de la lista
+            setResenas((prev) => prev.filter((r) => r._id !== resenaUsuario._id)); // Eliminar de la 
+            window.location.reload();
         } catch (error) {
             console.error("Error eliminando la reseña:", error);
         }
