@@ -9,7 +9,6 @@ const AppAdmin = () => {
           <div className="admin-container">
             <div className="profile-content">
               <Routes>
-                <Route path="/admin" element={<Navigate to="/gestion-producto" replace />} />
                 <Route path="/gestion-producto" element={<ProductList />} />
               </Routes>
             </div>
