@@ -42,31 +42,9 @@ export const DeleteIconButton: React.FC<DeleteIconButtonProps> = ( { onClick }) 
   };
   
 
-  export const CartItem: React.FC<ItemProps> = ({ item, addToCart, removeFromCart, deleteItem }) => {
-      // const [seccionNombre, setSeccionNombre] = useState<string | null>(null);
-      
-      // useEffect(() => {
-      //     async function obtenerSeccion() {
-      //         if (!item.seccion) return;
-  
-      //         try {
-      //             const response = await fetch(`http://localhost:5000/seccion/${item.seccion}`);
-                  
-      //             if (!response.ok) {
-      //                 console.error('Error al obtener la sección:', response.statusText);
-      //                 return;
-      //             }
-  
-      //             const seccionData = await response.json();
-      //             setSeccionNombre(seccionData.nombre);
-      //         } catch (error) {
-      //             console.error('Error en la petición de la sección:', error);
-      //         }
-      //     }
-  
-      //     obtenerSeccion();
-      // }, [item.seccion]);
-  
+  export const CartItem: React.FC<ItemProps> = ({ item }) => {
+    const {addToCart, removeFromCart, deleteItem} = useContext(CartContext)
+     
       return (
           <div className="block-cart-item">
               <img className="block-cart-item-image" src={item.img} alt={item.nombre} />
@@ -94,13 +72,11 @@ export const DeleteIconButton: React.FC<DeleteIconButtonProps> = ( { onClick }) 
 
 export type CartProps = {
   cartItems: ArticuloCarrito[];
-  addToCart: (clickedItem: ArticuloCarrito) => void;
-  removeFromCart: (item: ArticuloCarrito) => void;
 }
 
 const Cart: React.FC<CartProps> = () => {
     const navigate = useNavigate();
-    const { cartItems, addToCart, removeFromCart, getCartTotal, deleteItem } = useContext(CartContext)
+    const { cartItems, getCartTotal } = useContext(CartContext)
 
     return (
         <aside className='block-cart-wrapper'>
@@ -110,9 +86,7 @@ const Cart: React.FC<CartProps> = () => {
                 <CartItem
                   key = {item.nombre}
                   item = {item}
-                  addToCart={ addToCart}
-                  removeFromCart={ removeFromCart}
-                  deleteItem={deleteItem}>
+                  >
                 
                 </CartItem> 
             ))}

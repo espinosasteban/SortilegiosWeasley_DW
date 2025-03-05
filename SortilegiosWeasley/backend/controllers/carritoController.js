@@ -67,7 +67,7 @@ class CarritoController {
             res.json({
                 _id: carrito._id,
                 userId: carrito.userId,
-                items: itemsFormateados
+                items: itemsFormateados,
             });
     
         } catch (error) {
@@ -98,6 +98,45 @@ class CarritoController {
         } catch (error) {
             console.log("Error actualizando el carrito", error);
             res.status(500).json({ error: 'Error actualizando el carrito' });
+        }
+    }
+
+    async updateItem(req, res) {
+        try {
+            if (!req.user) {
+                return res.status(401).json({ error: "Usuario no autenticado" });
+            }
+    
+            const { productoId } = req.params;
+            const { total_items } = req.body;
+    
+            if (total_items < 1) {
+                return res.status(400).json({ error: "La cantidad debe ser al menos 1" });
+            }
+    
+            const carrito = await Carrito.findOne({ userId: req.user.id });
+    
+            if (!carrito) {
+                return res.status(404).json({ error: "Carrito no encontrado" });
+            }
+    
+            // Buscar el producto dentro del carrito
+            const itemIndex = carrito.items.findIndex(item => item.productoId.toString() === productoId);
+    
+            if (itemIndex === -1) {
+                return res.status(404).json({ error: "Producto no encontrado en el carrito" });
+            }
+    
+            // Modificar la cantidad del producto
+            carrito.items[itemIndex].cantidad = total_items;
+    
+            await carrito.save();
+    
+            res.status(200).json(carrito);
+            
+    
+        } catch (error) {
+            res.status(500).json({ error: "Error actualizando el producto en el carrito" });
         }
     }
 

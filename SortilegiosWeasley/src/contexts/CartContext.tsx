@@ -1,155 +1,5 @@
-// import { createContext, useState, useEffect } from "react";
-// import { ArticuloCarrito, Carrito } from "../tipos";
-// import {jwtDecode} from "jwt-decode";
-
-
-// export const CartContext = createContext<{
-//   cartItems: ArticuloCarrito[];
-//   addToCart: (item: ArticuloCarrito) => void;
-//   removeFromCart: (item: ArticuloCarrito) => void;
-//   getCartTotal: () => number;
-//   toggleCart: () => void;
-//   getTotalCartItems: () => number;
-//   deleteItem: (item: ArticuloCarrito) => void;
-//   migrateCart: (items: ArticuloCarrito[]) => Promise<void>;
-// }>({
-//   cartItems: [],
-//   addToCart: () => {},
-//   removeFromCart: () => {},
-//   getCartTotal: () => 0,
-//   toggleCart: () => {},
-//   getTotalCartItems: () => 0,
-//   deleteItem: () => {},
-//   migrateCart: async () => {},
-// });
-
-// export const CartProvider = ({ children }: { children: React.ReactNode }) => {
-//   const [isCartOpen, setIsCartOpen] = useState(false);
-//   const [cartItems, setCartItems] = useState<ArticuloCarrito[]>([]);
-//   const [token, setToken] = useState<string | null>(null);
-//   const [carrito, setCarrito] = useState<Carrito>({} as Carrito);
-
-//   // Cargar carrito del usuario autenticado
-//   useEffect(() => {
-//     const token = localStorage.getItem('token');
-//     const decoded = jwtDecode(token) ?? '';
-//     const fetchCart = async () => {
-//       if (token) {
-//         try {
-//           const response = await fetch(`http://localhost:5000/carrito/${decoded.id}`, {
-//             method:"GET",
-//             headers: { Authorization: `Bearer ${token}` },
-//           });
-
-//           if (response.ok) {
-//             const data = await response.json();
-//             setCarrito(data)
-//           } 
-//         } catch (error) {
-//           console.error("Error al obtener el carrito:", error);
-//         }
-//       } else {
-//         setCartItems([]);
-//         //TODO: leer los datos del carrito de compras en el local storage, apenas los lea los guarda en setCartItems
-//       }
-//     };
-//     fetchCart();
-//   }, []);
-// const addToCart = async (item: ArticuloCarrito) => {
-//   const isItemInCart = cartItems.find((cartItem) => cartItem._id === item._id);
-//   const token = localStorage.getItem('token');
-//   const decoded = jwtDecode(token) ?? '';
-//   console.log("HOLAAA")
-//   if (isItemInCart) {
-//     setCartItems(prevCartItems =>
-//       prevCartItems.map(cartItem =>
-//         cartItem._id === item._id
-//           ? { ...cartItem, total_items: cartItem.total_items + 1 }
-//           : cartItem
-//       )
-//     );
-//   } else {
-//     setCartItems(prevCartItems => [...prevCartItems, { ...item, total_items: 1 }]);
-//   }
-//   carrito.items = cartItems.map(item => ({
-//     _id: item._id,
-//     total_items: item.total_items
-//   }))
-//   console.log("Miremos a cartItems",cartItems)
-//   console.log("Miremos a carrito", {carrito}) 
-//   if ( typeof carrito.items !== "undefined") {
-//     try {
-//       console.log("Se agregó el tin con el tan", carrito.items)
-//       const peticion = cartItems.map(item => ({
-//         _id: item._id,
-//         total_items: item.total_items
-//       }))
-
-//       console.log(peticion)
-      
-//       const carritoId = carrito?._id
-//       const response = await fetch(`http://localhost:5000/carrito/${carritoId}`, {
-//         method: "PUT",
-//         headers: {
-//           "Content-Type": "application/json",
-//           Authorization: `Bearer ${token}`,
-//         },
-//         body: JSON.stringify({
-//           userId: decoded.id, 
-//           // items: [{ productoId: item._id, total_items: 1 }],
-//           items: cartItems.map(item => ({
-//             _id: item._id,
-//             total_items: item.total_items
-//           }))
-//         }),
-//       });
-      
-//       const data = await response.json();
-      
-//       console.log(`productos en base de datos ${data}`);
-//       //TODO guardar estos datos en setCarrito
-//       console.log("🔍 Respuesta del backend al agregar producto:", data);
-  
-//       if (!response.ok) {
-//         console.error("❌ Error en la petición:", data);
-//       }
-//     } catch (error) {
-//       console.error("❌ Error al agregar producto al carrito en el backend:", error);
-//     }
-//   }
-//   else {
-//     try {
-//       console.log("Aquí está vacío")
-//       const response = await fetch(`http://localhost:5000/carrito`, {
-//         method: "POST",
-//         headers: {
-//           "Content-Type": "application/json",
-//           Authorization: `Bearer ${token}`,
-//         },
-//         body: JSON.stringify({
-//           userId: decoded.id, // Asegurarse de que esto coincide con el backend
-//           items: {
-//             productoId: cartItems[0]._id,
-//             total_items: cartItems[0].total_items
-//           },
-//         }),
-//       });
-  
-//       const data = await response.json();
-//       console.log(`productos en base de datos ${data}`);
-//       //TODO guardar estos datos en setCarrito
-//       console.log("🔍 Respuesta del backend al agregar producto:", data);
-  
-//       if (!response.ok) {
-//         console.error("❌ Error en la petición:", data);
-//       }
-//     } catch (error) {
-//       console.error("❌ Error al agregar producto al carrito en el backend:", error);
-//     }
-//   }
-
 import { createContext, useState, useEffect } from "react";
-import { ArticuloCarrito, Carrito } from "../tipos";
+import { ArticuloCarrito, Carrito, Articulo } from "../tipos";
 import { jwtDecode } from "jwt-decode";
 
 export const CartContext = createContext<{
@@ -174,7 +24,7 @@ export const CartContext = createContext<{
 
 export const CartProvider = ({ children }: { children: React.ReactNode }) => {
   const [isCartOpen, setIsCartOpen] = useState(false);
-  const [cartItems, setCartItems] = useState<ArticuloCarrito[]>([]);
+  const [cartItems, setCartItems] = useState<Articulo[]>([]);
   const [token, setToken] = useState<string | null>(null);
   const [carrito, setCarrito] = useState<Carrito>({} as Carrito);
 
@@ -236,23 +86,7 @@ const addToCart = async (item: ArticuloCarrito) => {
     return;
   }
 
-  // Actualizamos el estado localmente
-  // let updatedCartItems: ArticuloCarrito[];
-  // setCartItems(prevCartItems => {
-  //   const isItemInCart = prevCartItems.find(cartItem => cartItem._id === item._id);
-  //   if (isItemInCart) {
-  //     updatedCartItems = prevCartItems.map(cartItem =>
-  //       cartItem._id === item._id
-  //         ? { ...cartItem, total_items: cartItem.total_items + 1 }
-  //         : cartItem
-  //     );
-  //   } else {
-  //     updatedCartItems = [...prevCartItems, { ...item, total_items: 1 }];
-  //   }
-  //   console.log("Aquí está el carrito actualizado: ", {updatedCartItems})
-  //   return updatedCartItems;
-  // });
-
+  
   setCartItems(prevCartItems => {
     const isItemInCart = prevCartItems.find(cartItem => cartItem._id === item._id);
     if (isItemInCart) {
@@ -267,7 +101,7 @@ const addToCart = async (item: ArticuloCarrito) => {
   })
 
   try {
-    // 2️⃣ Verificar si el usuario ya tiene un carrito
+    // Verificar si el usuario ya tiene un carrito
     console.log({carrito})
     let carritoId = carrito?._id;
     if (!carritoId) {
@@ -284,7 +118,7 @@ const addToCart = async (item: ArticuloCarrito) => {
       }
     }
 
-    // 3️⃣ Si el carrito existe, actualizarlo con PUT
+    // Si el carrito existe, actualizarlo con PUT
     if (carritoId) {
       console.log("🔄 Actualizando carrito existente...");
 
