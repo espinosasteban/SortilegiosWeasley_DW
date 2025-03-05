@@ -3,7 +3,6 @@ import "./styles.css";
 import InfoBoton from '../../../components/infoBoton';
 import { useAuth } from '../AuthContext';
 import { useNavigate } from 'react-router';
-
 import HarryPotterImg from '../../../assets/Login/HarryPotter.png';
 
 export default function Login() {
@@ -12,7 +11,6 @@ export default function Login() {
     const [usuario, setUsuario] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState<string | null>(null);
-
 
     const handleLogin = async () => {
         console.log("Enviando datos:", { nombreUsuario: usuario, contrasena: password });
@@ -23,8 +21,6 @@ export default function Login() {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ nombreUsuario: usuario, contrasena: password })
             });
-
-
 
             const data = await response.json();
             if (!response.ok) {
