@@ -221,9 +221,18 @@ function Direccion({setFormulario,onGuardar}: PropsInformacionContacto){
     setDireccionSeleccionada(idSeleccionado);
 
     const direccionEncontrada = direcciones.find((dir) => dir._id === idSeleccionado);
-    if (direccionEncontrada) {
-      setDatos(direccionEncontrada); // Cargar los datos de la dirección seleccionada
-    }
+    setDatos(direccionEncontrada || {
+        id: "",
+        _id: "",
+        nombre: "",
+        departamento: "",
+        municipio: "",
+        direccion: "",
+        barrio: "",
+        info_extra: "",
+        recibidor: "",
+        usuario: ""
+    });
   };
 
   // 🔹 3. Manejar cambios en los inputs
@@ -235,12 +244,15 @@ function Direccion({setFormulario,onGuardar}: PropsInformacionContacto){
   const manejarSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    const respuesta = await fetch(`${API_URL_DIRECCIONES}/${direccionSeleccionada}`, {
-      method: "PUT",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json"
-      },
+    const metodo = datos._id ? "PUT" : "POST";
+        const url = datos._id ? `${API_URL_DIRECCIONES}/${datos._id}` : API_URL_DIRECCIONES;
+
+        const respuesta = await fetch(url, {
+            method: metodo,
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json"
+            },
       body: JSON.stringify(datos)
     });
 
@@ -248,8 +260,8 @@ function Direccion({setFormulario,onGuardar}: PropsInformacionContacto){
       console.error("Error guardando la dirección");
       return;
     }
-
-    onGuardar?.(await respuesta.json()); // Notificar cambios al componente padre
+    const nuevaDireccion = await respuesta.json();
+    onGuardar?.(nuevaDireccion); // Notificar cambios al componente padre
   };
 
   const handleClick = async (e: React.FormEvent) => {
@@ -303,7 +315,7 @@ function Direccion({setFormulario,onGuardar}: PropsInformacionContacto){
                     <label>Información adicional</label>
                     <input
                         type="text"
-                        name="informacion-adicional"
+                        name="info_extra"
                         value={datos.info_extra}
                         onChange={manejarCambio} 
                         required
@@ -323,14 +335,14 @@ function Direccion({setFormulario,onGuardar}: PropsInformacionContacto){
                         <label>Nombre de quien recibe</label>
                     <input
                         type= "text"
-                        name="nombre-recibe"
+                        name="recibidor"
                         value={datos.recibidor}
                         onChange={manejarCambio} 
                         required
                     />
                     </div>
                     <div><label>Cambiar dirección</label>
-                    <select value={direccionSeleccionada} onChange={cambiarDireccion}>
+                    <select value={direccionSeleccionada} onChange={cambiarDireccion} className='seleccion-direccion'>
                         {direcciones.map((dir) => (
                         <option key={dir._id} value={dir._id}>
                         {dir.nombre} - {dir.direccion}
