@@ -432,6 +432,7 @@ function CrearResena({ productoId, setResenas }: CrearResenaProps) {
             });
     
             setResenaUsuario(resenaGuardada);
+            window.location.reload();
         } catch (error) {
             console.error("Error guardando la reseña:", error);
         }
@@ -455,7 +456,8 @@ function CrearResena({ productoId, setResenas }: CrearResenaProps) {
             setComentario("");
             setPuntuacion(0);
     
-            setResenas((prev) => prev.filter((r) => r._id !== resenaUsuario._id)); // Eliminar de la lista
+            setResenas((prev) => prev.filter((r) => r._id !== resenaUsuario._id)); // Eliminar de la 
+            window.location.reload();
         } catch (error) {
             console.error("Error eliminando la reseña:", error);
         }
