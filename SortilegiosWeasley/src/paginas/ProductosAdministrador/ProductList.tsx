@@ -137,7 +137,7 @@ const MisArticulo: React.FC = () => {
             <div className="close-btn" onClick={() => setModalAbierto(false)}>×</div>
             <div className="pop-up-content-wrap">
               <img src={articuloActual.img} alt={articuloActual.nombre} className="modal-imagen" style={{width: "140px", height:"120px", objectFit: "cover", borderRadius:"8px"}} />
-              <h3>{articuloActual.nombre}</h3>
+              <h3 className="nombre-producto">{articuloActual.nombre}</h3>
               <p>Precio: ${articuloActual.precio ?? "No disponible"}</p>
               <p>Unidades: {articuloActual.unidadesStock}</p>
               <p>Sección: {obtenerNombreSeccion(articuloActual.seccion)}</p>
