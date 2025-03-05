@@ -55,8 +55,7 @@ const CarritoSchema = z.object({
         productoId: z.string().min(1, "El ID del producto es obligatorio"),
         total_items: z.number().min(1, "La cantidad debe ser al menos 1"),
       })
-    ),
-    total: z.number().optional(), // Se calculará en Mongoose
+    )
 });
 
 export function validarCarrito(input) {

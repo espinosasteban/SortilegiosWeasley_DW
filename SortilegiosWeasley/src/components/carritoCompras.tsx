@@ -43,29 +43,29 @@ export const DeleteIconButton: React.FC<DeleteIconButtonProps> = ( { onClick }) 
   
 
   export const CartItem: React.FC<ItemProps> = ({ item, addToCart, removeFromCart, deleteItem }) => {
-      const [seccionNombre, setSeccionNombre] = useState<string | null>(null);
+      // const [seccionNombre, setSeccionNombre] = useState<string | null>(null);
       
-      useEffect(() => {
-          async function obtenerSeccion() {
-              if (!item.seccion) return;
+      // useEffect(() => {
+      //     async function obtenerSeccion() {
+      //         if (!item.seccion) return;
   
-              try {
-                  const response = await fetch(`http://localhost:5000/seccion/${item.seccion}`);
+      //         try {
+      //             const response = await fetch(`http://localhost:5000/seccion/${item.seccion}`);
                   
-                  if (!response.ok) {
-                      console.error('Error al obtener la sección:', response.statusText);
-                      return;
-                  }
+      //             if (!response.ok) {
+      //                 console.error('Error al obtener la sección:', response.statusText);
+      //                 return;
+      //             }
   
-                  const seccionData = await response.json();
-                  setSeccionNombre(seccionData.nombre);
-              } catch (error) {
-                  console.error('Error en la petición de la sección:', error);
-              }
-          }
+      //             const seccionData = await response.json();
+      //             setSeccionNombre(seccionData.nombre);
+      //         } catch (error) {
+      //             console.error('Error en la petición de la sección:', error);
+      //         }
+      //     }
   
-          obtenerSeccion();
-      }, [item.seccion]);
+      //     obtenerSeccion();
+      // }, [item.seccion]);
   
       return (
           <div className="block-cart-item">
@@ -76,12 +76,12 @@ export const DeleteIconButton: React.FC<DeleteIconButtonProps> = ( { onClick }) 
                       <DeleteIconButton onClick={() => deleteItem(item)} />
                   </div>
                   <p className="block-cart-item-effect">
-                      {seccionNombre ? seccionNombre : "Cargando sección..."}
+                      {item.seccion ? item.seccion : "Cargando sección..."}
                   </p>
                   <div className="block-cart-item-bottom">
                       <div className="block-cart-item-quantity">
                           <button className="block-quantity-btn" onClick={() => removeFromCart(item)}>-</button>
-                          <p className='block-total-'>{item.total_items}</p>
+                          <p className='block-total-items'>{item.total_items}</p>
                           <button className="block-quantity-btn" onClick={() => addToCart(item)}>+</button>
                       </div>
                       <p className="block-cart-item-price">$ {Number(item.precio * item.total_items).toFixed(2)}</p>

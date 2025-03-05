@@ -30,7 +30,7 @@ app.use('/resenas', routesResenas);
 app.use('/auth', authRoutes);
 app.use('/mis-direcciones', authMiddleware, routesDireccion);
 app.use('/mi-informacion', authMiddleware, routesPerfil);
-app.use('/carrito', routesCarrito);
+app.use('/carrito', authMiddleware, routesCarrito);
 
 
 // 4. Conectar a MongoDB

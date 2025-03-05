@@ -24,6 +24,7 @@ export const corsMiddleware = (req, res, next) => {
 };
 
 export const authMiddleware = (req, res, next) => {
+  
   const token = req.header("Authorization")?.split(" ")[1];
 
   if (!token) {

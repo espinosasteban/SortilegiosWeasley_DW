@@ -1,9 +1,9 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import "./styles.css";
 import InfoBoton from '../../../components/infoBoton';
 import { useAuth } from '../AuthContext';
 import { useNavigate } from 'react-router';
-import { CartContext } from '../../../contexts/CartContext';
+
 import HarryPotterImg from '../../../assets/Login/HarryPotter.png';
 
 export default function Login() {
@@ -12,7 +12,7 @@ export default function Login() {
     const [usuario, setUsuario] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState<string | null>(null);
-    const { migrateCart} = useContext(CartContext)
+
 
     const handleLogin = async () => {
 
@@ -25,7 +25,7 @@ export default function Login() {
                 body: JSON.stringify({ nombreUsuario: usuario, contrasena: password })
             });
 
-            
+
 
             const data = await response.json();
             if (!response.ok) {
@@ -34,15 +34,6 @@ export default function Login() {
 
             localStorage.setItem('token', data.token);
             login(data.rol); // Guarda el rol
-
-            const carritoLocal = JSON.parse(localStorage.getItem("carrito")) || [];
-
-            if (carritoLocal.length > 0) {
-                const migracionExitosa = await migrateCart(carritoLocal);
-                if (migracionExitosa) {
-                    localStorage.removeItem("carrito"); // 
-                }
-            }
             navigate(data.rol === "admin" ? '/admin' : '/perfil');
             
 

@@ -1,10 +1,13 @@
 import Carrito from '../modelos/carrito.js';
+import Producto from '../modelos/producto.js';
 import { validarCarrito, validarCarritoParcial } from '../esquemas/esquemas.js';
 
 class CarritoController {
     
     async create(req, res) {
         try {
+            console.log("Se intento agregar el producto")
+
             if (!req.user) {
                 return res.status(401).json({ error: "Usuario no autenticado" });
             }
@@ -34,20 +37,44 @@ class CarritoController {
 
     async getOne(req, res) {
         try {
-            const { id } = req.params;
-            const carrito = await Carrito.findById(id);
-            if (carrito) {
-                res.status(200).json(carrito);
-                console.log("Carrito obtenido con éxito");
-            } else {
-                console.log("Carrito no encontrado");
-                res.status(404).json({ error: 'Carrito no encontrado' });
+            if (!req.user) {
+                return res.status(401).json({ error: "Usuario no autenticado" });
             }
+    
+            
+            const carrito = await Carrito.findOne({ userId: req.user.id })
+                .populate({
+                    path: "items.productoId",
+                    populate: { path: "seccion", select: "nombre" } // Obtiene el nombre de la sección
+                });
+    
+            if (!carrito) {
+                return res.status(404).json({ error: "Carrito no encontrado" });
+            }
+    
+            const itemsFormateados = carrito.items.map(item => ({
+                _id: item.productoId._id,
+                nombre: item.productoId.nombre,
+                descripcion: item.productoId.descripcion,
+                img: item.productoId.img,
+                precio: item.productoId.precio,
+                unidadesStock: item.productoId.unidadesStock,
+                seccion: item.productoId.seccion ? item.productoId.seccion.nombre : "Sin sección", 
+                __v: item.productoId.__v,
+                total_items: item.cantidad
+            }));
+    
+            res.json({
+                userId: carrito.userId,
+                items: itemsFormateados
+            });
+    
         } catch (error) {
-            console.log("Error obteniendo el carrito", error);
-            res.status(500).json({ error: 'Error obteniendo el carrito' });
+            console.error("❌ Error obteniendo el carrito:", error);
+            res.status(500).json({ error: "Error obteniendo el carrito" });
         }
     }
+    
 
     async update(req, res) {
         try {
@@ -92,42 +119,42 @@ class CarritoController {
     }
 
     async migrarCarrito(req, res) {
+        const { userId } = req.user; 
+        const { items } = req.body;
+        console.log("Migré el carrito")
+
         try {
-            if (!req.user) {
-                return res.status(401).json({ error: "Usuario no autenticado" });
-            }
-    
-            const { items } = req.body;
-            if (!Array.isArray(items) || items.length === 0) {
-                return res.status(400).json({ error: "No hay productos para migrar" });
-            }
-    
-            let carrito = await Carrito.findOne({ userId: req.user.id });
+            
+            let carrito = await Carrito.findOne( {userId} );
     
             if (!carrito) {
-                carrito = new Carrito({ userId: req.user.id, items });
-            } else {
-                const productosMap = new Map(carrito.items.map(item => [item.productoId.toString(), item]));
-    
-                items.forEach(({ productoId, total_items }) => {
-                    if (productosMap.has(productoId)) {
-                        productosMap.get(productoId).total_items += total_items;
-                    } else {
-                        productosMap.set(productoId, { productoId, total_items });
-                    }
-                });
-    
-                carrito.items = Array.from(productosMap.values());
+                carrito = new Carrito({ userId, items: [] });
             }
-    
+            // Agregar los nuevos productos al carrito
+            for (const item of items) {
+                const producto = await Producto.findById(item.productoId);
+                if (producto) {
+                    // Verificar si el producto ya está en el carrito
+                    const itemIndex = carrito.items.findIndex(i => i.productoId.toString() === item.productoId);
+                    if (itemIndex >= 0) {
+                        // Si el producto ya está en el carrito, actualizar la cantidad
+                        carrito.items[itemIndex].total_items += item.total_items;
+                    } else {
+                        // Si el producto no está en el carrito, agregarlo
+                        carrito.items.push(item);
+                    }
+                }
+            }
+
+            // Guardar el carrito actualizado
             await carrito.save();
-            res.json({ mensaje: "Carrito migrado exitosamente", carrito });
-    
+
+            res.status(200).json({ message: 'Carrito migrado exitosamente', carrito });
         } catch (error) {
-            console.error("Error migrando carrito:", error);
-            res.status(500).json({ error: "Error interno del servidor" });
+            res.status(500).json({ message: 'Error al migrar el carrito', error });
         }
-    }
+    };
+
     
 }
 
