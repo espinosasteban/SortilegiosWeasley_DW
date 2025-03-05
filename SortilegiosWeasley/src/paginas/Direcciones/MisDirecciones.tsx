@@ -99,7 +99,7 @@ const MisDirecciones: React.FC = () => {
           </button>
 
           {direcciones.length === 0 ? (
-            <p>No tienes direcciones guardadas.</p>
+            <p className="no-direccion">No tienes direcciones guardadas.</p>
           ) : (
             <div className="tarjetas-direcciones">
               {direcciones.map((dir) => (
