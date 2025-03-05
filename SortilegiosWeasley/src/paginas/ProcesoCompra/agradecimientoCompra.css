@@ -1,0 +1,30 @@
+.agradecimiento-compra {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+
+}
+
+.h2-gracias-muggle {
+  margin-top: 5rem;
+  display: block;
+  color: black;
+}
+
+.p-agradecimiento{
+    display: block;
+    color: black;
+}
+
+.p-lechuza{
+    display: block;
+    color: black;
+}
+
+.boton-volver {
+  margin-top: 2rem;
+  padding: 1rem;
+  border: 1px solid black;
+}

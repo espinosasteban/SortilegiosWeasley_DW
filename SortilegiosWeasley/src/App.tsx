@@ -11,6 +11,9 @@ import CrearCuenta from './paginas/ProcesoLoginUsuario/crearCuenta/';
 import CambiarContraseña from "./paginas/ProcesoLoginUsuario/cambiarContraseña/";
 import AppProfile from "./paginas/MiPerfil/App_perfil"; // Agregado
 import AppAdmin from "./paginas/ProductosAdministrador/AppAdmin"; // Agregado
+import ProcesoCompra from './paginas/ProcesoCompra/procesoCompra.tsx';
+import AgradecimientoCompra from './paginas/ProcesoCompra/agradecimientoCompra.tsx';
+
 // Contexts 
 import { CartProvider } from './contexts/CartContext.tsx';
 import { AuthProvider } from "./paginas/ProcesoLoginUsuario/AuthContext"; // Agregado
@@ -18,7 +21,6 @@ import { AuthProvider } from "./paginas/ProcesoLoginUsuario/AuthContext"; // Agr
 import { Articulo } from "./tipos.tsx";
 // Hooks
 import { useEffect, useState } from 'react';
-import ProcesoCompra from './paginas/ProcesoCompra/procesoCompra.tsx';
 
 function App() {
     const [seccion, setSeccion] = useState<string | null>(null);
@@ -56,8 +58,9 @@ function App() {
                                 <Route path="/crearCuenta" element={<CrearCuenta />} />
                                 <Route path="/cambiarContraseña" element={<CambiarContraseña />} />
                                 <Route path="/perfil" element={<AppProfile/>} /> {/* Agregado */}
-                                <Route path="/admin" element={<AppAdmin/>} /> {/* Agregado */}
+                                <Route path="/gestion-producto" element={<AppAdmin/>} /> {/* Agregado */}
                                 <Route path ="/procesoCompra" element={<ProcesoCompra infoContacto={true} />} />
+                                <Route path ="/gracias" element={<AgradecimientoCompra/>} />
                         </Routes>
                         </main>
                     </BrowserRouter>

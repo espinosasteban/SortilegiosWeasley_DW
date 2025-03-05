@@ -15,8 +15,7 @@ export default function Login() {
 
 
     const handleLogin = async () => {
-
-        console.log("Enviado datos:", { nombreUsuario: usuario, contrasena: password });
+        console.log("Enviando datos:", { nombreUsuario: usuario, contrasena: password });
 
         try {
             const response = await fetch('http://localhost:5000/auth/login', {
@@ -33,13 +32,14 @@ export default function Login() {
             }
 
             localStorage.setItem('token', data.token);
-            login(data.rol); // Guarda el rol
-            navigate(data.rol === "admin" ? '/admin' : '/perfil');
-            
+            localStorage.setItem('usuario', usuario);
+            login(usuario, data.rol); // Guarda usuario y rol correctamente
+
+            navigate(data.rol === "admin" ? '/gestion-producto' : '/perfil');
 
         } catch (error) {
-            console.error("Error", error);
-            setError("Error en el servidor");
+            console.error("Error en el login:", error);
+            setError("Error en el servidor o credenciales incorrectas");
         }
     };
 
@@ -69,7 +69,6 @@ export default function Login() {
                 <div className="login-error">
                     {error && <p className="error">{error}</p>}
                 </div>
-
             </form>
             <InfoBoton />
         </div>

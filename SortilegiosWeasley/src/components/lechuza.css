@@ -1,0 +1,565 @@
+/*créditos: https://codepen.io/cicaadaa/pen/mKWLzZ*/
+
+  .lechuza {
+    position: relative;
+    margin: 0 auto;
+    margin-top: 7%;
+    width: 300px;
+    height: 300px;
+  }
+  
+  .tailbot {
+    position: absolute;
+    top: 82%;
+    left: 42%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%) rotate(10deg);
+    
+    width: 12%;
+    height: 25%;
+    border-radius: 40px 50px 140px 0px;
+    background-color: #ccc;
+    animation: bob 5s infinite;
+  }
+  .tailtop {
+    position: absolute;
+    top: 73%;
+    left: 43.5%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%) rotate(8deg);
+    
+    width: 15%;
+    height: 17%;
+    border-radius: 40px 50px 140px 20px;
+    background-color: #bbb;
+    animation: bob 5s infinite;
+  }
+  
+  .bod {
+    position: absolute;
+    top: 56%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    
+    width: 30%;
+    height: 42%;
+    border-radius: 40px 50px 140px 60px;
+    background-color: #ddd;
+    animation: bob 5s infinite;
+  }
+  .chest {
+    position: absolute;
+    top: 45%;
+    left: 53.5%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    
+    width: 25%;
+    height: 20%;
+    border-radius: 20px 50px 70px 90px;
+    background-color: #fff;
+    animation: bob 5s infinite;
+  }
+  .head {
+    position: absolute;
+    top: 26%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    
+    width: 26%;
+    height: 20%;
+    border-radius: 70px 70px 10px 10px;
+    background-color: #fff;
+    animation: face 10s infinite;
+  }
+  .headback {
+    position: absolute;
+    top: 26%;
+    left: 49%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    
+    width: 26%;
+    height: 21.5%;
+    border-radius: 70px 70px 10px 10px;
+    background-color: #ccc;
+    animation: head 10s infinite;
+  }
+  
+  .beak {
+    position: absolute;
+    top: 31%;
+    left: 53%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    
+    width: 1%;
+    height: 3%;
+    border-radius: 5px 10px 20px 2px;
+    background-color: #666;
+      animation: mouth 10s infinite, beak 10s infinite;
+  }
+  .nose {
+    position: absolute;
+    top: 29.3%;
+    left: 53%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    
+    width: 2%;
+    height: 1%;
+    border-radius: 5px;
+    background-color: #aaa;
+      animation: mouth 10s infinite;
+  }
+  .eyeleft {
+    position: absolute;
+    top: 25.4%;
+    left: 58%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    
+    width: 4.4%;
+    height: 4%;
+    border-radius: 10px 5px;
+    background-color: #555;
+    animation: eye 10s infinite;
+  }
+  .eyeright {
+    position: absolute;
+    top: 25.5%;
+    left: 47%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    
+    width: 4.5%;
+    height: 4%;
+    border-radius: 5px 10px;
+    background-color: #555;
+    animation: eye 10s infinite;
+  }
+  .irisleft {
+    position: absolute;
+    top: 25.4%;
+    left: 58%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    
+    width: 3.2%;
+    height: 3%;
+    border-radius: 10px 5px;
+    background-color: #f9bd3b;
+    animation: eye 10s infinite;
+  }
+  .irisright {
+    position: absolute;
+    top: 25.5%;
+    left: 47.1%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    
+    width: 3.6%;
+    height: 3%;
+    border-radius: 5px 10px;
+    background-color: #f9bd3b;
+    animation: eye 10s infinite;
+  }
+  .lightleft {
+    position: absolute;
+    top: 25.2%;
+    left: 58.5%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    
+    width: 2%;
+    height: 2.1%;
+    border-radius: 5px;
+    background-color: #333;
+  animation: iris 10s infinite;
+  }
+  .lightright {
+    position: absolute;
+    top: 25.4%;
+    left: 47.7%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    
+    width: 2.1%;
+    height: 2%;
+    border-radius: 5px;
+    background-color: #333;
+   animation: irisleft 10s infinite;
+  }
+  
+  .wingleft {
+    position: absolute;
+    top: 61%;
+    left: 34%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%) rotate(3deg);
+    
+    width: 12%;
+    height: 43%;
+    border-radius: 100px 10px 100px 0px;
+    background-color: #fff;
+    animation: bob 7s infinite;
+  }
+  .armpitleft {
+    position: absolute;
+    top: 44%;
+    left: 34%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    
+    width: 13%;
+    height: 15%;
+    border-radius: 100px 10px 100px 10px;
+    background-color: #bbb;
+    animation: bob 7s infinite;
+  }
+  .wingright {
+    position: absolute;
+    top: 61%;
+    left: 59%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%) rotate(3deg);
+    
+    width: 12%;
+    height: 38%;
+    border-radius: 50px 10px 100px 0px;
+    background-color: #eee;
+    animation: bob 7s infinite;
+  }
+  .armpitright {
+    position: absolute;
+    top: 44%;
+    left: 60%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    
+    width: 13%;
+    height: 15%;
+    border-radius: 10px 70px 10px 100px;
+    background-color: #bbb;
+    animation: bob 7s infinite;
+  }
+  .thighleft {
+    position: absolute;
+    top: 75%;
+    left: 45%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    
+    width: 9%;
+    height: 10%;
+    border-radius: 40px 20px 70px 20px;
+    background-color: #999;
+  }
+  .thighright {
+    position: absolute;
+    top: 74%;
+    left: 51%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    
+    width: 8%;
+    height: 10%;
+    border-radius: 40px 20px 70px 20px;
+    background-color: #888;
+  }
+  .shinleft {
+    position: absolute;
+    top: 80%;
+    left: 43%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%) rotate(10deg);
+    
+    width: 2%;
+    height: 5%;
+    border-radius: 40px 20px 70px 20px;
+    background-color: #666;
+  }
+  .shinright {
+    position: absolute;
+    top: 79%;
+    left: 49%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%) rotate(10deg);
+    
+    width: 2%;
+    height: 5%;
+    border-radius: 40px 20px 70px 20px;
+    background-color: #666;
+  }
+  .stick {
+    position: absolute;
+    top: 81%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%) rotate(-10deg);
+    
+    width: 80%;
+    height: 2%;
+    border-radius: 40px 20px 70px 20px;
+    background-color: #7a5119;
+  }
+  
+  .footleft {
+    position: absolute;
+    top: 82%;
+    left: 44%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%) rotate(-10deg);
+    
+    width: 2%;
+    height: 3%;
+    border-radius: 40px 20px 70px 20px;
+    background-color: #666;
+  }
+  .footright {
+    position: absolute;
+    top: 81%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%) rotate(-10deg);
+    
+    width: 2%;
+    height: 3%;
+    border-radius: 40px 20px 70px 20px;
+    background-color: #666;
+  }
+  
+  .spot0 {
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    
+    width: 3%;
+    height: 1.5%;
+    border-radius: 10px 50px;
+    background-color: #666;
+    animation: bobs 5s infinite;
+  }
+  .spot1 {
+    position: absolute;
+    top: 60%;
+    left: 60%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    
+    width: 2.5%;
+    height: 1.5%;
+    border-radius: 50px 10px;
+    background-color: #666;
+    animation: bobs 5s infinite;
+  }
+  .spot2 {
+    position: absolute;
+    top: 55%;
+    left: 45%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    
+    width: 3%;
+    height: 1.5%;
+    border-radius: 10px 50px;
+    background-color: #666;
+    animation: bobs 5s infinite;
+  }
+  .spot3 {
+    position: absolute;
+    top: 55%;
+    left: 63%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    
+    width: 2.5%;
+    height: 1.5%;
+    border-radius: 50px 10px;
+    background-color: #666;
+    animation: bobs 5s infinite;
+  }
+  .spot4 {
+    position: absolute;
+    top: 55%;
+    left: 55%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    
+    width: 3%;
+    height: 1.5%;
+    border-radius: 50px 50px;
+    background-color: #666;
+    animation: bobs 5s infinite;
+  }
+  .spot5 {
+    position: absolute;
+    top: 65%;
+    left: 55%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    
+    width: 3%;
+    height: 1.5%;
+    border-radius: 50px 50px;
+    background-color: #666;
+    animation: bobs 5s infinite;
+  }
+  .spot6 {
+    position: absolute;
+    top: 65%;
+    left: 47%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    
+    width: 3%;
+    height: 1.5%;
+    border-radius: 10px 50px;
+    background-color: #666;
+    animation: bobs 5s infinite;
+  }
+  .spot7 {
+    position: absolute;
+    top: 65%;
+    left: 61%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    
+    width: 2.5%;
+    height: 1.5%;
+    border-radius: 50px 10px;
+    background-color: #666;
+    animation: bobs 5s infinite;
+  }
+  .spot8 {
+    position: absolute;
+    top: 70%;
+    left: 57%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    
+    width: 2%;
+    height: 1.5%;
+    border-radius: 50px 10px;
+    background-color: #666;
+    animation: bobs 5s infinite;
+  }
+  .spot9 {
+    position: absolute;
+    top: 70%;
+    left: 51%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    
+    width: 2.5%;
+    height: 1.5%;
+    border-radius: 10px 50px;
+    background-color: #666;
+    animation: bobs 5s infinite;
+  }
+  
+  
+  @keyframes face {
+    50%{
+      left: 48%;
+    }
+    75%{
+      
+    }
+    90%{
+      left: 51%;
+    }
+  }
+  @keyframes head {
+    50%{
+      left: 50%;
+    }
+    75%{
+      
+    }
+    90%{
+      left: 48%;
+    }
+  }
+  @keyframes mouth {
+    50%{
+      left: 47%;
+    }
+    75%{
+      left: 53%;
+    }
+    90%{
+      left: 55%;
+    }
+  }
+  @keyframes beak {
+    50%{
+      border-radius: 10px 5px 2px 20px;
+    }
+    75%{
+      border-radius: 5px 10px 20px 2px;
+    }
+    90%{
+      border-radius: 5px 10px 20px 2px;
+    }
+  }
+  @keyframes eye {
+    50%{
+      transform: translate(-140%, -50%);
+    }
+    75%{
+      transform: translate(-50%, -50%);
+    }
+    90%{
+       transform: translate(-10%, -50%);
+    }
+  }
+  @keyframes iris {
+    50%{
+      transform: translate(-230%, -50%);
+    }
+    75%{
+      transform: translate(-50%, -50%);
+    }
+    90%{
+       transform: translate(-10%, -50%);
+    }
+  }
+  @keyframes irisleft {
+  
+    50%{
+    left: 43%;
+    }
+    75%{
+    left: 47.7%;
+    }
+    90%{
+    left: 49%;
+    }
+  }
+  @keyframes bob {
+    50%{
+      transform: translate(-50%, -54%);
+    }
+    75% {
+       transform: translate(-50%, -50%);
+    }
+    90% {
+       transform: translate(-50%, -49%);
+    }
+  }
+  @keyframes bobs {
+    50%{
+      transform: translate(-50%, -140%);
+    }
+    75% {
+       transform: translate(-50%, -50%);
+    }
+    90% {
+       transform: translate(-50%, 0%);
+    }
+  }
