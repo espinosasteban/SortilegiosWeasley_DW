@@ -303,6 +303,22 @@
     color: #95BF3B;
 }
 
+.aviso-inicio-sesion {
+    background-color: #212426;
+    border: 2px solid #463859;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    color: #F2F2F2;
+    width: 16rem;
+    padding: 1rem;
+    margin: 1rem auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 3rem;
+}
+
 
 
 

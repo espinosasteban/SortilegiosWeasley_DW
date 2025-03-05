@@ -58,7 +58,7 @@ function App() {
                                 <Route path="/crearCuenta" element={<CrearCuenta />} />
                                 <Route path="/cambiarContraseña" element={<CambiarContraseña />} />
                                 <Route path="/perfil" element={<AppProfile/>} /> {/* Agregado */}
-                                <Route path="/admin" element={<AppAdmin/>} /> {/* Agregado */}
+                                <Route path="/gestion-producto" element={<AppAdmin/>} /> {/* Agregado */}
                                 <Route path ="/procesoCompra" element={<ProcesoCompra infoContacto={true} />} />
                                 <Route path ="/gracias" element={<AgradecimientoCompra/>} />
                         </Routes>
