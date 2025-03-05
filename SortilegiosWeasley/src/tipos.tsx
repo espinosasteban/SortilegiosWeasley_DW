@@ -11,7 +11,11 @@ export interface Articulo {
 export interface ArticuloCarrito extends Articulo {
     total_items: number;
 }
-
+export interface Carrito {
+    _id: string;
+    userId: string;
+    items: Articulo[]
+}
 export interface ResenaArticulo {
     puntuacion: number;
     fecha: Date;

@@ -51,7 +51,7 @@ class CarritoController {
             if (!carrito) {
                 return res.status(404).json({ error: "Carrito no encontrado" });
             }
-    
+
             const itemsFormateados = carrito.items.map(item => ({
                 _id: item.productoId._id,
                 nombre: item.productoId.nombre,
@@ -65,6 +65,7 @@ class CarritoController {
             }));
     
             res.json({
+                _id: carrito._id,
                 userId: carrito.userId,
                 items: itemsFormateados
             });
