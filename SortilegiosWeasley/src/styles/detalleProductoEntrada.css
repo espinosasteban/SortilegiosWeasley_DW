@@ -1,0 +1,817 @@
+
+.main-vista-producto {
+    background-color: #e0e7f1;
+    padding: 4rem 1rem 1rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.detalle-producto-seccion {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 2rem;
+    align-items: center;
+    margin: 5rem 2rem 2rem 2rem;
+    background-color: #423773;
+    border-radius: 1rem;
+    width: 80%;
+    height: 100%;
+}
+
+
+
+.mostrador-producto-seccion {
+    display:flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    height: 100%;
+}
+
+.mostrador-producto-seccion img {
+    width: 20rem;
+    height: 20rem;
+    border-radius: 1rem;
+    margin: 1rem;
+}
+
+.detalle-seccion {
+    border-radius: 0.75rem;
+    max-width: 33rem;
+    margin: 0 1rem 1rem 1rem;
+    text-align: center;
+    
+}
+
+.detalle-seccion h2 {
+    font-size: 2.5rem;
+    color: #e5dcdc;
+    margin-bottom: 0.625rem;
+}
+
+
+
+.detalle-seccion-descripcion {
+    font-size: 1.2rem;
+    color: #bfbdf1;
+    background-color: #5e519f;
+    padding: 1rem;
+    width: fit-content;
+    border-radius: 0.75rem;
+    margin-bottom: 0.625rem;
+}
+
+
+
+.contenedor-detalle-seccion {
+    display:flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.detalle-seccion-precio {
+    font-size: 1.5rem;
+    color: #e6e5f8;
+    background-color: #c96655;
+    padding: 0.5rem 3rem;
+    border-radius: 0.75rem;
+    margin: 1rem;
+}
+
+.detalle-seccion button {
+    background-color: #1a1a1a;
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+    margin: 1rem;
+}
+
+.detalle-seccion button:hover {
+    background-color: #0056b3;
+}
+
+@media (max-width: 1000px) {
+    .detalle-seccion {
+        margin: 3rem 2rem 2rem 2rem;
+    }
+    
+}
+
+.detalle-resena-seccion {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: 2rem 2rem 2rem 2rem;
+    background-color: #8271fb;
+    border-radius: 1rem;
+    width: 85%;
+    height: fit-content;
+
+}
+
+
+.titulo-detalle-resena {
+    font-size: 2em;
+    color: #F2F2F2;
+    margin: 2rem 1rem 2rem 2rem;
+}
+
+.valoracion-seccion {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #1a1a1a;
+    width: 70%;
+    padding: 1rem;
+    border-radius: 10px;
+}
+
+.vitrina-resena {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    height: fit-content;
+}
+
+.resena {
+    background-color: #212426;
+    border: 2px solid #463859;
+    border-radius: 10px;
+    padding: 2rem;
+    margin: 2rem; /* Centrado y con margen */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    color: #F2F2F2;
+    width: 30rem; /* Ancho máximo para que no ocupe toda la página */
+}
+
+.crear-resena {
+    background-color: #212426;
+    border: 2px solid #463859;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    color: #F2F2F2;
+    width: 32rem;
+    padding: 1rem;
+    margin: 1rem auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 3rem;
+}
+
+.contenido-resena {
+    width: 90%;
+    height: 5rem;
+    background-color: #F2F2F2;
+    border: none;
+    border-radius: 5px;
+    color: #212426;
+    resize: none;
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    font-weight: 400;
+    font-size: 1em;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: box-shadow 0.3s ease;
+    padding: 0.5rem; 
+}
+
+
+.puntuacion-varita-resena {
+    display: flex;
+    justify-content: center;
+    margin-top: -1.5rem;
+    margin-bottom: 0.2rem;
+}
+
+.contenido-resena:focus {
+    outline: none;
+    box-shadow: inset 0 4px 8px #423773;
+}
+
+.boton-crearresena {
+    background-color: #D9663D;
+    color: #fff;
+    border: none;
+    margin: 1rem;
+    padding: 0.5rem 1.5rem;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.boton-crearresena:hover {
+    background-color: #423773;
+    transform: translateY(-2px);
+}
+
+.boton-crearresena:active {
+    transform: translateY(1px);
+}
+
+.crear-resena h2{
+    font-size: 1.5em;
+    margin-top: 2rem;
+}
+
+.resena header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.resena header h3 {
+    font-size: 1.5em;
+    color: #D9663D;
+    margin: 0;
+
+}
+
+.resena header p {
+    font-size: 0.9em;
+    color: #95BF3B;
+
+}
+
+.resena .contenido {
+    background-color: #F2F2F2;
+    padding: 1.5rem;
+    border-radius: 5px;
+    margin-bottom: 1.5rem;
+    color: #212426; /* Texto oscuro sobre fondo claro */
+    
+}
+
+.resena .contenido p {
+    margin: 0;
+    font-size: 1em;
+    line-height: 1.5;
+}
+
+.resena footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.resena .utilidad {
+    display: flex;
+    align-items: center;
+}
+
+.resena .utilidad button {
+    background-color: #D9663D;
+    border: none;
+    color: #F2F2F2;
+    padding: 5px 10px;
+    margin: 0 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.resena-comentario {
+    color: #0d0d0f;
+}
+
+.resena .utilidad button:hover {
+    background-color: #D97941;
+}
+
+.resena .utilidad p {
+    margin: 0 5px;
+    font-size: 1em;
+    color: #F2F2F2;
+}
+
+.resena .calificacion {
+    font-size: 1.2em;
+    color: #95BF3B;
+}
+
+.aviso-inicio-sesion {
+    background-color: #212426;
+    border: 2px solid #463859;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    color: #F2F2F2;
+    width: 16rem;
+    padding: 1rem;
+    margin: 1rem auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 3rem;
+}
+
+.seleccionado {
+    background-color: #4CAF50;
+    color: white;
+}
+
+
+
+
+
+
+/*ANIMACIONES*/
+
+/*ANIMACIÓN HUEVOIRROMPIBLE*/
+
+@keyframes caerYRebotar {
+    0% {
+        transform: translateY(-100px) rotate(0deg);
+    }
+    50% {
+        transform: translateY(0) rotate(360deg);
+    }
+    60% {
+        transform: translateY(-30px) rotate(360deg);
+    }
+    70% {
+        transform: translateY(0) rotate(360deg);
+    }
+    80% {
+        transform: translateY(-15px) rotate(360deg);
+    }
+    100% {
+        transform: translateY(0) rotate(360deg);
+    }
+}
+
+
+@keyframes brillar {
+    0% {
+
+        filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.5));
+    }
+    50% {
+
+        filter: drop-shadow(0 0 20px rgba(255, 215, 0, 1)) drop-shadow(0 0 40px rgba(255, 215, 0, 0.7));
+    }
+    100% {
+
+        filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.5));
+    }
+}
+
+
+#huevoirrompible {
+    animation: caerYRebotar 2s ease-in-out forwards; /* Solo se ejecuta una vez */
+    transition: filter 0.5s ease;
+    filter: drop-shadow(0 0 1rem rgba(255, 215, 0, 0.5));
+}
+
+#huevoirrompible:hover {
+    filter: drop-shadow(0 0 7rem rgba(255, 215, 0, 1)) drop-shadow(0 0 3rem rgba(255, 237, 145, 0.7));
+}
+
+/* Animación principal: explosión */
+@keyframes shake {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    10% {
+        transform: translateX(-7px); filter: brightness(0.7);
+    }
+    20% {
+        transform: translateX(12px);
+    }
+    30% {
+        transform: translateX(-15px); filter: brightness(1);
+    }
+    40% {
+        transform: translateX(9px);
+    }
+    50% {
+        transform: translateX(0); filter: brightness(1.5);
+    }
+    60% {
+        transform: translateX(-10px); filter: brightness(0.8); 
+    }
+    70% {
+        transform: translateX(8px); 
+    }
+    80% {
+        transform: translateX(-13px); 
+    }
+    90% {
+        transform: translateX(6px); 
+    }
+}
+
+@keyframes grow {
+    0% { transform: scale(1); filter: brightness(1.3);}
+    100% { transform: scale(1.5); filter: brightness(1.5)}
+}
+
+@keyframes explode {
+    0% { transform: scale(1.3); opacity: 1; filter: brightness(3)}
+    100% { transform: scale(3); opacity: 0; filter: brightness(0)}
+
+}
+
+#bombaarcanaoscura {
+    transition: all 0.3s ease-in-out;
+    animation: shake 2s ease-in-out infinite;
+}
+
+#bombaarcanaoscura:hover {
+    animation: shake 0.5s ease-in-out, grow 0.5s 0.5s ease-in-out, explode 1s 1s;
+
+}
+
+/* ----------------------------------------------------------------------------------*/
+/*Animación varita*/
+
+#varitamagicafake {
+    animation: float-animation 2s infinite ease-in-out;
+    filter: drop-shadow(0 0 6rem rgb(94, 0, 255)) drop-shadow(0 0 5rem rgba(225, 132, 253, 0.7)) drop-shadow(0 0 4rem rgba(255, 255, 255, 0.8)) brightness(1.7);
+}
+
+
+#varitamagicafake:hover {
+
+    animation: glow-animation 2s infinite ease-in-out, rotate-animation 1.3s infinite; /* Añadimos la animación de rotación */
+    filter: drop-shadow(0 0 6rem rgb(236, 212, 64)) drop-shadow(0 0 5rem rgba(197, 191, 107, 0.7)) drop-shadow(0 0 4rem rgba(255, 255, 255, 0.8)) brightness(1.7);
+
+
+}
+
+/* Animación del brillo */
+@keyframes glow-animation {
+    0% {
+
+        transform: scale(0.8);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(0.8);
+    }
+}
+
+/* Animación de flotación */
+@keyframes float-animation {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-2rem);
+    }
+}
+
+/* Animación de rotación */
+@keyframes rotate-animation {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
+/*-------------------------------------------------------------------------*/
+/*Animacion Poción de Amor*/
+
+#pociondeamor {
+    animation: palpitar 1.5s infinite ease-in-out;
+    filter: drop-shadow(0 0 3rem rgba(255, 105, 180, 0.8));
+}
+
+/* Efecto de palpitación */
+@keyframes palpitar {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    60% {
+        transform: scale(1);
+    }
+    70% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+/*-------------------------------------------------------------------------*/
+/*Animacion Elixir Removedor de Acné*/
+
+#elixirremovedordeacne {
+    animation: brillar 2s ease-in-out infinite;
+    filter: drop-shadow(0 0 20px rgb(192, 199, 98)) drop-shadow(0 0 5px rgba(200, 211, 49, 0.5));
+}
+
+#elixirremovedordeacne:hover {
+    animation: shake-diagonal 1s ease-in-out;
+  }
+
+
+@keyframes shake-diagonal {
+    0% {
+      transform: translate(0, 0) rotate(0deg);
+    }
+    10% {
+      transform: translate(-10px, 10px) rotate(-5deg);
+    }
+    20% {
+      transform: translate(10px, -10px) rotate(5deg);
+    }
+    30% {
+      transform: translate(-10px, 10px) rotate(-5deg);
+    }
+    40% {
+      transform: translate(10px, -10px) rotate(5deg);
+    }
+    50% {
+      transform: translate(-10px, 10px) rotate(-5deg);
+    }
+    60% {
+      transform: translate(10px, -10px) rotate(5deg);
+    }
+    70% {
+      transform: translate(-10px, 10px) rotate(-5deg);
+    }
+    80% {
+      transform: translate(10px, -10px) rotate(5deg);
+    }
+    90% {
+      transform: translate(-10px, 10px) rotate(-5deg);
+    }
+    100% {
+      transform: translate(0, 0) rotate(0deg);
+    }
+  }
+
+/*-------------------------------*/
+/*Animacion WildFire*/
+
+#wildfirewhizz-bangs {
+    animation: shake 1.5s ease-in-out infinite;
+}
+
+#wildfirewhizz-bangs:hover {
+    animation: explode 1s ease-out forwards;
+}
+
+@keyframes shake {
+    0%, 100% {filter: brightness(1.1); transform: rotate(0deg) translate(0, 0); }
+    25% {filter: brightness(1.5); transform: rotate(2deg) translate(1px, -1px); }
+    50% {filter: brightness(1.1); transform: rotate(-2deg) translate(-1px, 1px); }
+    75% {filter: brightness(1.5); transform: rotate(2deg) translate(1px, -1px); }
+}
+
+
+@keyframes explode {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+        filter: brightness(3) blur(0);
+    }
+
+    100% {
+        transform: scale(3);
+        opacity: 0;
+        filter: brightness(1.7) blur(2px);
+    }
+}
+
+
+/*-------------------------------*/
+/*Animacion Pastillas Vomitivas*/
+
+#pastillasvomitivas {
+    animation: vomitoEffect 2s infinite alternate ease-in-out,
+    colorEffect 2s infinite alternate ease-in-out;
+    transform-origin: bottom;
+    filter: drop-shadow(0 0 3rem rgba(13, 208, 97, 0.5));
+}
+
+@keyframes vomitoEffect {
+    0% {
+        filter: hue-rotate(0deg) brightness(1);
+        transform: scaleY(1);
+    }
+    50% {
+        filter: hue-rotate(45deg) brightness(1.5);
+        transform: scale3d(1.2, 1.2, 1.2);
+    }
+
+    100% {
+        filter: hue-rotate(90deg) brightness(1.2);
+        transform: scaleY(0.7); /* Aumenta la altura en un 20% */
+    }
+}
+
+
+
+@keyframes colorEffect {
+    0% {
+        filter: hue-rotate(0deg) brightness(1) drop-shadow(0 0 3rem rgba(13, 208, 97, 0.5));
+    }
+    50% {
+        filter: hue-rotate(45deg) brightness(1.5) drop-shadow(0 0 4rem rgba(13, 208, 97, 0.7));
+    }
+    100% {
+        filter: hue-rotate(90deg) brightness(1.2) drop-shadow(0 0 5rem rgba(13, 208, 97, 1));
+    }
+}
+
+/*-------------------------------*/
+/*Animacion Guantes*/
+
+
+@keyframes activarPoder {
+    0% {
+        filter: drop-shadow(0 0 5px rgba(0, 162, 255, 0.6));
+        transform: scale(1);
+    }
+    50% {
+        filter: drop-shadow(0 0 15px rgba(0, 162, 255, 0.8));
+        transform: scale(1.1);
+    }
+    100% {
+        filter: drop-shadow(0 0 25px rgba(0, 162, 255, 1));
+        transform: scale(1.05) rotate(5deg);
+    }
+}
+
+@keyframes girar180 {
+    0% {
+        transform: rotate(0deg);
+    }
+    10% {
+        transform: rotate(20deg);
+        filter: drop-shadow(0 0 2rem rgb(86, 191, 250)) brightness(1.01)
+    }
+    20% {
+        transform: rotate(-30deg);
+        filter: drop-shadow(0 0 1rem rgb(163, 220, 255)) brightness(1.05)
+
+    }
+
+    40% {
+        transform: rotate(40deg);
+        filter: drop-shadow(0 0 3rem rgb(94, 193, 255)) brightness(1.1)
+
+    }
+
+    60% {
+        transform: rotate(-40deg);
+        filter: drop-shadow(0 0 1rem rgb(214, 241, 255)) brightness(1.15)
+    }
+
+    70% {
+        transform: rotate(40deg);
+        filter: drop-shadow(0 0 1rem rgb(86, 194, 253)) brightness(1.15)
+    }
+
+    80% {
+        filter: drop-shadow(0 0 2rem rgb(163, 220, 255)) brightness(1.2)
+    }
+
+    100% {
+        transform: rotate(-180deg) scale(1.2);
+        filter: drop-shadow(0 0 4rem rgba(0, 162, 255, 0.7)) brightness(1.3);
+    }
+
+}
+#guantesescudo {
+    animation: activarPoder 2s infinite alternate ease-in-out;
+    transform-origin: center;
+    transition: transform 0.5s ease-out, filter 0.5s ease-out;
+    will-change: filter, transform;
+}
+
+#guantesescudo:hover{
+    animation: girar180 2.7s ease-in-out forwards;
+}
+
+/*-------------------------------*/
+/*Animacion sombrero Antigravedad*/
+
+#sombreroantigravedad {
+    animation: volar 4s ease-in-out infinite;
+    filter: drop-shadow(0 0 2rem rgba(214, 203, 39, 0.5));
+}
+
+@keyframes volar {
+    0% {
+        transform: translateX(0) translateY(0) rotate(0deg) scale(1.2);
+    }
+    25% {
+        transform: translateX(30px) translateY(-50px) rotate(45deg) scale(0.8);
+    }
+    50% {
+        transform: translateX(-40px) translateY(-100px) rotate(0deg) scale(0.6);
+    }
+    75% {
+        transform: translateX(20px) translateY(-50px) rotate(45deg) scale(0.8);
+    }
+    100% {
+        transform: translateX(0) translateY(0) rotate(0deg) scale(1.2);
+    }
+}
+
+/*-------------------------------*/
+/*Animacion polvos peruanos*/
+
+@keyframes pulsoBrillo {
+    0% { filter: drop-shadow(0 0 2rem rgba(2, 85, 86, 0.3)); }
+
+    50% { filter: drop-shadow(0 0 8rem rgba(1, 22, 24, 1)) drop-shadow(0 0 15rem rgba(1, 22, 24, 1)) brightness(0.5); }
+
+    100% { filter: drop-shadow(0 0 2rem rgba(3, 84, 86, 0.3)); }
+}
+
+@keyframes oscurecer {
+    0% { filter: brightness(1); }
+    100% { filter: brightness(0); }
+}
+
+#polvoperuanodeoscuridadinstantanea {
+    animation: pulsoBrillo 2s infinite ease-in-out; 
+}
+
+#polvoperuanodeoscuridadinstantanea:hover {
+    animation: oscurecer 1s forwards ease-in-out;
+}
+
+
+/*-------------------------------*/
+/*Animacion ratones mágicos*/
+
+@keyframes movimientoRatones {
+    0% { transform: translateX(0) translateY(0); }
+    25% { transform: translateX(10px) translateY(-40px); }
+    50% { transform: translateX(-5px) translateY(15px); }
+    75% { transform: translateX(20px) translateY(-20px); }
+    100% { transform: translateX(0) translateY(0); }
+}
+
+@keyframes brilloMagico {
+    0% { filter: brightness(1); opacity: 1}
+    50% { filter: brightness(1.2); opacity: 0.5}
+    100% { filter: brightness(1); opacity: 1}
+}
+
+@keyframes titilar {
+    0% { opacity: 1; }
+    25% { opacity: 0.5; }
+    50% { opacity: 1; }
+    75% { opacity: 0.5; }
+    85% { opacity: 1}
+    100% { opacity: 0; }
+}
+
+
+#losratonesmagicosdemaria {
+    animation: movimientoRatones 3s infinite ease-in-out, brilloMagico 2s infinite ease-in-out;
+    transition: opacity 1s ease-in-out;
+    opacity: 1;
+}
+
+#losratonesmagicosdemaria:hover {
+    animation: titilar 2.3s ease-in-out forwards, movimientoRatones 0.7s infinite ease-in-out forwards;
+}
+
+/*-------------------------------*/
+/*Animacion caramelo longuilonguo*/
+
+@keyframes estirarLengua {
+    0% { transform: scaleY(1); }
+    50% { transform: scaleY(1.6); }
+    100% { transform: scaleY(1); }
+}
+
+#caramelolonguilonguo {
+    filter: drop-shadow(0 0  2rem rgba(255, 0, 0, 0.5));
+    transform-origin: top;
+    transition: transform 0.5s ease-in-out; /* Transición para el estado normal */
+}
+
+#caramelolonguilonguo:hover {
+    animation: estirarLengua 6s ease-in-out infinite;
+}

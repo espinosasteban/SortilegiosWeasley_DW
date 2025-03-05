@@ -1,0 +1,150 @@
+.navbar {
+    background-color: #f4f4f4;
+    padding: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    width: 100%;
+    max-height: 4rem;
+    z-index: 1000;
+}
+
+.logo {
+    width: 5.5rem;
+    height: 5.5rem;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar-list {
+    display: flex;
+    justify-content: space-around;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+    height: 4rem;
+}
+
+.navbar-item {
+    cursor: pointer;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-transform: capitalize;
+    color: #333;
+    transition: color 0.3s;
+}
+
+.navbar-item a:hover {
+    color: #8271fb;
+}
+
+.navbar-item a {
+    color: #463859;
+    margin: 1rem;
+}
+
+.buscar {
+    display: flex;
+    justify-content: center;
+    margin: 1rem;
+    background-color: #d77840;
+    align-items: center;
+    border-radius: 0.5rem;
+    padding: 0;
+}
+
+.buscar input {
+    width: 100%;
+    padding: 0.8rem;
+    border: none;
+    background-color: transparent;
+    margin-right: 0.7rem;
+    -moz-border-radius-topleft: 0.5rem;
+    -moz-border-radius-bottomleft: 0.5rem;
+}
+
+.buscar input::placeholder {
+    color: #fff;
+    font-size: 1rem;
+}
+
+.buscar input:active, .buscar input:focus {
+    outline: none;
+}
+
+.icono-buscar {
+    margin-right: 0.5rem;
+}
+
+
+
+
+
+.active {
+    color: #0a1b2e;
+}
+
+.menu-icon, .right-menu-icon {
+    display: none;
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+.navbar-sections, .right-menu {
+    display: flex;
+    align-items: center;
+}
+
+@media (max-width: 1410px) {
+    .right-menu-icon {
+        display: block; /* Mostrar el ícono del menú de la derecha */
+    }
+
+    .right-menu {
+        display: none; /* Ocultar el menú de la derecha por defecto */
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background-color: #f4f4f4;
+        width: 200px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .right-menu.open {
+        display: flex; /* Mostrar el menú de la derecha cuando esté abierto */
+    }
+
+    .buscar::placeholder {
+        text: "Buscar";
+    }
+
+}
+
+@media (max-width: 1200px) {
+    .menu-icon {
+        display: block; /* Mostrar el ícono del menú de secciones */
+    }
+
+    .navbar-sections {
+        display: none; /* Ocultar las secciones por defecto */
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        background-color: #f4f4f4;
+        width: 100%;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        align-items: center;
+    }
+
+    .navbar-sections.open {
+        display: flex; /* Mostrar las secciones cuando el menú esté abierto */
+    }
+
+    .navbar-item {
+        width: 100%;
+        text-align: center;
+        padding: 1rem 0;
+    }
+}
+

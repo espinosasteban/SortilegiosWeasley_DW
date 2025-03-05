@@ -1,0 +1,91 @@
+.entrada-section {
+    background-color: #D97941;
+    padding: 0;
+    margin-top: 5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.entrada-section h1 {
+    margin: 0;
+    padding: 4rem;
+}
+
+.entrada-section img {
+
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.entrada-section video{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1000;
+}
+
+
+.producto-section {
+    background-color:#e0e7f1;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 3rem;
+}
+
+.carrusel-contenedor {
+    display:flex;
+    flex-direction: column;
+    background-color: #D97941;
+    height: 100%
+}
+
+.titulo-descubre-mas {
+    font-size: 4rem;
+}
+
+.carrusel-productos {
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 2rem;;
+    width: 100%;
+
+}
+
+.producto-carrusel {
+    background-color: #262626;
+    height: 40rem;
+    width: 24rem;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 2rem 8rem 0rem 1rem;
+
+}
+
+.producto-carrusel h2 {
+    font-size: 2rem;
+}
+
+.carrusel-productos a {
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.carrusel-productos a:nth-child(2) img {
+
+    z-index: 900;
+
+
+}
+
+.carrusel-productos a img {
+    filter: drop-shadow(0px 0px 3rem #ffffb3);
+}
