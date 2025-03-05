@@ -10,6 +10,7 @@ import routesResenas from './routes/resena.js';
 import authRoutes from './routes/auth.js';
 import routesDireccion from './routes/direccion.js';
 import routesPerfil from './routes/perfil.js';
+import routesCarrito from './routes/carrito.js'; 
 
 const app = express();
 
@@ -29,6 +30,8 @@ app.use('/resenas', routesResenas);
 app.use('/auth', authRoutes);
 app.use('/mis-direcciones', authMiddleware, routesDireccion);
 app.use('/mi-informacion', authMiddleware, routesPerfil);
+app.use('/carrito', authMiddleware, routesCarrito);
+
 
 // 4. Conectar a MongoDB
 mongoose.connect(`mongodb+srv://${process.env.USER_DB}:${process.env.PASSWORD_DB}@${process.env.SERVER_DB}/SortilegiosWeasley?retryWrites=true&w=majority&appName=Sortilegios`)
@@ -38,3 +41,4 @@ mongoose.connect(`mongodb+srv://${process.env.USER_DB}:${process.env.PASSWORD_DB
 // 5. Iniciar servidor
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`🚀 Servidor corriendo en el puerto ${PORT}`));
+

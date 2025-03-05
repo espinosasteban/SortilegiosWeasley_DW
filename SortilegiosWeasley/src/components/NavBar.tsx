@@ -1,8 +1,6 @@
 import '../styles/NavBar.css';
 import {Link, useNavigate} from "react-router"; // Importa Link
 
-// Types
-import ArticuloCarrito  from './carritoCompras';
 // External Components
 import Badge from '@mui/material/Badge'
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
@@ -111,7 +109,7 @@ function NavBar({ setSeccion }: NavBarProps) {
                         </Drawer>
                         <IconButton onClick={() => setCartOpen(true)} aria-label="Carrito de Compras">
                             <Badge badgeContent={getTotalCartItems()} color="error">
-                                <AddShoppingCartIcon />
+                                <AddShoppingCartIcon sx = {{'color': '#646cff'}} />
                             </Badge>
                         </IconButton>
                     </li>

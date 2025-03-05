@@ -25,7 +25,7 @@ import { useEffect, useState } from 'react';
 function App() {
     const [seccion, setSeccion] = useState<string | null>(null);
     const [productos, setProductos] = useState<Array<Articulo>>([]);
-    const [producto, setProducto] = useState<Articulo | null>(null);
+    const [_, setProducto] = useState<Articulo | null>(null);
 
     useEffect(() => {
         console.log('Entré al useEffect');
