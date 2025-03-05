@@ -12,6 +12,7 @@ import { CartContext } from '../../contexts/CartContext.tsx';
 
 // Hooks
 import { useContext, useEffect, useState } from 'react';
+import {useAuth} from "../ProcesoLoginUsuario/AuthContext.tsx";
 
 interface VistaProductoProps {
     productos: Articulo[];
@@ -58,7 +59,7 @@ export default function VistaProducto({ productos, setProducto }: VistaProductoP
             {producto ? (
                 <>
                     <DetalleProducto producto={producto} resenas={resenas} />
-                    <DetalleResena resenas={resenas} />
+                    <DetalleResena resenas={resenas} setResenas={setResenas} productoId={producto._id} />
                 </>
             ) : (
                 <p>No hay producto seleccionado.</p>
@@ -70,6 +71,7 @@ export default function VistaProducto({ productos, setProducto }: VistaProductoP
 function formatearNombreParaRuta(nombre: string): string {
     return nombre.toLowerCase().replace(/\s+/g, '').normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 }
+
 
 interface DetalleProductoProps {
     producto: Articulo;
@@ -102,7 +104,7 @@ function MostradorProducto({ producto, resenas }: MostradorProductoProps) {
                 id={producto?.nombre.toLowerCase().replace(/\s+/g, '').normalize('NFD').replace(/[\u0300-\u036f]/g, '')}
                 alt={producto?.nombre ?? 'Nombre no disponible'}
             />
-            <Valoracion producto={producto} resenas={resenas} />
+            <Valoracion resenas={resenas}/>
         </section>
     );
 }
@@ -147,7 +149,7 @@ function Detalle({ producto }: DetalleProps) {
             setMensajeError("");
         }
     };
-    
+
     return (
         <section className="detalle-seccion">
             <h2>{producto?.nombre ?? 'Nombre no disponible'}</h2>
@@ -164,8 +166,8 @@ function Detalle({ producto }: DetalleProps) {
                 {mensajeError && <p className="mensaje-error">{mensajeError}</p>}
 
                 {/*Aquí supongo que deberíamos pasar también la cantidad*/}
-                <button 
-                    onClick={() => addToCart(producto)} 
+                <button
+                    onClick={() => addToCart(producto)}
                     disabled={stockDisponible === 0}
                 >
                     {stockDisponible === 0 ? "Sin stock" : "Añadir al carrito"}
@@ -175,12 +177,16 @@ function Detalle({ producto }: DetalleProps) {
     );
 }
 
-function DetalleResena({ resenas }: ValoracionProps) {
+
+function DetalleResena({ resenas, setResenas, productoId}: ValoracionProps) {
+    const { usuario } = useAuth();
+
     return (
         <section className="detalle-resena-seccion">
             <h2 className="titulo-detalle-resena">Reseñas del producto</h2>
             <VitrinaResena resenas={resenas} />
-            <CrearResena />
+            {usuario ? (<CrearResena setResenas={setResenas} productoId={productoId} />) :
+            (<p className="aviso-inicio-sesion">Para dejar una resena, inicia sesión</p>)}
         </section>
     );
 }
@@ -192,18 +198,25 @@ interface ValoracionProps {
 function Valoracion({ resenas }: ValoracionProps) {
     let puntuacion = '0';
 
-    if (resenas) {
-        puntuacion = (resenas.reduce((sum, resena) => sum + resena.puntuacion, 0) / resenas.length).toFixed(1);
+    if (resenas && resenas.length > 0) {
+        const promedio = resenas.reduce((sum, resena) => sum + resena.puntuacion, 0) / resenas.length;
+        puntuacion = (Math.round(promedio * 10) / 10).toFixed(1); // Redondea a un decimal
     }
 
     return (
         <section className="valoracion-seccion">
             <h2>
-                {!(resenas) || resenas.length === 0
+                {!resenas || resenas.length === 0
                     ? "Sin calificaciones"
                     : puntuacion}
             </h2>
-            <PuntuacionVarita defaultRaing={Math.floor(Number(puntuacion))} iconSize="2rem" modifiable={false} />
+            {resenas && resenas.length > 0 && (
+                <PuntuacionVarita
+                    defaultRaing={Math.round(Number(puntuacion))}
+                    iconSize="2rem"
+                    modifiable={false}
+                />
+            )}
         </section>
     );
 }
@@ -272,16 +285,70 @@ function Resena({ resenas }: ResenaProps) {
         </>
     );
 }
+interface CrearResenaProps {
+    setResenas: (resenas: Array<ResenaArticulo>) => void;
+    productoId: string;
+}
 
-function CrearResena() {
+
+function CrearResena({ setResenas, productoId }: CrearResenaProps) {
+    const token = localStorage.getItem("token");
+    const [comentario, setComentario] = useState('');
+    const [puntuacion, setPuntuacion] = useState(0);
+
+    const guardarResena = async () => {
+        const resena: ResenaArticulo = {
+            puntuacion: puntuacion,
+            fecha: new Date(),
+            comentario: comentario,
+            recuentoUtil: 0,
+            recuentoNoUtil: 0,
+            producto: productoId,
+            usuario: ''
+        };
+        console.log('Token:', token);
+        console.log(resena);
+        console.log(JSON.stringify(resena));
+
+        const respuesta = await fetch('http://localhost:5000/resenas/', {
+            method: "POST",
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(resena),
+        });
+
+        if (!respuesta.ok) {
+            console.error("Error guardando la reseña");
+            return;
+        }
+
+        // Después de guardar, recargar toda la lista desde la API
+        fetch('http://localhost:5000/resenas/', {
+            method: "GET",
+        })
+            .then((res) => res.json())
+            .then((data) => setResenas(data.filter((resena: ResenaArticulo) => resena.producto === productoId)))
+            .catch((error) => console.error("Error obteniendo reseñas:", error));
+    };
+
     return (
+
         <section className="crear-resena">
             <h2>¿Qué te pareció el producto?</h2>
             <div className='puntuacion-varita-resena'>
-                <PuntuacionVarita defaultRaing={0} iconSize="2.5rem" modifiable={true} />
+                <PuntuacionVarita defaultRaing={0} iconSize="2.5rem" modifiable={true} setPuntuacion={setPuntuacion} />
             </div>
-            <textarea className='contenido-resena' placeholder="Escribe tu reseña aquí..." />
-            <button className="boton-publicar">Publicar</button>
+
+
+            <textarea
+                className='contenido-resena'
+                placeholder="Escribe tu reseña aquí..."
+                value={comentario}
+                onChange={(e) => setComentario(e.target.value)}
+            />
+            <button className="boton-publicar" onClick={guardarResena}>Publicar</button>
         </section>
     );
 }

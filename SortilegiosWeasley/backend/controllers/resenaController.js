@@ -5,16 +5,34 @@ class resenaController {
 
     async create(req, res) {
         try {
-            const result = validarResena(req.body);
 
-            if (!result.success){
-                return res.status(400).json({ error: JSON.parse(result.error.message) })
+            const { comentario, puntuacion, producto } = req.body;
+            const usuario = req.user;
+            console.log("usuario", usuario);
+
+            const nuevaResena = new Resena({
+                comentario,
+                puntuacion,
+                producto,
+                usuario,
+                fecha: new Date()
+            })
+
+            console.log("nuevaResena", nuevaResena);
+
+
+            const result = validarResena(nuevaResena);
+            console.log("result", result);
+            if(!result.success){
+                return res.status(400).json({ error: JSON.parse(result.error.message) });
             }
 
-            const resena = new Resena(req.body);
-            const nuevoResena = await resena.save();
+            const resenaGuardada = await nuevaResena.save();
             console.log("resena creada con éxito");
             res.status(201).json(nuevoResena);
+
+
+
 
         } catch (error) {
             console.log("Error creando la resena");
