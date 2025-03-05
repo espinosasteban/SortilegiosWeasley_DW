@@ -11,6 +11,7 @@ import authRoutes from './routes/auth.js';
 import routesDireccion from './routes/direccion.js';
 import routesPerfil from './routes/perfil.js';
 import routesImagen from "./routes/imagen.js";
+import routesVotos from './routes/votos.js';
 
 const app = express();
 
@@ -30,11 +31,13 @@ app.use('/resenas', routesResenas);
 app.use('/auth', authRoutes);
 app.use('/mis-direcciones', authMiddleware, routesDireccion);
 app.use('/mi-informacion', authMiddleware, routesPerfil);
+app.use('/votos', routesVotos);
 
 // Habilitar archivos estáticos para acceder a imágenes subidas
 app.use("/uploads", express.static("uploads"));
 // Agregar la ruta de carga de imágenes
 app.use("/upload", routesImagen);
+
 
 // 4. Conectar a MongoDB
 mongoose.connect(`mongodb+srv://${process.env.USER_DB}:${process.env.PASSWORD_DB}@${process.env.SERVER_DB}/SortilegiosWeasley?retryWrites=true&w=majority&appName=Sortilegios`)

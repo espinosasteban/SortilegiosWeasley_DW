@@ -12,7 +12,7 @@ import { CartContext } from '../../contexts/CartContext.tsx';
 
 // Hooks
 import { useContext, useEffect, useState } from 'react';
-import {useAuth} from "../ProcesoLoginUsuario/AuthContext.tsx";
+import { useAuth } from '../ProcesoLoginUsuario/AuthContext.tsx';
 
 interface VistaProductoProps {
     productos: Articulo[];
@@ -59,7 +59,7 @@ export default function VistaProducto({ productos, setProducto }: VistaProductoP
             {producto ? (
                 <>
                     <DetalleProducto producto={producto} resenas={resenas} />
-                    <DetalleResena resenas={resenas} setResenas={setResenas} productoId={producto._id} />
+                    <DetalleResena producto={producto} resenas={resenas} />
                 </>
             ) : (
                 <p>No hay producto seleccionado.</p>
@@ -177,22 +177,20 @@ function Detalle({ producto }: DetalleProps) {
     );
 }
 
-
-function DetalleResena({ resenas, setResenas, productoId}: ValoracionProps) {
-    const { usuario } = useAuth();
-
+function DetalleResena({ resenas, producto }: ValoracionProps) {
+    const { usuario } = useAuth(); 
     return (
         <section className="detalle-resena-seccion">
             <h2 className="titulo-detalle-resena">Reseñas del producto</h2>
-            <VitrinaResena resenas={resenas} />
-            {usuario ? (<CrearResena setResenas={setResenas} productoId={productoId} />) :
-            (<p className="aviso-inicio-sesion">Para dejar una resena, inicia sesión</p>)}
+            <VitrinaResena resenas={resenas} producto={producto}/>
+            {usuario ? (<CrearResena />) : (<p>Para dejar una reseña, inicia sesión.</p>)}
         </section>
     );
 }
 
 interface ValoracionProps {
     resenas: Array<ResenaArticulo> | null;
+    producto: Articulo | null;
 }
 
 function Valoracion({ resenas }: ValoracionProps) {
@@ -221,24 +219,43 @@ function Valoracion({ resenas }: ValoracionProps) {
     );
 }
 
-function VitrinaResena({ resenas }: ResenaProps) {
+function VitrinaResena({ resenas, producto}: ResenaProps) {
     return (
         <section className="vitrina-resena">
-            <Resena resenas={resenas} />
+            <Resena producto={producto} />
         </section>
     );
 }
 
 interface ResenaProps {
-    resenas: Array<ResenaArticulo> | null;
+    producto: Articulo | null;
 }
 
-function Resena({ resenas }: ResenaProps) {
+
+function Resena({producto}: ResenaProps) {
     const [usuariosResenas, setUsuariosResenas] = useState<Record<string, string>>({});
+    const [resenas, setResenas] = useState<Array<ResenaArticulo>>([]);
+    const [triggerUtil, setTriggerUtil] = useState(0);
+    const token = localStorage.getItem('token');
+
+    useEffect(() => {
+        async function obtenerResenas() {
+            const response = await fetch('http://localhost:5000/resenas/');
+            console.log(response);
+            if (!response.ok) {
+                console.log('Error al obtener resenas', response.statusText);
+                return;
+            }
+    
+            const resenas = await response.json();
+            const resenasFiltradas = resenas.filter((resena: ResenaArticulo) => resena.producto === producto._id);
+            setResenas(resenasFiltradas);
+        }
+       obtenerResenas(); 
+    }, [triggerUtil]);
 
     useEffect(() => {
         if (resenas && resenas.length > 0) {
-            console.log('Entré al useEffect de usuariosResenas');
             async function obtenerUsuariosResenas() {
                 const response = await fetch('http://localhost:5000/usuario/');
                 console.log(response);
@@ -258,6 +275,41 @@ function Resena({ resenas }: ResenaProps) {
         }
     }, [resenas]);
 
+    function manejarUtil(idResena: string) {
+        fetch('http://localhost:5000/votos/', {
+            method: 'POST',
+            body: JSON.stringify({ resenaId: idResena, tipo: 'recuentoUtil' }),
+            headers: { Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json' }
+        })
+        .then(response => {
+            if (!response.ok) {
+                console.log('Error al votar', response.statusText);
+                return;
+            }
+            console.log('Voto registrado');
+            setTriggerUtil(triggerUtil + 1);
+        });
+        
+    }
+
+    function manejarNoUtil(idResena: string) {
+        fetch('http://localhost:5000/votos/', {
+            method: 'POST',
+            body: JSON.stringify({ resenaId: idResena, tipo: 'recuentoNoUtil' }),
+            headers: { Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json' }
+        })
+        .then(response => {
+            if (!response.ok) {
+                console.log('Error al votar', response.statusText);
+                return;
+            }
+            console.log('Voto registrado');
+            setTriggerUtil(triggerUtil + 1);
+        });
+    }
+
     return (
         <>
             {resenas?.map((resena, index) => (
@@ -271,9 +323,9 @@ function Resena({ resenas }: ResenaProps) {
                     </div>
                     <footer>
                         <div className="utilidad">
-                            <button>Útil</button>
+                            <button onClick={() => manejarUtil(resena._id)}>Útil</button>
                             <p>{resena.recuentoUtil}</p>
-                            <button>No útil</button>
+                            <button onClick={() => manejarNoUtil(resena._id)}>No útil</button>
                             <p>{resena.recuentoNoUtil}</p>
                         </div>
                         <div className="calificacion">
