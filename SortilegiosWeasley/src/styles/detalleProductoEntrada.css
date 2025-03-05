@@ -201,7 +201,7 @@
     box-shadow: inset 0 4px 8px #423773;
 }
 
-.boton-publicar {
+.boton-crearresena {
     background-color: #D9663D;
     color: #fff;
     border: none;
@@ -213,12 +213,12 @@
     transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.boton-publicar:hover {
+.boton-crearresena:hover {
     background-color: #423773;
     transform: translateY(-2px);
 }
 
-.boton-publicar:active {
+.boton-crearresena:active {
     transform: translateY(1px);
 }
 

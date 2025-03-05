@@ -246,3 +246,14 @@ p {
   color: #000000;
 }
 
+.custom-model-inner{
+  background: #D9663D;
+  border-color: #D9663D ;
+}
+
+.custom-model-inner p{
+  color: #e0e7f1;
+}
+.custom-model-inner h3{
+  color: #e0e7f1;
+}

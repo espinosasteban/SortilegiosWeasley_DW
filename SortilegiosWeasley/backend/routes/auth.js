@@ -30,7 +30,7 @@ router.post('/login', async (req, res) => {
         // Crear token JWT
         const token = jwt.sign({ id: usuario._id, rol: usuario.rol }, SECRET_KEY, { expiresIn: '1h' });
 
-        res.json({ token, rol: usuario.rol });
+        res.json({ token, rol: usuario.rol, id: usuario._id });
     } catch (error) {
         res.status(500).json({ mensaje: "Error en el servidor" });
     }

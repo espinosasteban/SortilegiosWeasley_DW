@@ -138,10 +138,10 @@ const MisArticulo: React.FC = () => {
             <div className="pop-up-content-wrap">
               <img src={articuloActual.img} alt={articuloActual.nombre} className="modal-imagen" style={{width: "140px", height:"120px", objectFit: "cover", borderRadius:"8px"}} />
               <h3 className="nombre-producto">{articuloActual.nombre}</h3>
-              <p>Precio: ${articuloActual.precio ?? "No disponible"}</p>
-              <p>Unidades: {articuloActual.unidadesStock}</p>
-              <p>Sección: {obtenerNombreSeccion(articuloActual.seccion)}</p>
-              <p>Descripción: {articuloActual.descripcion}</p>
+              <p><strong>Precio: </strong>  ${articuloActual.precio ?? "No disponible"}</p>
+              <p><strong> Unidades: </strong> {articuloActual.unidadesStock}</p>
+              <p><strong>Sección: </strong>  {obtenerNombreSeccion(articuloActual.seccion)}</p>
+              <p> <strong>Descripción: </strong> {articuloActual.descripcion}</p>
             </div>
           </div>
         </div>

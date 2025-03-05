@@ -109,5 +109,29 @@ class resenaController {
             res.status(500).json({error: 'Error eliminando la resena'});
         }
     }
+
+    // Obtener la reseña del usuario autenticado para un producto
+    async getResenaUsuario(req, res) {
+        try {
+            const { producto } = req.query;
+            const usuarioId = req.user.id;
+
+            if (!producto) {
+                return res.status(400).json({ error: "Se requiere un ID de producto" });
+            }
+
+            const resena = await Resena.findOne({ usuario: usuarioId, producto });
+
+            if (!resena) {
+                return res.status(404).json(null);
+            }
+
+            res.json(resena);
+        } catch (error) {
+            console.error("Error obteniendo la reseña del usuario:", error);
+            res.status(500).json({ error: "Error en el servidor" });
+        }
+    }
+
 }
 export default new resenaController();
