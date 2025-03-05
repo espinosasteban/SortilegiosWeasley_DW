@@ -8,10 +8,11 @@
     display: grid;
     gap: 20px;
     justify-content: center;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   }
   
   .tarjeta {
-    background: #7769bd;
+    background: #5e519f;
     padding: 15px;
     border-radius: 8px;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
@@ -79,12 +80,14 @@
     padding: 8px;
     margin-bottom: 10px;
     margin-right: 20px;
-    border: 1px solid #ddd;
+    border: 2px solid #000000;
     border-radius: 5px;
+    background-color: #212426;
+    color: #FFFFFF;
   }
 
   .formulario-direccion button{
     margin: 10px;
-    background-color: #0d0d0f;
+    background-color: #D9663D;;
     color: aliceblue;
   }

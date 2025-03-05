@@ -1,11 +1,13 @@
 import React from 'react';
 import { Link, useLocation } from "react-router-dom";
+import DobbyImg from "../../assets/Login/Dobby.png";
 
 const Navbar_perfil: React.FC = () => {
     const location = useLocation(); // Obtiene la ruta actual
 
     return (
       <nav className="navbar_perfil">
+        <img src={DobbyImg} alt="Dobby" className="dobby-img" />
         <div><h2>¡Hola, Muggle! </h2></div>
         <ul>
           <li className={location.pathname === "/mi-informacion" ? "active" : ""}>
