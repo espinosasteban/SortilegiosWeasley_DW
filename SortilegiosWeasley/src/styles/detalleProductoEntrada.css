@@ -201,7 +201,7 @@
     box-shadow: inset 0 4px 8px #423773;
 }
 
-.boton-publicar {
+.boton-crearresena {
     background-color: #D9663D;
     color: #fff;
     border: none;
@@ -213,12 +213,12 @@
     transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.boton-publicar:hover {
+.boton-crearresena:hover {
     background-color: #423773;
     transform: translateY(-2px);
 }
 
-.boton-publicar:active {
+.boton-crearresena:active {
     transform: translateY(1px);
 }
 
@@ -301,6 +301,27 @@
 .resena .calificacion {
     font-size: 1.2em;
     color: #95BF3B;
+}
+
+.aviso-inicio-sesion {
+    background-color: #212426;
+    border: 2px solid #463859;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    color: #F2F2F2;
+    width: 16rem;
+    padding: 1rem;
+    margin: 1rem auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 3rem;
+}
+
+.seleccionado {
+    background-color: #4CAF50;
+    color: white;
 }
 
 

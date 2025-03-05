@@ -12,6 +12,7 @@ import { CartContext } from '../../contexts/CartContext.tsx';
 
 // Hooks
 import { useContext, useEffect, useState } from 'react';
+import { useAuth } from '../ProcesoLoginUsuario/AuthContext.tsx';
 
 interface VistaProductoProps {
     productos: Articulo[];
@@ -58,7 +59,7 @@ export default function VistaProducto({ productos, setProducto }: VistaProductoP
             {producto ? (
                 <>
                     <DetalleProducto producto={producto} resenas={resenas} />
-                    <DetalleResena resenas={resenas} />
+                    <DetalleResena setResenas={setResenas} producto={producto} />
                 </>
             ) : (
                 <p>No hay producto seleccionado.</p>
@@ -70,6 +71,7 @@ export default function VistaProducto({ productos, setProducto }: VistaProductoP
 function formatearNombreParaRuta(nombre: string): string {
     return nombre.toLowerCase().replace(/\s+/g, '').normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 }
+
 
 interface DetalleProductoProps {
     producto: Articulo;
@@ -102,7 +104,7 @@ function MostradorProducto({ producto, resenas }: MostradorProductoProps) {
                 id={producto?.nombre.toLowerCase().replace(/\s+/g, '').normalize('NFD').replace(/[\u0300-\u036f]/g, '')}
                 alt={producto?.nombre ?? 'Nombre no disponible'}
             />
-            <Valoracion producto={producto} resenas={resenas} />
+            <Valoracion resenas={resenas}/>
         </section>
     );
 }
@@ -147,7 +149,7 @@ function Detalle({ producto }: DetalleProps) {
             setMensajeError("");
         }
     };
-    
+
     return (
         <section className="detalle-seccion">
             <h2>{producto?.nombre ?? 'Nombre no disponible'}</h2>
@@ -164,8 +166,8 @@ function Detalle({ producto }: DetalleProps) {
                 {mensajeError && <p className="mensaje-error">{mensajeError}</p>}
 
                 {/*Aquí supongo que deberíamos pasar también la cantidad*/}
-                <button 
-                    onClick={() => addToCart(producto)} 
+                <button
+                    onClick={() => addToCart(producto)}
                     disabled={stockDisponible === 0}
                 >
                     {stockDisponible === 0 ? "Sin stock" : "Añadir al carrito"}
@@ -175,113 +177,319 @@ function Detalle({ producto }: DetalleProps) {
     );
 }
 
-function DetalleResena({ resenas }: ValoracionProps) {
+function DetalleResena({setResenas, producto }: ValoracionProps) {
+    const { usuario } = useAuth(); 
     return (
         <section className="detalle-resena-seccion">
             <h2 className="titulo-detalle-resena">Reseñas del producto</h2>
-            <VitrinaResena resenas={resenas} />
-            <CrearResena />
+            <VitrinaResena producto={producto} setResenas={setResenas}/>
+            {usuario ? (<CrearResena productoId={producto._id} setResenas={setResenas} />) : (<p>Para dejar una reseña o valorar alguna, inicia sesión.</p>)}
         </section>
     );
 }
 
 interface ValoracionProps {
     resenas: Array<ResenaArticulo> | null;
+    producto: Articulo | null;
+    setResenas: (resenas: Array<ResenaArticulo>) => void;
 }
 
 function Valoracion({ resenas }: ValoracionProps) {
     let puntuacion = '0';
 
-    if (resenas) {
-        puntuacion = (resenas.reduce((sum, resena) => sum + resena.puntuacion, 0) / resenas.length).toFixed(1);
+    if (resenas && resenas.length > 0) {
+        const promedio = resenas.reduce((sum, resena) => sum + resena.puntuacion, 0) / resenas.length;
+        puntuacion = (Math.round(promedio * 10) / 10).toFixed(1); // Redondea a un decimal
     }
 
     return (
         <section className="valoracion-seccion">
             <h2>
-                {!(resenas) || resenas.length === 0
+                {!resenas || resenas.length === 0
                     ? "Sin calificaciones"
                     : puntuacion}
             </h2>
-            <PuntuacionVarita defaultRaing={Math.floor(Number(puntuacion))} iconSize="2rem" modifiable={false} />
+            {resenas && resenas.length > 0 && (
+                <PuntuacionVarita
+                    defaultRaing={Math.round(Number(puntuacion))}
+                    iconSize="2rem"
+                    modifiable={false}
+                />
+            )}
         </section>
     );
 }
 
-function VitrinaResena({ resenas }: ResenaProps) {
+function VitrinaResena({ producto, setResenas }: { producto: Articulo | null; setResenas: (resenas: Array<ResenaArticulo>) => void }) {
     return (
         <section className="vitrina-resena">
-            <Resena resenas={resenas} />
+            <Resena producto={producto} setResenas={setResenas} />
         </section>
     );
 }
 
+
 interface ResenaProps {
-    resenas: Array<ResenaArticulo> | null;
+    producto: Articulo | null;
 }
 
-function Resena({ resenas }: ResenaProps) {
+
+function Resena({ producto, setResenas }: { producto: Articulo | null; setResenas: (resenas: Array<ResenaArticulo>) => void }) {
+    const [resenas, setLocalResenas] = useState<Array<ResenaArticulo>>([]);
     const [usuariosResenas, setUsuariosResenas] = useState<Record<string, string>>({});
+    const [votosUsuario, setVotosUsuario] = useState<Record<string, string>>({});
+
+    const token = localStorage.getItem("token");
+    const { usuario } = useAuth();
 
     useEffect(() => {
-        if (resenas && resenas.length > 0) {
-            console.log('Entré al useEffect de usuariosResenas');
+        async function obtenerResenas() {
+            const response = await fetch("http://localhost:5000/resenas/");
+            if (!response.ok) {
+                console.error("Error al obtener resenas", response.statusText);
+                return;
+            }
+            const resenas = await response.json();
+            const resenasFiltradas = resenas.filter((resena: ResenaArticulo) => resena.producto === producto._id);
+            setLocalResenas(resenasFiltradas);
+            setResenas(resenasFiltradas); // 🔥 Actualiza la lista de reseñas globalmente
+        }
+        obtenerResenas();
+    }, [producto]);
+
+    // 🔹 Cargar nombres de usuarios que dejaron reseñas
+    useEffect(() => {
+        if (resenas.length > 0) {
             async function obtenerUsuariosResenas() {
-                const response = await fetch('http://localhost:5000/usuario/');
-                console.log(response);
+                const response = await fetch("http://localhost:5000/usuario/");
                 if (!response.ok) {
-                    console.log('Error al obtener usuarios', response.statusText);
+                    console.error("Error al obtener usuarios", response.statusText);
                     return;
                 }
                 const usuarios = await response.json();
-                const usuariosMap = usuarios.reduce((acc: { [key: string]: string }, usuario: { _id: string, nombreUsuario: string }) => {
+                const usuariosMap = usuarios.reduce((acc: { [key: string]: string }, usuario: { _id: string; nombreUsuario: string }) => {
                     acc[usuario._id] = usuario.nombreUsuario;
                     return acc;
                 }, {});
-                console.log(usuariosMap);
                 setUsuariosResenas(usuariosMap);
             }
             obtenerUsuariosResenas();
         }
     }, [resenas]);
 
+    // 🔹 Manejo de votos de utilidad
+    function manejarVoto(idResena: string, tipo: "recuentoUtil" | "recuentoNoUtil") {
+        if (!usuario) return;
+
+        fetch("http://localhost:5000/votos/", {
+            method: "POST",
+            body: JSON.stringify({ resenaId: idResena, tipo }),
+            headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
+        }).then((response) => {
+            if (!response.ok) {
+                console.error("Error al votar", response.statusText);
+                return;
+            }
+            setVotosUsuario((prev) => ({ ...prev, [idResena]: tipo }));
+        });
+    }
+
     return (
         <>
-            {resenas?.map((resena, index) => (
-                <section className="resena" key={index}>
-                    <header>
-                        <h3>{usuariosResenas[resena.usuario]}</h3>
-                        <p>{new Date(resena.fecha).toLocaleDateString('es-ES')}</p>
-                    </header>
-                    <div className="contenido">
-                        <p className="resena-comentario">{resena.comentario}</p>
-                    </div>
-                    <footer>
-                        <div className="utilidad">
-                            <button>Útil</button>
-                            <p>{resena.recuentoUtil}</p>
-                            <button>No útil</button>
-                            <p>{resena.recuentoNoUtil}</p>
+            {resenas.map((resena, index) => {
+                const votoUsuario = votosUsuario[resena._id];
+
+                return (
+                    <section className="resena" key={index}>
+                        <header>
+                            <h3>{usuariosResenas[resena.usuario]}</h3>
+                            <p>{new Date(resena.fecha).toLocaleDateString("es-ES")}</p>
+                        </header>
+
+                        <div className="contenido">
+                            <p className="resena-comentario">{resena.comentario}</p>
                         </div>
-                        <div className="calificacion">
-                            <PuntuacionVarita defaultRaing={resena.puntuacion} iconSize="1.5rem" modifiable={false} />
-                        </div>
-                    </footer>
-                </section>
-            ))}
+
+                        <footer>
+                            <div className="utilidad">
+                                <button
+                                    className={`btn-util ${votoUsuario === "recuentoUtil" ? "seleccionado" : ""}`}
+                                    onClick={() => manejarVoto(resena._id, "recuentoUtil")}
+                                    disabled={!usuario}
+                                >
+                                    Útil
+                                </button>
+                                <p>{resena.recuentoUtil}</p>
+                                <button
+                                    className={`btn-noutil ${votoUsuario === "recuentoNoUtil" ? "seleccionado" : ""}`}
+                                    onClick={() => manejarVoto(resena._id, "recuentoNoUtil")}
+                                    disabled={!usuario}
+                                >
+                                    No útil
+                                </button>
+                                <p>{resena.recuentoNoUtil}</p>
+                            </div>
+
+                            <div className="calificacion">
+                                <PuntuacionVarita defaultRaing={resena.puntuacion} iconSize="1.5rem" modifiable={false} />
+                            </div>
+                        </footer>
+                    </section>
+                );
+            })}
         </>
     );
 }
 
-function CrearResena() {
+
+
+
+
+interface CrearResenaProps {
+    productoId: string;
+    setResenas: (resenas: Array<ResenaArticulo>) => void;
+}
+
+
+function CrearResena({ productoId, setResenas }: CrearResenaProps) {
+    const [comentario, setComentario] = useState("");
+    const [puntuacion, setPuntuacion] = useState(0);
+    const [resenaUsuario, setResenaUsuario] = useState<ResenaArticulo | null>(null);
+    
+    const token = localStorage.getItem("token");
+    const { usuario } = useAuth();
+
+    useEffect(() => {
+        // 🔹 Buscar la reseña del usuario logueado
+        async function obtenerResenaUsuario() {
+            if (!usuario || !token) return;
+            try {
+                const response = await fetch(`http://localhost:5000/resenas/usuario/${usuario.id}?producto=${productoId}`, {
+                    headers: { Authorization: `Bearer ${token}` },
+                });
+
+                if (response.ok) {
+                    const resena = await response.json();
+                    setResenaUsuario(resena);  // Guardar la reseña en el estado
+                    setComentario(resena.comentario); // Llenar el textarea con la reseña
+                    setPuntuacion(resena.puntuacion);
+                } else {
+                    setResenaUsuario(null); // No hay reseña previa
+                }
+            } catch (error) {
+                console.error("Error obteniendo la reseña del usuario:", error);
+            }
+        }
+
+        obtenerResenaUsuario();
+    }, [productoId, usuario]);
+
+    const guardarResena = async () => {
+        if (!token) {
+            console.error("No hay token disponible.");
+            return;
+        }
+    
+        const nuevaResena: ResenaArticulo = {
+            _id: resenaUsuario?._id || "", // Si ya tiene reseña, usa su ID; si no, es una nueva
+            puntuacion,
+            fecha: new Date(),
+            comentario,
+            recuentoUtil: 0,
+            recuentoNoUtil: 0,
+            producto: productoId,
+            usuario: usuario?.id || "",
+        };
+    
+        try {
+            const metodo = resenaUsuario ? "PUT" : "POST";
+            const url = resenaUsuario
+                ? `http://localhost:5000/resenas/${resenaUsuario._id}`
+                : "http://localhost:5000/resenas/";
+    
+            const respuesta = await fetch(url, {
+                method: metodo,
+                body: JSON.stringify(nuevaResena),
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "application/json",
+                },
+            });
+    
+            if (!respuesta.ok) {
+                throw new Error("Error guardando la reseña");
+            }
+    
+            const resenaGuardada = await respuesta.json();
+            console.log("✅ Reseña guardada correctamente:", resenaGuardada);
+    
+            setResenas((prevResenas) => {
+                if (metodo === "POST") {
+                    return [...prevResenas, resenaGuardada]; // Agregar nueva reseña
+                } else {
+                    return prevResenas.map((r) => (r._id === resenaGuardada._id ? resenaGuardada : r)); // Editar reseña
+                }
+            });
+    
+            setResenaUsuario(resenaGuardada);
+        } catch (error) {
+            console.error("Error guardando la reseña:", error);
+        }
+    };
+    
+    const eliminarResena = async () => {
+        if (!resenaUsuario || !token) return;
+        if (!window.confirm("¿Estás seguro de que quieres eliminar tu reseña?")) return;
+    
+        try {
+            const respuesta = await fetch(`http://localhost:5000/resenas/${resenaUsuario._id}`, {
+                method: "DELETE",
+                headers: { Authorization: `Bearer ${token}` },
+            });
+    
+            if (!respuesta.ok) {
+                throw new Error("Error eliminando la reseña");
+            }
+    
+            setResenaUsuario(null);
+            setComentario("");
+            setPuntuacion(0);
+    
+            setResenas((prev) => prev.filter((r) => r._id !== resenaUsuario._id)); // Eliminar de la lista
+        } catch (error) {
+            console.error("Error eliminando la reseña:", error);
+        }
+    };
+    
+
     return (
         <section className="crear-resena">
             <h2>¿Qué te pareció el producto?</h2>
-            <div className='puntuacion-varita-resena'>
-                <PuntuacionVarita defaultRaing={0} iconSize="2.5rem" modifiable={true} />
+
+            <div className="puntuacion-varita-resena">
+                <PuntuacionVarita
+                    defaultRaing={puntuacion}
+                    iconSize="2.5rem"
+                    modifiable={true}
+                    setPuntuacion={setPuntuacion}
+                />
             </div>
-            <textarea className='contenido-resena' placeholder="Escribe tu reseña aquí..." />
-            <button className="boton-publicar">Publicar</button>
+
+            <textarea
+                className="contenido-resena"
+                placeholder="Escribe tu reseña aquí..."
+                value={comentario}
+                onChange={(e) => setComentario(e.target.value)}
+            />
+
+            {resenaUsuario ? (
+                <div className="acciones-resena">
+                    <button className="boton-crearresena" onClick={guardarResena}>Editar</button>
+                    <button className="boton-crearresena" onClick={eliminarResena}>Eliminar</button>
+                </div>
+            ) : (
+                <button className="boton-crearresena" onClick={guardarResena}>Publicar</button>
+            )}
         </section>
     );
 }

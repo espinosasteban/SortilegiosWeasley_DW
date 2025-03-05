@@ -1,26 +1,43 @@
-import { createContext, useContext, useState, ReactNode } from "react";
+import { createContext, useContext, useState, ReactNode, useEffect } from "react";
 
 interface AuthContextType {
     usuario: string | null;
     rol: string | null;
-    login: (rol: string) => void;
+    login: (usuario: string, rol: string) => void;
     logout: () => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-    const [usuario, setUsuario] = useState<string | null>(null);
-    const [rol, setRol] = useState<string | null>(null);
+    const [usuario, setUsuario] = useState<string | null>(localStorage.getItem('usuario'));
+    const [rol, setRol] = useState<string | null>(localStorage.getItem('rol'));
 
-    const login = (rol: string) => {
-        setUsuario("Usuario"); // Esto podría venir del backend
+    useEffect(() => {
+        const storedUsuario = localStorage.getItem('usuario');
+        const storedRol = localStorage.getItem('rol');
+        const storedToken = localStorage.getItem('token');
+
+        if (storedUsuario && storedRol && storedToken) {
+            setUsuario(storedUsuario);
+            setRol(storedRol);
+        } else {
+            logout(); // Si falta algo, cierra sesión automáticamente
+        }
+    }, []);
+
+    const login = (usuario: string, rol: string) => {
+        setUsuario(usuario);
         setRol(rol);
+        localStorage.setItem('usuario', usuario);
+        localStorage.setItem('rol', rol);
     };
 
     const logout = () => {
         setUsuario(null);
         setRol(null);
+        localStorage.removeItem('usuario');
+        localStorage.removeItem('rol');
         localStorage.removeItem('token');
     };
 

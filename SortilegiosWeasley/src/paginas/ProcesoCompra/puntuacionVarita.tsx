@@ -1,5 +1,5 @@
 import '../../styles/puntuacionVarita.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { fas } from '@fortawesome/free-solid-svg-icons'
 
@@ -11,16 +11,24 @@ interface PuntuacionVaritaProps {
     defaultRaing: number | 0;
     iconSize: string | null;
     modifiable: boolean;
+    setPuntuacion?: (rating: number) => void;
 }
 
-export default function PuntuacionVarita({defaultRaing, iconSize, modifiable} : PuntuacionVaritaProps) {
+export default function PuntuacionVarita({defaultRaing, iconSize, modifiable, setPuntuacion} : PuntuacionVaritaProps) {
     const [rating, setRating] = useState(defaultRaing);
     const [hoverRating, setHoverRating] = useState(0);
 
     let varitas = Array(DEFAULT_COUNT).fill(0);
 
+    useEffect(() => {
+        setRating(defaultRaing); // Asegura que el estado se actualiza si cambia defaultRating
+    }, [defaultRaing]);
+
     const handleClick = (rating: number) => {
         setRating(rating);
+        if (setPuntuacion) {
+            setPuntuacion(rating);
+        }
     }
 
     if (!defaultRaing && !modifiable) {

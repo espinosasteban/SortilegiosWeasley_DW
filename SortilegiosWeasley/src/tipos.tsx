@@ -17,6 +17,7 @@ export interface Carrito {
     items: Articulo[]
 }
 export interface ResenaArticulo {
+    _id: string;
     puntuacion: number;
     fecha: Date;
     comentario: string;

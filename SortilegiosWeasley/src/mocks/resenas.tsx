@@ -275,4 +275,3 @@ export const resenasCarameloLonguilongo: Array<ResenaArticulo> = [
         cantidadNoEsUtil: 6
     }
 ]
-
