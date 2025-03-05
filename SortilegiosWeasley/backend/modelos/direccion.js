@@ -13,4 +13,3 @@ const direccionSchema = new mongoose.Schema({
 
 const Direccion = mongoose.model('Direccion', direccionSchema, 'direcciones');
 export default Direccion;
-

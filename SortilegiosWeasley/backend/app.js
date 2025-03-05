@@ -10,7 +10,8 @@ import routesResenas from './routes/resena.js';
 import authRoutes from './routes/auth.js';
 import routesDireccion from './routes/direccion.js';
 import routesPerfil from './routes/perfil.js';
-import routesCarrito from './routes/carrito.js'; 
+import routesImagen from "./routes/imagen.js";
+import routesVotos from './routes/votos.js';
 
 const app = express();
 
@@ -30,7 +31,12 @@ app.use('/resenas', routesResenas);
 app.use('/auth', authRoutes);
 app.use('/mis-direcciones', authMiddleware, routesDireccion);
 app.use('/mi-informacion', authMiddleware, routesPerfil);
-app.use('/carrito', authMiddleware, routesCarrito);
+app.use('/votos', routesVotos);
+
+// Habilitar archivos estáticos para acceder a imágenes subidas
+app.use("/uploads", express.static("uploads"));
+// Agregar la ruta de carga de imágenes
+app.use("/upload", routesImagen);
 
 
 // 4. Conectar a MongoDB
@@ -41,4 +47,3 @@ mongoose.connect(`mongodb+srv://${process.env.USER_DB}:${process.env.PASSWORD_DB
 // 5. Iniciar servidor
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`🚀 Servidor corriendo en el puerto ${PORT}`));
-

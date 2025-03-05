@@ -154,4 +154,5 @@ class usuarioController {
         }
     }
 }
+
 export default new usuarioController();
