@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect } from "react";
-import { ArticuloCarrito, Carrito, Articulo } from "../tipos";
+import { ArticuloCarrito, Carrito } from "../tipos";
 import { jwtDecode } from "jwt-decode";
 
 export const CartContext = createContext<{
@@ -24,7 +24,7 @@ export const CartContext = createContext<{
 
 export const CartProvider = ({ children }: { children: React.ReactNode }) => {
   const [isCartOpen, setIsCartOpen] = useState(false);
-  const [cartItems, setCartItems] = useState<Articulo[]>([]);
+  const [cartItems, setCartItems] = useState<ArticuloCarrito[]>([]);
   const [token, setToken] = useState<string | null>(null);
   const [carrito, setCarrito] = useState<Carrito>({} as Carrito);
 
@@ -86,7 +86,23 @@ const addToCart = async (item: ArticuloCarrito) => {
     return;
   }
 
-  
+  // Actualizamos el estado localmente
+  // let updatedCartItems: ArticuloCarrito[];
+  // setCartItems(prevCartItems => {
+  //   const isItemInCart = prevCartItems.find(cartItem => cartItem._id === item._id);
+  //   if (isItemInCart) {
+  //     updatedCartItems = prevCartItems.map(cartItem =>
+  //       cartItem._id === item._id
+  //         ? { ...cartItem, total_items: cartItem.total_items + 1 }
+  //         : cartItem
+  //     );
+  //   } else {
+  //     updatedCartItems = [...prevCartItems, { ...item, total_items: 1 }];
+  //   }
+  //   console.log("Aquí está el carrito actualizado: ", {updatedCartItems})
+  //   return updatedCartItems;
+  // });
+
   setCartItems(prevCartItems => {
     const isItemInCart = prevCartItems.find(cartItem => cartItem._id === item._id);
     if (isItemInCart) {
@@ -101,7 +117,7 @@ const addToCart = async (item: ArticuloCarrito) => {
   })
 
   try {
-    // Verificar si el usuario ya tiene un carrito
+    // 2️⃣ Verificar si el usuario ya tiene un carrito
     console.log({carrito})
     let carritoId = carrito?._id;
     if (!carritoId) {
@@ -118,7 +134,7 @@ const addToCart = async (item: ArticuloCarrito) => {
       }
     }
 
-    // Si el carrito existe, actualizarlo con PUT
+    // 3️⃣ Si el carrito existe, actualizarlo con PUT
     if (carritoId) {
       console.log("🔄 Actualizando carrito existente...");
 
@@ -131,7 +147,7 @@ const addToCart = async (item: ArticuloCarrito) => {
         body: JSON.stringify({
         items: cartItems.map(i => ({
             productoId: i._id,
-            total_items: i.total_items ?? 1
+            total_items: i.total_items
           })),
         }),
       });
@@ -154,7 +170,7 @@ const addToCart = async (item: ArticuloCarrito) => {
           Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
-          userId,
+          userId: userId,
           items: [{ productoId: item._id, total_items: 1 }],
         }),
       });
@@ -168,7 +184,7 @@ const addToCart = async (item: ArticuloCarrito) => {
       }
     }
   } catch (error) {
-    console.error(" Error al manejar el carrito:", error);
+    console.error("❌ Error al manejar el carrito:", error);
   }
 };
 

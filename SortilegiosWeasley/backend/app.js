@@ -12,6 +12,7 @@ import routesDireccion from './routes/direccion.js';
 import routesPerfil from './routes/perfil.js';
 import routesImagen from "./routes/imagen.js";
 import routesVotos from './routes/votos.js';
+import routesCarritos from './routes/carrito.js'
 
 const app = express();
 
@@ -25,6 +26,7 @@ app.use(corsMiddleware);
 
 // 3. Definir rutas
 app.use('/producto', routesProductos);
+app.use('/carrito', routesCarritos );
 app.use('/seccion', routesSecciones);
 app.use('/usuario', routesUsuarios);
 app.use('/resenas', routesResenas);

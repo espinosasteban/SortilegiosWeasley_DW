@@ -5,7 +5,7 @@ const carritoSchema = new mongoose.Schema({
     items: [
         {
             productoId: { type: mongoose.Schema.Types.ObjectId, ref: 'Producto' },
-            total_items: Number
+            total_items: { type: Number, default: 1}
         }
     ]}, {
     timestamps: true

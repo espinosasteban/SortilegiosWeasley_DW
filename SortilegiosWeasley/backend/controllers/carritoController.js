@@ -61,7 +61,7 @@ class CarritoController {
                 unidadesStock: item.productoId.unidadesStock,
                 seccion: item.productoId.seccion ? item.productoId.seccion.nombre : "Sin sección", 
                 __v: item.productoId.__v,
-                total_items: item.cantidad
+                total_items: item.total_items
             }));
     
             res.json({
@@ -100,6 +100,119 @@ class CarritoController {
             res.status(500).json({ error: 'Error actualizando el carrito' });
         }
     }
+
+    async increaseItemQty(req, res) {
+        try {
+            if (!req.user) {
+                return res.status(401).json({ error: "Usuario no autenticado" });
+            }
+            
+            const { userId } = req.params
+            const { productoId } = req.body
+            const carrito = await Carrito.findOne( {userId: userId } );
+
+            if (!carrito) {
+                res.status(404).json({ error: 'Carrito no encontrado' })
+            }
+
+            const carritoActualizado = await Carrito.findOneAndUpdate(
+                { userId: userId, "items.productoId": productoId }, 
+                { $inc: { "items.$.total_items": 1 } }, 
+                { new: true }
+            );
+    
+            if (!carritoActualizado) {
+                return res.status(404).json({ error: "Producto no encontrado en el carrito" });
+            }
+    
+            res.status(200).json({ message: "Cantidad de productos aumentada", carrito: carritoActualizado });
+        } catch (error) {
+            console.error("Error en increaseItemQty:", error);
+            res.status(500).json({ error: "Error actualizando el producto en el carrito" });
+        }
+    }
+    
+    async decreaseItemQty(req,res) {
+        try {
+            if (!req.user) {
+                return res.status(401).json({ error: "Usuario no autenticado" });
+            }
+            const { userId } = req.params;
+            const { productoId} = req.body;
+            console.log(req.params)
+
+            const  carrito = await Carrito.findOne({ userId: userId });
+
+            if (!carrito) {
+                res.status(404).json({ error: 'Carrito no encontrado' });
+            };
+
+            // Buscar el producto dentro del carrito
+            const item = carrito.items.find(i => i.productoId.toString() === productoId);
+
+            if (!item) {
+                return res.status(404).json({ error: "Producto no encontrado en el carrito" });
+            }
+
+            if (item.total_items > 1) {
+                const carritoActualizado = await Carrito.findOneAndUpdate(
+                    { userId: userId, "items.productoId": productoId },
+                    { $inc: { "items.$.total_items": -1 } },
+                    { new: true }
+                );
+                return res.status(200).json({ message: "Cantidad de productos disminuida" , carrito: carritoActualizado });
+            } else {
+                await Carrito.findOneAndUpdate(
+                    { userId: userId },
+                    { $pull: { items: {productoId:productoId }} }, // Elimina el producto
+                    { new: true }
+                );
+                return res.status(200).json({ message: "Producto eliminado del carrito"});
+            };
+            
+        } catch (error) {
+            console.error("Error en decreaseItemQty:", error);
+            res.status(500).json({ error: "Error actualizando el producto en el carrito" });
+        }
+    }
+
+
+    async deleteItem(req, res) {
+        try {
+           if (!req.user) {
+            return res.status(401).json({ error: "Usuario no autenticado" });
+           };
+
+           const {userId} = req.params;
+           const {productoId} = req.body;
+
+           const carrito = await Carrito.findOne( { userId: userId} );
+
+           if (!carrito) {
+            return res.status(404).json({ error: 'Carrito no encontrado' });
+           }
+
+           const item = carrito.items.find(id => id.productoId.toString()===productoId);
+           console.log(item)
+           console.log(productoId)
+
+           if (!item) {
+            return res.status(404).json({ error: 'Producto no encontrado' });
+           }
+
+           await Carrito.findOneAndUpdate(
+            {userId: userId},
+            {$pull: { items: {productoId: productoId},}},
+            {new: true}
+            );
+
+            return res.status(200).json({ message: "Producto eliminado del carrito"});
+        } catch ( error) {
+            console.error("Error en deleteItem:", error);
+            res.status(500).json({ error: "Error eliminando el producto en el carrito" });
+        }
+    }
+    
 
     async updateItem(req, res) {
         try {

@@ -182,7 +182,7 @@ function DetalleResena({setResenas, producto }: ValoracionProps) {
     return (
         <section className="detalle-resena-seccion">
             <h2 className="titulo-detalle-resena">Reseñas del producto</h2>
-            <VitrinaResena producto={producto} setResenas={setResenas} setResenas={setResenas}/>
+            <VitrinaResena producto={producto} setResenas={setResenas}/>
             {usuario ? (<CrearResena productoId={producto._id} setResenas={setResenas} />) : (<p>Para dejar una reseña o valorar alguna, inicia sesión.</p>)}
         </section>
     );
@@ -223,7 +223,7 @@ function Valoracion({ resenas }: ValoracionProps) {
 function VitrinaResena({ producto, setResenas }: { producto: Articulo | null; setResenas: (resenas: Array<ResenaArticulo>) => void }) {
     return (
         <section className="vitrina-resena">
-            <Resena producto={producto} setResenas={setResenas} setResenas={setResenas} />
+            <Resena producto={producto} setResenas={setResenas} />
         </section>
     );
 }
