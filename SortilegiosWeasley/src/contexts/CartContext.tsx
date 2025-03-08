@@ -1,32 +1,31 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
+import { useAuth } from "../paginas/ProcesoLoginUsuario/AuthContext";
 import { ArticuloCarrito, Carrito } from "../tipos";
 import { jwtDecode } from "jwt-decode";
+
 
 export const CartContext = createContext<{
   cartItems: ArticuloCarrito[];
   addToCart: (item: ArticuloCarrito) => void;
   removeFromCart: (item: ArticuloCarrito) => void;
   getCartTotal: () => number;
-  toggleCart: () => void;
   getTotalCartItems: () => number;
   deleteItem: (item: ArticuloCarrito) => void;
-  migrateCart: (items: ArticuloCarrito[]) => Promise<void>;
 }>({
   cartItems: [],
   addToCart: () => {},
   removeFromCart: () => {},
   getCartTotal: () => 0,
-  toggleCart: () => {},
   getTotalCartItems: () => 0,
   deleteItem: () => {},
-  migrateCart: async () => {},
 });
 
 export const CartProvider = ({ children }: { children: React.ReactNode }) => {
-  const [isCartOpen, setIsCartOpen] = useState(false);
+  const { usuario } = useAuth();
   const [cartItems, setCartItems] = useState<ArticuloCarrito[]>([]);
-  const [token, setToken] = useState<string | null>(null);
-  const [carrito, setCarrito] = useState<Carrito>({} as Carrito);
+  const [token, __] = useState<string | null>(null);
+  const [_, setCarrito] = useState<Carrito>({} as Carrito);
+
 
   useEffect(() => {
     const storedToken = localStorage.getItem("token");
@@ -65,60 +64,63 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
       }
     };
     fetchCart();
-  }, [token]);
+  }, [usuario]);
 
-  
-
-const addToCart = async (item: ArticuloCarrito, cantidad: number = 1 ) => {
+const addToCart = async (item: ArticuloCarrito, cantidad: number = 1) => {
   const token = localStorage.getItem("token");
-  if (!token) return; // Si no hay token, no hacemos nada
+  if (!token) return;
 
-  const decoded = jwtDecode(token) ?? {};
+  const decoded = jwtDecode<{ id: string }>(token);
   const userId = decoded.id;
 
   if (!userId) {
     console.error("Error: No se encontró el ID del usuario en el token.");
     return;
   }
-  
+
   try {
-      const response = await fetch(`http://localhost:5000/carrito/addCart`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          userId: userId,
-          productoId: item._id,
-          total_items: cantidad,
-        }),
-      });
+    const response = await fetch(`http://localhost:5000/carrito/addCart`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        userId: userId,
+        productoId: item._id,
+        total_items: cantidad,
+      }),
+    });
 
-      const data = await response.json();
+    if (!response.ok) {
+      console.error("Error agregando producto al carrito");
+      return;
+    }
+    // Obtener el carrito después de la actualización de la BD
+    const updatedCartResponse = await fetch(`http://localhost:5000/carrito/${userId}`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
 
-      if (response.ok) {
-        setCartItems(prevCartItems => {
-          const isItemInCart = prevCartItems.find(cartItem => cartItem._id === item._id);
-          if (isItemInCart) {
-            return prevCartItems.map(cartItem =>
-              cartItem._id === item._id
-                ? { ...cartItem, total_items: (cartItem.total_items || 0) + cantidad }
-                : cartItem
-            )} else { return [...prevCartItems, { ...item, total_items: cantidad }]};
-        });
-    } else{
-    console.error("Error agregando producto al carrito:", data);
+    if (updatedCartResponse.ok) {
+      const updatedCart = await updatedCartResponse.json();
+      setCarrito(updatedCart);
+      setCartItems(updatedCart.items || []);
+    }
+  } catch (error) {
+    console.error("Error al manejar el carrito:", error);
   }
-  } catch (error) {console.error("Error al manejar el carrito:", error);}} ;
+};
 
 
-  // Remover un producto del carrito
+  // Remover un sólo item del carrito
   const removeFromCart = async (item: ArticuloCarrito) => {
     const token = localStorage.getItem("token");
     if (!token) return; // Si no hay token, no hacemos nada
   
-    const decoded = jwtDecode(token) ?? {};
+    const decoded = jwtDecode<{ id: string }>(token);
     const userId = decoded.id;
 
     const isItemInCart = cartItems.find((cartItem) => cartItem._id === item._id);
@@ -151,12 +153,12 @@ const addToCart = async (item: ArticuloCarrito, cantidad: number = 1 ) => {
     }
   };
 
-  // Eliminar producto del carrito
+  // Eliminar un producto del carrito
   const deleteItem = async (item: ArticuloCarrito) => {
     const token = localStorage.getItem("token");
     if (!token) return; // Si no hay token, no hacemos nada
 
-    const decoded = jwtDecode(token) ?? {};
+    const decoded = jwtDecode<{ id: string }>(token);
     const userId = decoded.id;
     setCartItems(cartItems.filter((cartItem) => cartItem._id !== item._id));
 
@@ -176,40 +178,10 @@ const addToCart = async (item: ArticuloCarrito, cantidad: number = 1 ) => {
     }
   };   
 
-  // Migrar carrito cuando el usuario inicia sesión
-  const migrateCart = async (items: ArticuloCarrito[]) => {
-    try {
-      const response = await fetch("http://localhost:5000/carrito/migrar", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          items: items.map((item) => ({
-            productoId: item._id,
-            total_items: item.total_items,
-          })),
-        }),
-      });
-
-      if (!response.ok) {
-        throw new Error("Error al migrar el carrito");
-      }
-
-      console.log("Carrito migrado exitosamente");
-    } catch (error) {
-      console.error("Error en migrateCart:", error);
-    }
-  };
-
   // Calcular el total del carrito
   const getCartTotal = () => {
     return cartItems.reduce((total, item) => total + item.precio * item.total_items, 0);
   };
-
-  // Alternar la visibilidad del carrito
-  const toggleCart = () => setIsCartOpen(!isCartOpen);
 
   // Obtener la cantidad total de productos en el carrito
   const getTotalCartItems = () => {
@@ -223,10 +195,8 @@ const addToCart = async (item: ArticuloCarrito, cantidad: number = 1 ) => {
         addToCart,
         removeFromCart,
         getCartTotal,
-        toggleCart,
         getTotalCartItems,
         deleteItem,
-        migrateCart
       }}
     >
       {children}
