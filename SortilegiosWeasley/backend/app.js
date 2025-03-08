@@ -12,6 +12,9 @@ import routesDireccion from './routes/direccion.js';
 import routesPerfil from './routes/perfil.js';
 import routesImagen from "./routes/imagen.js";
 import routesVotos from './routes/votos.js';
+import routesCarritos from './routes/carrito.js'
+import routesHistorial from './routes/historialCompras.js'
+
 
 const app = express();
 
@@ -25,6 +28,7 @@ app.use(corsMiddleware);
 
 // 3. Definir rutas
 app.use('/producto', routesProductos);
+app.use('/carrito', routesCarritos );
 app.use('/seccion', routesSecciones);
 app.use('/usuario', routesUsuarios);
 app.use('/resenas', routesResenas);
@@ -32,6 +36,8 @@ app.use('/auth', authRoutes);
 app.use('/mis-direcciones', authMiddleware, routesDireccion);
 app.use('/mi-informacion', authMiddleware, routesPerfil);
 app.use('/votos', routesVotos);
+app.use('/historial', authMiddleware, routesHistorial);
+
 
 // Habilitar archivos estáticos para acceder a imágenes subidas
 app.use("/uploads", express.static("uploads"));

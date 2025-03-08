@@ -2,41 +2,17 @@ import { useEffect, useState, useContext } from 'react';
 import { useNavigate } from 'react-router';
 import { CartContext } from '../../contexts/CartContext';
 import { DeleteIconButton } from '../../components/carritoCompras';
+import { jwtDecode } from 'jwt-decode';
 import '../MiPerfil/user_info.css';
 import './procesoCompra.css';
 
 import "../MiPerfil/user_info.css";
 import './procesoCompra.css';
-import { LegendToggleRounded } from '@mui/icons-material';
 import type { Direccion } from "../../tipos";
-// Definir el tipo para las secciones
-interface Seccion {
-    _id: string;
-    nombre: string;
-}
 
 export default function ProcesoCompra() {
     const [formulario, setFormulario] = useState('información');
     const { cartItems, addToCart, removeFromCart, getCartTotal, deleteItem } = useContext(CartContext);
-    const [secciones, setSecciones] = useState<Seccion[]>([]);
-
-    // Cargar las secciones desde el backend
-    useEffect(() => {
-        async function fetchSecciones() {
-            try {
-                const response = await fetch('http://localhost:5000/seccion');
-                if (!response.ok) {
-                    console.error('Error al obtener secciones:', response.statusText);
-                    return;
-                }
-                const data = await response.json();
-                setSecciones(data);
-            } catch (error) {
-                console.error('Error de red al obtener secciones:', error);
-            }
-        }
-        fetchSecciones();
-    }, []);
 
     return (
       <main className="proceso-compra">
@@ -47,7 +23,6 @@ export default function ProcesoCompra() {
           </section>
         </section>
 
-        {/* Resumen de Compras */}
         <aside className="resumen-compras">
             <h2 className="resumen-compras-title">Resumen de tu compra</h2>
             {cartItems.length === 0 ? (
@@ -55,9 +30,6 @@ export default function ProcesoCompra() {
             ) : (
                 <div className="resumen-lista">
                     {cartItems.map((item) => {
-                        // Buscar el nombre de la sección basado en el _id almacenado en item.seccion
-                        const seccionNombre = secciones.find(sec => sec._id === item.seccion)?.nombre || 'Sección desconocida';
-
                         return (
                             <div key={item.nombre} className="resumen-item">
                                 <div className="resumen-imagen">
@@ -70,8 +42,8 @@ export default function ProcesoCompra() {
                                         <DeleteIconButton onClick={() => deleteItem(item)} />
                                     </div>
 
-                                    {/* Mostrar el nombre de la sección */}
-                                    <p className='resumen-item-seccion'>{seccionNombre}</p>
+                                
+                                    <p className='resumen-item-seccion'>{item.seccion}</p>
 
                                     <div className='resumen-item-bottom'>
                                         <div className='resumen-item-quantity'>
@@ -327,10 +299,83 @@ function Direccion({setFormulario,onGuardar}: PropsInformacionContacto){
   };
 
   const handleClick = async (e: React.FormEvent) => {
+    const API_URL_CARRITO = "http://localhost:5000/carrito/"
+    const API_URL_HISTORIAL = "http://localhost:5000/historial/"
     e.preventDefault();
-    await manejarSubmit(e);
-    navigate("/gracias");
-  };
+    await manejarSubmit(e); // Guardar la dirección primero
+
+    const storedToken = localStorage.getItem("token");
+    if (!storedToken) {
+        console.error("Usuario no autenticado");
+        return;
+    }
+
+    let decoded;
+    try {
+        decoded = jwtDecode<{ id: string }>(storedToken);
+    } catch (error) {
+        console.error("Error al decodificar el token", error);
+        return;
+    }
+
+    try {
+        // Obtener el carrito del usuario
+        const cartResponse = await fetch(`${API_URL_CARRITO}/${decoded.id}`, {
+            method: "GET",
+            headers: { Authorization: `Bearer ${storedToken}` },
+        });
+
+        if (!cartResponse.ok) {
+            console.error("Error al obtener el carrito");
+            return;
+        }
+
+        const cartData = await cartResponse.json();
+        console.log({cartData})
+        if (!cartData.items || cartData.items.length === 0) {
+            console.warn("El carrito está vacío");
+            return;
+        }
+
+        // Construir el objeto para el historial de compras
+        const historialCompra = {
+            usuarioId: decoded.id,
+            items: cartData.items.map((item: any) => ({
+                productoId: item._id,
+                total_items: item.total_items,
+            })),
+        };
+
+        // Enviar la compra al historial 
+        const postResponse = await fetch(`${API_URL_HISTORIAL}`, {
+            method: "POST",
+            headers: {
+                "Authorization": `Bearer ${storedToken}`,
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(historialCompra),
+        });
+
+        if (!postResponse.ok) {
+            console.error("Error al finalizar la compra");
+            return;
+        }
+
+
+        if (postResponse.ok) {
+            alert("Compra realizada con éxito 🎉");
+
+            // Vaciar el carrito en la base de datos
+            await fetch(`${API_URL_CARRITO}/${decoded.id}`, {
+                method: "DELETE",
+                headers: { Authorization: `Bearer ${storedToken}` },
+            });
+            navigate("/gracias");
+        }
+    } catch (error) {
+        console.error("Ocurrió un error inesperado", error);
+    }
+};
 
     return (<>
         <section className="info-contacto">

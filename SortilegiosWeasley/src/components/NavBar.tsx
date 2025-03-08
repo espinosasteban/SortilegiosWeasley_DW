@@ -1,8 +1,6 @@
 import '../styles/NavBar.css';
 import {Link, useNavigate} from "react-router"; // Importa Link
 
-// Types
-import ArticuloCarrito  from './carritoCompras';
 // External Components
 import Badge from '@mui/material/Badge'
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
@@ -19,7 +17,6 @@ import { CartContext } from '../contexts/CartContext.tsx';
 import { useAuth } from '../paginas/ProcesoLoginUsuario/AuthContext';
 
 import SearchIcon from '@mui/icons-material/Search';
-import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 
 interface NavBarProps {
     setSeccion: (seccion: string | null) => void;

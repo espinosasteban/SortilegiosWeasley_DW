@@ -16,6 +16,7 @@ const AppProfile = () => {
               <Routes>
                 <Route path="/perfil" element={<Navigate to="/mi-informacion" replace />} />
                 <Route path="/mi-informacion" element={<UserInfo />} />
+                <Route path="/historial-compras" element={<HistorialCompras />} />
                 <Route path="/mis-direcciones" element={<MisDirecciones />} />
               </Routes>
             </div>

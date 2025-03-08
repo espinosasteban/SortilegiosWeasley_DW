@@ -16,7 +16,9 @@ const Navbar_perfil: React.FC = () => {
           <li className={location.pathname === "/mis-direcciones" ? "active" : ""}>
             <Link to="/mis-direcciones">Mis Direcciones</Link>
           </li>
-          
+          <li className={location.pathname === "/historial-compras" ? "active" : ""}>
+            <Link to="/historial-compras">Historial de Compras</Link>
+          </li>
         </ul>
       </nav>
     );
