@@ -319,7 +319,7 @@ function Direccion({setFormulario,onGuardar}: PropsInformacionContacto){
     }
 
     try {
-        // 🔹 Obtener el carrito del usuario
+        // Obtener el carrito del usuario
         const cartResponse = await fetch(`${API_URL_CARRITO}/${decoded.id}`, {
             method: "GET",
             headers: { Authorization: `Bearer ${storedToken}` },
@@ -337,7 +337,7 @@ function Direccion({setFormulario,onGuardar}: PropsInformacionContacto){
             return;
         }
 
-        // 🔹 Construir el objeto para el historial de compras
+        // Construir el objeto para el historial de compras
         const historialCompra = {
             usuarioId: decoded.id,
             items: cartData.items.map((item: any) => ({
@@ -346,7 +346,7 @@ function Direccion({setFormulario,onGuardar}: PropsInformacionContacto){
             })),
         };
 
-        // 🔹 Enviar la compra al historial con una petición POST
+        // Enviar la compra al historial 
         const postResponse = await fetch(`${API_URL_HISTORIAL}`, {
             method: "POST",
             headers: {
@@ -365,7 +365,7 @@ function Direccion({setFormulario,onGuardar}: PropsInformacionContacto){
         if (postResponse.ok) {
             alert("Compra realizada con éxito 🎉");
 
-            // 🔹 Vaciar el carrito en la base de datos
+            // Vaciar el carrito en la base de datos
             await fetch(`${API_URL_CARRITO}/${decoded.id}`, {
                 method: "DELETE",
                 headers: { Authorization: `Bearer ${storedToken}` },

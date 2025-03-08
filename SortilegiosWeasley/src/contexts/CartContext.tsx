@@ -156,7 +156,7 @@ const addToCart = async (item: ArticuloCarrito, cantidad: number = 1) => {
   // Eliminar un producto del carrito
   const deleteItem = async (item: ArticuloCarrito) => {
     const token = localStorage.getItem("token");
-    if (!token) return; // Si no hay token, no hacemos nada
+    if (!token) return; 
 
     const decoded = jwtDecode<{ id: string }>(token);
     const userId = decoded.id;
