@@ -1,5 +1,4 @@
 import Carrito from '../modelos/carrito.js';
-import Producto from '../modelos/producto.js';
 import { validarCarrito, validarCarritoParcial } from '../esquemas/esquemas.js';
 
 class CarritoController {

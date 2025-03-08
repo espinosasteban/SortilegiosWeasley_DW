@@ -13,6 +13,8 @@ import routesPerfil from './routes/perfil.js';
 import routesImagen from "./routes/imagen.js";
 import routesVotos from './routes/votos.js';
 import routesCarritos from './routes/carrito.js'
+import routesHistorial from './routes/historialCompras.js'
+
 
 const app = express();
 
@@ -34,6 +36,8 @@ app.use('/auth', authRoutes);
 app.use('/mis-direcciones', authMiddleware, routesDireccion);
 app.use('/mi-informacion', authMiddleware, routesPerfil);
 app.use('/votos', routesVotos);
+app.use('/historial', authMiddleware, routesHistorial);
+
 
 // Habilitar archivos estáticos para acceder a imágenes subidas
 app.use("/uploads", express.static("uploads"));
