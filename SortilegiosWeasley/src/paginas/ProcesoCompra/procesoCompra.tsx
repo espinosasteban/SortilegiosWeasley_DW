@@ -2,6 +2,7 @@ import { useEffect, useState, useContext } from 'react';
 import { useNavigate } from 'react-router';
 import { CartContext } from '../../contexts/CartContext';
 import { DeleteIconButton } from '../../components/carritoCompras';
+import { jwtDecode } from 'jwt-decode';
 import '../MiPerfil/user_info.css';
 import './procesoCompra.css';
 
@@ -298,10 +299,83 @@ function Direccion({setFormulario,onGuardar}: PropsInformacionContacto){
   };
 
   const handleClick = async (e: React.FormEvent) => {
+    const API_URL_CARRITO = "http://localhost:5000/carrito/"
+    const API_URL_HISTORIAL = "http://localhost:5000/historial/"
     e.preventDefault();
-    await manejarSubmit(e);
-    navigate("/gracias");
-  };
+    await manejarSubmit(e); // Guardar la dirección primero
+
+    const storedToken = localStorage.getItem("token");
+    if (!storedToken) {
+        console.error("Usuario no autenticado");
+        return;
+    }
+
+    let decoded;
+    try {
+        decoded = jwtDecode<{ id: string }>(storedToken);
+    } catch (error) {
+        console.error("Error al decodificar el token", error);
+        return;
+    }
+
+    try {
+        // 🔹 Obtener el carrito del usuario
+        const cartResponse = await fetch(`${API_URL_CARRITO}/${decoded.id}`, {
+            method: "GET",
+            headers: { Authorization: `Bearer ${storedToken}` },
+        });
+
+        if (!cartResponse.ok) {
+            console.error("Error al obtener el carrito");
+            return;
+        }
+
+        const cartData = await cartResponse.json();
+        console.log({cartData})
+        if (!cartData.items || cartData.items.length === 0) {
+            console.warn("El carrito está vacío");
+            return;
+        }
+
+        // 🔹 Construir el objeto para el historial de compras
+        const historialCompra = {
+            usuarioId: decoded.id,
+            items: cartData.items.map((item: any) => ({
+                productoId: item._id,
+                total_items: item.total_items,
+            })),
+        };
+
+        // 🔹 Enviar la compra al historial con una petición POST
+        const postResponse = await fetch(`${API_URL_HISTORIAL}`, {
+            method: "POST",
+            headers: {
+                "Authorization": `Bearer ${storedToken}`,
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(historialCompra),
+        });
+
+        if (!postResponse.ok) {
+            console.error("Error al finalizar la compra");
+            return;
+        }
+
+
+        if (postResponse.ok) {
+            alert("Compra realizada con éxito 🎉");
+
+            // 🔹 Vaciar el carrito en la base de datos
+            await fetch(`${API_URL_CARRITO}/${decoded.id}`, {
+                method: "DELETE",
+                headers: { Authorization: `Bearer ${storedToken}` },
+            });
+            navigate("/gracias");
+        }
+    } catch (error) {
+        console.error("Ocurrió un error inesperado", error);
+    }
+};
 
     return (<>
         <section className="info-contacto">
