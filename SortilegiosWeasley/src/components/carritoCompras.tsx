@@ -9,7 +9,7 @@ import { ArticuloCarrito } from '../tipos.tsx'
 // Contexts
 import { CartContext } from '../contexts/CartContext.tsx';
 // Hooks
-import { useContext, useEffect, useState } from 'react';
+import { useContext } from 'react';
 
 import { useNavigate } from 'react-router';
 
@@ -35,10 +35,6 @@ export const DeleteIconButton: React.FC<DeleteIconButtonProps> = ( { onClick }) 
 
   export type ItemProps = {
     item: ArticuloCarrito;
-    addToCart: (clickedItem: ArticuloCarrito) => void;
-    removeFromCart: (item: ArticuloCarrito) => void;
-    deleteItem: (item: ArticuloCarrito) => void;
-    compact?: boolean; 
   };
   
 

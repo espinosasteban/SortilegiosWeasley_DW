@@ -18,25 +18,6 @@ interface Seccion {
 export default function ProcesoCompra() {
     const [formulario, setFormulario] = useState('información');
     const { cartItems, addToCart, removeFromCart, getCartTotal, deleteItem } = useContext(CartContext);
-    const [secciones, setSecciones] = useState<Seccion[]>([]);
-
-    // Cargar las secciones desde el backend
-    useEffect(() => {
-        async function fetchSecciones() {
-            try {
-                const response = await fetch('http://localhost:5000/seccion');
-                if (!response.ok) {
-                    console.error('Error al obtener secciones:', response.statusText);
-                    return;
-                }
-                const data = await response.json();
-                setSecciones(data);
-            } catch (error) {
-                console.error('Error de red al obtener secciones:', error);
-            }
-        }
-        fetchSecciones();
-    }, []);
 
     return (
       <main className="proceso-compra">
@@ -55,9 +36,6 @@ export default function ProcesoCompra() {
             ) : (
                 <div className="resumen-lista">
                     {cartItems.map((item) => {
-                        // Buscar el nombre de la sección basado en el _id almacenado en item.seccion
-                        const seccionNombre = secciones.find(sec => sec._id === item.seccion)?.nombre || 'Sección desconocida';
-
                         return (
                             <div key={item.nombre} className="resumen-item">
                                 <div className="resumen-imagen">
@@ -71,7 +49,7 @@ export default function ProcesoCompra() {
                                     </div>
 
                                     {/* Mostrar el nombre de la sección */}
-                                    <p className='resumen-item-seccion'>{seccionNombre}</p>
+                                    <p className='resumen-item-seccion'>{item.seccion}</p>
 
                                     <div className='resumen-item-bottom'>
                                         <div className='resumen-item-quantity'>

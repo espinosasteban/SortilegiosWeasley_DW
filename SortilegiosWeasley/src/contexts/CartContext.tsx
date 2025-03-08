@@ -28,10 +28,6 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
   const [token, setToken] = useState<string | null>(null);
   const [carrito, setCarrito] = useState<Carrito>({} as Carrito);
 
-
-  console.log("CARTITEMS", {cartItems})
-  console.log("CARRITO", {carrito})
-  // Cargar carrito del usuario autenticado
   useEffect(() => {
     const storedToken = localStorage.getItem("token");
     if (!storedToken) {
@@ -61,7 +57,6 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
           setCartItems(data.items || []);
         }  else if (response.status === 404) {
           console.warn("Carrito no encontrado para este usuario.");
-          // setCartItems([]); // cartItems se mantenga vacío
         } else {
           console.error("Error al obtener el carrito:", response.status, response.statusText);
         }
@@ -70,11 +65,11 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
       }
     };
     fetchCart();
-  }, []);
+  }, [token]);
 
   
 
-const addToCart = async (item: ArticuloCarrito) => {
+const addToCart = async (item: ArticuloCarrito, cantidad: number = 1 ) => {
   const token = localStorage.getItem("token");
   if (!token) return; // Si no hay token, no hacemos nada
 
@@ -82,88 +77,12 @@ const addToCart = async (item: ArticuloCarrito) => {
   const userId = decoded.id;
 
   if (!userId) {
-    console.error("❌ Error: No se encontró el ID del usuario en el token.");
+    console.error("Error: No se encontró el ID del usuario en el token.");
     return;
   }
-
-  // Actualizamos el estado localmente
-  // let updatedCartItems: ArticuloCarrito[];
-  // setCartItems(prevCartItems => {
-  //   const isItemInCart = prevCartItems.find(cartItem => cartItem._id === item._id);
-  //   if (isItemInCart) {
-  //     updatedCartItems = prevCartItems.map(cartItem =>
-  //       cartItem._id === item._id
-  //         ? { ...cartItem, total_items: cartItem.total_items + 1 }
-  //         : cartItem
-  //     );
-  //   } else {
-  //     updatedCartItems = [...prevCartItems, { ...item, total_items: 1 }];
-  //   }
-  //   console.log("Aquí está el carrito actualizado: ", {updatedCartItems})
-  //   return updatedCartItems;
-  // });
-
-  setCartItems(prevCartItems => {
-    const isItemInCart = prevCartItems.find(cartItem => cartItem._id === item._id);
-    if (isItemInCart) {
-      return prevCartItems.map(cartItem =>
-        cartItem._id === item._id
-          ? { ...cartItem, total_items: (cartItem.total_items || 0) + 1 }
-          : cartItem
-      );
-    } else {
-      return [...prevCartItems, { ...item, total_items: 1 }];
-    }
-  })
-
+  
   try {
-    // 2️⃣ Verificar si el usuario ya tiene un carrito
-    console.log({carrito})
-    let carritoId = carrito?._id;
-    if (!carritoId) {
-      console.warn("⚠️ No se encontró un carrito, intentando obtener uno...");
-      const response = await fetch(`http://localhost:5000/carrito/${userId}`, {
-        method: "GET",
-        headers: { Authorization: `Bearer ${token}` },
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        carritoId = data._id;
-        setCarrito(data);
-      }
-    }
-
-    // 3️⃣ Si el carrito existe, actualizarlo con PUT
-    if (carritoId) {
-      console.log("🔄 Actualizando carrito existente...");
-
-      const response = await fetch(`http://localhost:5000/carrito/${carritoId}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-        items: cartItems.map(i => ({
-            productoId: i._id,
-            total_items: i.total_items
-          })),
-        }),
-      });
-
-      const data = await response.json();
-      if (!response.ok) {
-        console.error("❌ Error en la actualización del carrito:", data);
-      } else {
-        console.log("✅ Carrito actualizado:", data);
-        setCarrito(data);
-      }
-    } else {
-      // 4️⃣ Si no hay carrito, crearlo con POST
-      console.log("🆕 Creando nuevo carrito...");
-
-      const response = await fetch(`http://localhost:5000/carrito`, {
+      const response = await fetch(`http://localhost:5000/carrito/addCart`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -171,26 +90,37 @@ const addToCart = async (item: ArticuloCarrito) => {
         },
         body: JSON.stringify({
           userId: userId,
-          items: [{ productoId: item._id, total_items: 1 }],
+          productoId: item._id,
+          total_items: cantidad,
         }),
       });
 
       const data = await response.json();
-      if (!response.ok) {
-        console.error("❌ Error creando carrito:", data);
-      } else {
-        console.log("✅ Carrito creado:", data);
-        setCarrito(data);
-      }
-    }
-  } catch (error) {
-    console.error("❌ Error al manejar el carrito:", error);
+
+      if (response.ok) {
+        setCartItems(prevCartItems => {
+          const isItemInCart = prevCartItems.find(cartItem => cartItem._id === item._id);
+          if (isItemInCart) {
+            return prevCartItems.map(cartItem =>
+              cartItem._id === item._id
+                ? { ...cartItem, total_items: (cartItem.total_items || 0) + cantidad }
+                : cartItem
+            )} else { return [...prevCartItems, { ...item, total_items: cantidad }]};
+        });
+    } else{
+    console.error("Error agregando producto al carrito:", data);
   }
-};
+  } catch (error) {console.error("Error al manejar el carrito:", error);}} ;
+
 
   // Remover un producto del carrito
   const removeFromCart = async (item: ArticuloCarrito) => {
-    console.log("removeFromCart")
+    const token = localStorage.getItem("token");
+    if (!token) return; // Si no hay token, no hacemos nada
+  
+    const decoded = jwtDecode(token) ?? {};
+    const userId = decoded.id;
+
     const isItemInCart = cartItems.find((cartItem) => cartItem._id === item._id);
 
     if (isItemInCart?.total_items === 1) {
@@ -207,13 +137,13 @@ const addToCart = async (item: ArticuloCarrito) => {
 
     if (token) {
       try {
-        await fetch(`http://localhost:5000/carrito/${item._id}`, {
+        await fetch(`http://localhost:5000/carrito/decreaseItemQty/${userId}`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
-          body: JSON.stringify({ total_items: isItemInCart.total_items - 1 }),
+          body: JSON.stringify({ productoId: item._id,}),
         });
       } catch (error) {
         console.error("Error al remover producto del carrito en el backend:", error);
@@ -223,22 +153,28 @@ const addToCart = async (item: ArticuloCarrito) => {
 
   // Eliminar producto del carrito
   const deleteItem = async (item: ArticuloCarrito) => {
+    const token = localStorage.getItem("token");
+    if (!token) return; // Si no hay token, no hacemos nada
+
+    const decoded = jwtDecode(token) ?? {};
+    const userId = decoded.id;
     setCartItems(cartItems.filter((cartItem) => cartItem._id !== item._id));
 
     if (token) {
       try {
-        await fetch(`http://localhost:5000/carrito/${item._id}`, {
+        await fetch(`http://localhost:5000/carrito/deleteItem/${userId}`, {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
+          body: JSON.stringify({ productoId: item._id,}),
         });
       } catch (error) {
         console.error("Error al eliminar producto del carrito en el backend:", error);
       }
     }
-  };
+  };   
 
   // Migrar carrito cuando el usuario inicia sesión
   const migrateCart = async (items: ArticuloCarrito[]) => {
@@ -295,5 +231,5 @@ const addToCart = async (item: ArticuloCarrito) => {
     >
       {children}
     </CartContext.Provider>
-  );
+  )
 };

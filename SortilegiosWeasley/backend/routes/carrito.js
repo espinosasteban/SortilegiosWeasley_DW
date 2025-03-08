@@ -5,7 +5,8 @@ import { authMiddleware } from '../middlewares/cors.js';
 
 const route = express.Router();
 
-route.post('/',authMiddleware, CarritoController.create);
+// route.post('/',authMiddleware, CarritoController.create);
+route.post('/addCart', authMiddleware, CarritoController.addCart)
 route.get('/:id',authMiddleware, CarritoController.getOne);     
 route.put('/:id',authMiddleware, CarritoController.update);
 route.put('/increaseItemQty/:userId', authMiddleware, CarritoController.increaseItemQty);
@@ -13,9 +14,5 @@ route.put('/decreaseItemQty/:userId', authMiddleware, CarritoController.decrease
 
 route.delete('/deleteItem/:userId', authMiddleware, CarritoController.deleteItem);
 route.delete('/:id',authMiddleware, CarritoController.delete);
-
-route.post('/migrar',authMiddleware, CarritoController.migrarCarrito);
-
-
 
 export default route;

@@ -34,7 +34,7 @@ export default function CrearCuenta() {
             }
 
             localStorage.setItem('token', data.token);
-            login(data.rol); // Guarda el rol
+            login(usuario, data.rol); // Guarda el rol
             navigate('/perfil'); // Redirige al perfil
 
         } catch (error) {
