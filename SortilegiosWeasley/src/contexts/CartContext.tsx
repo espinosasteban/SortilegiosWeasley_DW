@@ -3,6 +3,7 @@ import { useAuth } from "../paginas/ProcesoLoginUsuario/AuthContext";
 import { ArticuloCarrito, Carrito } from "../tipos";
 import { jwtDecode } from "jwt-decode";
 
+const API_URL = "http://localhost:5000/carrito"
 
 export const CartContext = createContext<{
   cartItems: ArticuloCarrito[];
@@ -23,7 +24,6 @@ export const CartContext = createContext<{
 export const CartProvider = ({ children }: { children: React.ReactNode }) => {
   const { usuario } = useAuth();
   const [cartItems, setCartItems] = useState<ArticuloCarrito[]>([]);
-  const [token, __] = useState<string | null>(null);
   const [_, setCarrito] = useState<Carrito>({} as Carrito);
 
 
@@ -45,7 +45,7 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
 
     const fetchCart = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/carrito/${decoded.id}`, {
+        const response = await fetch(`${API_URL}/${decoded.id}`, {
           method: "GET",
           headers: { Authorization: `Bearer ${storedToken}` },
         });
@@ -79,7 +79,7 @@ const addToCart = async (item: ArticuloCarrito, cantidad: number = 1) => {
   }
 
   try {
-    const response = await fetch(`http://localhost:5000/carrito/addCart`, {
+    const response = await fetch(`${API_URL}/addCart`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -97,7 +97,7 @@ const addToCart = async (item: ArticuloCarrito, cantidad: number = 1) => {
       return;
     }
     // Obtener el carrito después de la actualización de la BD
-    const updatedCartResponse = await fetch(`http://localhost:5000/carrito/${userId}`, {
+    const updatedCartResponse = await fetch(`${API_URL}/${userId}`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -139,7 +139,7 @@ const addToCart = async (item: ArticuloCarrito, cantidad: number = 1) => {
 
     if (token) {
       try {
-        await fetch(`http://localhost:5000/carrito/decreaseItemQty/${userId}`, {
+        await fetch(`${API_URL}/decreaseItemQty/${userId}`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
@@ -164,7 +164,7 @@ const addToCart = async (item: ArticuloCarrito, cantidad: number = 1) => {
 
     if (token) {
       try {
-        await fetch(`http://localhost:5000/carrito/deleteItem/${userId}`, {
+        await fetch(`${API_URL}/deleteItem/${userId}`, {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",

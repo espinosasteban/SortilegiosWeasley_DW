@@ -7,13 +7,7 @@ import './procesoCompra.css';
 
 import "../MiPerfil/user_info.css";
 import './procesoCompra.css';
-import { LegendToggleRounded } from '@mui/icons-material';
 import type { Direccion } from "../../tipos";
-// Definir el tipo para las secciones
-interface Seccion {
-    _id: string;
-    nombre: string;
-}
 
 export default function ProcesoCompra() {
     const [formulario, setFormulario] = useState('información');
@@ -28,7 +22,6 @@ export default function ProcesoCompra() {
           </section>
         </section>
 
-        {/* Resumen de Compras */}
         <aside className="resumen-compras">
             <h2 className="resumen-compras-title">Resumen de tu compra</h2>
             {cartItems.length === 0 ? (
@@ -48,7 +41,7 @@ export default function ProcesoCompra() {
                                         <DeleteIconButton onClick={() => deleteItem(item)} />
                                     </div>
 
-                                    {/* Mostrar el nombre de la sección */}
+                                
                                     <p className='resumen-item-seccion'>{item.seccion}</p>
 
                                     <div className='resumen-item-bottom'>
